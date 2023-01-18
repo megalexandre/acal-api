@@ -1,0 +1,12 @@
+version: "3"
+services:
+  db:
+    container_name: acal-db
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=TrObccrzH11dUR=/ytVjTGwOCiK8!mba
+      - MYSQL_DATABASE=acaldb
+    volumes:
+      - ./docker/database/init:/docker-entrypoint-initdb.d/:ro
