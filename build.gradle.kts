@@ -54,6 +54,12 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+
+	testImplementation("io.rest-assured:spring-web-test-client:5.3.0")
+	testImplementation("io.rest-assured:rest-assured:5.3.0")
+	testImplementation("io.rest-assured:json-path:5.3.0")
+	testImplementation("io.rest-assured:xml-path:5.3.0")
+	testImplementation("io.rest-assured:kotlin-extensions:5.3.0")
 }
 
 tasks.withType<KotlinCompile> {

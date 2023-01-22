@@ -6,6 +6,7 @@ data class UserLogin(
     val username: String?,
     val password: String?,
     val authorities: List<Role>?,
+    val token: String?
 )
 
 data class Role(

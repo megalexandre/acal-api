@@ -25,7 +25,7 @@ class UserService (
 	}
 
 	override fun loadUserByUsername(username: String): UserDetails {
-
+		BCryptPasswordEncoder().encode("senha")
 		val user = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found exception")
 		user.roles = roleRepository.findByUser(user)
 

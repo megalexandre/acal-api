@@ -1,27 +1,60 @@
 package br.com.acalv3.integration
 
-import br.com.acalv3.application.configuration.error.AppAdvice
+import br.com.acalv3.application.configuration.dto.UserLogin
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.runner.RunWith
+import com.fasterxml.jackson.module.kotlin.KotlinFeature
+import com.fasterxml.jackson.module.kotlin.KotlinModule
+import io.restassured.RestAssured
+import io.restassured.http.ContentType.JSON
+import io.restassured.specification.RequestSpecification
+import org.junit.jupiter.api.Assertions
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
-import org.springframework.test.context.junit4.SpringRunner
-import org.springframework.test.web.servlet.MockMvc
-import org.springframework.test.web.servlet.setup.MockMvcBuilders
+import org.springframework.boot.web.server.LocalServerPort
+import javax.annotation.PostConstruct
 
-@RunWith(SpringRunner::class)
 @SpringBootTest(
 	webEnvironment = RANDOM_PORT,
 )
-@AutoConfigureMockMvc
-abstract class DefaultGatewayTest(
-	val router: String? = null
-	){
+class DefaultGatewayTest(){
+
+	@LocalServerPort
+	var port: Int = 0
 
 	@Autowired
 	lateinit var objectMapper: ObjectMapper
 
+	var token: String? = null
+
+	@PostConstruct
+	fun sendLoginAndGetToken(){
+
+		val response = RestAssured.given()
+			.contentType(JSON)
+			.`when`()
+			.body("{\"username\": \"alexandre\", \"password\": \"senha\"}")
+			.post("http://localhost:$port/auth/login")
+			.then()
+			.statusCode(200).extract().asString()
+
+		objectMapper.registerModule(
+			KotlinModule.Builder()
+				.withReflectionCacheSize(512)
+				.configure(KotlinFeature.NullToEmptyCollection, false)
+				.configure(KotlinFeature.NullToEmptyMap, false)
+				.configure(KotlinFeature.NullIsSameAsDefault, false)
+				.configure(KotlinFeature.StrictNullChecks, false)
+				.build()
+		)
+		val userLogin: UserLogin = objectMapper.readValue(response, UserLogin::class.java)
+		Assertions.assertNotNull(userLogin.token, "Must return a valid token")
+
+		this.token = userLogin.token
+	}
+	companion object{
+		lateinit var requestSpecification: RequestSpecification
+		private const val DEFAULT_BASE_PATH = "http://localhost"
+	}
 
 }

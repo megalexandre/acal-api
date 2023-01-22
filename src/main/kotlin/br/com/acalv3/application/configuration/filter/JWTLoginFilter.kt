@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
 import javax.servlet.FilterChain
@@ -21,13 +20,11 @@ class JWTLoginFilter(
 	private val objectMapper: ObjectMapper,
 	private val authManager: AuthenticationManager,
 	private val tokenAuthenticationService: TokenAuthenticationService,
-	) :
-	AbstractAuthenticationProcessingFilter(
+	): AbstractAuthenticationProcessingFilter(
 		AntPathRequestMatcher(url)
 	) {
-	private var logger: Logger = LoggerFactory.getLogger(JWTLoginFilter::class.java)
 
-	override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication {
+	override fun attemptAuthentication(request: HttpServletRequest?, response: HttpServletResponse?): Authentication = run {
 
 		val credentials: UserLogin = objectMapper.readValue(request?.inputStream, UserLogin::class.java).also {
 			logger.info("attempt authentication for user:${it.username}")
@@ -39,7 +36,7 @@ class JWTLoginFilter(
 			credentials.authorities,
 		)
 
-		return authManager.authenticate(usernamePasswordAuthenticationToken)
+		authManager.authenticate(usernamePasswordAuthenticationToken)
 	}
 
 	override fun successfulAuthentication(
@@ -47,10 +44,9 @@ class JWTLoginFilter(
 		response: HttpServletResponse,
 		chain: FilterChain?,
 		authResult: Authentication
-	) {
+	) = run {
 		logger.info("successful Authentication for user: ${(authResult.principal as UserModel).username}")
-
-		return tokenAuthenticationService.addAuthentication(response, authResult)
+		tokenAuthenticationService.addAuthentication(response, authResult)
 	}
 
 }
