@@ -5,7 +5,6 @@ import br.com.acalv3.domain.exception.DuplicatedFieldException
 import br.com.acalv3.domain.exception.RequiredFieldException
 import br.com.acalv3.domain.model.AbstractModel
 import br.com.acalv3.domain.model.AbstractNamedModel
-import br.com.acalv3.domain.spec.v3.AbstractSpec
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.dao.DataIntegrityViolationException
@@ -68,24 +67,6 @@ abstract class AppService<U: AbstractModel>(
 
     fun getAll(): List<U> =
         appRepository.findAll()
-
-    open fun filterByExample(filter: FilterDTO<U>): List<U> {
-        val model = filter.model as AbstractNamedModel
-
-        val sort = Sort.by(Sort.Direction.ASC, NAME)
-        val spec = AbstractSpec<U>(model)
-
-        return appSpec.findAll(spec, sort)
-    }
-
-    open fun pageable(filter: FilterDTO<U>): Page<U> {
-
-        val model = filter.model as AbstractNamedModel
-        return appSpec.findAll(
-            AbstractSpec<U>(model),
-                getPage(filter)
-            )
-    }
 
     fun count(): Long =
         appRepository.count()

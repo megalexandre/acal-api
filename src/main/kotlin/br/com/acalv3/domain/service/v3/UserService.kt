@@ -1,9 +1,10 @@
 package br.com.acalv3.domain.service.v3
 
-import br.com.acalv3.resources.model.UserModel
+import br.com.acalv3.resources.model.security.UserModel
 import br.com.acalv3.domain.repository.v3.RoleRepository
 import br.com.acalv3.domain.repository.v3.UserRepository
 import br.com.acalv3.domain.service.AppService
+import br.com.acalv3.resources.model.security.RoleModel
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.security.core.userdetails.UserDetails
@@ -17,17 +18,17 @@ import org.testng.util.Strings
 class UserService (
 	private val userRepository: UserRepository,
     private val roleRepository: RoleRepository,
-    ) : AppService<UserModel>(userRepository, userRepository), UserDetailsService {
+    ): UserDetailsService {
 	private var logger: Logger = LoggerFactory.getLogger(AppService::class.java)
 
-	override fun findByName(name: String): UserModel = run {
+	fun findByName(name: String): UserModel = run {
 		return userRepository.findByUsername(name) ?: throw UsernameNotFoundException("")
 	}
 
 	override fun loadUserByUsername(username: String): UserDetails {
 		BCryptPasswordEncoder().encode("senha")
 		val user = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found exception")
-		user.roles = roleRepository.findByUser(user)
+		user.roles = listOf(RoleModel( authority = "ADMIN"))
 
 		return user
 	}
@@ -45,7 +46,6 @@ class UserService (
 		}
 
 		BCryptPasswordEncoder().encode(userModel.password).also { userModel.password = it }
-		super.prepareForSave(userModel)
 		userRepository.save(userModel)
 	}
 
