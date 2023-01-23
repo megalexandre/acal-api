@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.spec
 
-import br.com.acalv3.domain.model.v3.CustomerModel
+import br.com.acalv3.resources.model.CustomerModel
 import br.com.acalv3.domain.spec.v3.AbstractSpec
 import org.testng.util.Strings
 import javax.persistence.criteria.CriteriaBuilder
@@ -9,13 +9,13 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class CustomerSpec (
-	override var model: CustomerModel,
+    override var model: CustomerModel,
 ): AbstractSpec<CustomerModel>(model){
 
 	override fun toPredicate(
-		root: Root<CustomerModel>,
-		cq: CriteriaQuery<*>,
-		cb: CriteriaBuilder
+        root: Root<CustomerModel>,
+        cq: CriteriaQuery<*>,
+        cb: CriteriaBuilder
 	): Predicate? {
 		val predicates: MutableList<Predicate> = ArrayList()
 

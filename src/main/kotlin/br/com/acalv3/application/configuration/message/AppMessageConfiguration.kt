@@ -10,13 +10,9 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 class AppMessageConfiguration {
 
 	@Bean
-	fun messageSource(): MessageSource? {
+	fun messageSource(): MessageSource {
 		val messageSource = ReloadableResourceBundleMessageSource()
-
-		messageSource.setBasenames(
-			"classpath:/messages/api_error_messages",
-		)
-
+		messageSource.setBasenames("classpath:/messages/api_error_messages")
 		messageSource.setDefaultEncoding("UTF-8")
 		return messageSource
 	}

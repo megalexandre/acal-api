@@ -14,12 +14,16 @@ class BearerTokenInterceptor(
 		response: HttpServletResponse,
 		filterChain: FilterChain
 	) {
-		val authorizationHeaderValue: String? = request.getHeader("Authorization")
+		val authorizationHeaderValue: String? = request.getHeader(AUTHORIZATION)
 
-		if (authorizationHeaderValue != null && authorizationHeaderValue.startsWith("Bearer")) {
+		if (authorizationHeaderValue != null && authorizationHeaderValue.startsWith(BEARER)) {
 			val token = authorizationHeaderValue.substring(7, authorizationHeaderValue.length);
 			tokenWrapper.token = token
 		}
 	}
 
+	companion object{
+		private const val AUTHORIZATION = "Authorization"
+		private const val BEARER = "Bearer"
+	}
 }

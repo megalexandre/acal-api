@@ -2,10 +2,8 @@ package br.com.acalv3.application.configuration.filter
 
 import br.com.acalv3.application.configuration.dto.UserLogin
 import br.com.acalv3.application.configuration.security.TokenAuthenticationService
-import br.com.acalv3.domain.model.v3.UserModel
+import br.com.acalv3.resources.model.UserModel
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.core.Authentication

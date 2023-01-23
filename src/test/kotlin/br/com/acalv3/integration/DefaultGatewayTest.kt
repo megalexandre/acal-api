@@ -9,9 +9,11 @@ import io.restassured.http.ContentType.JSON
 import io.restassured.specification.RequestSpecification
 import org.junit.jupiter.api.Assertions
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT
 import org.springframework.boot.web.server.LocalServerPort
+import org.springframework.core.io.Resource
 import javax.annotation.PostConstruct
 
 @SpringBootTest(
@@ -33,20 +35,11 @@ class DefaultGatewayTest(){
 		val response = RestAssured.given()
 			.contentType(JSON)
 			.`when`()
-			.body("{\"username\": \"alexandre\", \"password\": \"senha\"}")
+			.body("{\"username\": \"alexandre\",\"password\": \"senha\"}")
 			.post("http://localhost:$port/auth/login")
 			.then()
 			.statusCode(200).extract().asString()
 
-		objectMapper.registerModule(
-			KotlinModule.Builder()
-				.withReflectionCacheSize(512)
-				.configure(KotlinFeature.NullToEmptyCollection, false)
-				.configure(KotlinFeature.NullToEmptyMap, false)
-				.configure(KotlinFeature.NullIsSameAsDefault, false)
-				.configure(KotlinFeature.StrictNullChecks, false)
-				.build()
-		)
 		val userLogin: UserLogin = objectMapper.readValue(response, UserLogin::class.java)
 		Assertions.assertNotNull(userLogin.token, "Must return a valid token")
 

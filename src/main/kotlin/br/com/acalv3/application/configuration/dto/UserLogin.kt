@@ -4,9 +4,9 @@ import org.springframework.security.core.GrantedAuthority
 
 data class UserLogin(
     val username: String?,
-    val password: String?,
-    val authorities: List<Role>?,
-    val token: String?
+    var password: String? = null,
+    var authorities: List<Role>? = null,
+    var token: String? = null
 )
 
 data class Role(
@@ -15,5 +15,4 @@ data class Role(
 
     override fun getAuthority() = name
 }
-
 

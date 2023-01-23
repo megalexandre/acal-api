@@ -1,7 +1,6 @@
 package br.com.acalv3.application.configuration.security
 
-import br.com.acalv3.domain.model.v3.UserModel
-import br.com.acalv3.domain.response.UserResponse
+import br.com.acalv3.application.configuration.dto.UserLogin
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
@@ -22,17 +21,15 @@ class TokenAuthenticationService(
 	){
 
 	fun addAuthentication(response: HttpServletResponse, auth: Authentication) {
-		val userModel: UserModel = auth.principal as UserModel
+		val userLogin: UserLogin = auth.principal as UserLogin
 
-		val roles = userModel.roles?.map { it.authority }
 		val jwt = Jwts.builder()
 
 			.setSubject(auth.name)
-				.claim("role", roles)
+				.claim("role", userLogin.authorities?.map { it.name })
 				.claim("name", auth.name)
 			.setExpiration(
-				Date
-					.from(LocalDateTime.now()
+				Date.from(LocalDateTime.now()
 						.plusHours(HOURS_TO_EXPIRATION)
 						.atZone(ZoneId.systemDefault()).toInstant())
 			).signWith(
@@ -44,13 +41,14 @@ class TokenAuthenticationService(
 			)
 
 		val token = jwt.compact()
-		userModel.token = token
+		userLogin.token = token
 
-		val stringResponse = objectMapper.writeValueAsString(UserResponse(
-			username = userModel.username,
-			token = token,
-			roles = roles
-		))
+		val stringResponse = objectMapper.writeValueAsString(UserLogin(
+			username = userLogin.username,
+			token = userLogin.token,
+			authorities = userLogin.authorities
+			)
+		)
 
 		try {
 			response.writer.write(stringResponse)

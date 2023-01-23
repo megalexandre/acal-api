@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.spec
 
-import br.com.acalv3.domain.model.v3.ContractModel
+import br.com.acalv3.resources.model.ContractModel
 import br.com.acalv3.domain.spec.v3.AbstractSpec
 import org.testng.util.Strings
 import javax.persistence.criteria.CriteriaBuilder
@@ -9,13 +9,13 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class ContractSpec (
-	override var model: ContractModel,
+    override var model: ContractModel,
 ): AbstractSpec<ContractModel>(model){
 
 	override fun toPredicate(
-		root: Root<ContractModel>,
-		cq: CriteriaQuery<*>,
-		cb: CriteriaBuilder
+        root: Root<ContractModel>,
+        cq: CriteriaQuery<*>,
+        cb: CriteriaBuilder
 	): Predicate? {
 		val predicates: MutableList<Predicate> = ArrayList()
 		equalsId(

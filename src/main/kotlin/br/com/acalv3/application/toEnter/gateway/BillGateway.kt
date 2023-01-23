@@ -1,4 +1,4 @@
-package br.com.acalv3.application.toEnter.gateway.v4
+package br.com.acalv3.application.toEnter.gateway
 
 import br.com.acalv3.application.toEnter.comunicate.request.BillPaymentRequest
 import org.springframework.web.bind.annotation.PostMapping

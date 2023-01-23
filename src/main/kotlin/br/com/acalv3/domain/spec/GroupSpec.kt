@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.spec
 
-import br.com.acalv3.domain.model.v3.GroupModel
+import br.com.acalv3.resources.model.GroupModel
 import br.com.acalv3.domain.spec.v3.AbstractSpec
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
@@ -9,13 +9,13 @@ import javax.persistence.criteria.Root
 
 
 class GroupSpec(
-	override val model: GroupModel,
+    override val model: GroupModel,
 ): AbstractSpec<GroupModel>(model) {
 
 	override fun toPredicate(
-		root: Root<GroupModel>,
-		cq: CriteriaQuery<*>,
-		cb: CriteriaBuilder
+        root: Root<GroupModel>,
+        cq: CriteriaQuery<*>,
+        cb: CriteriaBuilder
 	): Predicate? {
 		val predicates: MutableList<Predicate> = ArrayList()
 

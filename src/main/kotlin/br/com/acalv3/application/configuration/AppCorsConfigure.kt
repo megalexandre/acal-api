@@ -12,7 +12,6 @@ class AppCorsConfigure: WebMvcConfigurer {
 			.addMapping(MAPPING)
 			.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS",  "HEAD", "TRACE", "CONNECT")
 	}
-
 	companion object{
 		const val MAPPING = "/**"
 	}

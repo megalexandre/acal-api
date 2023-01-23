@@ -1,4 +1,4 @@
-package br.com.acalv3.domain.model.v3
+package br.com.acalv3.resources.model
 
 import br.com.acalv3.domain.model.AbstractNamedModel
 import com.fasterxml.jackson.annotation.JsonFormat
@@ -12,29 +12,18 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 import javax.persistence.ManyToOne
 
-@Entity(name = "contract_model")
-class ContractModel (
+@Entity(name = "address_model")
+class AddressModel (
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     override var id: Long? = null,
 
-	@Column(nullable = false, unique = true)
-	override var name: String? = null,
+	@ManyToOne(optional = false, cascade = [CascadeType.MERGE])
+    var addressType: AddressTypeModel? = null,
 
-	var nameBusiness: String? = null,
-
-	@ManyToOne(cascade = [CascadeType.DETACH])
-	var group: GroupModel? = null,
-
-	@ManyToOne(cascade = [CascadeType.DETACH])
-    var placeResidence: PlaceModel? = null,
-
-	@ManyToOne(cascade = [CascadeType.DETACH])
-	var placeMail: PlaceModel? = null,
-
-	@ManyToOne(cascade = [CascadeType.DETACH])
-	var customer: CustomerModel? = null,
+	@Column(nullable = false)
+    override var name: String? = null,
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss", iso = DateTimeFormat.ISO.DATE_TIME)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -54,4 +43,4 @@ class ContractModel (
 
 	override var deleted: Boolean? = false,
 
-) : AbstractNamedModel
+	) : AbstractNamedModel

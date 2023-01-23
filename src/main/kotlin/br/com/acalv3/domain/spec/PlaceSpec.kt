@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.spec
 
-import br.com.acalv3.domain.model.v3.PlaceModel
+import br.com.acalv3.resources.model.PlaceModel
 import br.com.acalv3.domain.spec.v3.AbstractSpec
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.CriteriaQuery
@@ -8,13 +8,13 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class PlaceSpec (
-	override var model: PlaceModel,
+    override var model: PlaceModel,
 ): AbstractSpec<PlaceModel>(model) {
 
 	override fun toPredicate(
-		root: Root<PlaceModel>,
-		cq: CriteriaQuery<*>,
-		cb: CriteriaBuilder
+        root: Root<PlaceModel>,
+        cq: CriteriaQuery<*>,
+        cb: CriteriaBuilder
 	): Predicate? {
 		val predicates: MutableList<Predicate> = ArrayList()
 

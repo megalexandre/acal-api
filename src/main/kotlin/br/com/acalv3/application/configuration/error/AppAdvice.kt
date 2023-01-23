@@ -24,9 +24,7 @@ class AppAdvice {
 	@ExceptionHandler(value = [
 		ConstraintViolationException::class, DuplicatedFieldException::class])
 	fun e2 (ex: RuntimeException) =
-		getResponse(
-			ex, BAD_REQUEST
-		)
+		getResponse(ex, BAD_REQUEST)
 
 	@ExceptionHandler(value = [
 		RequiredFieldException::class])

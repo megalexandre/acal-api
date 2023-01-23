@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.spec
 
-import br.com.acalv3.domain.model.v3.AddressModel
+import br.com.acalv3.resources.model.AddressModel
 import br.com.acalv3.domain.spec.v3.AbstractSpec
 import org.testng.util.Strings
 import javax.persistence.criteria.CriteriaBuilder
@@ -9,13 +9,13 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class AddressSpec(
-	override val model: AddressModel,
+    override val model: AddressModel,
 ): AbstractSpec<AddressModel>(model) {
 
 	override fun toPredicate(
-		root: Root<AddressModel>,
-		cq: CriteriaQuery<*>,
-		cb: CriteriaBuilder
+        root: Root<AddressModel>,
+        cq: CriteriaQuery<*>,
+        cb: CriteriaBuilder
 	): Predicate? {
 		val predicates: MutableList<Predicate> = ArrayList()
 
