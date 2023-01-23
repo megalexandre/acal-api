@@ -1,5 +1,6 @@
 package br.com.acalv3.application.configuration.dto
 
+import br.com.acalv3.resources.model.security.RoleModel
 import org.springframework.security.core.GrantedAuthority
 
 data class UserLogin(
@@ -12,7 +13,8 @@ data class UserLogin(
 data class Role(
     val name: String? = "",
 ): GrantedAuthority {
-
     override fun getAuthority() = name
 }
+
+
 

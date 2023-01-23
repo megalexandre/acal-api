@@ -1,6 +1,7 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
+import br.com.acalv3.domain.model.Customer
 import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
@@ -13,7 +14,7 @@ import javax.persistence.*
 class CustomerModel (
 
     @Id
-    var id: UUID? = UUID.randomUUID(),
+    var id: UUID? = null,
 
     @Column(nullable = false)
     var name: String? = null,
@@ -21,10 +22,26 @@ class CustomerModel (
     var document: String? = null,
 
     @Enumerated(EnumType.STRING)
-    var personType: PersonTypeEnum? = null,
+    var personType: PersonTypeEnum,
 
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
-    var birthDate: LocalDate? = null,
+    var birthDay: LocalDate? = null,
 
+)
+
+fun Customer.toCustomerModel() = CustomerModel(
+    id = id,
+    name = name,
+    document = document,
+    personType = personType,
+    birthDay = birthDay
+)
+
+fun CustomerModel.toCustomer() = Customer(
+    id = id ?: UUID.randomUUID(),
+    name = name ?: "",
+    document = document ?: "",
+    personType = personType,
+    birthDay = birthDay
 )

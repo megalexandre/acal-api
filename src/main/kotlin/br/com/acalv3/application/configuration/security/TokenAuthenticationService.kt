@@ -1,6 +1,8 @@
 package br.com.acalv3.application.configuration.security
 
 import br.com.acalv3.application.configuration.dto.UserLogin
+import br.com.acalv3.resources.model.security.UserModel
+import br.com.acalv3.resources.model.security.toUserLogin
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
@@ -19,9 +21,8 @@ import javax.xml.bind.DatatypeConverter
 class TokenAuthenticationService(
 	private var objectMapper: ObjectMapper
 	){
-
 	fun addAuthentication(response: HttpServletResponse, auth: Authentication) {
-		val userLogin: UserLogin = auth.principal as UserLogin
+		val userLogin: UserLogin =(auth.principal as UserModel).toUserLogin()
 
 		val jwt = Jwts.builder()
 

@@ -1,17 +1,9 @@
 package br.com.acalv3.resources.model.security
 
-import br.com.acalv3.domain.model.AbstractModel
-import com.fasterxml.jackson.annotation.JsonFormat
-import org.springframework.format.annotation.DateTimeFormat
+import br.com.acalv3.application.configuration.dto.Role
+import br.com.acalv3.application.configuration.dto.UserLogin
 import org.springframework.security.core.userdetails.UserDetails
-import java.time.LocalDateTime
-import javax.persistence.CascadeType
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType
-import javax.persistence.Id
-import javax.persistence.OneToMany
+import javax.persistence.*
 
 @Entity(name = "user_model")
 class UserModel (
@@ -64,3 +56,13 @@ class UserModel (
        return true
     }
 }
+
+fun UserModel.toUserLogin() =
+    UserLogin(
+        username = username,
+        password = password,
+        authorities = authorities?.map { it.toRole() },
+        token = null
+    )
+
+

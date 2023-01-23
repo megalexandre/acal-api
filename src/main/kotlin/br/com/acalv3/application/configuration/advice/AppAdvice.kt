@@ -1,4 +1,4 @@
-package br.com.acalv3.application.configuration.error
+package br.com.acalv3.application.configuration.advice
 
 import br.com.acalv3.domain.exception.DuplicatedFieldException
 import br.com.acalv3.domain.exception.RequiredFieldException

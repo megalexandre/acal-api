@@ -27,3 +27,9 @@ class BearerTokenInterceptor(
 		private const val BEARER = "Bearer"
 	}
 }
+
+class BearerTokenWrapper {
+
+	var token: String? = ""
+
+}

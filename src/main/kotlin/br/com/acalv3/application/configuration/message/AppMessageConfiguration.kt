@@ -8,7 +8,6 @@ import org.springframework.context.support.ReloadableResourceBundleMessageSource
 
 @Configuration
 class AppMessageConfiguration {
-
 	@Bean
 	fun messageSource(): MessageSource {
 		val messageSource = ReloadableResourceBundleMessageSource()

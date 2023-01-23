@@ -2,8 +2,8 @@ package br.com.acalv3.application.configuration.security
 
 import br.com.acalv3.application.configuration.filter.JWTAuthenticationFilter
 import br.com.acalv3.application.configuration.filter.JWTLoginFilter
-import br.com.acalv3.application.configuration.handler.CustomAccessDeniedHandler
-import br.com.acalv3.domain.service.v3.UserService
+import br.com.acalv3.application.configuration.interceptor.CustomAccessDeniedHandler
+import br.com.acalv3.domain.service.UserService
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

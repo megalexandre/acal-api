@@ -1,4 +1,4 @@
-package br.com.acalv3.application.toEnter.gateway
+package br.com.acalv3.application.comunicate.gateway
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
