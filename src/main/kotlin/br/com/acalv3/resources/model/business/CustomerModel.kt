@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.util.*
 import javax.persistence.*
 
@@ -14,20 +13,19 @@ import javax.persistence.*
 class CustomerModel (
 
     @Id
-    var id: UUID? = null,
+    val id: UUID,
 
     @Column(nullable = false)
-    var name: String? = null,
-
-    var document: String? = null,
+    val name: String,
 
     @Enumerated(EnumType.STRING)
-    var personType: PersonTypeEnum,
+    val personType: PersonTypeEnum,
+
+    var document: String? = null,
 
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
     var birthDay: LocalDate? = null,
-
 )
 
 fun Customer.toCustomerModel() = CustomerModel(
@@ -39,8 +37,8 @@ fun Customer.toCustomerModel() = CustomerModel(
 )
 
 fun CustomerModel.toCustomer() = Customer(
-    id = id ?: UUID.randomUUID(),
-    name = name ?: "",
+    id = id,
+    name = name,
     document = document ?: "",
     personType = personType,
     birthDay = birthDay

@@ -5,6 +5,7 @@ spring:
     username: root
     password: TrObccrzH11dUR=/ytVjTGwOCiK8!mba
   jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: update
       hbm2ddl:  auto

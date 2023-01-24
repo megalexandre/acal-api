@@ -1,13 +1,15 @@
 package br.com.acalv3.application.configuration.advice
 
+import br.com.acalv3.commons.clearMessage
 import br.com.acalv3.domain.exception.DuplicatedFieldException
 import br.com.acalv3.domain.exception.RequiredFieldException
 import org.hibernate.exception.ConstraintViolationException
+import org.ietf.jgss.GSSException.UNAUTHORIZED
 import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.http.HttpStatus
-import org.springframework.http.HttpStatus.BAD_REQUEST
-import org.springframework.http.HttpStatus.NO_CONTENT
+import org.springframework.http.HttpStatus.*
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
 import java.sql.SQLException
@@ -17,14 +19,29 @@ import java.time.LocalDateTime
 class AppAdvice {
 
 	@ExceptionHandler(value = [
-		EmptyResultDataAccessException::class, NoSuchElementException::class])
+		EmptyResultDataAccessException::class,
+		NoSuchElementException::class])
 	fun e1 (ex: RuntimeException) =
 		getResponse(ex, NO_CONTENT)
 
 	@ExceptionHandler(value = [
-		ConstraintViolationException::class, DuplicatedFieldException::class])
+		ConstraintViolationException::class,
+		DuplicatedFieldException::class,
+	])
 	fun e2 (ex: RuntimeException) =
 		getResponse(ex, BAD_REQUEST)
+
+	@ExceptionHandler(value = [
+		MethodArgumentNotValidException::class
+	])
+	fun e3 (ex: MethodArgumentNotValidException) =
+		getResponse(ex, BAD_REQUEST)
+
+	@ExceptionHandler(value = [
+		RuntimeException::class
+	])
+	fun e4 (ex: RuntimeException) =
+		getResponse(ex,HttpStatus.UNAUTHORIZED)
 
 	@ExceptionHandler(value = [
 		RequiredFieldException::class])
@@ -43,15 +60,14 @@ class AppAdvice {
 		)
 	}
 
-	fun getResponse(ex: Exception, status: HttpStatus, error: String? = null ){
+	fun getResponse(ex: Exception, status: HttpStatus, error: String? = null ) = run {
 		val body: MutableMap<String, Any?> = LinkedHashMap()
 		body["timestamp"] = LocalDateTime.now()
-		body["error"] = error?.let {ex.message} ?: error
+		body["error"] = ex.message?.let { error  } ?: ex.message?.clearMessage()
 
 		ResponseEntity(
 			body,
 			BAD_REQUEST
 		)
 	}
-
 }

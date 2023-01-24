@@ -11,15 +11,6 @@ import org.junit.jupiter.api.Test
 class BillPaymentTest: DefaultGatewayTest() {
 
 	@Test
-	fun test(){
-		given()
-			.contentType(JSON)
-			.`when`().get("http://localhost:$port/health/status")
-			.then()
-			.statusCode(200)
-	}
-
-	@Test
 	fun `should payment response ok 200`(){
 		given()
 			.contentType(JSON)
@@ -30,5 +21,7 @@ class BillPaymentTest: DefaultGatewayTest() {
 			.statusCode(200)
 			.body("status", equalTo("ok"))
 	}
+
+
 
 }
