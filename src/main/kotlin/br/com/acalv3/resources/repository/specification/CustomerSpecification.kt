@@ -3,6 +3,7 @@ package br.com.acalv3.resources.repository.specification
 import br.com.acalv3.application.comunicate.model.request.CustomerPageRequest
 import br.com.acalv3.resources.model.business.CustomerModel
 import org.springframework.data.jpa.domain.Specification
+import java.time.LocalDate
 import java.util.*
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
@@ -31,6 +32,10 @@ class CustomerSpecification(val customer: CustomerPageRequest) {
         if (customer.document != null) {
             predicate.expressions.add(likeDocument(root, builder))
         }
+
+        if(customer.birthDay != null){
+            predicate.expressions.add(eqDate(root, builder))
+        }
     }
 
     private fun eqID(root: Root<CustomerModel>, builder: CriteriaBuilder): Predicate =
@@ -39,5 +44,7 @@ class CustomerSpecification(val customer: CustomerPageRequest) {
         builder.like(builder.upper(root.get("name")),"%${customer.name}%")
     private fun likeDocument(root: Root<CustomerModel>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get("document")),"%${customer.document}%")
+    private fun eqDate(root: Root<CustomerModel>, builder: CriteriaBuilder): Predicate =
+        builder.equal(root.get<LocalDate>("birthDay"), customer.birthDay)
 }
 
