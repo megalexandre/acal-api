@@ -7,12 +7,16 @@ import br.com.acalv3.domain.service.CustomerService
 import org.springframework.context.MessageSource
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
+import java.util.*
 
 @Service
 class CustomerServiceImpl(
 	val repository: CustomerRepository,
 	val messageSource: MessageSource,
 ): CustomerService {
+	override fun getById(id: UUID): Customer =
+		repository.getById(id)
+
 	override fun save(customer: Customer): Customer =
 		repository.save(customer)
 

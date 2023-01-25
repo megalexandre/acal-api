@@ -3,6 +3,8 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonSubTypes
+import org.hibernate.annotations.Type
 import org.springframework.data.domain.Page
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
@@ -14,6 +16,7 @@ import javax.persistence.*
 class CustomerModel (
 
     @Id
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
     @Column(nullable = false)

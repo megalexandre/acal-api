@@ -8,16 +8,21 @@ import br.com.acalv3.resources.model.business.toCustomerModel
 import br.com.acalv3.resources.model.business.toCustomerPage
 import br.com.acalv3.resources.repository.CustomerRepositoryJpa
 import br.com.acalv3.resources.repository.specification.CustomerSpecification
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.jpa.domain.Specification
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
+import java.util.*
 
 @Repository
 class CustomerRepositoryImpl(
     private val customerRepositoryJpa: CustomerRepositoryJpa,
 ) : CustomerRepository{
+    override fun getById(id: UUID): Customer =
+        customerRepositoryJpa.findByIdOrNull(id)?.toCustomer() ?: throw NotFoundException()
 
     override fun save(customer: Customer): Customer =
         customerRepositoryJpa.save(customer.toCustomerModel()).toCustomer()
