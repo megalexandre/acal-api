@@ -1,5 +1,6 @@
-package br.com.acalv3.integration
+package br.com.acalv3.integration.customer
 
+import br.com.acalv3.integration.DefaultGatewayTest
 import io.restassured.http.ContentType.JSON
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
@@ -8,14 +9,12 @@ import org.hamcrest.Matchers.hasKey
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.util.StreamUtils.*
-import java.nio.charset.Charset
 import java.nio.charset.Charset.defaultCharset
 
 
-class CustomerTest: DefaultGatewayTest() {
+class SaveCustomerTest: DefaultGatewayTest() {
 
 	@Value("classpath:json/request/user_post.json")
 	private lateinit var validUser: Resource
@@ -28,7 +27,6 @@ class CustomerTest: DefaultGatewayTest() {
 
 	@Value("classpath:json/request/user_post_with_invalid_person_type.json")
 	private lateinit var userPostWithInvalidPersonType: Resource
-
 
 	@Test
 	fun `should save a customer ok 200`(){

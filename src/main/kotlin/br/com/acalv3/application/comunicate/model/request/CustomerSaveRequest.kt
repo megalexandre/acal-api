@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 
-data class CustomerRequest(
+data class SaveCustomerRequest(
 
     @field:NotBlank(message = "Nome é um campo obrigatório")
     val name: String? = null,
@@ -20,7 +20,7 @@ data class CustomerRequest(
 
     @field:NotNull(message = "Tipo da pessoa é um campo obrigatório")
     @field:NotBlank(message = "Tipo da pessoa é um campo obrigatório")
-    @field:Pattern(regexp="PERSON|LEGAL", message = "os valores aceitos para tipo de pessoa são PERSON ou LEGAL")
+    @field:Pattern(regexp = "PERSON|LEGAL", message = "os valores aceitos para tipo de pessoa são PERSON ou LEGAL")
     var personType: String,
 
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
@@ -28,7 +28,7 @@ data class CustomerRequest(
     var birthDay: LocalDate? = null,
 )
 
-fun CustomerRequest.toCustomer() = Customer(
+fun SaveCustomerRequest.toCustomer() = Customer(
     name = name!!,
     document = document!!,
     personType = PersonTypeEnum.valueOf(personType),
