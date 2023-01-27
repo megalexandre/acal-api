@@ -25,13 +25,12 @@ class CustomerGateway(
     fun saveCustomer(@Valid @RequestBody saveCustomerRequest: SaveCustomerRequest): SaveCustomerResponse =
         customerService.save(saveCustomerRequest.toCustomer()).toCustomerResponse()
 
-    @GetMapping
+    @PostMapping("/paginate")
     fun paginateCustomer(@Valid @RequestBody customerPageRequest: CustomerPageRequest): Page<CustomerPageResponse> =
         customerService.paginate(customerPageRequest).toCustomerPageResponse()
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/{id}")
     fun paginateCustomer(@PathVariable id: UUID): GetCustomerResponse =
         customerService.getById(id).toGetCustomerResponse()
-
 
 }

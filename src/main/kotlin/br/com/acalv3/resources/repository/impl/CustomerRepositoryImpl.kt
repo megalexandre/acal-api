@@ -32,7 +32,7 @@ class CustomerRepositoryImpl(
 
     override fun paginate(customerPageRequest: CustomerPageRequest): Page<Customer> = run {
         val spec  = CustomerSpecification(customerPageRequest).getSpecification()
-        val page = PageRequest.of(0, 10).withSort(Sort.by(Sort.Direction.ASC, "id"))
+        val page = PageRequest.of(0, 3).withSort(Sort.by(Sort.Direction.ASC, "id"))
 
         customerRepositoryJpa.findAll(spec ,page ).toCustomerPage()
     }

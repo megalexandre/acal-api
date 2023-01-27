@@ -14,5 +14,4 @@ data class CustomerPageRequest(
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
     val birthDay: LocalDate? = null,
-
 )
