@@ -1,6 +1,6 @@
 package br.com.acalv3.domain.service.impl
 
-import br.com.acalv3.application.comunicate.model.request.CustomerPageRequest
+import br.com.acalv3.application.comunicate.model.request.customer.CustomerPageRequest
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.repository.CustomerRepository
 import br.com.acalv3.domain.service.CustomerService
@@ -18,6 +18,9 @@ class CustomerServiceImpl(
 		repository.getById(id)
 
 	override fun save(customer: Customer): Customer =
+		repository.save(customer)
+
+	override fun update(customer: Customer): Customer =
 		repository.save(customer)
 
 	override fun findByName(name: String): Customer =

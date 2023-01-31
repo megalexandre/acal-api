@@ -25,16 +25,19 @@ class CustomerModel (
     @Enumerated(EnumType.STRING)
     val personType: PersonTypeEnum,
 
-    var document: String? = null,
+    val phoneNumber: String? = null,
+
+    val document: String? = null,
 
     @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
     @JsonFormat(pattern = "yyyy-MM-dd")
-    var birthDay: LocalDate? = null,
+    val birthDay: LocalDate? = null,
 )
 
 fun Customer.toCustomerModel() = CustomerModel(
     id = id,
     name = name,
+    phoneNumber = phoneNumber,
     document = document,
     personType = personType,
     birthDay = birthDay
@@ -43,6 +46,7 @@ fun Customer.toCustomerModel() = CustomerModel(
 fun CustomerModel.toCustomer() = Customer(
     id = id,
     name = name,
+    phoneNumber = phoneNumber,
     document = document ?: "",
     personType = personType,
     birthDay = birthDay

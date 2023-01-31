@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpMethod.POST
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -34,17 +35,15 @@ class AppSecurityConfig(
 			.csrf().disable()
 			.cors().and()
 			.authorizeRequests()
-			.antMatchers("/**").permitAll()
-			.antMatchers("/customer/paginate").permitAll()
 			.antMatchers(HEALTH_STATUS).permitAll()
-			.antMatchers(LOGIN_ROUTER).permitAll()
-			.antMatchers(REGISTER_ROUTER).permitAll()
+			.antMatchers(AUTH_LOGIN_ROUTER).permitAll()
+			.antMatchers(AUTH_REGISTER_ROUTER).permitAll()
 			.anyRequest().authenticated().and()
 			.exceptionHandling().accessDeniedHandler( CustomAccessDeniedHandler())
 			.and()
 			.addFilterBefore(
 				JWTLoginFilter(
-					url = LOGIN_ROUTER,
+					url = AUTH_LOGIN_ROUTER,
 					objectMapper = objectMapper,
 					authManager = authenticationManagerBean(),
 					tokenAuthenticationService = tokenAuthenticationService,
@@ -52,10 +51,11 @@ class AppSecurityConfig(
 				UsernamePasswordAuthenticationFilter::class.java
 			)
 			.addFilterBefore(
-				JWTAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter::class.java
+				JWTAuthenticationFilter(tokenAuthenticationService),
+				UsernamePasswordAuthenticationFilter::class.java
 			)
 			.logout()
-				.logoutRequestMatcher(AntPathRequestMatcher(LOGOUT_ROUTER, HttpMethod.POST.name))
+				.logoutRequestMatcher(AntPathRequestMatcher(AUTH_LOGOUT_ROUTER, POST.name))
 	}
 
 	override fun configure(auth: AuthenticationManagerBuilder) {
@@ -77,10 +77,10 @@ class AppSecurityConfig(
 		CustomAccessDeniedHandler()
 
 	companion object {
-		const val REGISTER_ROUTER = "/auth/register"
 		const val HEALTH_STATUS = "/health/status"
-		const val LOGIN_ROUTER = "/auth/login"
-		const val LOGOUT_ROUTER = "/auth/logout"
+		const val AUTH_REGISTER_ROUTER = "/auth/register"
+		const val AUTH_LOGIN_ROUTER = "/auth/login"
+		const val AUTH_LOGOUT_ROUTER = "/auth/logout"
 	}
 
 }

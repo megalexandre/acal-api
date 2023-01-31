@@ -5,9 +5,10 @@ import java.time.LocalDate
 import java.util.*
 
 class Customer(
-    val id: UUID = UUID.randomUUID(),
+    val id: UUID,
     val name: String,
     val document: String,
     val personType: PersonTypeEnum,
     var birthDay: LocalDate? = null,
+    val phoneNumber: String?
 )
