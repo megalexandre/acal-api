@@ -1,4 +1,4 @@
-package br.com.acalv3.resources.repository
+package br.com.acalv3.resources.repository.interfaces
 
 import br.com.acalv3.resources.model.security.UserModel
 import org.springframework.data.jpa.repository.JpaRepository

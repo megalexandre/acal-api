@@ -1,10 +1,11 @@
 package br.com.acalv3.resources.model.business
 
+import br.com.acalv3.application.comunicate.Fixture
+import br.com.acalv3.application.comunicate.Fixture.Companion.DEFAULT_DATE_TIME_FORMAT
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
+import br.com.acalv3.domain.model.Link
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonSubTypes
-import org.hibernate.annotations.Type
 import org.springframework.data.domain.Page
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
@@ -12,8 +13,8 @@ import java.time.LocalDate
 import java.util.*
 import javax.persistence.*
 
-@Entity(name = "customer_model")
-class CustomerModel (
+@Entity(name = "customer")
+class CustomerEntity (
 
     @Id
     @Column(name = "id", columnDefinition = "BINARY(16)")
@@ -29,12 +30,17 @@ class CustomerModel (
 
     val document: String? = null,
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DATE_TIME)
-    @JsonFormat(pattern = "yyyy-MM-dd")
+    /*
+    @OneToMany(mappedBy = "LinkEntity")
+    val links: List<LinkEntity>,
+     */
+
+    @DateTimeFormat(pattern = DEFAULT_DATE_TIME_FORMAT, iso = DATE_TIME)
+    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     val birthDay: LocalDate? = null,
 )
 
-fun Customer.toCustomerModel() = CustomerModel(
+fun Customer.toCustomerModel() = CustomerEntity(
     id = id,
     name = name,
     phoneNumber = phoneNumber,
@@ -43,7 +49,7 @@ fun Customer.toCustomerModel() = CustomerModel(
     birthDay = birthDay
 )
 
-fun CustomerModel.toCustomer() = Customer(
+fun CustomerEntity.toCustomer() = Customer(
     id = id,
     name = name,
     phoneNumber = phoneNumber,
@@ -52,4 +58,4 @@ fun CustomerModel.toCustomer() = Customer(
     birthDay = birthDay
 )
 
-fun Page<CustomerModel>.toCustomerPage() = map{ it.toCustomer() }
+fun Page<CustomerEntity>.toCustomerPage() = map{ it.toCustomer() }

@@ -3,7 +3,7 @@ package br.com.acalv3.domain.service
 import br.com.acalv3.application.configuration.dto.UserLogin
 import br.com.acalv3.resources.model.security.RoleModel
 import br.com.acalv3.resources.model.security.toUserLogin
-import br.com.acalv3.resources.repository.UserRepository
+import br.com.acalv3.resources.repository.interfaces.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService (
-	private val userRepository: UserRepository,
+    private val userRepository: UserRepository,
     ): UserDetailsService {
 
 	fun findByName(name: String): UserLogin =

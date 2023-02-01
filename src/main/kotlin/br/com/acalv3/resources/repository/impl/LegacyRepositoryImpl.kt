@@ -5,7 +5,7 @@ import br.com.acalv3.domain.repository.LegacyRepository
 import br.com.acalv3.resources.model.business.toCustomerModel
 import br.com.acalv3.resources.model.dto.LegacyUser
 import br.com.acalv3.resources.model.dto.toCustomer
-import br.com.acalv3.resources.repository.CustomerRepositoryJpa
+import br.com.acalv3.resources.repository.interfaces.CustomerRepositoryJpa
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.module.kotlin.KotlinModule

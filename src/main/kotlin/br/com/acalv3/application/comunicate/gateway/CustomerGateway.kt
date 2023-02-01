@@ -29,7 +29,7 @@ class CustomerGateway(
         customerService.paginate(request).toCustomerPageResponse()
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: UUID): GetCustomerResponse =
+    fun find(@PathVariable id: UUID): CustomerGetResponse =
         customerService.getById(id).toGetCustomerResponse()
 
 }

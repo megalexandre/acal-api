@@ -1,6 +1,5 @@
 package br.com.acalv3.application.comunicate.model.response.customer
 
-import br.com.acalv3.application.comunicate.Fixture
 import br.com.acalv3.application.comunicate.Fixture.Companion.DEFAULT_DATE_TIME_FORMAT
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
@@ -8,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 import java.util.*
 
-data class GetCustomerResponse(
+data class CustomerGetResponse(
     val id: UUID?,
     val name: String?,
     val document: String?,
@@ -18,7 +17,7 @@ data class GetCustomerResponse(
     var birthDay: LocalDate? = null,
 )
 
-fun Customer.toGetCustomerResponse() = GetCustomerResponse(
+fun Customer.toGetCustomerResponse() = CustomerGetResponse(
     id = id,
     name = name,
     document = document,
