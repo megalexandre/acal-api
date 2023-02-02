@@ -21,7 +21,8 @@ class LinkGateway(
 
     @PostMapping
     fun save(@Valid @RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
-        service.save(request.toLink(customerService.getById(UUID.fromString(request.customerEntity)))).toLinkResponse()
+        val customer = customerService.getById(UUID.fromString(request.customer))
+        service.save(request.toLink(customer)).toLinkResponse()
     }
 
     @PutMapping("/update")

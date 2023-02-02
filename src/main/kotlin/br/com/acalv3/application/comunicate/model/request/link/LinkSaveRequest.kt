@@ -11,7 +11,7 @@ data class LinkSaveRequest(
     val name: String?,
 
     @field:NotBlank(message = "Cliente é um campo obrigatório")
-    val customerEntity: String?
+    val customer: String?
 
 )
 

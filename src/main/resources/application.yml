@@ -13,26 +13,11 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
-        format_sql: false
+        format_sql: true
         check_nullability: false
   output:
     ansi:
       enabled: always
 
-
-logging:
-  pattern:
-    console: "%d %-5level %logger : %msg%n"
-  level:
-    org:
-      springframework: info
-      hibernate:
-        type: info
-
 server:
   port: 8080
-
-app:
-  environment:
-    dateTimeFormatter: 'dd/mm/yyyy hh:mm:ss'
-    dateFormatter:   'dd/mm/yyyy'
