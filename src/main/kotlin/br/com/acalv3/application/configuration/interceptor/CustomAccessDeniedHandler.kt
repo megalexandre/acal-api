@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse
 
 class CustomAccessDeniedHandler: SLF4JLoggerContext(),  AccessDeniedHandler {
 	private var logger: Logger = LoggerFactory.getLogger(CustomAccessDeniedHandler::class.java)
+
 	override fun handle(
 		request: HttpServletRequest?,
 		response: HttpServletResponse?,

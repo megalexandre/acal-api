@@ -2,7 +2,7 @@ package br.com.acalv3.resources.repository.impl
 
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.repository.LegacyRepository
-import br.com.acalv3.resources.model.business.toCustomerModel
+import br.com.acalv3.resources.model.business.toCustomerEntity
 import br.com.acalv3.resources.model.dto.LegacyUser
 import br.com.acalv3.resources.model.dto.toCustomer
 import br.com.acalv3.resources.repository.interfaces.CustomerRepositoryJpa
@@ -38,7 +38,7 @@ class LegacyRepositoryImpl(
             }
         }
 
-        customerRepositoryJpa.saveAll( users.map { it.toCustomer().toCustomerModel()})
+        customerRepositoryJpa.saveAll( users.map { it.toCustomer().toCustomerEntity()})
     }
 
 

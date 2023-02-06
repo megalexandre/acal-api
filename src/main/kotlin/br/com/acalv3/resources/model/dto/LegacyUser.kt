@@ -15,7 +15,7 @@ class LegacyUser (
 )
 
 fun LegacyUser.toCustomer() = Customer(
-    id = UUID.randomUUID(),
+    id = UUID.randomUUID().toString(),
     name = name,
     document = document,
     personType = personType,

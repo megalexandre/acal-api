@@ -7,4 +7,4 @@ package br.com.acalv3.application.comunicate.model.request.pagination
      open val direction: String? = "ASC",
      open val sortedField: String? = "id",
 
- )
+)

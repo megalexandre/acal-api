@@ -8,9 +8,17 @@ import org.springframework.data.domain.Sort.Direction.DESC
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DefaultRepository {
+interface DefaultRepository<T> {
 
-    fun paginate(request: DefaultPageRequest): PageRequest =
+    fun getById(id: String): T
+
+    fun save(t: T): T
+
+    fun update(t: T): T
+
+    fun findByName(name: String): T
+
+    fun pageable(request: DefaultPageRequest): PageRequest =
         PageRequest.of(
             request.page?.let { if (it < 0) 0 else it } ?: 0,
             request.pageSize?.let { if (it < 0) 10 else it } ?: 10)

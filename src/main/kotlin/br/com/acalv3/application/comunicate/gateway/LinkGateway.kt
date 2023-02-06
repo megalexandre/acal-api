@@ -9,7 +9,6 @@ import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.LinkService
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @RestController
@@ -21,13 +20,18 @@ class LinkGateway(
 
     @PostMapping
     fun save(@Valid @RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
-        val customer = customerService.getById(UUID.fromString(request.customer))
-        service.save(request.toLink(customer)).toLinkResponse()
+        service.save(request.toLink(
+            customerService.getById(request.customer ?: throw RuntimeException(""))
+        )).toLinkResponse()
     }
 
     @PutMapping("/update")
     fun update(@Valid @RequestBody request: LinkUpdateRequest): SaveUpdateLinkResponse = run {
-        service.update(request.toLink(customerService.getById(UUID.fromString(request.customerEntity)))).toLinkResponse()
+        service.update(
+            request.toLink(
+                customerService.getById(request.customer ?: throw RuntimeException(""))
+            ))
+            .toLinkResponse()
     }
 
     @PostMapping("/paginate")
@@ -35,7 +39,7 @@ class LinkGateway(
         service.paginate(request).toLinkPageResponse()
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: UUID): LinkGetResponse =
+    fun find(@PathVariable id: String): LinkGetResponse =
         service.getById(id).toLinkGetResponse()
 
 }

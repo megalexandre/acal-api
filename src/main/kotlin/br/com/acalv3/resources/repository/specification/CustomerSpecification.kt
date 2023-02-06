@@ -9,6 +9,7 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class CustomerSpecification(private val customer: CustomerPageRequest) {
+
     fun getSpecification(): Specification<CustomerEntity> =
         Specification<CustomerEntity> { root, _, builder ->
             val predicate = builder.conjunction()
@@ -33,8 +34,10 @@ class CustomerSpecification(private val customer: CustomerPageRequest) {
 
     private fun likeName(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get(NAME)),"%${customer.name}%")
+
     private fun likeDocument(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get(DOCUMENT)),"%${customer.document}%")
+
     private fun eqDate(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<LocalDate>(BIRTH_DAY), customer.birthDay)
 

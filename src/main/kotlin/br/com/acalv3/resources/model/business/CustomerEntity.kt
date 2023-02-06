@@ -1,10 +1,9 @@
 package br.com.acalv3.resources.model.business
 
-import br.com.acalv3.application.comunicate.Fixture
 import br.com.acalv3.application.comunicate.Fixture.Companion.DEFAULT_DATE_TIME_FORMAT
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
-import br.com.acalv3.domain.model.Link
+import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
 import org.springframework.data.domain.Page
 import org.springframework.format.annotation.DateTimeFormat
@@ -30,18 +29,14 @@ class CustomerEntity (
 
     val document: String? = null,
 
-    /*
-    @OneToMany(mappedBy = "LinkEntity")
-    val links: List<LinkEntity>,
-     */
-
     @DateTimeFormat(pattern = DEFAULT_DATE_TIME_FORMAT, iso = DATE_TIME)
     @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     val birthDay: LocalDate? = null,
-)
 
-fun Customer.toCustomerModel() = CustomerEntity(
-    id = id,
+    ) : DefaultEntity()
+
+fun Customer.toCustomerEntity() = CustomerEntity(
+    id = UUID.fromString(id),
     name = name,
     phoneNumber = phoneNumber,
     document = document,
@@ -50,7 +45,7 @@ fun Customer.toCustomerModel() = CustomerEntity(
 )
 
 fun CustomerEntity.toCustomer() = Customer(
-    id = id,
+    id = id.toString(),
     name = name,
     phoneNumber = phoneNumber,
     document = document ?: "",

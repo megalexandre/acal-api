@@ -8,7 +8,6 @@ import br.com.acalv3.application.comunicate.model.response.customer.*
 import br.com.acalv3.domain.service.CustomerService
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.validation.Valid
 
 @RestController
@@ -29,7 +28,7 @@ class CustomerGateway(
         customerService.paginate(request).toCustomerPageResponse()
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: UUID): CustomerGetResponse =
+    fun find(@PathVariable id: String): CustomerGetResponse =
         customerService.getById(id).toGetCustomerResponse()
 
 }

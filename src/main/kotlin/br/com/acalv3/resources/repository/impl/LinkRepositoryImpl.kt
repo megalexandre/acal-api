@@ -18,10 +18,10 @@ import java.util.*
 @Repository
 class LinkRepositoryImpl(
     private val repository: LinkRepositoryJpa,
-) : LinkRepository, DefaultRepository {
+) : LinkRepository, DefaultRepository<Link> {
 
-    override fun getById(id: UUID): Link =
-        repository.findByIdOrNull(id)?.toLink() ?: throw NotFoundException()
+    override fun getById(id: String): Link =
+        repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
 
     override fun save(link: Link): Link =
         repository.save(link.toLinkEntity()).toLink()
@@ -35,8 +35,7 @@ class LinkRepositoryImpl(
     override fun paginate(request: LinkPageRequest): Page<Link> =
         repository.findAll(
             LinkSpecification(request).getSpecification(),
-            super.paginate(request)
+            super.pageable(request)
         ).toLinkPage()
-
 
 }

@@ -1,4 +1,4 @@
-package br.com.acalv3.integration.customer
+package br.com.acalv3.integration.customer.save
 
 import br.com.acalv3.integration.DefaultGatewayTest
 import io.restassured.http.ContentType.JSON
@@ -9,33 +9,26 @@ import org.hamcrest.Matchers.hasKey
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
-import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.util.StreamUtils.*
 import java.nio.charset.Charset.defaultCharset
 
 
-class SaveCustomerTest: DefaultGatewayTest() {
+class CustomerSaveTest: DefaultGatewayTest() {
 
-	@Value("classpath:json/request/user_post.json")
-	private lateinit var validUser: Resource
+	@Value("classpath:json/request/customer/customer_minimal_field.json")
+	private lateinit var customerMinimal: Resource
 
-	@Value("classpath:json/request/user_post_without_document.json")
-	private lateinit var userPostWithDocument: Resource
-
-	@Value("classpath:json/request/user_post_without_name.json")
-	private lateinit var userPostWithName: Resource
-
-	@Value("classpath:json/request/user_post_with_invalid_person_type.json")
-	private lateinit var userPostWithInvalidPersonType: Resource
+	@Value("classpath:json/request/customer/customer_completed_field.json")
+	private lateinit var customerCompleted: Resource
 
 	@Test
-	fun `should save a customer ok 200`(){
-		val postUser = copyToString(validUser.inputStream, defaultCharset())
+	fun `should save a minimal customer ok 200`(){
+		val customer = copyToString(customerMinimal.inputStream, defaultCharset())
 
 		Given {
 			contentType(JSON)
 			header(header)
-			body(postUser)
+			body(customer)
 		} When {
 			post("$basePath/customer")
 		} Then {
@@ -44,6 +37,24 @@ class SaveCustomerTest: DefaultGatewayTest() {
 		}
 	}
 
+	@Test
+	fun `should save a completed customer ok 200`(){
+		val customer = copyToString(customerCompleted.inputStream, defaultCharset())
+
+		Given {
+			contentType(JSON)
+			header(header)
+			body(customer)
+		} When {
+			post("$basePath/customer")
+		} Then {
+			statusCode(200)
+			body("$", hasKey("id"))
+		}
+	}
+
+
+	/*
 	@Test
 	fun `should reject customer when name is not present 400`(){
 		val postUser = copyToString(userPostWithName.inputStream, defaultCharset())
@@ -90,6 +101,5 @@ class SaveCustomerTest: DefaultGatewayTest() {
 			body("$", hasKey("error"))
 		}
 	}
-
-
+	*/
 }

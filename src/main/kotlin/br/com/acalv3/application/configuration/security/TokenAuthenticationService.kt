@@ -86,7 +86,7 @@ class TokenAuthenticationService(
 
 	companion object{
 		private const val ERROR_MESSAGE = "Você não possui permissão"
-		private const val HOURS_TO_EXPIRATION: Long = 8
+		private const val HOURS_TO_EXPIRATION: Long = 4
 		private const val SECRET = "2a108Imja6xTLcqhRUDVrVusTuW7xVtjifhrJon1bDyBkdRzuLSHBVY2q"
 		private const val TOKEN_PREFIX = "Bearer"
 		private const val HEADER_STRING = "Authorization"

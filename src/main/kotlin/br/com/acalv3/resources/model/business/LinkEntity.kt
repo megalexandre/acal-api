@@ -1,6 +1,7 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Link
+import br.com.acalv3.resources.model.DefaultEntity
 import org.springframework.data.domain.Page
 import java.util.*
 import javax.persistence.*
@@ -17,16 +18,17 @@ class LinkEntity (
     @ManyToOne
     @JoinColumn(name="customer_id")
     val customerEntity: CustomerEntity
-)
+
+) : DefaultEntity()
 
 fun Link.toLinkEntity() = LinkEntity(
-    id = id,
+    id = UUID.fromString(id),
     name = name,
-    customerEntity = customer.toCustomerModel()
+    customerEntity = customer.toCustomerEntity()
 )
 
 fun LinkEntity.toLink() = Link(
-    id = id,
+    id = id.toString(),
     name = name,
     customer = customerEntity.toCustomer(),
 )
