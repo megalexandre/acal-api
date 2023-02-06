@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.model.business
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.DEFAULT_DATE_TIME_FORMAT
+import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity
@@ -29,8 +29,8 @@ class CustomerEntity (
 
     val document: String? = null,
 
-    @DateTimeFormat(pattern = DEFAULT_DATE_TIME_FORMAT, iso = DATE_TIME)
-    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
+    @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
+    @JsonFormat(pattern = DATE_FORMAT)
     val birthDay: LocalDate? = null,
 
     ) : DefaultEntity()

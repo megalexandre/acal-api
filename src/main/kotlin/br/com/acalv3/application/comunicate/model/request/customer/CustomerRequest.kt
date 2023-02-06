@@ -1,9 +1,5 @@
 package br.com.acalv3.application.comunicate.model.request.customer
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.DEFAULT_DATE_TIME_FORMAT
-import com.fasterxml.jackson.annotation.JsonFormat
-import org.springframework.format.annotation.DateTimeFormat
-import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
@@ -20,8 +16,6 @@ open class CustomerRequest (
     @field:Pattern(regexp = "PERSON|LEGAL", message = "os valores aceitos para tipo de pessoa são PERSON ou LEGAL")
     open var personType: String? = null,
 
-    @DateTimeFormat(pattern = DEFAULT_DATE_TIME_FORMAT, iso = DATE_TIME)
-    @JsonFormat(pattern = DEFAULT_DATE_TIME_FORMAT)
     open var birthDay: LocalDate? = null,
 
     open val phoneNumber: String? = null,
