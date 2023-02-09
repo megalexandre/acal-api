@@ -15,4 +15,8 @@ class LegacyGateway(
     fun status() =
         legacyService.person()
 
+    @GetMapping("/address")
+    fun address() =
+        legacyService.address()
+
 }

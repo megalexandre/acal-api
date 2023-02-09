@@ -13,4 +13,8 @@ class LegacyServiceImpl(
 		repository.person()
 	}
 
+	override fun address() {
+		repository.address()
+	}
+
 }

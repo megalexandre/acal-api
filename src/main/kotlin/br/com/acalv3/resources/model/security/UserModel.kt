@@ -1,8 +1,8 @@
 package br.com.acalv3.resources.model.security
 
-import br.com.acalv3.application.configuration.dto.Role
 import br.com.acalv3.application.configuration.dto.UserLogin
 import org.springframework.security.core.userdetails.UserDetails
+import java.util.*
 import javax.persistence.*
 
 @Entity(name = "user_model")
@@ -12,12 +12,12 @@ class UserModel (
     @GeneratedValue(
         strategy = GenerationType.IDENTITY,
     )
-    private var id: Long? = null,
+    private val id: String? = null,
 
     @Column(name="username", unique=true)
-    private var username: String? = "",
+    private val username: String,
 
-    private var password: String? = "",
+    private var password: String,
 
     @OneToMany(cascade = [CascadeType.PERSIST])
     var roles: List<RoleModel>? = mutableListOf(),

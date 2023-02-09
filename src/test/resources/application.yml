@@ -3,11 +3,11 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/acaldb
     username: root
-    password: TrObccrzH11dUR=/ytVjTGwOCiK8!mba
+    password: 123456
   jpa:
     open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       hbm2ddl:  auto
     show-sql: true
     properties:
@@ -15,3 +15,4 @@ spring:
         dialect: org.hibernate.dialect.MySQL5Dialect
         format_sql: false
         check_nullability: false
+

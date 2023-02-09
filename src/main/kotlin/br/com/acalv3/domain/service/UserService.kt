@@ -2,6 +2,7 @@ package br.com.acalv3.domain.service
 
 import br.com.acalv3.application.configuration.dto.UserLogin
 import br.com.acalv3.resources.model.security.RoleModel
+import br.com.acalv3.resources.model.security.UserModel
 import br.com.acalv3.resources.model.security.toUserLogin
 import br.com.acalv3.resources.repository.interfaces.UserRepository
 import org.springframework.security.core.userdetails.UserDetails
@@ -19,13 +20,9 @@ class UserService (
 		userRepository.findByUsername(name)?.toUserLogin() ?: throw UsernameNotFoundException("User not found: $name")
 
 	override fun loadUserByUsername(username: String): UserDetails {
-		BCryptPasswordEncoder().encode("senha")
-		val user = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found exception")
+		val user: UserModel = userRepository.findByUsername(username) ?: throw UsernameNotFoundException("User not found: $username")
 		user.roles = listOf(RoleModel( authority = "ADMIN"))
 		return user
 	}
-	companion object{
-		const val NAME_PARAMETER_IS_REQUIRED = "Nome é paramêtro obrigatório"
-		const val PASSWORD_PARAMETER_IS_REQUIRED = "Senha é paramêtro obrigatório"
-	}
+
 }

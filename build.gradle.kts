@@ -61,6 +61,10 @@ dependencies {
 	testImplementation("io.rest-assured:json-path:5.3.0")
 	testImplementation("io.rest-assured:xml-path:5.3.0")
 	testImplementation("io.rest-assured:kotlin-extensions:5.3.0")
+
+	implementation("org.testcontainers:testcontainers-bom:1.17.6")
+	implementation("org.testcontainers:junit-jupiter:1.17.6")
+	implementation("org.testcontainers:mysql:1.17.6")
 }
 
 tasks.withType<KotlinCompile> {
