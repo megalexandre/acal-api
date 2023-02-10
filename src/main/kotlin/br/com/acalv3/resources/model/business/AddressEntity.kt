@@ -31,3 +31,4 @@ fun AddressEntity.toAddress() = Address(
 )
 
 fun Page<AddressEntity>.toAddressPage() = map{ it.toAddress() }
+fun List<AddressEntity>.toAddress() = map{ it.toAddress() }

@@ -65,6 +65,9 @@ dependencies {
 	implementation("org.testcontainers:testcontainers-bom:1.17.6")
 	implementation("org.testcontainers:junit-jupiter:1.17.6")
 	implementation("org.testcontainers:mysql:1.17.6")
+
+	testImplementation("org.junit.jupiter:junit-jupiter")
+	testImplementation("com.tngtech.archunit:archunit-junit5-engine:0.23.1")
 }
 
 tasks.withType<KotlinCompile> {

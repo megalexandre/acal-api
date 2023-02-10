@@ -1,9 +1,9 @@
 package br.com.acalv3.application.configuration.interceptor
 
-import org.springframework.web.filter.OncePerRequestFilter
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.springframework.web.filter.OncePerRequestFilter
 
 class BearerTokenInterceptor(
 	private val tokenWrapper: BearerTokenWrapper
@@ -17,7 +17,7 @@ class BearerTokenInterceptor(
 		val authorizationHeaderValue: String? = request.getHeader(AUTHORIZATION)
 
 		if (authorizationHeaderValue != null && authorizationHeaderValue.startsWith(BEARER)) {
-			val token = authorizationHeaderValue.substring(7, authorizationHeaderValue.length);
+			val token = authorizationHeaderValue.substring(7, authorizationHeaderValue.length)
 			tokenWrapper.token = token
 		}
 	}

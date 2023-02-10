@@ -1,12 +1,14 @@
 package br.com.acalv3.integration
 
-import br.com.acalv3.application.configuration.dto.UserLogin
-import br.com.acalv3.resources.model.security.UserModel
-import br.com.acalv3.resources.repository.interfaces.UserRepository
+import br.com.acalv3.domain.model.security.UserDomain
+import br.com.acalv3.resources.model.security.UserEntity
+import br.com.acalv3.resources.repository.interfaces.UserRepositoryJpa
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.restassured.RestAssured
 import io.restassured.http.ContentType.JSON
 import io.restassured.http.Header
+import java.nio.charset.Charset
+import javax.annotation.PostConstruct
 import org.junit.jupiter.api.Assertions.assertNotNull
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -22,8 +24,6 @@ import org.springframework.util.StreamUtils.copyToString
 import org.testcontainers.containers.MySQLContainer
 import org.testcontainers.junit.jupiter.Container
 import org.testcontainers.junit.jupiter.Testcontainers
-import java.nio.charset.Charset
-import javax.annotation.PostConstruct
 
 @Testcontainers
 @SpringBootTest(
@@ -41,7 +41,7 @@ class DefaultGatewayTest{
 	lateinit var objectMapper: ObjectMapper
 
 	@Autowired
-	lateinit var userRepository: UserRepository
+	lateinit var userRepositoryJpa: UserRepositoryJpa
 
 	var token: String? = null
 	var header: Header? = null
@@ -58,15 +58,15 @@ class DefaultGatewayTest{
 			.then()
 			.statusCode(OK.value()).extract().asString()
 
-		val userLogin: UserLogin = objectMapper.readValue(response, UserLogin::class.java)
+		val userLogin: UserDomain = objectMapper.readValue(response, UserDomain::class.java)
 		assertNotNull(userLogin.token, "Must return a valid token")
 
 		this.token = userLogin.token
 		this.header = Header(AUTHORIZATION, token)
 		this.basePath = "$LOCAL_HOST$port"
 
-		userRepository.save(
-			UserModel(
+		userRepositoryJpa.save(
+			UserEntity(
 				username = "alexandre",
 				password = BCryptPasswordEncoder().encode("senha")
 			)

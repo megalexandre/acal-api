@@ -7,7 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("bill", produces=[ "application/json" ])
+@RequestMapping("bill",
+    produces=[ "application/json" ],
+    consumes = ["application/json"]
+)
 class BillGateway{
     @PostMapping("payment")
     fun billPayment(@RequestBody paymentRequest: BillPaymentRequest) = "{\"status\":\"ok\"}"

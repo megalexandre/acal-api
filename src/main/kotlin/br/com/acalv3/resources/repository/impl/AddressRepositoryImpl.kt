@@ -1,7 +1,7 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.application.comunicate.model.request.address.AddressPageRequest
 import br.com.acalv3.domain.model.Address
+import br.com.acalv3.domain.model.page.AddressPage
 import br.com.acalv3.domain.repository.AddressRepository
 import br.com.acalv3.resources.model.business.toAddress
 import br.com.acalv3.resources.model.business.toAddressEntity
@@ -18,7 +18,7 @@ import java.util.*
 @Repository
 class AddressRepositoryImpl(
     private val repository: AddressRepositoryJpa,
-) : AddressRepository, DefaultRepository<Address> {
+) : AddressRepository, DefaultRepository {
 
     override fun getById(id: String): Address =
         repository.findByIdOrNull(UUID.fromString(id))?.toAddress() ?: throw NotFoundException()
@@ -32,10 +32,12 @@ class AddressRepositoryImpl(
     override fun findByName(name: String): Address =
         repository.findByName(name).toAddress()
 
-    override fun paginate(request: AddressPageRequest): Page<Address> =
+    override fun paginate(request: AddressPage): Page<Address> =
         repository.findAll(
             AddressSpecification(request).getSpecification(),
             super.pageable(request)
         ).toAddressPage()
 
+    override fun getAll(): List<Address> =
+        repository.findAll().toAddress()
 }

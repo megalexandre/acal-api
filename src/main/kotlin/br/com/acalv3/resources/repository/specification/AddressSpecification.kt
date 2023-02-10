@@ -1,14 +1,13 @@
 package br.com.acalv3.resources.repository.specification
 
-import br.com.acalv3.application.comunicate.model.request.address.AddressPageRequest
+import br.com.acalv3.domain.model.page.AddressPage
 import br.com.acalv3.resources.model.business.AddressEntity
-import br.com.acalv3.resources.model.business.CustomerEntity
 import org.springframework.data.jpa.domain.Specification
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
-class AddressSpecification(private val address: AddressPageRequest) {
+class AddressSpecification(private val address: AddressPage) {
 
     fun getSpecification(): Specification<AddressEntity> =
         Specification<AddressEntity> { root, _, builder ->

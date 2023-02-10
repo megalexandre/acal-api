@@ -1,14 +1,14 @@
 package br.com.acalv3.resources.repository.specification
 
-import br.com.acalv3.application.comunicate.model.request.customer.CustomerPageRequest
+import br.com.acalv3.domain.model.page.CustomerPage
 import br.com.acalv3.resources.model.business.CustomerEntity
-import org.springframework.data.jpa.domain.Specification
 import java.time.LocalDate
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
+import org.springframework.data.jpa.domain.Specification
 
-class CustomerSpecification(private val customer: CustomerPageRequest) {
+class CustomerSpecification(private val customer: CustomerPage) {
 
     fun getSpecification(): Specification<CustomerEntity> =
         Specification<CustomerEntity> { root, _, builder ->

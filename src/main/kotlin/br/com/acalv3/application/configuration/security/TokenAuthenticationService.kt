@@ -1,33 +1,32 @@
 package br.com.acalv3.application.configuration.security
 
-import br.com.acalv3.application.configuration.dto.UserLogin
-import br.com.acalv3.resources.model.security.UserModel
-import br.com.acalv3.resources.model.security.toUserLogin
+import br.com.acalv3.domain.model.security.UserDomain
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.Authentication
 import java.io.IOException
 import java.time.LocalDateTime
 import java.time.ZoneId
-import java.util.*
+import java.util.Collections
+import java.util.Date
 import javax.crypto.spec.SecretKeySpec
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 import javax.xml.bind.DatatypeConverter
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.Authentication
 
 class TokenAuthenticationService(
 	private var objectMapper: ObjectMapper
 	){
 	fun addAuthentication(response: HttpServletResponse, auth: Authentication) {
-		val userLogin: UserLogin =(auth.principal as UserModel).toUserLogin()
+		val userLogin: UserDomain =(auth.principal as UserDomain)
 
 		val jwt = Jwts.builder()
 
 			.setSubject(auth.name)
-				.claim("role", userLogin.authorities?.map { it.name })
+				.claim("role", userLogin.authorities?.map { it.authority })
 				.claim("name", auth.name)
 			.setExpiration(
 				Date.from(LocalDateTime.now()
@@ -44,15 +43,8 @@ class TokenAuthenticationService(
 		val token = jwt.compact()
 		userLogin.token = token
 
-		val stringResponse = objectMapper.writeValueAsString(UserLogin(
-			username = userLogin.username,
-			token = userLogin.token,
-			authorities = userLogin.authorities
-			)
-		)
-
 		try {
-			response.writer.write(stringResponse)
+			response.writer.write(objectMapper.writeValueAsString(userLogin))
 			response.writer.flush()
 			response.writer.close()
 		} catch (e: IOException) {

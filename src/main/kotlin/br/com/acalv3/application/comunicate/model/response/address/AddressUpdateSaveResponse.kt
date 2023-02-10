@@ -2,7 +2,7 @@ package br.com.acalv3.application.comunicate.model.response.address
 
 import br.com.acalv3.domain.model.Address
 
-data class SaveUpdateAddressResponse(
+class SaveUpdateAddressResponse(
     val id: String
 )
 

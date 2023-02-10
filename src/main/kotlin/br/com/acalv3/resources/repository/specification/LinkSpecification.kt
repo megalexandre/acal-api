@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.repository.specification
 
-import br.com.acalv3.application.comunicate.model.request.link.LinkPageRequest
+import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.resources.model.business.CustomerEntity
 import br.com.acalv3.resources.model.business.LinkEntity
 import org.springframework.data.jpa.domain.Specification
@@ -9,7 +9,7 @@ import javax.persistence.criteria.Join
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
-class LinkSpecification(private val link: LinkPageRequest) {
+class LinkSpecification(private val link: LinkPage) {
 
     fun getSpecification(): Specification<LinkEntity> =
         Specification<LinkEntity> { root, _, builder ->
@@ -32,11 +32,7 @@ class LinkSpecification(private val link: LinkPageRequest) {
         if (link.name != null) {
             predicate.expressions.add(likeName(root, builder))
         }
-
-
     }
-
-
 
     private fun likeName(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get("name")),"%${link.name}%")

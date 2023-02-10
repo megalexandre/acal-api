@@ -2,6 +2,7 @@ package br.com.acalv3.application.comunicate.model.request.customer
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.application.comunicate.model.request.pagination.DefaultPageRequest
+import br.com.acalv3.domain.model.page.CustomerPage
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 
@@ -13,3 +14,9 @@ data class CustomerPageRequest(
     val birthDay: LocalDate? = null,
 
 ): DefaultPageRequest()
+
+fun CustomerPageRequest.toCustomerPage() = CustomerPage(
+    name = name,
+    document = document,
+    birthDay = birthDay,
+)

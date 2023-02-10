@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.repository
 
-import br.com.acalv3.application.comunicate.model.request.pagination.DefaultPageRequest
+import br.com.acalv3.domain.model.page.DefaultPage
 import org.springframework.data.domain.PageRequest
 import org.springframework.data.domain.Sort
 import org.springframework.data.domain.Sort.Direction.ASC
@@ -8,20 +8,10 @@ import org.springframework.data.domain.Sort.Direction.DESC
 import org.springframework.stereotype.Repository
 
 @Repository
-interface DefaultRepository<T> {
+interface DefaultRepository {
 
-    fun getById(id: String): T
-
-    fun save(t: T): T
-
-    fun update(t: T): T
-
-    fun findByName(name: String): T
-
-    fun pageable(request: DefaultPageRequest): PageRequest =
-        PageRequest.of(
-            request.page?.let { if (it < 0) 0 else it } ?: 0,
-            request.pageSize?.let { if (it < 0) 10 else it } ?: 10)
+    fun pageable(request: DefaultPage): PageRequest =
+        PageRequest.of(request.page, request.pageSize)
             .withSort(
                 Sort.by(
                     when (request.direction) {
@@ -30,8 +20,7 @@ interface DefaultRepository<T> {
                         }
 
                         else -> ASC
-                    }, request.sortedField ?: "id"
+                    }, request.sortedField
                 )
             )
-
 }
