@@ -2,10 +2,10 @@ package br.com.acalv3.resources.model.security
 
 import br.com.acalv3.domain.model.security.RoleDomain
 import com.fasterxml.jackson.annotation.JsonIgnore
+import java.util.UUID
 import javax.persistence.CascadeType.DETACH
+import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.GeneratedValue
-import javax.persistence.GenerationType.IDENTITY
 import javax.persistence.Id
 import javax.persistence.ManyToOne
 
@@ -13,10 +13,8 @@ import javax.persistence.ManyToOne
 data class RoleEntity (
 
     @Id
-    @GeneratedValue(
-        strategy = IDENTITY,
-    )
-    private var id: Long? = null,
+    @Column(name = "id", columnDefinition = "BINARY(16)")
+    val id: UUID? = null,
 
     val authority: String,
 
@@ -27,5 +25,10 @@ data class RoleEntity (
 )
 
 fun RoleEntity.toRoleDomain() = RoleDomain(
+    authority = authority
+)
+
+
+fun RoleDomain.toRoleEntity() = RoleEntity(
     authority = authority
 )

@@ -11,7 +11,6 @@ import br.com.acalv3.application.comunicate.model.response.address.SaveUpdateAdd
 import br.com.acalv3.application.comunicate.model.response.address.toAddressPageResponse
 import br.com.acalv3.application.comunicate.model.response.address.toAddressResponse
 import br.com.acalv3.application.comunicate.model.response.address.toGetAddressResponse
-import br.com.acalv3.application.configuration.interceptor.CustomAccessDeniedHandler
 import br.com.acalv3.domain.service.AddressService
 import javax.validation.Valid
 import org.slf4j.Logger
@@ -33,7 +32,7 @@ import org.springframework.web.bind.annotation.RestController
 class AddressGateway(
     val service: AddressService
 ) {
-    private var logger: Logger = LoggerFactory.getLogger(CustomAccessDeniedHandler::class.java)
+    private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
     fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse =

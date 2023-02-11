@@ -2,12 +2,14 @@ package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Group
 import br.com.acalv3.resources.model.DefaultEntity
-import org.springframework.data.domain.Page
 import java.math.BigDecimal
-import java.util.*
-import javax.persistence.*
+import java.util.UUID
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import org.springframework.data.domain.Page
 
-@Entity(name = "group")
+@Entity(name = "group_entity")
 class GroupEntity (
 
     @Id

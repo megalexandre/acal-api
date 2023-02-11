@@ -1,7 +1,6 @@
 package br.com.acalv3.application.comunicate.model.request.address
 
 import br.com.acalv3.domain.model.Address
-import br.com.acalv3.domain.model.Customer
 import javax.validation.constraints.NotBlank
 
 data class AddressUpdateRequest(

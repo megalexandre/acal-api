@@ -1,7 +1,7 @@
 package br.com.acalv3.application.comunicate.model.request.group
 
 import br.com.acalv3.domain.model.Group
-import java.util.*
+import java.util.UUID
 
 class GroupSaveRequest: GroupRequest()
 

@@ -5,12 +5,16 @@ import br.com.acalv3.domain.enumeration.PersonTypeEnum
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
+import java.time.LocalDate
+import java.util.UUID
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.Enumerated
+import javax.persistence.Id
 import org.springframework.data.domain.Page
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
-import java.time.LocalDate
-import java.util.*
-import javax.persistence.*
 
 @Entity(name = "customer")
 class CustomerEntity (

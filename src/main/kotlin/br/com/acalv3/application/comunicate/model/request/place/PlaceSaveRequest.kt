@@ -2,7 +2,7 @@ package br.com.acalv3.application.comunicate.model.request.place
 
 import br.com.acalv3.application.comunicate.model.request.address.toAddress
 import br.com.acalv3.domain.model.Place
-import java.util.*
+import java.util.UUID
 
 class PlaceSaveRequest: PlaceRequest()
 

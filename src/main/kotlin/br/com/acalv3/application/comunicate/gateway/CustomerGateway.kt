@@ -24,8 +24,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("customer",
-    produces=[ "application/json" ],
-    consumes = ["application/json"]
+    produces=[ "application/json" ]
 )
 class CustomerGateway(
     val customerService: CustomerService) {

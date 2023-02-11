@@ -1,7 +1,7 @@
 package br.com.acalv3.application.comunicate.model.request.address
 
 import br.com.acalv3.domain.model.Address
-import java.util.*
+import java.util.UUID
 
 class AddressSaveRequest: AddressRequest()
 

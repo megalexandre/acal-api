@@ -1,8 +1,8 @@
 package br.com.acalv3.application.comunicate.model.response.group
 
 import br.com.acalv3.domain.model.Group
-import org.springframework.data.domain.Page
 import java.math.BigDecimal
+import org.springframework.data.domain.Page
 
 class GroupPageResponse(
     val id: String,
