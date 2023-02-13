@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("address",
     produces=[ "application/json" ],
-    consumes = ["application/json"]
 )
 class AddressGateway(
     val service: AddressService
@@ -50,4 +49,7 @@ class AddressGateway(
     fun find(@PathVariable id: String): AddressGetResponse =
         service.getById(id).toGetAddressResponse()
 
+    @GetMapping("/list")
+    fun list(): List<AddressGetResponse> =
+        service.getAll().toGetAddressResponse()
 }

@@ -6,9 +6,18 @@ import br.com.acalv3.domain.model.page.AddressPage
 data class AddressPageRequest(
 
     val name: String? = null,
+    override val sortedField: String = "id",
+    override val page: Int = 0,
+    override val pageSize: Int = 10,
+    override val direction: String = "ASC",
 
 ): DefaultPageRequest()
 
 fun AddressPageRequest.toAddressPage() = AddressPage(
     name = name,
+
+    sortedField = sortedField,
+    page = page,
+    pageSize = pageSize,
+    direction = direction,
 )

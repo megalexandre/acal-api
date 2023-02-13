@@ -18,8 +18,8 @@ interface DefaultRepository {
                         DESC.name -> {
                             DESC
                         }
-
                         else -> ASC
+
                     }, request.sortedField
                 )
             )

@@ -12,11 +12,21 @@ data class CustomerPageRequest(
     val document: String? = null,
     @JsonFormat(pattern = DATE_FORMAT)
     val birthDay: LocalDate? = null,
+    override val page: Int = 0,
+    override val pageSize: Int = 10,
+    override val direction: String = "ASC",
+    override val sortedField: String = "id",
 
 ): DefaultPageRequest()
 
 fun CustomerPageRequest.toCustomerPage() = CustomerPage(
+
     name = name,
     document = document,
     birthDay = birthDay,
+    sortedField = sortedField,
+    page = page,
+    pageSize = pageSize,
+    direction = direction,
+
 )

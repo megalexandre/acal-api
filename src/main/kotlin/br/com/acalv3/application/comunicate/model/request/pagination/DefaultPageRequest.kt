@@ -7,4 +7,4 @@ open class DefaultPageRequest(
      open val direction: String = "ASC",
      open val sortedField: String = "id",
 
-)
+     )

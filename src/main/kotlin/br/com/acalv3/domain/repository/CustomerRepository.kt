@@ -9,6 +9,6 @@ interface CustomerRepository {
     fun save(customer: Customer): Customer
     fun update(customer: Customer): Customer
     fun findByName(name: String): Customer
-    fun paginate(customerPageRequest: CustomerPage): Page<Customer>
+    fun paginate(customerPage: CustomerPage): Page<Customer>
 
 }

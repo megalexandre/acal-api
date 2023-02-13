@@ -10,8 +10,17 @@ class GroupPageRequest(
     val value: BigDecimal? = null,
     val name: String? = null,
 
+    override val sortedField: String = "id",
+    override val page: Int = 0,
+    override val pageSize: Int = 10,
+    override val direction: String = "ASC",
+
 ): DefaultPageRequest()
 
 fun GroupPageRequest.toGroupPage() = GroupPage(
-    name = name
+    name = name,
+    sortedField = sortedField,
+    page = page,
+    pageSize = pageSize,
+    direction = direction,
 )

@@ -1,10 +1,13 @@
 package br.com.acalv3.application.comunicate.model.request.place
 
+import br.com.acalv3.application.comunicate.model.request.address.AddressUpdateRequest
 import br.com.acalv3.application.comunicate.model.request.address.toAddress
 import br.com.acalv3.domain.model.Place
 import java.util.UUID
 
-class PlaceSaveRequest: PlaceRequest()
+class PlaceSaveRequest(
+    val address: AddressUpdateRequest? = null,
+): PlaceRequest()
 
 fun PlaceSaveRequest.toPlace() = Place(
     id = UUID.randomUUID().toString(),

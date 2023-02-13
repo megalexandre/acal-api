@@ -8,15 +8,18 @@ import io.restassured.http.ContentType.JSON
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
-import org.hamcrest.Matchers.*
+import java.nio.charset.Charset.defaultCharset
+import java.util.UUID
+import org.hamcrest.Matchers.equalTo
+import org.hamcrest.Matchers.hasKey
+import org.hamcrest.Matchers.not
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.util.StreamUtils.*
-import java.nio.charset.Charset.defaultCharset
-import java.util.*
+import org.springframework.util.StreamUtils.copyToString
 
 
 class CustomerFilterTest: DefaultGatewayTest() {
@@ -32,6 +35,11 @@ class CustomerFilterTest: DefaultGatewayTest() {
 
 	@Value("classpath:json/request/customer/filter/customer_birthday.json")
 	private lateinit var customerBirthday: Resource
+
+	@BeforeEach
+	fun beforeEach(){
+		repository.deleteAll()
+	}
 
 	@Test
 	fun `should filter by id`(){

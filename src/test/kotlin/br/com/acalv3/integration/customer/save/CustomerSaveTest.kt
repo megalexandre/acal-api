@@ -9,6 +9,8 @@ import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -26,6 +28,11 @@ class CustomerSaveTest: DefaultGatewayTest() {
 
 	@Autowired
 	private lateinit var repository: JpaRepository<CustomerEntity, UUID>
+
+	@BeforeEach
+	fun beforeEach(){
+		repository.deleteAll()
+	}
 
 	@Test
 	fun `should save a minimal customer ok 200`(){
@@ -57,6 +64,8 @@ class CustomerSaveTest: DefaultGatewayTest() {
 			statusCode(200)
 			body("$", hasKey("id"))
 		}
+
+		assertEquals(repository.findAll().size , 1 , "update cant be grown size")
 
 	}
 
