@@ -19,6 +19,8 @@ class GroupPageRequest(
 
 fun GroupPageRequest.toGroupPage() = GroupPage(
     name = name,
+    category = category,
+    value =  value,
     sortedField = sortedField,
     page = page,
     pageSize = pageSize,
