@@ -1,7 +1,7 @@
 package br.com.acalv3.application.comunicate.model.response.customer
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
-import br.com.acalv3.domain.enumeration.PersonTypeEnum
+import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
@@ -11,7 +11,7 @@ data class CustomerGetResponse(
     val name: String?,
     val document: String?,
     val phoneNumber: String?,
-    val personType: PersonTypeEnum?,
+    val personType: PersonType?,
     @JsonFormat(pattern = DATE_FORMAT)
     var birthDay: LocalDate? = null,
 )

@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("place",
     produces=[ "application/json" ],
-    consumes = ["application/json"]
 )
 class PlaceGateway(
     val service: PlaceService

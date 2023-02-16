@@ -25,31 +25,39 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("address",
-    produces=[ "application/json" ],
-)
+@RequestMapping("address", produces=[ "application/json" ])
 class AddressGateway(
     val service: AddressService
 ) {
     private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
-    fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse =
+    fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse = run {
+        logger.info("saving Address: $request")
         service.save(request.toAddress()).toAddressResponse()
+    }
 
     @PutMapping("/update")
-    fun update(@Valid @RequestBody request: AddressUpdateRequest) =
+    fun update(@Valid @RequestBody request: AddressUpdateRequest) = run {
+        logger.info("updating Address: $request")
         service.update(request.toAddress()).toAddressResponse()
+    }
 
     @PostMapping("/paginate")
-    fun paginate(@Valid @RequestBody request: AddressPageRequest): Page<AddressPageResponse> =
+    fun paginate(@Valid @RequestBody request: AddressPageRequest): Page<AddressPageResponse> = run {
+        logger.info("paginate Address: $request")
         service.paginate(request.toAddressPage()).toAddressPageResponse()
+    }
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String): AddressGetResponse =
+    fun find(@PathVariable id: String): AddressGetResponse = run {
+        logger.info("getting Address by id: $id")
         service.getById(id).toGetAddressResponse()
+    }
 
     @GetMapping("/list")
-    fun list(): List<AddressGetResponse> =
-        service.getAll().toGetAddressResponse()
+    fun list(): List<AddressGetResponse> = run {
+        logger.info("listing all address")
+       service.getAll().toGetAddressResponse()
+    }
 }

@@ -1,5 +1,10 @@
 package br.com.acalv3.application.comunicate.model.request.customer
 
+import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
+import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING
+import com.fasterxml.jackson.databind.annotation.JsonSerialize
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern

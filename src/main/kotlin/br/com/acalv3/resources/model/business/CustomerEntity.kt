@@ -1,7 +1,7 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
-import br.com.acalv3.domain.enumeration.PersonTypeEnum
+import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
@@ -10,6 +10,7 @@ import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType
+import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
 import javax.persistence.Id
 import org.springframework.data.domain.Page
@@ -26,8 +27,8 @@ class CustomerEntity (
     @Column(nullable = false)
     val name: String,
 
-    @Enumerated(EnumType.STRING)
-    val personType: PersonTypeEnum,
+    @Enumerated(STRING)
+    val personType: PersonType,
 
     val phoneNumber: String? = null,
 

@@ -9,6 +9,6 @@ interface GroupRepository {
     fun save(group: Group): Group
     fun update(group: Group): Group
     fun findByName(name: String): Group
-    fun paginate(pageRequest: GroupPage): Page<Group>
+    fun paginate(request: GroupPage): Page<Group>
     fun getAll(): List<Group>
 }

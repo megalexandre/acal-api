@@ -7,4 +7,5 @@ import java.util.*
 
 interface UserRepositoryJpa: JpaRepository<UserEntity, UUID>, JpaSpecificationExecutor<UserEntity> {
 	fun findByUsername(username: String): UserEntity?
+	fun existsByUsername(username: String): Boolean
 }

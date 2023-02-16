@@ -5,6 +5,7 @@ import br.com.acalv3.resources.model.DefaultEntity
 import org.springframework.data.domain.Page
 import java.util.*
 import javax.persistence.*
+import javax.persistence.CascadeType.DETACH
 
 @Entity(name = "link")
 class LinkEntity (
@@ -15,22 +16,39 @@ class LinkEntity (
 
     val name: String,
 
-    @ManyToOne
+    @ManyToOne(cascade = [DETACH])
+    @JoinColumn(name="place_id")
+    val place: PlaceEntity,
+
+    @ManyToOne(cascade = [DETACH])
+    @JoinColumn(name="place_address_id")
+    val placeAddress: PlaceEntity?,
+
+    @ManyToOne(cascade = [DETACH])
+    @JoinColumn(name="group_id")
+    val group: GroupEntity,
+
+    @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="customer_id")
-    val customerEntity: CustomerEntity
+    val customer: CustomerEntity
 
 ) : DefaultEntity()
 
 fun Link.toLinkEntity() = LinkEntity(
     id = UUID.fromString(id),
-    name = name,
-    customerEntity = customer.toCustomerEntity()
+    place = place.toPlaceEntity(),
+    placeAddress = place.toPlaceEntity(),
+    group = group.toGroupEntity(),
+    customer = customer.toCustomerEntity(),
+    name = ""
 )
 
 fun LinkEntity.toLink() = Link(
     id = id.toString(),
-    name = name,
-    customer = customerEntity.toCustomer(),
+    place = place.toPlace(),
+    placeAddress = place.toPlace(),
+    group = group.toGroup(),
+    customer = customer.toCustomer(),
 )
 
 fun Page<LinkEntity>.toLinkPage() = map{ it.toLink() }

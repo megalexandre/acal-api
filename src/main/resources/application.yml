@@ -1,4 +1,5 @@
 spring:
+  jackson.time-zone: America/Sao_Paulo
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/acaldb

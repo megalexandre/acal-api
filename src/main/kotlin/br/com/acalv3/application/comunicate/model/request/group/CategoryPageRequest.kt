@@ -1,6 +1,7 @@
 package br.com.acalv3.application.comunicate.model.request.group
 
 import br.com.acalv3.application.comunicate.model.request.pagination.DefaultPageRequest
+import br.com.acalv3.domain.enumeration.Category
 import br.com.acalv3.domain.model.page.GroupPage
 import java.math.BigDecimal
 
@@ -19,7 +20,7 @@ class GroupPageRequest(
 
 fun GroupPageRequest.toGroupPage() = GroupPage(
     name = name,
-    category = category,
+    category =  Category.byValue(category),
     value =  value,
     sortedField = sortedField,
     page = page,

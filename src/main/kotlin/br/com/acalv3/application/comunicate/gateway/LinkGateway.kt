@@ -12,7 +12,9 @@ import br.com.acalv3.application.comunicate.model.response.link.toLinkGetRespons
 import br.com.acalv3.application.comunicate.model.response.link.toLinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkResponse
 import br.com.acalv3.domain.service.CustomerService
+import br.com.acalv3.domain.service.GroupService
 import br.com.acalv3.domain.service.LinkService
+import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,17 +28,21 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("link",
     produces=[ "application/json" ],
-    consumes = ["application/json"]
 )
 class LinkGateway(
     val service: LinkService,
-    val customerService: CustomerService
+    val customerService: CustomerService,
+    val placeService: PlaceService,
+    val groupService: GroupService,
 ) {
 
     @PostMapping
     fun save(@Valid @RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
         service.save(request.toLink(
-            customerService.getById(request.customer ?: throw RuntimeException(""))
+            customer = customerService.getById(request.customerId ?: throw RuntimeException("")),
+            place = placeService.getById(request.placeId ?: throw RuntimeException("")),
+            placeAddress = request.placeAddressId?.let { placeService.getById(it) } ,
+            group = groupService.getById(request.groupId ?: throw RuntimeException("")),
         )).toLinkResponse()
     }
 
@@ -44,9 +50,8 @@ class LinkGateway(
     fun update(@Valid @RequestBody request: LinkUpdateRequest): SaveUpdateLinkResponse = run {
         service.update(
             request.toLink(
-                customerService.getById(request.customer ?: throw RuntimeException(""))
-            ))
-            .toLinkResponse()
+                customerService.getById(request.customer?.id ?: throw RuntimeException(""))
+            )).toLinkResponse()
     }
 
     @PostMapping("/paginate")

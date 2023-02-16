@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("group",
     produces=[ "application/json" ],
-    consumes = ["application/json"]
 )
 class GroupGateway(
     val service: GroupService,

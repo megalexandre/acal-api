@@ -1,11 +1,15 @@
 package br.com.acalv3.resources.model.business
 
+import br.com.acalv3.domain.enumeration.Category
 import br.com.acalv3.domain.model.Group
 import br.com.acalv3.resources.model.DefaultEntity
 import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.EnumType.STRING
+import javax.persistence.Enumerated
 import javax.persistence.Id
 import org.springframework.data.domain.Page
 
@@ -20,7 +24,8 @@ class GroupEntity (
     val value: BigDecimal,
 
     @Column(nullable = false)
-    val category: String,
+    @Enumerated(STRING)
+    val category: Category,
 
     @Column(nullable = false)
     val name: String,

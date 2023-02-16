@@ -19,4 +19,7 @@ class UserRepositoryImpl(
     override fun save(user: UserDomain): UserDomain  =
         repository.save(user.toUserEntity()).toUserDomain()
 
+    override fun existByName(name: String):Boolean =
+        repository.existsByUsername(name)
+
 }
