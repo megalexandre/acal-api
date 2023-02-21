@@ -13,13 +13,13 @@ class UserRepositoryImpl(
     private val repository: UserRepositoryJpa,
 ) : UserRepository {
 
-    override fun findByUsername(name: String): UserDomain =
-        repository.findByUsername(name)?.toUserDomain() ?: throw RuntimeException("")
+    override fun findByUsername(name: String): UserDomain? =
+        repository.findByUsername(name)?.toUserDomain()
 
     override fun save(user: UserDomain): UserDomain  =
         repository.save(user.toUserEntity()).toUserDomain()
 
-    override fun existByName(name: String):Boolean =
+    override fun existByUsername(name: String):Boolean =
         repository.existsByUsername(name)
 
 }

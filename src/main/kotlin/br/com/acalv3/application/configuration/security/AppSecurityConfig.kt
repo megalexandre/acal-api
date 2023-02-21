@@ -35,6 +35,8 @@ class AppSecurityConfig(
 			.cors().and()
 			.authorizeRequests()
 			.antMatchers(HEALTH_STATUS).permitAll()
+			.antMatchers(LEGACY).permitAll()
+			.antMatchers(PERSON).permitAll()
 			.antMatchers(AUTH_LOGIN_ROUTER).permitAll()
 			.antMatchers(AUTH_REGISTER_ROUTER).permitAll()
 			.anyRequest().authenticated().and()
@@ -80,6 +82,8 @@ class AppSecurityConfig(
 		const val AUTH_REGISTER_ROUTER = "/auth/register"
 		const val AUTH_LOGIN_ROUTER = "/auth/login"
 		const val AUTH_LOGOUT_ROUTER = "/auth/logout"
+		const val LEGACY = "/legacy**"
+		const val PERSON = "/person**"
 	}
 
 }

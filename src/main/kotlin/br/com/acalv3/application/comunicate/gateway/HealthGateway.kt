@@ -1,5 +1,6 @@
 package br.com.acalv3.application.comunicate.gateway
 
+import java.time.LocalDateTime
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -9,6 +10,6 @@ import org.springframework.web.bind.annotation.RestController
 class HealthGateway {
 
     @GetMapping("/status")
-    fun status() = "ok"
+    fun status() = "time=${LocalDateTime.now()} version:0.0.10"
 
 }
