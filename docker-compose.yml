@@ -2,42 +2,13 @@ version: "3.7"
 
 services:
 
-  api-acal:
-    container_name: acal-api
-    image: alexandrequeiroz/acalapi:0.0.11
-    restart: on-failure
-    env_file: ./.env
-    environment:
-      - spring.profiles.active=dev
-      - spring.datasource.url=jdbc:mysql://database-acal:3306/acaldb
-      - spring.datasource.username=root
-      - spring.datasource.password=TrObccrzH11dURytVjTGwOCiK8mba
-    ports:
-      - "443:443"
-
-    networks:
-      - acal
-    depends_on:
-      - database-acal
-    links:
-      - database-acal:localhost
-
-  database-acal:
-    container_name: db
+  database:
+    container_name: database
     image: mysql:8.0-debian
     restart: unless-stopped
     env_file: ./.env
     environment:
-      - MYSQL_DATABASE=acaldb
-      - MYSQL_ROOT_PASSWORD=TrObccrzH11dURytVjTGwOCiK8mba
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     ports:
-      - 3306:3306
-    networks:
-      - acal
-
-    #volumes:
-    #  - /opt/mysql:/var/lib/mysql
-
-networks:
-  acal:
-    driver: bridge
+      - "3306:3306"

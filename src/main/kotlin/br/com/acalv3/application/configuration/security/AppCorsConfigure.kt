@@ -10,6 +10,10 @@ class AppCorsConfigure: WebMvcConfigurer {
 	override fun addCorsMappings(registry: CorsRegistry) {
 		registry
 			.addMapping(MAPPING)
+			.maxAge(3600)
+			.allowedOrigins("*")
+			.exposedHeaders("X-Get-Header")
+			.allowedHeaders("*")
 			.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS",  "HEAD", "TRACE", "CONNECT")
 	}
 	companion object{
