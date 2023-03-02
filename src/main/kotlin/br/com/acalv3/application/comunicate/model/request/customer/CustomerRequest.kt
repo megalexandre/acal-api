@@ -1,10 +1,9 @@
 package br.com.acalv3.application.comunicate.model.request.customer
 
+import br.com.acalv3.application.comunicate.Fixture
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING
-import com.fasterxml.jackson.databind.annotation.JsonSerialize
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer
 import java.time.LocalDate
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Pattern
@@ -21,8 +20,10 @@ open class CustomerRequest (
     @field:Pattern(regexp = "PERSON|LEGAL", message = "os valores aceitos para tipo de pessoa são PERSON ou LEGAL")
     open var personType: String? = null,
 
+    @JsonFormat(shape = STRING, pattern = DATE_FORMAT)
     open var birthDay: LocalDate? = null,
 
     open val phoneNumber: String? = null,
 
+    open val active: Boolean? = true,
 )

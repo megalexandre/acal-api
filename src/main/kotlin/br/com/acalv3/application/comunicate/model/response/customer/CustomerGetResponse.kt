@@ -13,7 +13,8 @@ data class CustomerGetResponse(
     val phoneNumber: String?,
     val personType: PersonType?,
     @JsonFormat(pattern = DATE_FORMAT)
-    var birthDay: LocalDate? = null,
+    val birthDay: LocalDate? = null,
+    val active: Boolean
 )
 
 fun Customer.toGetCustomerResponse() = CustomerGetResponse(
@@ -22,5 +23,6 @@ fun Customer.toGetCustomerResponse() = CustomerGetResponse(
     document = document,
     personType = personType,
     birthDay = birthDay,
-    phoneNumber = phoneNumber
+    phoneNumber = phoneNumber,
+    active = active,
 )

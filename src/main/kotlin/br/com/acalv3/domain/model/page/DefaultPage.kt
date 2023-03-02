@@ -7,4 +7,4 @@ package br.com.acalv3.domain.model.page
      open val direction: String = "ASC",
      open val sortedField: String = "id",
 
-)
+ )

@@ -20,4 +20,5 @@ fun LegacyUser.toCustomer() = Customer(
     document = document,
     personType = personType,
     phoneNumber = number,
+    active = true,
 )

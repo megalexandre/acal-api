@@ -3,6 +3,7 @@ package br.com.acalv3.application.comunicate.gateway
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerPageRequest
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerSaveRequest
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerUpdateRequest
+import br.com.acalv3.application.comunicate.model.request.customer.TestRequest
 import br.com.acalv3.application.comunicate.model.request.customer.toCustomer
 import br.com.acalv3.application.comunicate.model.request.customer.toCustomerPage
 import br.com.acalv3.application.comunicate.model.response.customer.CustomerGetResponse
@@ -14,6 +15,7 @@ import br.com.acalv3.application.comunicate.model.response.customer.toGetCustome
 import br.com.acalv3.domain.service.CustomerService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -44,5 +46,9 @@ class CustomerGateway(
     @GetMapping("/{id}")
     fun find(@PathVariable id: String): CustomerGetResponse =
         customerService.getById(id).toGetCustomerResponse()
+
+    @DeleteMapping("delete/{id}")
+    fun delete(@PathVariable id: String) = customerService.delete(id)
+
 
 }

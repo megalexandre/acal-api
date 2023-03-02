@@ -23,6 +23,8 @@ class CustomerRepositoryImpl(
     override fun getById(id: String): Customer =
         repository.findByIdOrNull(UUID.fromString(id))?.toCustomer() ?: throw NotFoundException()
 
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
+
     override fun save(customer: Customer): Customer =
         repository.save(customer.toCustomerEntity()).toCustomer()
 

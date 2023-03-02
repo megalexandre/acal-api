@@ -9,5 +9,6 @@ class Customer(
     val document: String,
     val personType: PersonType,
     var birthDay: LocalDate? = null,
-    val phoneNumber: String?
+    val phoneNumber: String?,
+    val active: Boolean
 )

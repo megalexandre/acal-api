@@ -1,10 +1,13 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
+import br.com.acalv3.domain.enumeration.Active
+import br.com.acalv3.domain.enumeration.Active.TRUE
 import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.fasterxml.jackson.annotation.JsonSubTypes
 import java.time.LocalDate
 import java.util.UUID
 import javax.persistence.Column
@@ -32,11 +35,14 @@ class CustomerEntity (
 
     val phoneNumber: String? = null,
 
-    val document: String? = null,
+    @Column(unique = true, length = 32)
+    val document: String,
 
     @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
     @JsonFormat(pattern = DATE_FORMAT)
     val birthDay: LocalDate? = null,
+
+    val active: Boolean,
 
     ) : DefaultEntity()
 
@@ -46,16 +52,18 @@ fun Customer.toCustomerEntity() = CustomerEntity(
     phoneNumber = phoneNumber,
     document = document,
     personType = personType,
-    birthDay = birthDay
+    birthDay = birthDay,
+    active = active,
 )
 
 fun CustomerEntity.toCustomer() = Customer(
     id = id.toString(),
     name = name,
     phoneNumber = phoneNumber,
-    document = document ?: "",
+    document = document,
     personType = personType,
-    birthDay = birthDay
+    birthDay = birthDay,
+    active = active,
 )
 
 fun Page<CustomerEntity>.toCustomerPage() = map{ it.toCustomer() }

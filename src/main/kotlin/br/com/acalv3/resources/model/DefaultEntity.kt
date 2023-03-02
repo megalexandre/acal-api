@@ -16,4 +16,6 @@ open class DefaultEntity (
     @UpdateTimestamp
     @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
     val updatedAt: LocalDate? = null,
+
+
 )

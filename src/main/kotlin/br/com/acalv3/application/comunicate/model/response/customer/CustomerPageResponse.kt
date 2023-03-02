@@ -8,7 +8,6 @@ data class CustomerPageResponse(
     val name: String?,
     val document: String?,
 )
-
 fun Customer.toCustomerPageResponse() = CustomerPageResponse(
     id = id,
     name = name,

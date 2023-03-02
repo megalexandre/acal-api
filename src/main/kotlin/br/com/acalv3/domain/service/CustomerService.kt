@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page
 
 interface CustomerService {
     fun getById(id: String): Customer
+    fun delete(id: String)
     fun save(customer: Customer): Customer
     fun update(customer: Customer): Customer
     fun paginate(customerPageRequest: CustomerPage): Page<Customer>
