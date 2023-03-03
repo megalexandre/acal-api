@@ -34,10 +34,14 @@ class CustomerRepositoryImpl(
     override fun findByName(name: String): Customer =
         repository.findByName(name).toCustomer()
 
+    override fun findByDocument(document: String): Customer? = repository.findByDocument(document)?.toCustomer()
+
     override fun paginate(customerPage: CustomerPage): Page<Customer> =
         repository.findAll(
             CustomerSpecification(customerPage).getSpecification(),
             super.pageable(customerPage)
         ).toCustomerPage()
+
+    override fun count(): Long = repository.count()
 
 }

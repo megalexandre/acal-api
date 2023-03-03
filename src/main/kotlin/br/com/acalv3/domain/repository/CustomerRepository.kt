@@ -10,6 +10,7 @@ interface CustomerRepository {
     fun save(customer: Customer): Customer
     fun update(customer: Customer): Customer
     fun findByName(name: String): Customer
+    fun findByDocument(document: String): Customer?
     fun paginate(customerPage: CustomerPage): Page<Customer>
-
+    fun count(): Long
 }

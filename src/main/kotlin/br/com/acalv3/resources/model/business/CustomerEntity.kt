@@ -1,18 +1,14 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
-import br.com.acalv3.domain.enumeration.Active
-import br.com.acalv3.domain.enumeration.Active.TRUE
 import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.fasterxml.jackson.annotation.JsonSubTypes
 import java.time.LocalDate
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
 import javax.persistence.Id
@@ -35,7 +31,7 @@ class CustomerEntity (
 
     val phoneNumber: String? = null,
 
-    @Column(unique = true, length = 32)
+    @Column(nullable = false, unique = true, length = 32)
     val document: String,
 
     @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)

@@ -38,4 +38,7 @@ class LinkRepositoryImpl(
             super.pageable(request)
         ).toLinkPage()
 
+    override fun count(): Long = repository.count()
+
+
 }

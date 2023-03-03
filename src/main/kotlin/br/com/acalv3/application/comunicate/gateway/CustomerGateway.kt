@@ -3,7 +3,6 @@ package br.com.acalv3.application.comunicate.gateway
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerPageRequest
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerSaveRequest
 import br.com.acalv3.application.comunicate.model.request.customer.CustomerUpdateRequest
-import br.com.acalv3.application.comunicate.model.request.customer.TestRequest
 import br.com.acalv3.application.comunicate.model.request.customer.toCustomer
 import br.com.acalv3.application.comunicate.model.request.customer.toCustomerPage
 import br.com.acalv3.application.comunicate.model.response.customer.CustomerGetResponse
@@ -49,6 +48,5 @@ class CustomerGateway(
 
     @DeleteMapping("delete/{id}")
     fun delete(@PathVariable id: String) = customerService.delete(id)
-
 
 }

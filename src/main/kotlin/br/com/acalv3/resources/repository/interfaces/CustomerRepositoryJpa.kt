@@ -7,5 +7,7 @@ import java.util.*
 
 interface CustomerRepositoryJpa : JpaRepository<CustomerEntity, UUID>, JpaSpecificationExecutor<CustomerEntity> {
     fun findByName(name: String): CustomerEntity
+    fun findByDocument(document: String): CustomerEntity?
+
 }
 

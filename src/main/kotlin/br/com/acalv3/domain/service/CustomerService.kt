@@ -11,4 +11,5 @@ interface CustomerService {
     fun update(customer: Customer): Customer
     fun paginate(customerPageRequest: CustomerPage): Page<Customer>
     fun findByName(name: String): Customer
+    fun count(): Long
 }

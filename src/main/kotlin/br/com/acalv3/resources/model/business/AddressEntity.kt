@@ -15,7 +15,7 @@ class AddressEntity (
     @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, length = 32)
     val name: String,
 
 ) : DefaultEntity()

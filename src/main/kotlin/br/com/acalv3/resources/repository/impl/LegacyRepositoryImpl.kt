@@ -33,6 +33,7 @@ class LegacyRepositoryImpl(
     override fun person() {
         val postUser = StreamUtils.copyToString(legacyUsers.inputStream, Charset.defaultCharset())
         val users: Array<LegacyUser> = mapper.readValue(postUser, Array<LegacyUser>::class.java)
+
         users.forEach {
             if(it.personType == PersonType.PERSON){
                 it.document.padStart(11,'0' )
@@ -41,7 +42,7 @@ class LegacyRepositoryImpl(
             }
         }
 
-        customerRepositoryJpa.saveAll( users.map { it.toCustomer().toCustomerEntity()})
+        customerRepositoryJpa.saveAll( users.distinctBy { it.document }.map { it.toCustomer().toCustomerEntity()})
     }
 
     override fun address() {

@@ -10,4 +10,5 @@ interface LinkRepository {
     fun update(link: Link): Link
     fun findByName(name: String): Link
     fun paginate(request: LinkPage): Page<Link>
+    fun count(): Long
 }
