@@ -18,9 +18,9 @@ class DeleteGroupStrategy(
     override fun action() = DELETE
 
     override fun can(group: Group) {
-        linkService.findByGroupId(group.id).let { it ->
+        linkService.findByGroupId(group.id)?.let { it ->
             throw RuntimeException("O grupo não pode ser apagado porque está associado as ligações: " +
-                "${it.map { it.group.name }} de categoria ${it.map { it.group.category.value }}"
+                "${it.group.name} de categoria ${ it.group.category.value}"
             )
         }
     }

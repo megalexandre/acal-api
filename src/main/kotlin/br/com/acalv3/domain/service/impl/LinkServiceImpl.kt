@@ -12,27 +12,22 @@ class LinkServiceImpl(
 	val repository: LinkRepository,
 ): LinkService {
 
-	override fun getById(id: String): Link =
-		repository.getById(id)
+	override fun getById(id: String): Link = repository.getById(id)
 
-	override fun save(link: Link): Link =
-		repository.save(link)
+	override fun save(link: Link): Link = repository.save(link)
 
-	override fun update(link: Link): Link =
-		repository.save(link)
+	override fun update(link: Link): Link = repository.save(link)
 
-	override fun findByName(name: String): Link =
-        repository.findByName(name)
+	override fun findByName(name: String) = repository.findByName(name)
 
-	override fun findByCustomerId(customerId: String): List<Link> =
-		repository.findByCustomerId(customerId)
+	override fun findByCustomerId(customerId: String): Link? = repository.findByCustomerId(customerId)
 
-	override fun findByGroupId(groupId: String): List<Link> =
-		repository.findByGroupId(groupId)
+	override fun findByPlaceId(placeId: String): Link? = repository.findByPlaceId(placeId)
+
+	override fun findByGroupId(groupId: String): Link? = repository.findByGroupId(groupId)
 
 	override fun count(): Long = repository.count()
 
-	override fun paginate(linkPageRequest: LinkPage): Page<Link> =
-		repository.paginate(linkPageRequest)
+	override fun paginate(linkPageRequest: LinkPage): Page<Link> = repository.paginate(linkPageRequest)
 
 }

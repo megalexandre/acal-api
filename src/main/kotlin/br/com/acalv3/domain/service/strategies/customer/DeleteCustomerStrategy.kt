@@ -16,9 +16,8 @@ class DeleteCustomerStrategy(
     override fun action() = DELETE
 
     override fun can(customer: Customer) {
-        linkService.findByCustomerId(customer.id).let { it ->
-            throw RuntimeException("O usúario não pode ser apagado porque está associado as ligações: " +
-                "${it.map { it.place.address.name }}"
+        linkService.findByCustomerId(customer.id)?.let { it ->
+            throw RuntimeException("O usúario não pode ser apagado porque está associado as ligações: " + it.place.address.name
             )
         }
     }

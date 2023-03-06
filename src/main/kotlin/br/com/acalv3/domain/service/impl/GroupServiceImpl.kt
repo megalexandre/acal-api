@@ -19,8 +19,7 @@ class GroupServiceImpl(
 	val strategies: List<GroupStrategy>
 ): GroupService {
 
-	override fun getById(id: String): Group =
-		repository.getById(id)
+	override fun getById(id: String): Group = repository.getById(id)
 
 	override fun save(group: Group): Group =
 		strategies.first{ it.action() == SAVE }.can(group).let {
@@ -36,7 +35,6 @@ class GroupServiceImpl(
 		strategies.first{ it.action() == DELETE }.can(repository.getById(id)).let {
 			repository.delete(id)
 		}
-
 
 	override fun findByName(name: String): Group =  repository.findByName(name)
 

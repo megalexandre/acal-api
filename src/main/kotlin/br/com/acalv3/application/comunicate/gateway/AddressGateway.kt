@@ -16,6 +16,7 @@ import javax.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -29,35 +30,28 @@ import org.springframework.web.bind.annotation.RestController
 class AddressGateway(
     val service: AddressService
 ) {
-    private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
-    fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse = run {
-        logger.info("saving Address: $request")
+    fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse =
         service.save(request.toAddress()).toAddressResponse()
-    }
 
     @PutMapping("/update")
-    fun update(@Valid @RequestBody request: AddressUpdateRequest) = run {
-        logger.info("updating Address: $request")
+    fun update(@Valid @RequestBody request: AddressUpdateRequest) =
         service.update(request.toAddress()).toAddressResponse()
-    }
 
     @PostMapping("/paginate")
-    fun paginate(@Valid @RequestBody request: AddressPageRequest): Page<AddressPageResponse> = run {
-        logger.info("paginate Address: $request")
+    fun paginate(@Valid @RequestBody request: AddressPageRequest): Page<AddressPageResponse> =
         service.paginate(request.toAddressPage()).toAddressPageResponse()
-    }
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String): AddressGetResponse = run {
-        logger.info("getting Address by id: $id")
+    fun find(@PathVariable id: String): AddressGetResponse =
         service.getById(id).toGetAddressResponse()
-    }
 
     @GetMapping("/list")
-    fun list(): List<AddressGetResponse> = run {
-        logger.info("listing all address")
-       service.getAll().toGetAddressResponse()
-    }
+    fun list(): List<AddressGetResponse> =
+        service.getAll().toGetAddressResponse()
+
+    @DeleteMapping("delete/{id}")
+    fun delete(@PathVariable id: String) = service.delete(id)
+
 }

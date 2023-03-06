@@ -8,6 +8,7 @@ interface AddressService {
     fun getById(id: String): Address
     fun save(address: Address): Address
     fun update(address: Address): Address
+    fun delete(id: String)
     fun paginate(pageRequest: AddressPage): Page<Address>
     fun getAll(): List<Address>
 }

@@ -19,11 +19,6 @@ class CustomerServiceImpl(
 
 	override fun getById(id: String): Customer = repository.getById(id)
 
-	override fun delete(id: String) =
-		strategies.first{ it.action() === DELETE }.can(repository.getById(id)).let{
-			repository.delete(id)
-		}
-
 	override fun save(customer: Customer): Customer =
 		strategies.first{ it.action() === SAVE }.can(customer).let {
 			repository.save(customer)
@@ -32,6 +27,11 @@ class CustomerServiceImpl(
 	override fun update(customer: Customer): Customer =
 		strategies.first{ it.action() === UPDATE }.can(customer).let {
 			repository.update(customer)
+		}
+
+	override fun delete(id: String) =
+		strategies.first{ it.action() === DELETE }.can(repository.getById(id)).let{
+			repository.delete(id)
 		}
 
 	override fun findByName(name: String): Customer =  repository.findByName(name)

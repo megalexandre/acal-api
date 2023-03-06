@@ -2,10 +2,16 @@ package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.resources.model.DefaultEntity
-import org.springframework.data.domain.Page
-import java.util.*
-import javax.persistence.*
+import java.util.UUID
+import javax.persistence.CascadeType
 import javax.persistence.CascadeType.MERGE
+import javax.persistence.CascadeType.REFRESH
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import org.springframework.data.domain.Page
 
 @Entity(name = "place")
 class PlaceEntity (
@@ -17,7 +23,7 @@ class PlaceEntity (
     @Column(nullable = false)
     val letter: String,
 
-    @ManyToOne(cascade = [MERGE])
+    @ManyToOne
     @JoinColumn(name="address_id")
     val address: AddressEntity,
 

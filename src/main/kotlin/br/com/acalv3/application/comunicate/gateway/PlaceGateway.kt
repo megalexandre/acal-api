@@ -14,6 +14,7 @@ import br.com.acalv3.application.comunicate.model.response.place.toPlaceResponse
 import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -45,5 +46,9 @@ class PlaceGateway(
     @GetMapping("/{id}")
     fun find(@PathVariable id: String): PlaceGetResponse =
         service.getById(id).toGetPlaceResponse()
+
+    @DeleteMapping("delete/{id}")
+    fun delete(@PathVariable id: String) = service.delete(id)
+
 
 }

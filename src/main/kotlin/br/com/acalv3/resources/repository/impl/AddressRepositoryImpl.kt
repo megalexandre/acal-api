@@ -23,22 +23,20 @@ class AddressRepositoryImpl(
     override fun getById(id: String): Address =
         repository.findByIdOrNull(UUID.fromString(id))?.toAddress() ?: throw NotFoundException()
 
-    override fun save(address: Address): Address =
-        repository.save(address.toAddressEntity()).toAddress()
+    override fun save(address: Address): Address = repository.save(address.toAddressEntity()).toAddress()
 
-    override fun update(address: Address): Address =
-        repository.save(address.toAddressEntity()).toAddress()
+    override fun update(address: Address): Address = repository.save(address.toAddressEntity()).toAddress()
 
-    override fun findByName(name: String): Address? =
-        repository.findByName(name)?.toAddress()
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
-    override fun paginate(request: AddressPage): Page<Address> =
+    override fun findByName(name: String): Address? = repository.findByName(name)?.toAddress()
+
+    override fun paginate(pageRequest: AddressPage): Page<Address> =
         repository.findAll(
-            AddressSpecification(request).getSpecification(),
-            super.pageable(request)
+            AddressSpecification(pageRequest).getSpecification(),
+            super.pageable(pageRequest)
         ).toAddressPage()
 
-    override fun getAll(): List<Address> =
-        repository.findAll().toAddress()
+    override fun getAll(): List<Address> = repository.findAll().toAddress()
 
 }

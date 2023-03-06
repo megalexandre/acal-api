@@ -1,6 +1,6 @@
 package br.com.acalv3.application.comunicate.model.request.place
 
-import br.com.acalv3.application.comunicate.model.request.address.AddressSaveRequest
+import br.com.acalv3.application.comunicate.model.request.address.AddressUpdateRequest
 import br.com.acalv3.application.comunicate.model.request.address.toAddress
 import br.com.acalv3.domain.model.Place
 import javax.validation.constraints.NotBlank
@@ -10,7 +10,7 @@ class PlaceUpdateRequest(
     @field:NotBlank(message = "id é um campo obrigatório")
     val id: String? = null,
 
-    val address: AddressSaveRequest? = null,
+    val address: AddressUpdateRequest? = null,
     val hasHydrometer: Boolean = false
 
 ) : PlaceRequest()

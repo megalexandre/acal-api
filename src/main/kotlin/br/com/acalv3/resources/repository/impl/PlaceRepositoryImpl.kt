@@ -1,5 +1,6 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.domain.model.Address
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.PlacePage
 import br.com.acalv3.domain.repository.PlaceRepository
@@ -26,6 +27,11 @@ class PlaceRepositoryImpl(
     override fun save(place: Place): Place =
         repository.save(place.toPlaceEntity()).toPlace()
 
+    override fun update(place: Place): Place =
+        repository.save(place.toPlaceEntity()).toPlace()
+
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
+
     override fun findPlace(place: Place): Place?  =
         repository.findAll(
             PlaceSpecification(PlacePage(
@@ -35,12 +41,17 @@ class PlaceRepositoryImpl(
             )).getSpecification()
         ).firstOrNull()?.toPlace()
 
-    override fun update(place: Place): Place =
-        repository.save(place.toPlaceEntity()).toPlace()
 
     override fun paginate(request: PlacePage): Page<Place> =
         repository.findAll(
             PlaceSpecification(request).getSpecification(),
             super.pageable(request)
         ).toPlacePage()
+
+    override fun findByAddress(address: Address): Place? =
+        repository.findAll(
+            PlaceSpecification(PlacePage(
+                address = address
+            )).getSpecification()
+        ).firstOrNull()?.toPlace()
 }
