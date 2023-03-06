@@ -29,8 +29,8 @@ class AddressRepositoryImpl(
     override fun update(address: Address): Address =
         repository.save(address.toAddressEntity()).toAddress()
 
-    override fun findByName(name: String): Address =
-        repository.findByName(name).toAddress()
+    override fun findByName(name: String): Address? =
+        repository.findByName(name)?.toAddress()
 
     override fun paginate(request: AddressPage): Page<Address> =
         repository.findAll(
@@ -40,4 +40,5 @@ class AddressRepositoryImpl(
 
     override fun getAll(): List<Address> =
         repository.findAll().toAddress()
+
 }

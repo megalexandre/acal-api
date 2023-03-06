@@ -5,7 +5,7 @@ import java.math.BigDecimal
 
 data class GroupPage (
     val name: String?,
-    val value: BigDecimal?,
+    val value: BigDecimal? = null,
     val category: Category?,
     override val sortedField: String = "id",
     override val page: Int = 0,

@@ -14,6 +14,7 @@ import br.com.acalv3.application.comunicate.model.response.group.toGroupResponse
 import br.com.acalv3.domain.service.GroupService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -45,4 +46,8 @@ class GroupGateway(
     @PostMapping("/paginate")
     fun paginate(@Valid @RequestBody request: GroupPageRequest): Page<GroupPageResponse> =
         service.paginate(request.toGroupPage()).toGroupPageResponse()
+
+    @DeleteMapping("delete/{id}")
+    fun delete(@PathVariable id: String) = service.delete(id)
+
 }

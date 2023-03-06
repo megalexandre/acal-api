@@ -9,6 +9,8 @@ interface LinkRepository {
     fun save(link: Link): Link
     fun update(link: Link): Link
     fun findByName(name: String): Link
+    fun findByCustomerId(id: String): List<Link>
+    fun findByGroupId(id: String): List<Link>
     fun paginate(request: LinkPage): Page<Link>
     fun count(): Long
 }

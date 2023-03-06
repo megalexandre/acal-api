@@ -7,7 +7,7 @@ import br.com.acalv3.domain.model.page.PlacePage
 
 class PlacePageRequest(
     val letter: String?,
-    val number: Int?,
+    val number: Long?,
     val address: AddressUpdateRequest?,
 
     override val sortedField: String = "id",

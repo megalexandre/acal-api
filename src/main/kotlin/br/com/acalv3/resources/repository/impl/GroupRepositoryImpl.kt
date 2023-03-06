@@ -23,6 +23,14 @@ class GroupRepositoryImpl(
     override fun getById(id: String): Group =
         repository.findByIdOrNull(UUID.fromString(id))?.toGroup() ?: throw NotFoundException()
 
+    override fun findGroup(group: Group): Group? =
+        repository.findAll(
+            GroupSpecification(
+                GroupPage(
+                    name = group.name,
+                    category = group.category
+        )).getSpecification()).firstOrNull()?.toGroup()
+
     override fun findByName(name: String): Group =
        repository.findByName(name).toGroup()
 
@@ -38,7 +46,8 @@ class GroupRepositoryImpl(
             super.pageable(request)
         ).toGroupPage()
 
-    override fun getAll(): List<Group> =
-        repository.findAll().toGroup()
+    override fun getAll(): List<Group> = repository.findAll().toGroup()
+
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
 }

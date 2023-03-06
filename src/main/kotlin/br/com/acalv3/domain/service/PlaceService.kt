@@ -4,7 +4,7 @@ import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.PlacePage
 import org.springframework.data.domain.Page
 
-interface PlaceService {
+interface PlaceService{
     fun getById(id: String): Place
     fun save(place: Place): Place
     fun update(place: Place): Place

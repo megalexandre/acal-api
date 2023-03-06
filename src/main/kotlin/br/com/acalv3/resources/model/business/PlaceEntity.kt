@@ -24,6 +24,8 @@ class PlaceEntity (
     @Column(nullable = false)
     val number: Long,
 
+    val hasHydrometer: Boolean,
+
 ) : DefaultEntity()
 
 fun Place.toPlaceEntity() = PlaceEntity(
@@ -31,6 +33,7 @@ fun Place.toPlaceEntity() = PlaceEntity(
     address = address.toAddressEntity(),
     letter = letter,
     number = number,
+    hasHydrometer = hasHydrometer,
 )
 
 fun PlaceEntity.toPlace() = Place(
@@ -38,6 +41,7 @@ fun PlaceEntity.toPlace() = Place(
     address = address.toAddress(),
     letter = letter,
     number = number,
+    hasHydrometer = hasHydrometer,
 )
 
 fun Page<PlaceEntity>.toPlacePage() = map{ it.toPlace() }

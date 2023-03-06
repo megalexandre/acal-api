@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import java.util.*
 
 interface AddressRepositoryJpa : JpaRepository<AddressEntity, UUID>, JpaSpecificationExecutor<AddressEntity> {
-    fun findByName(name: String): AddressEntity
+    fun findByName(name: String): AddressEntity?
 }
 

@@ -6,9 +6,11 @@ import org.springframework.data.domain.Page
 
 interface GroupRepository {
     fun getById(id: String): Group
+    fun findGroup(group: Group): Group?
     fun save(group: Group): Group
     fun update(group: Group): Group
     fun findByName(name: String): Group
     fun paginate(request: GroupPage): Page<Group>
     fun getAll(): List<Group>
+    fun delete(id: String)
 }

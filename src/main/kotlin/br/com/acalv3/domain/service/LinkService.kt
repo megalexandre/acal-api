@@ -10,5 +10,7 @@ interface LinkService {
     fun update(link: Link): Link
     fun paginate(linkPageRequest: LinkPage): Page<Link>
     fun findByName(name: String): Link
+    fun findByCustomerId(customerId: String): List<Link>
+    fun findByGroupId(groupId: String): List<Link>
     fun count(): Long
 }

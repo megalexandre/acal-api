@@ -11,4 +11,6 @@ interface GroupService {
     fun paginate(pageRequest: GroupPage): Page<Group>
     fun findByName(name: String): Group
     fun getAll(): List<Group>
+    fun delete(id: String)
+
 }

@@ -23,14 +23,15 @@ class LinkRepositoryImpl(
     override fun getById(id: String): Link =
         repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
 
-    override fun save(link: Link): Link =
-        repository.save(link.toLinkEntity()).toLink()
+    override fun save(link: Link): Link = repository.save(link.toLinkEntity()).toLink()
 
-    override fun update(link: Link): Link =
-        repository.save(link.toLinkEntity()).toLink()
+    override fun update(link: Link): Link = repository.save(link.toLinkEntity()).toLink()
 
-    override fun findByName(name: String): Link =
-        repository.findByName(name).toLink()
+    override fun findByName(name: String): Link = repository.findByName(name).toLink()
+
+    override fun findByCustomerId(id: String): List<Link> = repository.findByCustomerId(UUID.fromString(id)).toLink()
+
+    override fun findByGroupId(id: String): List<Link> = repository.findByGroupId(UUID.fromString(id)).toLink()
 
     override fun paginate(request: LinkPage): Page<Link> =
         repository.findAll(

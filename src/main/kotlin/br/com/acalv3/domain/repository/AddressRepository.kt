@@ -8,7 +8,7 @@ interface AddressRepository {
     fun getById(id: String): Address
     fun save(address: Address): Address
     fun update(customer: Address): Address
-    fun findByName(name: String): Address
+    fun findByName(name: String): Address?
     fun paginate(pageRequest: AddressPage): Page<Address>
     fun getAll(): List<Address>
 }

@@ -4,7 +4,7 @@ import br.com.acalv3.domain.model.Address
 
 data class PlacePage (
     val letter: String?,
-    val number: Int?,
+    val number: Long?,
     val address: Address?,
 
     override val sortedField: String = "id",

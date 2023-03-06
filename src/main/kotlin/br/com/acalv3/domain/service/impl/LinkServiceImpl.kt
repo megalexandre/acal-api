@@ -24,9 +24,15 @@ class LinkServiceImpl(
 	override fun findByName(name: String): Link =
         repository.findByName(name)
 
+	override fun findByCustomerId(customerId: String): List<Link> =
+		repository.findByCustomerId(customerId)
+
+	override fun findByGroupId(groupId: String): List<Link> =
+		repository.findByGroupId(groupId)
+
 	override fun count(): Long = repository.count()
 
-	override fun paginate(request: LinkPage): Page<Link> =
-		repository.paginate(request)
+	override fun paginate(linkPageRequest: LinkPage): Page<Link> =
+		repository.paginate(linkPageRequest)
 
 }

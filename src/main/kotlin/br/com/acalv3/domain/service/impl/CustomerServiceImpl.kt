@@ -1,53 +1,44 @@
 package br.com.acalv3.domain.service.impl
 
+import br.com.acalv3.domain.enumeration.Action.DELETE
+import br.com.acalv3.domain.enumeration.Action.SAVE
+import br.com.acalv3.domain.enumeration.Action.UPDATE
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.page.CustomerPage
 import br.com.acalv3.domain.repository.CustomerRepository
 import br.com.acalv3.domain.service.CustomerService
+import br.com.acalv3.domain.service.strategies.customer.CustomerStrategy
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
+
 @Service
 class CustomerServiceImpl(
 	val repository: CustomerRepository,
+	val strategies: List<CustomerStrategy>
 ): CustomerService {
-	override fun getById(id: String): Customer =
-		repository.getById(id)
 
-	override fun delete(id: String) = repository.delete(id)
+	override fun getById(id: String): Customer = repository.getById(id)
 
-	override fun save(customer: Customer): Customer = run{
-		validSave(customer)
-		repository.save(customer)
-	}
-
-	private fun validSave(customer: Customer) {
-		if(repository.findByDocument(customer.document) != null){
-			throw RuntimeException(
-				"o documento ${customer.document} já está cadastrado para o usuário: ${customer.name}")
+	override fun delete(id: String) =
+		strategies.first{ it.action() === DELETE }.can(repository.getById(id)).let{
+			repository.delete(id)
 		}
-	}
 
-	override fun update(customer: Customer): Customer = run {
-		validUpdate(customer)
-		repository.update(customer)
-	}
-
-	private fun validUpdate(customer: Customer) {
-		repository.findByDocument(customer.document)?.let {
-			if(it.id != customer.id){
-				throw RuntimeException(
-					"o documento ${it.document} já está cadastrado para o usuário: ${it.name}")
-			}
+	override fun save(customer: Customer): Customer =
+		strategies.first{ it.action() === SAVE }.can(customer).let {
+			repository.save(customer)
 		}
-	}
 
-	override fun findByName(name: String): Customer =
-        repository.findByName(name)
+	override fun update(customer: Customer): Customer =
+		strategies.first{ it.action() === UPDATE }.can(customer).let {
+			repository.update(customer)
+		}
+
+	override fun findByName(name: String): Customer =  repository.findByName(name)
 
 	override fun count(): Long = repository.count()
 
-	override fun paginate(customerPage: CustomerPage): Page<Customer> =
-		repository.paginate(customerPage)
+	override fun paginate(customerPage: CustomerPage): Page<Customer> = repository.paginate(customerPage)
 
 }
 

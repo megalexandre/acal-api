@@ -5,4 +5,5 @@ class Place(
     val number: Long,
     val letter: String,
     val address: Address,
+    val hasHydrometer: Boolean,
 )

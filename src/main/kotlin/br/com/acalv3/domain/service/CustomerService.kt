@@ -9,7 +9,7 @@ interface CustomerService {
     fun delete(id: String)
     fun save(customer: Customer): Customer
     fun update(customer: Customer): Customer
-    fun paginate(customerPageRequest: CustomerPage): Page<Customer>
+    fun paginate(customerPage: CustomerPage): Page<Customer>
     fun findByName(name: String): Customer
     fun count(): Long
 }

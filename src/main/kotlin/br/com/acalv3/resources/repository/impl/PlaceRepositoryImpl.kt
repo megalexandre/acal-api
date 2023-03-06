@@ -1,6 +1,5 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.application.comunicate.model.request.place.PlacePageRequest
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.PlacePage
 import br.com.acalv3.domain.repository.PlaceRepository
@@ -10,11 +9,11 @@ import br.com.acalv3.resources.model.business.toPlacePage
 import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.PlaceRepositoryJpa
 import br.com.acalv3.resources.repository.specification.PlaceSpecification
+import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
-import java.util.*
 
 @Repository
 class PlaceRepositoryImpl(
@@ -27,6 +26,15 @@ class PlaceRepositoryImpl(
     override fun save(place: Place): Place =
         repository.save(place.toPlaceEntity()).toPlace()
 
+    override fun findPlace(place: Place): Place?  =
+        repository.findAll(
+            PlaceSpecification(PlacePage(
+                letter = place.letter,
+                number = place.number,
+                address = place.address
+            )).getSpecification()
+        ).firstOrNull()?.toPlace()
+
     override fun update(place: Place): Place =
         repository.save(place.toPlaceEntity()).toPlace()
 
@@ -35,5 +43,4 @@ class PlaceRepositoryImpl(
             PlaceSpecification(request).getSpecification(),
             super.pageable(request)
         ).toPlacePage()
-
 }

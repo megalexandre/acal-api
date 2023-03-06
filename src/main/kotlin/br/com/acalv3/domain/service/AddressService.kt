@@ -9,6 +9,5 @@ interface AddressService {
     fun save(address: Address): Address
     fun update(address: Address): Address
     fun paginate(pageRequest: AddressPage): Page<Address>
-    fun findByName(name: String): Address
     fun getAll(): List<Address>
 }

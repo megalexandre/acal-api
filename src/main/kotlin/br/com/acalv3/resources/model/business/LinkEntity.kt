@@ -52,3 +52,4 @@ fun LinkEntity.toLink() = Link(
 )
 
 fun Page<LinkEntity>.toLinkPage() = map{ it.toLink() }
+fun List<LinkEntity>.toLink() = map{ it.toLink() }
