@@ -14,4 +14,6 @@ interface LinkRepository {
     fun findByPlaceId(id: String): Link?
     fun paginate(request: LinkPage): Page<Link>
     fun count(): Long
+    fun sumValues(): Long
+    fun inactivate(id: String): Link
 }

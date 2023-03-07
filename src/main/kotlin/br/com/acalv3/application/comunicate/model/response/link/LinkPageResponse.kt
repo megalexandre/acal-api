@@ -11,6 +11,7 @@ data class LinkPageResponse(
     val place: Place,
     val customer: Customer,
     val group: Group,
+    val active: Boolean,
 )
 
 fun Link.toLinkPageResponse() = LinkPageResponse(
@@ -18,5 +19,6 @@ fun Link.toLinkPageResponse() = LinkPageResponse(
     place = place,
     customer = customer,
     group = group,
+    active = active,
 )
 fun Page<Link>.toLinkPageResponse() = map{ it.toLinkPageResponse() }

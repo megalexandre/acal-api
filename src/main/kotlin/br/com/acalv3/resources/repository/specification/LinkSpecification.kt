@@ -48,12 +48,28 @@ class LinkSpecification(private val link: LinkPage) {
             predicate.expressions.add(eqAddressId(root, builder))
         }
 
+        if(link.place?.number != null){
+            predicate.expressions.add(eqAddressNumber(root, builder))
+        }
+
+        if(link.active != null){
+            predicate.expressions.add(active(root, builder))
+        }
+
     }
+    private fun active(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
+        builder.equal(root.get<Boolean>("active"), link.active)
 
     private fun eqAddressId(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(
             root.get<Place>("place").get<Address>("address").get<UUID>("id"),
             UUID.fromString(link.place?.address?.id)
+        )
+
+    private fun eqAddressNumber(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
+        builder.equal(
+            root.get<Place>("place").get<Long>("number"),
+            link.place?.number
         )
 
     private fun eqGroupValue(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
@@ -70,5 +86,6 @@ class LinkSpecification(private val link: LinkPage) {
 
     private fun eqCustomerDocument(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get<Customer>("customer").get("document")), "%${link.customer?.document}%")
+
 
 }

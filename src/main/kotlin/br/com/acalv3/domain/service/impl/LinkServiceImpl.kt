@@ -1,20 +1,27 @@
 package br.com.acalv3.domain.service.impl
 
+import br.com.acalv3.domain.enumeration.Action
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
 import br.com.acalv3.domain.service.LinkService
+import br.com.acalv3.domain.service.strategies.address.AddressStrategy
+import br.com.acalv3.domain.service.strategies.link.LinkStrategy
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
 class LinkServiceImpl(
 	val repository: LinkRepository,
+	val strategies: List<LinkStrategy>
 ): LinkService {
 
 	override fun getById(id: String): Link = repository.getById(id)
 
-	override fun save(link: Link): Link = repository.save(link)
+	override fun save(link: Link): Link =
+		strategies.first{ it.action() === Action.SAVE }.can(link).let {
+			repository.save(link)
+		}
 
 	override fun update(link: Link): Link = repository.save(link)
 
@@ -29,5 +36,9 @@ class LinkServiceImpl(
 	override fun count(): Long = repository.count()
 
 	override fun paginate(linkPageRequest: LinkPage): Page<Link> = repository.paginate(linkPageRequest)
+
+	override fun sumValues(): Long = repository.sumValues()
+
+	override fun inactivate(id: String) = repository.inactivate(id)
 
 }

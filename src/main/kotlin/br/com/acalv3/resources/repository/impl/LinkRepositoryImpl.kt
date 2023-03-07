@@ -46,5 +46,8 @@ class LinkRepositoryImpl(
 
     override fun count(): Long = repository.count()
 
+    override fun sumValues(): Long = 0
 
+    override fun inactivate(id: String) = this.update(this.getById(id).copy(active = false))
 }
+

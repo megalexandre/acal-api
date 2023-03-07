@@ -11,7 +11,8 @@ class PlaceUpdateRequest(
     val id: String? = null,
 
     val address: AddressUpdateRequest? = null,
-    val hasHydrometer: Boolean = false
+    val hasHydrometer: Boolean = false,
+    val other: String?,
 
 ) : PlaceRequest()
 
@@ -21,4 +22,5 @@ fun PlaceUpdateRequest.toPlace() = Place(
     letter = letter?: throw RuntimeException("letter can't be null"),
     address = address?.toAddress() ?: throw RuntimeException("Address can't be null"),
     hasHydrometer = hasHydrometer,
+    other = other,
 )

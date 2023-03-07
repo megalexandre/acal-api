@@ -6,6 +6,7 @@ data class LinkPage (
     val customer: CustomerPage? = null,
     val place: PlacePage? = null,
     val group: GroupPage? = null,
+    val active: Boolean? = null,
 
     override val sortedField: String = "id",
     override val page: Int = 0,

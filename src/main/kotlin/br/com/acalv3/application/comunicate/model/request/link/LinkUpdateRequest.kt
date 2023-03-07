@@ -5,6 +5,7 @@ import br.com.acalv3.application.comunicate.model.request.group.GroupUpdateReque
 import br.com.acalv3.application.comunicate.model.request.group.toGroup
 import br.com.acalv3.application.comunicate.model.request.place.PlaceUpdateRequest
 import br.com.acalv3.application.comunicate.model.request.place.toPlace
+import br.com.acalv3.domain.enumeration.Active
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Link
 import javax.validation.constraints.NotBlank
@@ -25,12 +26,15 @@ data class LinkUpdateRequest(
 
     val placeAddress: PlaceUpdateRequest? = null,
 
+    val active: Boolean
+
 ): LinkRequest()
 
 fun LinkUpdateRequest.toLink(customer: Customer) = Link(
     id = id?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
     customer = customer,
     place = place?.toPlace() ?: throw RuntimeException("place id can't be null"),
-    placeAddress = placeAddress?.toPlace(),
+    mailPlace = placeAddress?.toPlace(),
     group = group?.toGroup() ?: throw RuntimeException("group id can't be null"),
+    active = active,
 )

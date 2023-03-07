@@ -7,7 +7,8 @@ import java.util.UUID
 
 class PlaceSaveRequest(
     val address: AddressUpdateRequest? = null,
-    val hasHydrometer: Boolean = false
+    val hasHydrometer: Boolean = false,
+    val other: String?,
 ): PlaceRequest()
 
 fun PlaceSaveRequest.toPlace() = Place(
@@ -16,4 +17,5 @@ fun PlaceSaveRequest.toPlace() = Place(
     number = number?: throw RuntimeException("number can't be null"),
     address = address?.toAddress() ?: throw RuntimeException("address can't be null"),
     hasHydrometer = hasHydrometer,
+    other = other,
 )

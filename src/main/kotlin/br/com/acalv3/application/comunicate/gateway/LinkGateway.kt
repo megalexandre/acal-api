@@ -11,12 +11,14 @@ import br.com.acalv3.application.comunicate.model.response.link.SaveUpdateLinkRe
 import br.com.acalv3.application.comunicate.model.response.link.toLinkGetResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkResponse
+import br.com.acalv3.application.comunicate.model.response.place.SaveUpdatePlaceResponse
 import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.GroupService
 import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -41,7 +43,7 @@ class LinkGateway(
         service.save(request.toLink(
             customer = customerService.getById(request.customerId ?: throw RuntimeException("")),
             place = placeService.getById(request.placeId ?: throw RuntimeException("")),
-            placeAddress = request.placeAddressId?.let { placeService.getById(it) } ,
+            mailPlace = request.placeAddressId?.let { placeService.getById(it) } ,
             group = groupService.getById(request.groupId ?: throw RuntimeException("")),
         )).toLinkResponse()
     }
@@ -59,7 +61,9 @@ class LinkGateway(
         service.paginate(request.toPageRequest()).toLinkPageResponse()
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String): LinkGetResponse =
-        service.getById(id).toLinkGetResponse()
+    fun find(@PathVariable id: String): LinkGetResponse = service.getById(id).toLinkGetResponse()
+
+    @DeleteMapping("inactive/{id}")
+    fun inactivate(@PathVariable id: String) = service.inactivate(id)
 
 }

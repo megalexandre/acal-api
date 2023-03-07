@@ -25,12 +25,13 @@ class LinkSaveRequest (
 fun LinkSaveRequest.toLink(
     customer: Customer,
     place: Place,
-    placeAddress: Place?,
+    mailPlace: Place?,
     group: Group,
 ) = Link(
     id = UUID.randomUUID().toString(),
     customer = customer,
     place = place,
-    placeAddress = place,
+    mailPlace = mailPlace,
     group = group,
+    active = true,
 )

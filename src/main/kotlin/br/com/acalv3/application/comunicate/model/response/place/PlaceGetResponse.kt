@@ -8,6 +8,7 @@ class PlaceGetResponse(
     val id: String?,
     val number: Long?,
     val hasHydrometer: Boolean,
+    val other: String?,
     val letter: String?,
     val address: AddressGetResponse?,
 )
@@ -18,4 +19,5 @@ fun Place.toGetPlaceResponse() = PlaceGetResponse(
     letter = letter,
     address = address.toGetAddressResponse(),
     hasHydrometer = hasHydrometer,
+    other = other,
 )
