@@ -12,6 +12,7 @@ interface LinkRepository {
     fun findByCustomerId(id: String): Link?
     fun findByGroupId(id: String): Link?
     fun findByPlaceId(id: String): Link?
+    fun findActiveByPlaceId(id: String): Link?
     fun paginate(request: LinkPage): Page<Link>
     fun count(): Long
     fun sumValues(): Long

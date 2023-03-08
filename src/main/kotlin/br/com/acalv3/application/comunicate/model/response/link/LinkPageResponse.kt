@@ -4,6 +4,7 @@ import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Group
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.Place
+import java.time.LocalDateTime
 import org.springframework.data.domain.Page
 
 data class LinkPageResponse(
@@ -12,6 +13,8 @@ data class LinkPageResponse(
     val customer: Customer,
     val group: Group,
     val active: Boolean,
+    val startedAt: LocalDateTime,
+    val finishedAt: LocalDateTime?,
 )
 
 fun Link.toLinkPageResponse() = LinkPageResponse(
@@ -20,5 +23,7 @@ fun Link.toLinkPageResponse() = LinkPageResponse(
     customer = customer,
     group = group,
     active = active,
+    startedAt = startedAt,
+    finishedAt = finishedAt,
 )
 fun Page<Link>.toLinkPageResponse() = map{ it.toLinkPageResponse() }

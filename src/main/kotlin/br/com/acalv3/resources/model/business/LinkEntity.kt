@@ -30,7 +30,7 @@ class LinkEntity (
 
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="place_address_id")
-    val mailPlace: PlaceEntity?,
+    val mailPlace: PlaceEntity,
 
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="group_id")
@@ -48,27 +48,35 @@ class LinkEntity (
     @DateTimeFormat(pattern = Fixture.DATE_FORMAT, iso = DATE_TIME)
     val updatedAt: LocalDateTime? = null,
 
-    val active: Boolean
+    val active: Boolean,
+
+    val startedAt: LocalDateTime,
+
+    val finishedAt: LocalDateTime? = null
 
     ) : DefaultEntity()
 
 fun Link.toLinkEntity() = LinkEntity(
     id = UUID.fromString(id),
     place = place.toPlaceEntity(),
-    mailPlace = place.toPlaceEntity(),
+    mailPlace = mailPlace.toPlaceEntity(),
     group = group.toGroupEntity(),
     customer = customer.toCustomerEntity(),
     active = active,
-    name = ""
+    name = "",
+    startedAt = startedAt,
+    finishedAt = finishedAt,
 )
 
 fun LinkEntity.toLink() = Link(
     id = id.toString(),
     place = place.toPlace(),
-    mailPlace = place.toPlace(),
+    mailPlace = mailPlace.toPlace(),
     group = group.toGroup(),
     customer = customer.toCustomer(),
     active = active,
+    startedAt = startedAt,
+    finishedAt = finishedAt,
 )
 
 fun Page<LinkEntity>.toLinkPage() = map{ it.toLink() }

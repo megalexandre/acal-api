@@ -39,12 +39,12 @@ class LinkGateway(
 ) {
 
     @PostMapping
-    fun save(@Valid @RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
+    fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
         service.save(request.toLink(
-            customer = customerService.getById(request.customerId ?: throw RuntimeException("")),
-            place = placeService.getById(request.placeId ?: throw RuntimeException("")),
-            mailPlace = request.placeAddressId?.let { placeService.getById(it) } ,
-            group = groupService.getById(request.groupId ?: throw RuntimeException("")),
+            customer = customerService.getById(request.customerId()),
+            place = placeService.getById(request.placeId()),
+            mailPlace = placeService.getById(request.mailPlaceId()),
+            group = groupService.getById(request.groupId()),
         )).toLinkResponse()
     }
 

@@ -18,7 +18,7 @@ class SaveLinkStrategy(
     override fun action() = SAVE
 
     override fun can(link: Link) {
-        repository.findByPlaceId(link.place.id)?.let {
+        repository.findActiveByPlaceId(link.place.id)?.let {
             throw RuntimeException(
                 """
                     A ligação não pode ser realizada, porquê o enderço já está associado a outro cliente

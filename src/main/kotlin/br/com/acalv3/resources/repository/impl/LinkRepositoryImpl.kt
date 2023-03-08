@@ -9,6 +9,7 @@ import br.com.acalv3.resources.model.business.toLinkPage
 import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
+import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
@@ -38,6 +39,9 @@ class LinkRepositoryImpl(
     override fun findByPlaceId(id: String): Link? =
         repository.findByPlaceId(UUID.fromString(id))?.firstOrNull()?.toLink()
 
+    override fun findActiveByPlaceId(id: String): Link? =
+        repository.findByPlaceIdAndActive(UUID.fromString(id), true)?.firstOrNull()?.toLink()
+
     override fun paginate(request: LinkPage): Page<Link> =
         repository.findAll(
             LinkSpecification(request).getSpecification(),
@@ -48,6 +52,10 @@ class LinkRepositoryImpl(
 
     override fun sumValues(): Long = 0
 
-    override fun inactivate(id: String) = this.update(this.getById(id).copy(active = false))
+    override fun inactivate(id: String) = this.update(
+        this.getById(id).copy(
+            active = false,
+            finishedAt = LocalDateTime.now()
+        ))
 }
 
