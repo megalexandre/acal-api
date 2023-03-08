@@ -78,9 +78,9 @@ class AppSecurityConfig(
 		CustomAccessDeniedHandler()
 
 	companion object {
-		const val HEALTH_STATUS = "/health/status"
+		const val HEALTH_STATUS = "/health/status"	//{{host}}health/status
 		const val AUTH_REGISTER_ROUTER = "/auth/register"
-		const val AUTH_LOGIN_ROUTER = "/auth/login"
+		const val AUTH_LOGIN_ROUTER = "/auth/login"  // {{host}}auth/login
 		const val AUTH_LOGOUT_ROUTER = "/auth/logout"
 		const val LEGACY = "/legacy**"
 		const val PERSON = "/person**"
