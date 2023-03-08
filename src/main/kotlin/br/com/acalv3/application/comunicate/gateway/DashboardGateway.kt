@@ -15,6 +15,5 @@ class DashboardGateway(
     val service: DashboardService,
 ) {
     @GetMapping
-    fun get(): DashboardResponse =
-        service.get().toDashboardResponse()
+    fun get(): DashboardResponse = service.get().toDashboardResponse()
 }

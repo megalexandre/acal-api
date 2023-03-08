@@ -4,10 +4,12 @@ import br.com.acalv3.domain.model.Dashboard
 
 class DashboardResponse (
     val totalCustomer: Long,
-    val totalLink: Long
+    val totalLink: Long,
+    val invoicing: Long
 )
 
 fun Dashboard.toDashboardResponse() = DashboardResponse(
     totalCustomer = totalCustomer,
-    totalLink = totalLink
+    totalLink = totalLink,
+    invoicing = invoicing,
 )

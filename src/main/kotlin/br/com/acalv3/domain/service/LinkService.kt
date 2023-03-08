@@ -14,6 +14,7 @@ interface LinkService {
     fun findByPlaceId(placeId: String): Link?
     fun findByGroupId(groupId: String): Link?
     fun count(): Long
-    fun sumValues(): Long
+    fun countActive(): Long
+    fun invoicing(): Long
     fun inactivate(id: String): Link
 }

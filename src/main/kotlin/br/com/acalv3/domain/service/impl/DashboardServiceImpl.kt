@@ -13,7 +13,7 @@ class DashboardServiceImpl(
 	override fun get(): Dashboard =
 		Dashboard(
 			totalCustomer = customerServiceImpl.count(),
-			totalLink = linkServiceImpl.count(),
-			invoicing = linkServiceImpl.sumValues(),
+			totalLink = linkServiceImpl.countActive(),
+			invoicing = linkServiceImpl.invoicing(),
 		)
 }

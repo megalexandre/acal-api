@@ -5,7 +5,6 @@ import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
 import br.com.acalv3.domain.service.LinkService
-import br.com.acalv3.domain.service.strategies.address.AddressStrategy
 import br.com.acalv3.domain.service.strategies.link.LinkStrategy
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
@@ -35,9 +34,11 @@ class LinkServiceImpl(
 
 	override fun count(): Long = repository.count()
 
+	override fun countActive(): Long = repository.countActive()
+
 	override fun paginate(linkPageRequest: LinkPage): Page<Link> = repository.paginate(linkPageRequest)
 
-	override fun sumValues(): Long = repository.sumValues()
+	override fun invoicing(): Long = repository.invoicing()
 
 	override fun inactivate(id: String) = repository.inactivate(id)
 
