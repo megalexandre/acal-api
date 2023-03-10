@@ -3,15 +3,13 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.application.comunicate.Fixture
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.resources.model.DefaultEntity
-import java.time.LocalDate
 import java.time.LocalDateTime
-import org.springframework.data.domain.Page
 import java.util.*
 import javax.persistence.*
 import javax.persistence.CascadeType.DETACH
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
-import org.springframework.data.annotation.CreatedDate
+import org.springframework.data.domain.Page
 import org.springframework.format.annotation.DateTimeFormat
 import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 
@@ -39,6 +37,9 @@ class LinkEntity (
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="customer_id")
     val customer: CustomerEntity,
+
+    @OneToMany(mappedBy="link")
+    val invoice: List<InvoiceEntity>? = null,
 
     @CreationTimestamp
     @DateTimeFormat(pattern = Fixture.DATE_FORMAT, iso = DATE_TIME)

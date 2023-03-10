@@ -25,10 +25,10 @@ class InvoiceEntity (
     val referenceYear: Int,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="link_id")
+    @JoinColumn(name="link_id",nullable=false)
     val link: LinkEntity,
 
-    @OneToMany(cascade = [DETACH], fetch = EAGER)
+    @OneToMany(fetch = EAGER, mappedBy="invoice")
     val invoiceDetails: List<InvoiceDetailEntity>,
 
 ) : DefaultEntity()
