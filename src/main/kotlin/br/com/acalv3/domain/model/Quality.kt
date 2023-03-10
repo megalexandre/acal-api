@@ -1,5 +1,6 @@
 package br.com.acalv3.domain.model
 
+import br.com.acalv3.domain.enumeration.Param
 import java.time.LocalDate
 
 class Quality(
@@ -13,7 +14,7 @@ class Quality(
 
 class Gathering(
     val id: String,
-    val param: String,
+    val param: Param,
     val required: Long,
     val analyzed: Long,
     val conformity: Long,

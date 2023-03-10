@@ -29,7 +29,7 @@ fun Quality.toQualityResponse() = QualityResponse(
 fun Gathering.toGatheringResponse() = GatheringResponse(
     id = id,
     required = required,
-    param = param,
+    param = param.value,
     analyzed = analyzed,
     conformity = conformity,
 )

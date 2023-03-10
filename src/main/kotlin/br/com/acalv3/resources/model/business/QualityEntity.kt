@@ -11,7 +11,7 @@ import javax.persistence.Id
 import javax.persistence.OneToMany
 
 @Entity(name = "quality")
-class QualityEntity (
+data class QualityEntity (
 
     @Id
     @Column(name = "id", columnDefinition = "BINARY(16)")
@@ -25,6 +25,7 @@ class QualityEntity (
 
     @OneToMany(mappedBy="quality", cascade = [CascadeType.ALL])
     var gathering: List<GatheringEntity>? = null
+
 }
 
 fun Quality.toQualityEntity() = QualityEntity(

@@ -1,11 +1,13 @@
 package br.com.acalv3.application.comunicate.model.request.quality
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
+import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.util.UUID
 import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING
+import java.lang.RuntimeException
 import java.time.LocalDate
 
 class QualityRequest(
@@ -37,7 +39,7 @@ class GatheringRequest(
 fun GatheringRequest.toGathering(quality: Quality) = Gathering(
     id = UUID.randomUUID().toString(),
     required = required,
-    param = param,
+    param = Param.byValue(param) ?: throw RuntimeException("Param $param is not found"),
     analyzed = analyzed,
     conformity = conformity,
     quality = quality

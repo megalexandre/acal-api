@@ -1,5 +1,6 @@
 package br.com.acalv3.resources.model.business
 
+import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
 import br.com.acalv3.resources.model.DefaultEntity
@@ -7,6 +8,9 @@ import java.lang.RuntimeException
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.EnumType
+import javax.persistence.EnumType.STRING
+import javax.persistence.Enumerated
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -18,7 +22,8 @@ class GatheringEntity (
     @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    val param: String,
+    @Enumerated(STRING)
+    val param: Param,
 
     val required: Long,
 
@@ -26,7 +31,7 @@ class GatheringEntity (
 
     val conformity: Long,
 
-) : DefaultEntity() {
+    ) : DefaultEntity() {
 
     @ManyToOne
     @JoinColumn(name="quality_id")
