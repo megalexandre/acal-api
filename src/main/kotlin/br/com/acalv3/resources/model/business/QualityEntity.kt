@@ -7,8 +7,11 @@ import java.util.UUID
 import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.FetchType
+import javax.persistence.FetchType.EAGER
 import javax.persistence.Id
 import javax.persistence.OneToMany
+import org.springframework.data.domain.Page
 
 @Entity(name = "quality")
 data class QualityEntity (
@@ -23,7 +26,7 @@ data class QualityEntity (
 
 ) : DefaultEntity() {
 
-    @OneToMany(mappedBy="quality", cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy="quality", cascade = [CascadeType.ALL], fetch = EAGER)
     var gathering: List<GatheringEntity>? = null
 
 }
@@ -43,3 +46,6 @@ fun QualityEntity.toQuality() = Quality(
 ).also {
     it.gathering = this.gathering?.toGathering(it)
 }
+
+fun List<QualityEntity>.toQuality() = map{ it.toQuality() }
+fun Page<QualityEntity>.toPage() = map{ it.toQuality() }

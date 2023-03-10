@@ -1,4 +1,4 @@
-package br.com.acalv3.application.comunicate.model.response.quality
+package br.com.acalv3.application.comunicate.model.quality.response
 
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
@@ -35,4 +35,5 @@ fun Gathering.toGatheringResponse() = GatheringResponse(
 )
 
 fun List<Gathering>.toGatheringResponse() = map { it.toGatheringResponse() }
+fun List<Quality>.toQualityResponse() = map { it.toQualityResponse() }
 

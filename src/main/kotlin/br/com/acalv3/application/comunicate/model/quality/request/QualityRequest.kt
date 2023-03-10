@@ -1,14 +1,13 @@
-package br.com.acalv3.application.comunicate.model.request.quality
+package br.com.acalv3.application.comunicate.model.quality.request
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
 import com.fasterxml.jackson.annotation.JsonFormat
-import java.util.UUID
 import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING
-import java.lang.RuntimeException
 import java.time.LocalDate
+import java.util.UUID
 
 class QualityRequest(
 
