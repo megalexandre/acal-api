@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class SaveCustomerStrategy(
     val repository: CustomerRepository,
-): CustomerStrategy {
+): CustomerStrategy<Customer>  {
 
     override fun action() = SAVE
 

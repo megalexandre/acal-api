@@ -2,14 +2,12 @@ package br.com.acalv3.domain.service
 
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.page.CustomerPage
-import org.springframework.data.domain.Page
+import br.com.acalv3.domain.repository.CustomerRepository
+import br.com.acalv3.domain.service.strategies.customer.CustomerStrategy
 
-interface CustomerService {
-    fun getById(id: String): Customer
-    fun delete(id: String)
-    fun save(customer: Customer): Customer
-    fun update(customer: Customer): Customer
-    fun paginate(customerPage: CustomerPage): Page<Customer>
-    fun findByName(name: String): Customer
-    fun count(): Long
+abstract class CustomerService: AbstractService<Customer, CustomerPage>() {
+    abstract override fun strategies(): List<CustomerStrategy<Customer>>
+    abstract override fun repository(): CustomerRepository
+
+    abstract fun findByName(name: String): Customer
 }

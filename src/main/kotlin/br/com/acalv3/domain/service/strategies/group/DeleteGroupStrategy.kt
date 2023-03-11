@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service
 class DeleteGroupStrategy(
     val repository: GroupRepository,
     val linkService: LinkService
-): GroupStrategy {
+): GroupStrategy<Group> {
 
     override fun action() = DELETE
 

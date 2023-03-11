@@ -7,7 +7,6 @@ import br.com.acalv3.domain.repository.PlaceRepository
 import br.com.acalv3.resources.model.business.toPlace
 import br.com.acalv3.resources.model.business.toPlaceEntity
 import br.com.acalv3.resources.model.business.toPlacePage
-import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.PlaceRepositoryJpa
 import br.com.acalv3.resources.repository.specification.PlaceSpecification
 import java.util.UUID
@@ -19,10 +18,12 @@ import org.springframework.stereotype.Repository
 @Repository
 class PlaceRepositoryImpl(
     private val repository: PlaceRepositoryJpa,
-) : PlaceRepository, DefaultRepository {
+) : PlaceRepository {
 
     override fun getById(id: String): Place =
         repository.findByIdOrNull(UUID.fromString(id))?.toPlace() ?: throw NotFoundException()
+
+    override fun getAll(): List<Place> = repository.findAll().toPlace()
 
     override fun save(place: Place): Place =
         repository.save(place.toPlaceEntity()).toPlace()
@@ -31,6 +32,7 @@ class PlaceRepositoryImpl(
         repository.save(place.toPlaceEntity()).toPlace()
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
+    override fun count(): Long = repository.count()
 
     override fun findPlace(place: Place): Place?  =
         repository.findAll(
@@ -42,10 +44,10 @@ class PlaceRepositoryImpl(
         ).firstOrNull()?.toPlace()
 
 
-    override fun paginate(request: PlacePage): Page<Place> =
+    override fun paginate(page: PlacePage): Page<Place> =
         repository.findAll(
-            PlaceSpecification(request).getSpecification(),
-            super.pageable(request)
+            PlaceSpecification(page).getSpecification(),
+            super.pageable(page)
         ).toPlacePage()
 
     override fun findByAddress(address: Address): Place? =

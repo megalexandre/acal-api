@@ -7,7 +7,7 @@ import br.com.acalv3.domain.service.LinkService
 import org.springframework.stereotype.Service
 
 @Service
-class QualityQualityStrategy: QualityStrategy {
+class QualityQualityStrategy: QualityStrategy<Quality> {
 
     override fun action() = DELETE
 

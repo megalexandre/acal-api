@@ -6,7 +6,6 @@ import br.com.acalv3.domain.repository.GroupRepository
 import br.com.acalv3.resources.model.business.toGroup
 import br.com.acalv3.resources.model.business.toGroupEntity
 import br.com.acalv3.resources.model.business.toGroupPage
-import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.GroupRepositoryJpa
 import br.com.acalv3.resources.repository.specification.GroupSpecification
 import java.util.UUID
@@ -18,7 +17,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class GroupRepositoryImpl(
     private val repository: GroupRepositoryJpa,
-) : GroupRepository, DefaultRepository {
+) : GroupRepository {
 
     override fun getById(id: String): Group =
         repository.findByIdOrNull(UUID.fromString(id))?.toGroup() ?: throw NotFoundException()
@@ -49,5 +48,7 @@ class GroupRepositoryImpl(
     override fun getAll(): List<Group> = repository.findAll().toGroup()
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
+
+    override fun count(): Long = repository.count()
 
 }

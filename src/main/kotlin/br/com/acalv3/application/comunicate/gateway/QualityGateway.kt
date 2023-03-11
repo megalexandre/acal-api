@@ -1,7 +1,6 @@
 package br.com.acalv3.application.comunicate.gateway
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
-import br.com.acalv3.application.comunicate.Gateway
 import br.com.acalv3.application.comunicate.Gateway.Companion.QUALITY
 import br.com.acalv3.application.comunicate.model.quality.request.QualityPageRequest
 import br.com.acalv3.application.comunicate.model.quality.request.QualityRequest
@@ -32,7 +31,7 @@ class QualityGateway(
     fun save(@Valid @RequestBody request: QualityRequest) = service.save(request.toQuality()).toQualityResponse()
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String): QualityResponse = service.getById(id).toQualityResponse()
+    fun find(@PathVariable id: String) = service.getById(id).toQualityResponse()
 
     @GetMapping("/list")
     fun list(): List<QualityResponse> = service.getAll().toQualityResponse()
@@ -42,6 +41,5 @@ class QualityGateway(
 
    @PostMapping("/paginate")
    fun paginate(@Valid @RequestBody request: QualityPageRequest): Page<QualityPageResponse> =
-        service.paginate(request.toPage()).toPageResponse()
-
+       service.paginate(request.toPage()).toPageResponse()
 }

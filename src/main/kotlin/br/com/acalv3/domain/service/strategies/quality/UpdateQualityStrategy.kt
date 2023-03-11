@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class UpdateQualityStrategy(
     val repository: QualityRepository,
-): QualityStrategy {
+): QualityStrategy<Quality> {
 
     override fun action() = UPDATE
 

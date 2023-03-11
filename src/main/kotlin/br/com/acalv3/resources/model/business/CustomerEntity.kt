@@ -63,3 +63,4 @@ fun CustomerEntity.toCustomer() = Customer(
 )
 
 fun Page<CustomerEntity>.toCustomerPage() = map{ it.toCustomer() }
+fun List<CustomerEntity>.toCustomer() = map{ it.toCustomer() }

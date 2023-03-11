@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class SaveQualityStrategy(
     val repository: QualityRepository,
-): QualityStrategy {
+): QualityStrategy<Quality> {
 
     override fun action() = SAVE
 

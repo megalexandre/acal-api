@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class UpdateAddressStrategy(
     val repository: AddressRepository,
-): AddressStrategy {
+):  AddressStrategy<Address>  {
 
     override fun action() = UPDATE
 

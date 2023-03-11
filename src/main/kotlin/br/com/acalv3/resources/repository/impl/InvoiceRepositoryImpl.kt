@@ -6,10 +6,9 @@ import br.com.acalv3.domain.repository.InvoiceRepository
 import br.com.acalv3.resources.model.business.toInvoice
 import br.com.acalv3.resources.model.business.toInvoiceEntity
 import br.com.acalv3.resources.model.business.toInvoicePage
-import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.InvoiceRepositoryJpa
 import br.com.acalv3.resources.repository.specification.InvoiceSpecification
-import java.util.*
+import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
@@ -18,13 +17,17 @@ import org.springframework.stereotype.Repository
 @Repository
 class InvoiceRepositoryImpl(
     private val repository: InvoiceRepositoryJpa,
-) : InvoiceRepository, DefaultRepository {
+) : InvoiceRepository {
 
     override fun getById(id: String): Invoice =
         repository.findByIdOrNull(UUID.fromString(id))?.toInvoice() ?: throw NotFoundException()
 
     override fun save(invoice: Invoice): Invoice =
         repository.save(invoice.toInvoiceEntity()).toInvoice()
+
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
+
+    override fun count(): Long = repository.count()
 
     override fun update(invoice: Invoice): Invoice =
         repository.save(invoice.toInvoiceEntity()).toInvoice()
@@ -35,7 +38,6 @@ class InvoiceRepositoryImpl(
             super.pageable(request)
         ).toInvoicePage()
 
-    override fun getAll(): List<Invoice> =
-        repository.findAll().toInvoice()
+    override fun getAll(): List<Invoice> = repository.findAll().toInvoice()
 
 }

@@ -5,6 +5,4 @@ import java.util.UUID
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
-interface PlaceRepositoryJpa : JpaRepository<PlaceEntity, UUID>, JpaSpecificationExecutor<PlaceEntity> {
-}
-
+interface PlaceRepositoryJpa : JpaRepository<PlaceEntity, UUID>, JpaSpecificationExecutor<PlaceEntity>

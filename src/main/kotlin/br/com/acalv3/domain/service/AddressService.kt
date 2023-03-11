@@ -2,13 +2,10 @@ package br.com.acalv3.domain.service
 
 import br.com.acalv3.domain.model.Address
 import br.com.acalv3.domain.model.page.AddressPage
-import org.springframework.data.domain.Page
+import br.com.acalv3.domain.repository.AddressRepository
+import br.com.acalv3.domain.service.strategies.address.AddressStrategy
 
-interface AddressService {
-    fun getById(id: String): Address
-    fun save(address: Address): Address
-    fun update(address: Address): Address
-    fun delete(id: String)
-    fun paginate(pageRequest: AddressPage): Page<Address>
-    fun getAll(): List<Address>
+abstract class AddressService: AbstractService<Address, AddressPage>() {
+    abstract override fun strategies(): List<AddressStrategy<Address>>
+    abstract override fun repository(): AddressRepository
 }

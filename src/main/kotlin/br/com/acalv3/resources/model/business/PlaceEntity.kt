@@ -55,3 +55,4 @@ fun PlaceEntity.toPlace() = Place(
 )
 
 fun Page<PlaceEntity>.toPlacePage() = map{ it.toPlace() }
+fun List<PlaceEntity>.toPlace() = map{ it.toPlace() }

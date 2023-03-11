@@ -1,7 +1,7 @@
 package br.com.acalv3.resources.repository.impl
 
 import br.com.acalv3.domain.enumeration.PersonType
-import br.com.acalv3.domain.repository.LegacyRepository
+import br.com.acalv3.domain.repository.legacy.LegacyRepository
 import br.com.acalv3.resources.model.business.toAddressEntity
 import br.com.acalv3.resources.model.business.toCustomerEntity
 import br.com.acalv3.resources.model.dto.LegacyAddress

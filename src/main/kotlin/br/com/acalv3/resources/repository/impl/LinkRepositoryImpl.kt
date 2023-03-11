@@ -6,7 +6,6 @@ import br.com.acalv3.domain.repository.LinkRepository
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
-import br.com.acalv3.resources.repository.DefaultRepository
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
 import java.time.LocalDateTime
@@ -19,12 +18,16 @@ import org.springframework.stereotype.Repository
 @Repository
 class LinkRepositoryImpl(
     private val repository: LinkRepositoryJpa,
-) : LinkRepository, DefaultRepository {
+) : LinkRepository {
 
     override fun getById(id: String): Link =
         repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
 
+    override fun getAll(): List<Link> = repository.findAll().toLink()
+
     override fun save(link: Link): Link = repository.save(link.toLinkEntity()).toLink()
+
+    override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
     override fun update(link: Link): Link = repository.save(link.toLinkEntity()).toLink()
 
@@ -42,10 +45,10 @@ class LinkRepositoryImpl(
     override fun findActiveByPlaceId(id: String): Link? =
         repository.findByPlaceIdAndActive(UUID.fromString(id), true)?.firstOrNull()?.toLink()
 
-    override fun paginate(request: LinkPage): Page<Link> =
+    override fun paginate(page: LinkPage): Page<Link> =
         repository.findAll(
-            LinkSpecification(request).getSpecification(),
-            super.pageable(request)
+            LinkSpecification(page).getSpecification(),
+            super.pageable(page)
         ).toLinkPage()
 
     override fun count(): Long = repository.count()

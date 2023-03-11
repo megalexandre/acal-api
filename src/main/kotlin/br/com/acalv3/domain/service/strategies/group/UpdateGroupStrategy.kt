@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service
 @Service
 class UpdateGroupStrategy(
     val repository: GroupRepository,
-): GroupStrategy {
+): GroupStrategy<Group> {
 
     override fun action() = UPDATE
 

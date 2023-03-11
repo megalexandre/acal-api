@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class UpdateCustomerStrategy(
     val repository: CustomerRepository,
-): CustomerStrategy {
+): CustomerStrategy<Customer>  {
 
     override fun action() = UPDATE
 

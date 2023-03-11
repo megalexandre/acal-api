@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service
 class DeleteCustomerStrategy(
     val repository: CustomerRepository,
     val linkService: LinkService
-): CustomerStrategy {
+): CustomerStrategy<Customer> {
 
     override fun action() = DELETE
 

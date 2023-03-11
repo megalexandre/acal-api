@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 @Service
 class SaveAddressStrategy(
     val repository: AddressRepository,
-): AddressStrategy {
+): AddressStrategy<Address> {
 
     override fun action() = SAVE
 
