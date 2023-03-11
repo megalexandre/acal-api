@@ -12,6 +12,7 @@ fun customerStub(
     phoneNumber: String = "71988872749",
     document: String = "03386558662",
     birthDay: LocalDate = LocalDate.now(),
+    active: Boolean = true
 ) = Customer(
      id = id.toString(),
      name = name,
@@ -19,4 +20,5 @@ fun customerStub(
      phoneNumber = phoneNumber,
      document = document,
      birthDay = birthDay,
+     active = active
 )

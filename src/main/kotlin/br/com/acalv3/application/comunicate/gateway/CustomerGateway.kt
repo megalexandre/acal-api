@@ -46,7 +46,7 @@ class CustomerGateway(
     fun find(@PathVariable id: String): CustomerGetResponse =
         customerService.getById(id).toGetCustomerResponse()
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable id: String) = customerService.delete(id)
 
 }

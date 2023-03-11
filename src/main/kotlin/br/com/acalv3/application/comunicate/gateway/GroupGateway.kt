@@ -47,7 +47,7 @@ class GroupGateway(
     fun paginate(@Valid @RequestBody request: GroupPageRequest): Page<GroupPageResponse> =
         service.paginate(request.toGroupPage()).toGroupPageResponse()
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable id: String) = service.delete(id)
 
 }

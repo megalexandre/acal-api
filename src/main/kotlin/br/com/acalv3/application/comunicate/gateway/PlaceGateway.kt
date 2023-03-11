@@ -47,7 +47,7 @@ class PlaceGateway(
     fun find(@PathVariable id: String): PlaceGetResponse =
         service.getById(id).toGetPlaceResponse()
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable id: String) = service.delete(id)
 
 

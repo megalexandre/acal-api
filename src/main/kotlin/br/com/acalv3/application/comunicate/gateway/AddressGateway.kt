@@ -51,7 +51,7 @@ class AddressGateway(
     fun list(): List<AddressGetResponse> =
         service.getAll().toGetAddressResponse()
 
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     fun delete(@PathVariable id: String) = service.delete(id)
 
 }

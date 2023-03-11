@@ -22,6 +22,4 @@ class BillPaymentTest: DefaultGatewayTest() {
 			.body("status", equalTo("ok"))
 	}
 
-
-
 }
