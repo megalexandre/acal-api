@@ -6,8 +6,7 @@ import java.time.LocalDate
 
 class QualityResponse(
     val id:  String,
-    val startedAt: LocalDate,
-    val finishedAt: LocalDate,
+    val startedAt: String,
     val gathering: List<GatheringResponse>,
 )
 
@@ -22,14 +21,13 @@ class GatheringResponse(
 fun Quality.toQualityResponse() = QualityResponse(
     id = id,
     startedAt = startedAt,
-    finishedAt = finishedAt,
     gathering = gathering().toGatheringResponse(),
 )
 
 fun Gathering.toGatheringResponse() = GatheringResponse(
     id = id,
     required = required,
-    param = param.value,
+    param = param.toString(),
     analyzed = analyzed,
     conformity = conformity,
 )

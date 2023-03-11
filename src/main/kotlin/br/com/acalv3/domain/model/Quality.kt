@@ -14,8 +14,7 @@ class Gathering(
 
 class Quality(
     val id: String,
-    val startedAt: LocalDate,
-    val finishedAt: LocalDate,
+    val startedAt: String,
 ): Model() {
     var gathering: List<Gathering>? = null
     fun gathering(): List<Gathering> = gathering ?: throw RuntimeException("gathering cant be null")

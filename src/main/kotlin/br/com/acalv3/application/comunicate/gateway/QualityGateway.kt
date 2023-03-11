@@ -4,6 +4,7 @@ import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUC
 import br.com.acalv3.application.comunicate.Gateway.Companion.QUALITY
 import br.com.acalv3.application.comunicate.model.quality.request.QualityPageRequest
 import br.com.acalv3.application.comunicate.model.quality.request.QualityRequest
+import br.com.acalv3.application.comunicate.model.quality.request.QualityUpdateRequest
 import br.com.acalv3.application.comunicate.model.quality.request.toPage
 import br.com.acalv3.application.comunicate.model.quality.request.toQuality
 import br.com.acalv3.application.comunicate.model.quality.response.QualityPageResponse
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -29,6 +31,9 @@ class QualityGateway(
 
     @PostMapping
     fun save(@Valid @RequestBody request: QualityRequest) = service.save(request.toQuality()).toQualityResponse()
+
+    @PutMapping("/update")
+    fun update(@Valid @RequestBody request: QualityUpdateRequest) = service.update(request.toQuality()).toQualityResponse()
 
     @GetMapping("/{id}")
     fun find(@PathVariable id: String) = service.getById(id).toQualityResponse()

@@ -5,6 +5,7 @@ import br.com.acalv3.resources.model.DefaultEntity
 import java.time.LocalDate
 import java.util.UUID
 import javax.persistence.CascadeType
+import javax.persistence.CascadeType.ALL
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType
@@ -20,13 +21,11 @@ data class QualityEntity (
     @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    val startedAt: LocalDate,
-
-    val finishedAt: LocalDate,
+    val startedAt: String,
 
 ) : DefaultEntity() {
 
-    @OneToMany(mappedBy="quality", cascade = [CascadeType.ALL], fetch = EAGER)
+    @OneToMany(mappedBy="quality", cascade = [ALL], fetch = EAGER)
     var gathering: List<GatheringEntity>? = null
 
 }
@@ -34,7 +33,6 @@ data class QualityEntity (
 fun Quality.toQualityEntity() = QualityEntity(
     id = UUID.fromString(id),
     startedAt = startedAt,
-    finishedAt = finishedAt,
 ).also {
     it.gathering = gathering?.toGatheringEntity(it.toQuality())
 }
@@ -42,7 +40,6 @@ fun Quality.toQualityEntity() = QualityEntity(
 fun QualityEntity.toQuality() = Quality(
     id = id.toString(),
     startedAt = startedAt,
-    finishedAt = finishedAt,
 ).also {
     it.gathering = this.gathering?.toGathering(it)
 }

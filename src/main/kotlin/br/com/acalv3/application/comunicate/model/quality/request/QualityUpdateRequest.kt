@@ -8,24 +8,29 @@ import javax.validation.constraints.NotNull
 import org.springframework.validation.annotation.Validated
 
 @Validated
-class QualityRequest(
+class QualityUpdateRequest(
+
+    @field:NotNull
+    val id: String?,
 
     @field:NotNull(message = "os parametros da coleta são obrigatório")
-    val gathering: List<GatheringRequest>? ,
+    val gathering: List<GatheringUpdateRequest>? ,
 
     @field:NotNull(message = "Data de inicio é obrigatório")
     val startedAt: String?,
 )
 
-fun QualityRequest.toQuality() = Quality(
-    id = UUID.randomUUID().toString(),
+fun QualityUpdateRequest.toQuality() = Quality(
+    id = UUID.fromString(id).toString(),
     startedAt = startedAt ?: throw RuntimeException(),
 ).also {
     it.gathering = gathering?.toGathering(it) ?: throw RuntimeException()
 }
 
 @Validated
-class GatheringRequest(
+class GatheringUpdateRequest(
+    @field:NotNull
+    val id: String?,
     @field:NotNull(message = "Um parametro deve ter um nome")
     val param: String?,
     @field:NotNull(message = "Quantidade exigida é obrigatorio")
@@ -36,8 +41,8 @@ class GatheringRequest(
     val conformity: Long?,
 )
 
-fun GatheringRequest.toGathering(quality: Quality) = Gathering(
-    id = UUID.randomUUID().toString(),
+fun GatheringUpdateRequest.toGathering(quality: Quality) = Gathering(
+    id = UUID.fromString(id).toString(),
     required = required ?: throw RuntimeException(),
     analyzed = analyzed ?: throw RuntimeException(),
     conformity = conformity ?: throw RuntimeException(),
@@ -45,4 +50,4 @@ fun GatheringRequest.toGathering(quality: Quality) = Gathering(
     quality = quality
 )
 
-fun List<GatheringRequest>.toGathering(quality: Quality) = map { it.toGathering(quality) }
+fun List<GatheringUpdateRequest>.toGathering(quality: Quality) = map { it.toGathering(quality) }
