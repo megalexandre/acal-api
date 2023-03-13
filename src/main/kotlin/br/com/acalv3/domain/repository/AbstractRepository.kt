@@ -12,6 +12,7 @@ interface AbstractRepository<Type, Pagination> {
     fun delete(id: String)
     fun count(): Long
     fun paginate(page: Pagination): Page<Type>
+    fun findAll(page: Pagination): List<Type>
     fun pageable(request: BasePage): PageRequest =
         PageRequest.of(request.page, request.pageSize)
             .withSort(

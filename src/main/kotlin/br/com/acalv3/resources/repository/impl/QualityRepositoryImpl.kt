@@ -29,5 +29,9 @@ class QualityRepositoryImpl(
             pageable(page)
         ).toPage()
 
+    override fun findAll(page: QualityPage): List<Quality> =
+        repository.findAll(
+            QualitySpecification(page).getSpecification(),
+        ).toQuality()
 
 }

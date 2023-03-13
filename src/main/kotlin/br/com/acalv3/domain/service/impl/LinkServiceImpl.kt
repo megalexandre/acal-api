@@ -38,8 +38,11 @@ class LinkServiceImpl(
 
 	override fun paginate(linkPageRequest: LinkPage): Page<Link> = repository.paginate(linkPageRequest)
 
+	override fun findAll(linkPageRequest: LinkPage): List<Link> = repository.findAll(linkPageRequest)
+
 	override fun invoicing(): Long = repository.invoicing()
 
 	override fun inactivate(id: String) = repository.inactivate(id)
 
+	override fun linkWithHydrometerByMonth(reference: String) = repository.linkWithHydrometerByMonth(reference)
 }

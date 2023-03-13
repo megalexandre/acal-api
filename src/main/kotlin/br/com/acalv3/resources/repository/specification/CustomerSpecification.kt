@@ -34,6 +34,7 @@ class CustomerSpecification(private val customer: CustomerPage) {
 
     private fun likeName(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get(NAME)),"%${customer.name}%")
+
     private fun likeDocument(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get(DOCUMENT)),"%${customer.document}%")
 

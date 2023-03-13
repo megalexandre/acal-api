@@ -51,4 +51,7 @@ class GroupRepositoryImpl(
 
     override fun count(): Long = repository.count()
 
+    override fun findAll(page: GroupPage): List<Group> =
+        repository.findAll(GroupSpecification(page).getSpecification()).toGroup()
+
 }

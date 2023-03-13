@@ -1,7 +1,9 @@
 package br.com.acalv3.resources.repository.impl
 
 import br.com.acalv3.domain.model.Address
+import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.AddressPage
+import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.AddressRepository
 import br.com.acalv3.resources.model.business.toAddress
 import br.com.acalv3.resources.model.business.toAddressEntity
@@ -34,8 +36,13 @@ class AddressRepositoryImpl(
             super.pageable(page)
         ).toAddressPage()
 
+    override fun findAll(page: AddressPage): List<Address> =
+        repository.findAll(AddressSpecification(page).getSpecification()).toAddress()
+
     override fun count(): Long = repository.count()
 
     override fun getAll(): List<Address> = repository.findAll().toAddress()
+
+
 
 }

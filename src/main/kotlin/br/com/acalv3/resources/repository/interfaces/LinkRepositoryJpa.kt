@@ -18,5 +18,5 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
 
     //@Query("SELECT SUM(l.group.value) FROM link l where l.active = true")
     //fun invoicing(): Long
-}
 
+}

@@ -11,7 +11,6 @@ import br.com.acalv3.application.comunicate.model.response.link.SaveUpdateLinkRe
 import br.com.acalv3.application.comunicate.model.response.link.toLinkGetResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkResponse
-import br.com.acalv3.application.comunicate.model.response.place.SaveUpdatePlaceResponse
 import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.GroupService
 import br.com.acalv3.domain.service.LinkService
@@ -38,6 +37,9 @@ class LinkGateway(
     val groupService: GroupService,
 ) {
 
+    @GetMapping("/hydrometer/{reference}")
+    fun linkWithHydrometerByMonth(@PathVariable reference: String) = service.linkWithHydrometerByMonth(reference)
+
     @PostMapping
     fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
         service.save(request.toLink(
@@ -58,7 +60,11 @@ class LinkGateway(
 
     @PostMapping("/paginate")
     fun paginate(@Valid @RequestBody request: LinkPageRequest): Page<LinkPageResponse> =
-        service.paginate(request.toPageRequest()).toLinkPageResponse()
+        service.paginate(request.toPageRequest()).toLinkResponse()
+
+    @PostMapping("/list")
+    fun findAll(@Valid @RequestBody request: LinkPageRequest): List<LinkPageResponse> =
+        service.findAll(request.toPageRequest()).toLinkResponse()
 
     @GetMapping("/{id}")
     fun find(@PathVariable id: String): LinkGetResponse = service.getById(id).toLinkGetResponse()

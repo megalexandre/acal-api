@@ -50,6 +50,11 @@ class PlaceRepositoryImpl(
             super.pageable(page)
         ).toPlacePage()
 
+    override fun findAll(page: PlacePage): List<Place> =
+        repository.findAll(
+            PlaceSpecification(page).getSpecification(),
+        ).toPlace()
+
     override fun findByAddress(address: Address): Place? =
         repository.findAll(
             PlaceSpecification(PlacePage(

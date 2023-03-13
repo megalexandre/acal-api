@@ -26,4 +26,5 @@ fun Link.toLinkPageResponse() = LinkPageResponse(
     startedAt = startedAt,
     finishedAt = finishedAt,
 )
-fun Page<Link>.toLinkPageResponse() = map{ it.toLinkPageResponse() }
+fun Page<Link>.toLinkResponse() = map{ it.toLinkPageResponse() }
+fun List<Link>.toLinkResponse() = map{ it.toLinkPageResponse() }
