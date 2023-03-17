@@ -54,4 +54,8 @@ class GroupRepositoryImpl(
     override fun findAll(page: GroupPage): List<Group> =
         repository.findAll(GroupSpecification(page).getSpecification()).toGroup()
 
+    override fun findAll(): List<Group> {
+        TODO("Not yet implemented")
+    }
+
 }

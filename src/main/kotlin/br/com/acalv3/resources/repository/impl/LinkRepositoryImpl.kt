@@ -1,26 +1,19 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.Link
-import br.com.acalv3.domain.model.Place
-import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
-import br.com.acalv3.resources.model.business.LinkEntity
+import br.com.acalv3.resources.model.business.InvoiceEntity
 import br.com.acalv3.resources.model.business.PlaceEntity
-import br.com.acalv3.resources.model.business.toInvoice
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
-import br.com.acalv3.resources.repository.specification.CustomerSpecification
 import br.com.acalv3.resources.repository.specification.LinkSpecification
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
-import org.springframework.data.jpa.domain.Specification
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 
@@ -29,7 +22,7 @@ class LinkRepositoryImpl(
     private val repository: LinkRepositoryJpa,
 ) : LinkRepository {
 
-    override fun linkWithHydrometerByMonth(reference: String): List<Link>? = run {
+    override fun linkWithHydrometerByMonth(reference: String): List<Link>? =
 
         repository.findAll { root, _, builder ->
             builder.and(
@@ -38,7 +31,16 @@ class LinkRepositoryImpl(
             )
         }.toLink()
 
-    }
+    override fun findAll(reference: String): List<Link> =
+        repository.findAll { root, _, builder ->
+            builder.and(
+                builder.equal(root.get<Boolean>("active"), true),
+                builder.or(
+                    builder.isNull(root.get<InvoiceEntity>("invoice")),
+                    builder.notEqual(root.get<InvoiceEntity>("invoice").get<String>("reference"), reference)
+                )
+            )
+        }.toLink()
 
     override fun getById(id: String): Link =
         repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
@@ -74,6 +76,8 @@ class LinkRepositoryImpl(
     override fun findAll(page: LinkPage): List<Link> = repository.findAll(
         LinkSpecification(page).getSpecification()
     ).toLink()
+
+    override fun findAll(): List<Link> = repository.findAll().toLink()
 
     override fun count(): Long = repository.count()
 

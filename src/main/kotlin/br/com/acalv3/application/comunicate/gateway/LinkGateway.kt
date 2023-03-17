@@ -1,5 +1,6 @@
 package br.com.acalv3.application.comunicate.gateway
 
+import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
 import br.com.acalv3.application.comunicate.model.request.link.LinkPageRequest
 import br.com.acalv3.application.comunicate.model.request.link.LinkSaveRequest
 import br.com.acalv3.application.comunicate.model.request.link.LinkUpdateRequest
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("link",
-    produces=[ "application/json" ],
+    produces=[ APPLICATION_PRODUCES ],
 )
 class LinkGateway(
     val service: LinkService,
@@ -40,6 +41,7 @@ class LinkGateway(
     @GetMapping("/hydrometer/{reference}")
     fun linkWithHydrometerByMonth(@PathVariable reference: String) = service.linkWithHydrometerByMonth(reference)
 
+    //TODO mover isso para o service
     @PostMapping
     fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
         service.save(request.toLink(
@@ -62,9 +64,13 @@ class LinkGateway(
     fun paginate(@Valid @RequestBody request: LinkPageRequest): Page<LinkPageResponse> =
         service.paginate(request.toPageRequest()).toLinkResponse()
 
-    @PostMapping("/list")
-    fun findAll(@Valid @RequestBody request: LinkPageRequest): List<LinkPageResponse> =
-        service.findAll(request.toPageRequest()).toLinkResponse()
+    @GetMapping("/list")
+    fun findAll(): List<LinkPageResponse> =
+        service.findAll().toLinkResponse()
+
+    @GetMapping("/list/{reference}")
+    fun findAllByReference(@PathVariable reference: String): List<LinkPageResponse> =
+        service.findAll(reference).toLinkResponse()
 
     @GetMapping("/{id}")
     fun find(@PathVariable id: String): LinkGetResponse = service.getById(id).toLinkGetResponse()

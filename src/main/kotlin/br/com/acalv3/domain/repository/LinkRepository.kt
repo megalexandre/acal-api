@@ -14,4 +14,5 @@ interface LinkRepository:  AbstractRepository<Link, LinkPage>  {
     fun invoicing(): Long
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
+    fun findAll(reference: String): List<Link>
 }

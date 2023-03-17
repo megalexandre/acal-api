@@ -10,6 +10,8 @@ interface LinkService {
     fun update(link: Link): Link
     fun paginate(linkPageRequest: LinkPage): Page<Link>
     fun findAll(linkPageRequest: LinkPage): List<Link>
+    fun findAll(reference: String): List<Link>
+    fun findAll(): List<Link>
     fun findByName(name: String): Link?
     fun findByCustomerId(customerId: String): Link?
     fun findByPlaceId(placeId: String): Link?

@@ -34,7 +34,7 @@ class UserService (
 		}
 
 		return user?.copy(
-			authorities = listOf(RoleDomain(authority = "ADMIN"))
+			authorities = listOf(RoleDomain(authority = "Programador"))
 		) ?: throw UsernameNotFoundException("User $username was't found")
 	}
 

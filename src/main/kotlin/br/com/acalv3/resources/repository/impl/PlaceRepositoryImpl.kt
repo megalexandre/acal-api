@@ -55,6 +55,10 @@ class PlaceRepositoryImpl(
             PlaceSpecification(page).getSpecification(),
         ).toPlace()
 
+    override fun findAll(): List<Place> {
+        TODO("Not yet implemented")
+    }
+
     override fun findByAddress(address: Address): Place? =
         repository.findAll(
             PlaceSpecification(PlacePage(

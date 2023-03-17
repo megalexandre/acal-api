@@ -34,4 +34,8 @@ class QualityRepositoryImpl(
             QualitySpecification(page).getSpecification(),
         ).toQuality()
 
+    override fun findAll(): List<Quality> {
+        TODO("Not yet implemented")
+    }
+
 }

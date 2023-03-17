@@ -40,6 +40,10 @@ class LinkServiceImpl(
 
 	override fun findAll(linkPageRequest: LinkPage): List<Link> = repository.findAll(linkPageRequest)
 
+	override fun findAll(): List<Link> = repository.findAll()
+
+	override fun findAll(reference: String): List<Link> = repository.findAll(reference)
+
 	override fun invoicing(): Long = repository.invoicing()
 
 	override fun inactivate(id: String) = repository.inactivate(id)

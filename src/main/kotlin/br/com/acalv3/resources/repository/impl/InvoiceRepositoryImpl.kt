@@ -1,16 +1,12 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.domain.model.Group
 import br.com.acalv3.domain.model.Invoice
-import br.com.acalv3.domain.model.page.GroupPage
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.domain.repository.InvoiceRepository
-import br.com.acalv3.resources.model.business.toGroup
 import br.com.acalv3.resources.model.business.toInvoice
 import br.com.acalv3.resources.model.business.toInvoiceEntity
 import br.com.acalv3.resources.model.business.toInvoicePage
 import br.com.acalv3.resources.repository.interfaces.InvoiceRepositoryJpa
-import br.com.acalv3.resources.repository.specification.GroupSpecification
 import br.com.acalv3.resources.repository.specification.InvoiceSpecification
 import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
@@ -46,6 +42,10 @@ class InvoiceRepositoryImpl(
 
     override fun findAll(page: InvoicePage): List<Invoice> =
         repository.findAll().toInvoice()
+
+    override fun findAll(): List<Invoice> {
+        TODO("Not yet implemented")
+    }
 
 
 }
