@@ -4,18 +4,24 @@ import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.Link
 import java.util.UUID
 
-class InvoiceRequest (
-
-    val id: String?,
-    val reference: String?,
-    val link: Link?,
+class InvoiceTest(
+    val id: String? = null,
+    val reference: String? = null,
     val invoiceDetails: List<InvoiceDetailRequest>?,
-
 )
 
-fun InvoiceRequest.toInvoice() = Invoice(
-    id = UUID.randomUUID().toString(),
-    reference = reference ?: throw RuntimeException(),
-    link = link ?: throw RuntimeException(),
-    invoiceDetails = invoiceDetails?.toInvoiceDetail() ?: throw RuntimeException(),
+class InvoiceRequest (
+    val id: String? = null,
+    val reference: String? = null,
+    val invoiceDetails: List<InvoiceDetailRequest>?,
 )
+
+fun InvoiceRequest.toInvoice(link: Link) = Invoice(
+    id = UUID.randomUUID(),
+    reference = reference!!,
+    link = link,
+).also {
+    it.invoiceDetails = invoiceDetails?.toInvoiceDetail() ?: throw RuntimeException()
+}
+
+fun List<InvoiceRequest>.toInvoice(link: Link) = map{ it.toInvoice(link)}

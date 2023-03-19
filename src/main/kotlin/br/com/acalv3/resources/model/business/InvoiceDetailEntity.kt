@@ -11,6 +11,8 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
+import javax.persistence.FetchType
+import javax.persistence.FetchType.EAGER
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -28,21 +30,24 @@ class InvoiceDetailEntity (
 
     val value: BigDecimal,
 
-    @ManyToOne(cascade = [ALL])
-    @JoinColumn(name="invoice_id")
-    val invoice: InvoiceEntity?,
+) : DefaultEntity(){
 
-) : DefaultEntity()
+    @ManyToOne(cascade = [ALL], fetch = EAGER)
+    @JoinColumn(name="invoice_id")
+
+    var invoice: InvoiceEntity? = null
+}
 
 fun InvoiceDetail.toInvoiceDetailEntity(invoice: InvoiceEntity?) = InvoiceDetailEntity(
-    id = UUID.fromString(id),
+    id = id,
     reason = reason,
     value = value,
-    invoice = invoice,
-)
+).also {
+    it.invoice = invoice
+}
 
 fun InvoiceDetailEntity.toInvoiceDetail() = InvoiceDetail(
-    id = id.toString(),
+    id = id,
     reason = reason,
     value = value,
 )

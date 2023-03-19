@@ -32,6 +32,9 @@ class InvoiceRepositoryImpl(
     override fun update(invoice: Invoice): Invoice =
         repository.save(invoice.toInvoiceEntity()).toInvoice()
 
+    override fun save(invoice: List<Invoice>): List<Invoice> =
+        repository.saveAll(invoice.toInvoiceEntity()).toInvoice()
+
     override fun paginate(request: InvoicePage): Page<Invoice> =
         repository.findAll(
             InvoiceSpecification(request).getSpecification(),

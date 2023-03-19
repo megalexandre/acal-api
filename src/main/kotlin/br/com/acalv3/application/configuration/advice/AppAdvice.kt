@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 
 @ControllerAdvice
 class AppAdvice {
-	private var logger: Logger = LoggerFactory.getLogger(CustomAccessDeniedHandler::class.java)
+	private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
 	@ExceptionHandler(value = [
 		EmptyResultDataAccessException::class,
@@ -30,23 +30,20 @@ class AppAdvice {
 
 	@ExceptionHandler(value = [
 		ConstraintViolationException::class,
-		DuplicatedFieldException::class,
-	])
+		DuplicatedFieldException::class, ])
 	fun e2 (ex: RuntimeException) = getResponse(ex, BAD_REQUEST)
 
 	@ExceptionHandler(value = [
-		MethodArgumentNotValidException::class
-	])
+		MethodArgumentNotValidException::class])
 	fun e3 (ex: MethodArgumentNotValidException) = getResponse(ex, BAD_REQUEST)
 
 	@ExceptionHandler(value = [
-		RuntimeException::class
-	])
+		RuntimeException::class])
 	fun e4 (ex: RuntimeException) = getResponse(ex,INTERNAL_SERVER_ERROR)
 
 	@ExceptionHandler(value = [
 		RequiredFieldException::class])
-	fun e3 (ex: SQLException) = run {
+	fun e3 (ex: SQLException)  {
 
 		val start = ex.message?.indexOf("=(", 0, false)?.plus(2)
 		val end = ex.message?.lastIndexOf(")")

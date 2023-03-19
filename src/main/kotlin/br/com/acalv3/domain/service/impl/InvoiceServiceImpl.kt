@@ -18,6 +18,9 @@ class InvoiceServiceImpl(
 	override fun save(invoice: Invoice): Invoice =
 		repository.save(invoice)
 
+	override fun saveAll(invoice: List<Invoice>): List<Invoice> =
+		repository.save(invoice)
+
 	override fun update(invoice: Invoice): Invoice =
 		repository.save(invoice)
 

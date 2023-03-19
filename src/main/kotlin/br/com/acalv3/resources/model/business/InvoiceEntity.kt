@@ -3,6 +3,7 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.resources.model.DefaultEntity
 import java.util.UUID
+import javax.persistence.CascadeType.ALL
 import javax.persistence.CascadeType.DETACH
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -26,24 +27,29 @@ class InvoiceEntity (
     @JoinColumn(name="link_id",nullable=false)
     val link: LinkEntity,
 
-    @OneToMany(fetch = EAGER, mappedBy="invoice")
-    val invoiceDetails: List<InvoiceDetailEntity>,
+) : DefaultEntity() {
 
-) : DefaultEntity()
+    @OneToMany(fetch = EAGER, mappedBy="invoice", cascade = [ALL])
+    var invoiceDetails: List<InvoiceDetailEntity>? = null
+}
 
 fun Invoice.toInvoiceEntity() = InvoiceEntity(
-    id = UUID.fromString(id),
+    id = id,
     reference = reference,
     link = link.toLinkEntity(),
-    invoiceDetails = invoiceDetails.toInvoiceDetailEntity(null),
-)
+
+).also {
+    it.invoiceDetails = invoiceDetails?.toInvoiceDetailEntity(it)
+}
 
 fun InvoiceEntity.toInvoice() = Invoice(
-    id = id.toString(),
+    id = id,
     reference = reference,
     link = link.toLink(),
-    invoiceDetails = invoiceDetails.toInvoiceDetail(),
-)
+).also {
+    it.invoiceDetails = invoiceDetails?.toInvoiceDetail()
+}
 
-fun Page<InvoiceEntity>.toInvoicePage() = map{ it.toInvoice() }
-fun List<InvoiceEntity>.toInvoice() = map{ it.toInvoice() }
+fun Page<InvoiceEntity>.toInvoicePage() = map { it.toInvoice() }
+fun List<InvoiceEntity>.toInvoice() = map { it.toInvoice() }
+fun List<Invoice>.toInvoiceEntity() = map { it.toInvoiceEntity() }

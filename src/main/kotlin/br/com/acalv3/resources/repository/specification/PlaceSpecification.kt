@@ -2,13 +2,9 @@ package br.com.acalv3.resources.repository.specification
 
 import br.com.acalv3.domain.model.page.PlacePage
 import br.com.acalv3.resources.model.business.AddressEntity
-import br.com.acalv3.resources.model.business.CustomerEntity
-import br.com.acalv3.resources.model.business.LinkEntity
 import br.com.acalv3.resources.model.business.PlaceEntity
 import java.util.UUID
 import javax.persistence.criteria.CriteriaBuilder
-import javax.persistence.criteria.Join
-import javax.persistence.criteria.JoinType
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 import org.springframework.data.jpa.domain.Specification
@@ -42,10 +38,8 @@ class PlaceSpecification(private val place: PlacePage) {
     private fun eqLetter(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<Long>("letter"), place.letter?.trim())
 
-    private fun eqAddress(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =  run{
+    private fun eqAddress(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<AddressEntity>("address").get<UUID>("id"), UUID.fromString(place.address?.id))
-    }
-
 }
 
 

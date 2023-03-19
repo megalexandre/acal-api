@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page
 interface InvoiceService {
     fun getById(id: String): Invoice
     fun save(invoice: Invoice): Invoice
+    fun saveAll(invoice: List<Invoice>): List<Invoice>
     fun update(invoice: Invoice): Invoice
     fun paginate(pageRequest: InvoicePage): Page<Invoice>
     fun getAll(): List<Invoice>

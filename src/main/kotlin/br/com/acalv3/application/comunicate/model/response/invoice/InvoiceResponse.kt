@@ -7,7 +7,7 @@ class InvoiceResponse(
 )
 
 fun Invoice.toInvoiceResponse() = InvoiceResponse(
-    id = id,
+    id = id.toString(),
 )
 
 fun List<Invoice>.toInvoiceResponse() = map{ it.toInvoiceResponse() }

@@ -2,6 +2,7 @@ package br.com.acalv3.application.comunicate.model.response.link
 
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Group
+import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.Place
 import java.time.LocalDateTime

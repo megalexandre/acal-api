@@ -16,7 +16,20 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
     @Query("SELECT count(l) FROM link l where l.active = true")
     fun countActive(): Long
 
-    //@Query("SELECT SUM(l.group.value) FROM link l where l.active = true")
-    //fun invoicing(): Long
+    @Query(SELECT_INVOICE)
+    fun invoicing(reference: String): List<UUID>
 
+    companion object{
+        private const val SELECT_INVOICE = """
+            SELECT l.id 
+                FROM link l
+            WHERE l.active = true
+            AND l.id NOT IN 
+            (
+                SELECT i.link.id 
+                    FROM invoice i 
+                WHERE i.reference = :reference
+            )
+        """
+    }
 }
