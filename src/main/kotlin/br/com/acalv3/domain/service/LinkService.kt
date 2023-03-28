@@ -5,6 +5,7 @@ import br.com.acalv3.domain.model.page.LinkPage
 import org.springframework.data.domain.Page
 
 interface LinkService {
+    fun report(): ByteArray
     fun getById(id: String): Link
     fun save(link: Link): Link
     fun update(link: Link): Link

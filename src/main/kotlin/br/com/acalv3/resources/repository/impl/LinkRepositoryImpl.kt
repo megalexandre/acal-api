@@ -9,6 +9,8 @@ import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
+import br.com.acalv3.resources.model.report.LinkReport
+import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
 import java.time.LocalDateTime
@@ -16,6 +18,11 @@ import java.util.UUID
 import javax.persistence.criteria.Join
 import javax.persistence.criteria.JoinType
 import javax.persistence.criteria.JoinType.LEFT
+import net.sf.jasperreports.engine.JasperCompileManager
+import net.sf.jasperreports.engine.JasperExportManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import org.springframework.core.io.ClassPathResource
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
@@ -75,6 +82,7 @@ class LinkRepositoryImpl(
 
     override fun findAll(): List<Link> = repository.findAll().toLink()
 
+
     override fun count(): Long = repository.count()
 
     override fun countActive(): Long = repository.countActive()
@@ -86,5 +94,16 @@ class LinkRepositoryImpl(
             active = false,
             finishedAt = LocalDateTime.now()
         ))
+
+    override fun report(): ByteArray {
+        val list = repository.findAll().toLink().toLinkReport().sortedBy { it.customerName }
+        val data = JRBeanCollectionDataSource(list)
+
+        val stream = ClassPathResource("report/link.jrxml").inputStream
+        val report = JasperCompileManager.compileReport(stream)
+        val jasperPrint = JasperFillManager.fillReport(report, HashMap(), data)
+
+        return JasperExportManager.exportReportToPdf(jasperPrint)
+    }
 }
 

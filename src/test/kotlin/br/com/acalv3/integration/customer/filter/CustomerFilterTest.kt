@@ -77,7 +77,7 @@ class CustomerFilterTest: DefaultGatewayTest() {
 	@Test
 	fun `should paginate by document`(){
 		val customer = repository.save(customerStub().toCustomerEntity())
-		val customerQuery = copyToString(customerDocument.inputStream, defaultCharset()).replace("_document", customer.document!!)
+		val customerQuery = copyToString(customerDocument.inputStream, defaultCharset()).replace("_document", customer.document)
 
 		Given {
 			contentType(JSON)

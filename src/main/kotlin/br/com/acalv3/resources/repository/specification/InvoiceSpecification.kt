@@ -18,16 +18,7 @@ class InvoiceSpecification(private val invoice: InvoicePage) {
 
     private fun getPredicates(predicate: Predicate, root: Root<InvoiceEntity>, builder: CriteriaBuilder) {
 
-        if (invoice.name != null) {
-            predicate.expressions.add(likeName(root, builder))
-        }
     }
 
-    private fun likeName(root: Root<InvoiceEntity>, builder: CriteriaBuilder): Predicate =
-        builder.like(builder.upper(root.get(NAME)),"%${invoice.name}%")
-
-    companion object{
-        private const val NAME = "name"
-    }
 }
 

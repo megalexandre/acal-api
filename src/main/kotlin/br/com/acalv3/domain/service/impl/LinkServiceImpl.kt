@@ -6,6 +6,11 @@ import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
 import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.strategies.link.LinkStrategy
+import net.sf.jasperreports.engine.JasperCompileManager
+import net.sf.jasperreports.engine.JasperExportManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import org.springframework.core.io.ClassPathResource
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
@@ -14,6 +19,8 @@ class LinkServiceImpl(
 	val repository: LinkRepository,
 	val strategies: List<LinkStrategy>
 ): LinkService {
+
+	override fun report(): ByteArray  = repository.report()
 
 	override fun getById(id: String): Link = repository.getById(id)
 
