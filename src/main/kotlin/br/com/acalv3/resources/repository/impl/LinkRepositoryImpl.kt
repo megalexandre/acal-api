@@ -1,28 +1,20 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.commons.ReportUtils
+import br.com.acalv3.commons.formatDocument
+import br.com.acalv3.domain.enumeration.Report.LINK
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
-import br.com.acalv3.resources.model.business.InvoiceEntity
-import br.com.acalv3.resources.model.business.LinkEntity
 import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
-import br.com.acalv3.resources.model.report.LinkReport
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
 import java.time.LocalDateTime
 import java.util.UUID
-import javax.persistence.criteria.Join
-import javax.persistence.criteria.JoinType
-import javax.persistence.criteria.JoinType.LEFT
-import net.sf.jasperreports.engine.JasperCompileManager
-import net.sf.jasperreports.engine.JasperExportManager
-import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import org.springframework.core.io.ClassPathResource
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
@@ -82,7 +74,6 @@ class LinkRepositoryImpl(
 
     override fun findAll(): List<Link> = repository.findAll().toLink()
 
-
     override fun count(): Long = repository.count()
 
     override fun countActive(): Long = repository.countActive()
@@ -95,15 +86,47 @@ class LinkRepositoryImpl(
             finishedAt = LocalDateTime.now()
         ))
 
-    override fun report(): ByteArray {
-        val list = repository.findAll().toLink().toLinkReport().sortedBy { it.customerName }
-        val data = JRBeanCollectionDataSource(list)
+    override fun report(link: LinkPage): ByteArray {
+        val data = repository.findAll(
+            LinkSpecification(link).getSpecification(),
+            super.sort(link)
+        ).toLink().toLinkReport()
 
-        val stream = ClassPathResource("report/link.jrxml").inputStream
-        val report = JasperCompileManager.compileReport(stream)
-        val jasperPrint = JasperFillManager.fillReport(report, HashMap(), data)
+        return ReportUtils().print(
+            data = data,
+            report = LINK,
+            param = hashMapOf(
+                CUSTOMER to valid(link.customer?.name),
+                DOCUMENT to valid(link.customer?.document).formatDocument(),
+                ADDRESS to valid(link.place?.address?.name),
+                STATUS to valid(link.active),
+                GROUP to valid(link.group?.name),
+                CATEGORY to valid(link.group?.category?.value),
+                TOTAL to data.size.toString()
+            )
+        )
+    }
 
-        return JasperExportManager.exportReportToPdf(jasperPrint)
+    private fun valid(text: String?) = when(text) { null,EMPTY -> SEPARATOR else -> text}
+    private fun valid(status: Boolean?) = when(status) {
+        null -> ALL
+        true -> ACTIVE
+        false -> INACTIVE
+    }
+
+    companion object{
+        private const val EMPTY = ""
+        private const val ACTIVE = "Ativos"
+        private const val INACTIVE = "Inativos"
+        private const val SEPARATOR = " - "
+        private const val ALL = "todos"
+        private const val CUSTOMER = "customer"
+        private const val DOCUMENT = "document"
+        private const val ADDRESS = "address"
+        private const val STATUS = "status"
+        private const val GROUP = "group"
+        private const val CATEGORY = "category"
+        private const val TOTAL = "total_row"
     }
 }
 

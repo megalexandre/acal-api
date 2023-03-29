@@ -17,14 +17,16 @@ interface AbstractRepository<Type, Pagination> {
     fun pageable(request: BasePage): PageRequest =
         PageRequest.of(request.page, request.pageSize)
             .withSort(
-                Sort.by(
-                    when (request.direction) {
-                        Sort.Direction.DESC.name -> {
-                            Sort.Direction.DESC
-                        }
-                        else -> Sort.Direction.ASC
-
-                    }, request.sortedField
-                )
+               sort(request)
             )
+
+    fun sort(request: BasePage) =
+        Sort.by(
+            when (request.direction) {
+                Sort.Direction.DESC.name -> {
+                    Sort.Direction.DESC
+                }
+                else -> Sort.Direction.ASC
+            }, request.sortedField
+        )
 }

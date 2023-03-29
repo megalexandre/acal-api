@@ -20,7 +20,7 @@ class LinkServiceImpl(
 	val strategies: List<LinkStrategy>
 ): LinkService {
 
-	override fun report(): ByteArray  = repository.report()
+	override fun report(link: LinkPage): ByteArray  = repository.report(link)
 
 	override fun getById(id: String): Link = repository.getById(id)
 

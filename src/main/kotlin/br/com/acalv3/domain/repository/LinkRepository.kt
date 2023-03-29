@@ -15,5 +15,5 @@ interface LinkRepository:  AbstractRepository<Link, LinkPage>  {
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
     fun findAll(reference: String): List<Link>
-    fun report(): ByteArray
+    fun report(link: LinkPage): ByteArray
 }
