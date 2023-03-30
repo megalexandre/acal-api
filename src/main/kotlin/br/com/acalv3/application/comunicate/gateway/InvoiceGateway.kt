@@ -14,6 +14,7 @@ import br.com.acalv3.application.comunicate.model.response.link.LinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkResponse
 import br.com.acalv3.domain.service.InvoiceService
 import br.com.acalv3.domain.service.LinkService
+import java.util.UUID
 import javax.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -22,6 +23,7 @@ import org.springframework.http.MediaType
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -50,12 +52,18 @@ class InvoiceGateway(
     }
 
     @GetMapping("/list")
-    fun list(): List<InvoiceResponse> = run {
-        logger.info("listing all address")
-        service.getAll().toInvoiceResponse()
-    }
+    fun list(): List<InvoiceResponse> =
+        service.getAll().toInvoiceResponse().also{
+            logger.info("listing all address")
+        }
+
+    @PostMapping(path = ["/report/{id}"], produces = [APPLICATION_PDF_VALUE])
+    fun reportById(@PathVariable id: String): ByteArray? =
+        service.report(UUID.fromString(id)).also {
+            logger.info("getting report by id: $id")
+        }
 
     @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
-    fun report(): ByteArray? = service.report()
+    fun reportLot(@Valid @RequestBody request: InvoicePageRequest): ByteArray? = service.report()
 
 }

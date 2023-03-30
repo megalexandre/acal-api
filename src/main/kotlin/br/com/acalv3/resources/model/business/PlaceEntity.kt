@@ -3,9 +3,6 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.resources.model.DefaultEntity
 import java.util.UUID
-import javax.persistence.CascadeType
-import javax.persistence.CascadeType.MERGE
-import javax.persistence.CascadeType.REFRESH
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id

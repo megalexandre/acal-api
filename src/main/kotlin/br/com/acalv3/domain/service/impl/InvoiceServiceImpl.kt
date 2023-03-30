@@ -4,6 +4,7 @@ import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.domain.repository.InvoiceRepository
 import br.com.acalv3.domain.service.InvoiceService
+import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
@@ -31,4 +32,6 @@ class InvoiceServiceImpl(
 		repository.getAll()
 
 	override fun report(): ByteArray? = repository.report()
+
+	override fun report(id: UUID): ByteArray? = repository.report(id)
 }
