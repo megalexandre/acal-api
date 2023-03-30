@@ -29,4 +29,6 @@ class InvoiceServiceImpl(
 
 	override fun getAll(): List<Invoice> =
 		repository.getAll()
+
+	override fun report(): ByteArray? = repository.report()
 }

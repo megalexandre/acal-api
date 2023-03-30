@@ -34,12 +34,17 @@ dependencies {
 	implementation("org.testng:testng:7.1.0")
 	implementation("io.jsonwebtoken:jjwt:0.9.1")
 
+	//Reports
 	implementation("com.lowagie:itext:2.1.7")
+
+	implementation("net.sf.jasperreports:jasperreports:6.19.1")
 	implementation("net.sf.jasperreports:jasperreports-fonts:6.19.1"){
 		exclude(module = "com.lowagie")
 	}
-
-	implementation("net.sf.jasperreports:jasperreports:6.19.1")
+	implementation("net.sf.barcode4j:barcode4j:2.1")
+	implementation("com.google.zxing:core:3.5.1")
+	implementation("com.google.zxing:javase:3.5.1")
+	implementation("org.apache.xmlgraphics:batik-bridge:1.16")
 
 
 	testImplementation("org.junit.jupiter:junit-jupiter-api")

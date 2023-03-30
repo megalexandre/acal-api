@@ -15,7 +15,7 @@ class SaveCustomerStrategy(
     override fun can(customer: Customer) {
         repository.findByDocument(customer.document)?.let {
             throw RuntimeException(
-                "o documento ${customer.document} já está cadastrado para o usuário: ${customer.name}")
+                "o documento ${it.document} já está cadastrado para o usuário: ${it.name}")
         }
     }
 }

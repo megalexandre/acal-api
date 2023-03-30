@@ -18,7 +18,9 @@ import javax.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
+import org.springframework.http.MediaType
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -52,5 +54,8 @@ class InvoiceGateway(
         logger.info("listing all address")
         service.getAll().toInvoiceResponse()
     }
+
+    @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
+    fun report(): ByteArray? = service.report()
 
 }

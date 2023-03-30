@@ -10,7 +10,6 @@ import br.com.acalv3.application.comunicate.model.response.link.LinkGetResponse
 import br.com.acalv3.application.comunicate.model.response.link.LinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.SaveUpdateLinkResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkGetResponse
-import br.com.acalv3.application.comunicate.model.response.link.toLinkPageResponse
 import br.com.acalv3.application.comunicate.model.response.link.toLinkResponse
 import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.GroupService
@@ -18,6 +17,7 @@ import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -41,7 +41,6 @@ class LinkGateway(
     @GetMapping("/hydrometer/{reference}")
     fun linkWithHydrometerByMonth(@PathVariable reference: String) = service.linkWithHydrometerByMonth(reference)
 
-    //TODO mover isso para o service
     @PostMapping
     fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
         service.save(request.toLink(
@@ -77,5 +76,10 @@ class LinkGateway(
 
     @DeleteMapping("inactive/{id}")
     fun inactivate(@PathVariable id: String) = service.inactivate(id)
+
+    @PostMapping(path = ["/report"], produces = [MediaType.APPLICATION_PDF_VALUE])
+    fun link(@RequestBody request: LinkPageRequest): ByteArray? = service.report(
+        request.toPageRequest()
+    )
 
 }

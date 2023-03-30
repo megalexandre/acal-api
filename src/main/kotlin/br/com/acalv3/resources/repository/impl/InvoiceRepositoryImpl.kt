@@ -1,5 +1,8 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.commons.ReportUtils
+import br.com.acalv3.domain.enumeration.Report
+import br.com.acalv3.domain.enumeration.Report.INVOICE
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.domain.repository.InvoiceRepository
@@ -24,6 +27,12 @@ class InvoiceRepositoryImpl(
 
     override fun save(invoice: Invoice): Invoice =
         repository.save(invoice.toInvoiceEntity()).toInvoice()
+
+    override fun report(): ByteArray? = ReportUtils().print(
+        data = repository.findAll(),
+        report = INVOICE,
+        param = hashMapOf()
+    )
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

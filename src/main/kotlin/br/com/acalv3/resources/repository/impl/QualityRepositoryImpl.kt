@@ -17,6 +17,9 @@ class QualityRepositoryImpl(
     private val repository: QualityRepositoryJpa,
 ) : QualityRepository {
 
+    override fun findByStartedAt(startedAt: String) =
+        repository.findByStartedAt(startedAt)?.toQuality()
+
     override fun getById(id: String): Quality = repository.getById(UUID.fromString(id)).toQuality()
     override fun save(quality: Quality): Quality = repository.save(quality.toQualityEntity()).toQuality()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
