@@ -1,5 +1,7 @@
 package br.com.acalv3.application.comunicate.gateway
 
+import br.com.acalv3.application.comunicate.Fixture
+import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
 import br.com.acalv3.application.comunicate.model.request.invoice.InvoicePageRequest
 import br.com.acalv3.application.comunicate.model.request.invoice.InvoiceRequest
 import br.com.acalv3.application.comunicate.model.request.invoice.InvoiceTest
@@ -31,7 +33,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("invoice",
-    produces=[APPLICATION_JSON_VALUE],
+    produces=[APPLICATION_PRODUCES],
 )
 class InvoiceGateway(
     val service: InvoiceService,

@@ -18,6 +18,7 @@ import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType
+import org.springframework.http.MediaType.*
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -77,7 +78,7 @@ class LinkGateway(
     @DeleteMapping("inactive/{id}")
     fun inactivate(@PathVariable id: String) = service.inactivate(id)
 
-    @PostMapping(path = ["/report"], produces = [MediaType.APPLICATION_PDF_VALUE])
+    @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
     fun link(@RequestBody request: LinkPageRequest): ByteArray? = service.report(
         request.toPageRequest()
     )

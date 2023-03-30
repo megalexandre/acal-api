@@ -2,6 +2,7 @@ package br.com.acalv3.resources.repository.impl
 
 import br.com.acalv3.commons.ReportUtils
 import br.com.acalv3.domain.enumeration.Param
+import br.com.acalv3.domain.enumeration.Report.DEFAULT
 import br.com.acalv3.domain.enumeration.Report.INVOICE
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.page.InvoicePage
@@ -44,8 +45,8 @@ class InvoiceRepositoryImpl(
         }
 
         ReportUtils().print(
-            data = data,
-            report = INVOICE,
+            data = listOf<String>(),
+            report = DEFAULT,
             param = hashMapOf()
         )
     }
@@ -62,8 +63,8 @@ class InvoiceRepositoryImpl(
         report.totalColiforms = quality.gathering!!.first { it.param == Param.TOTAL_COLIFORMS }.toReport()
 
         ReportUtils().print(
-            data = listOf(report),
-            report = INVOICE,
+            data = listOf<String>(),
+            report = DEFAULT,
             param = hashMapOf()
         )
     }
