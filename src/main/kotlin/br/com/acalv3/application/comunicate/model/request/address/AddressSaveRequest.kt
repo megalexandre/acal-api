@@ -6,6 +6,6 @@ import java.util.UUID
 class AddressSaveRequest: AddressRequest()
 
 fun AddressSaveRequest.toAddress() = Address(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     name = name?.trim() ?: throw RuntimeException("name can't be null"),
 )

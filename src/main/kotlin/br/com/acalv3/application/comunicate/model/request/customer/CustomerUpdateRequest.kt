@@ -5,6 +5,7 @@ import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
+import java.util.UUID
 import javax.validation.constraints.NotBlank
 
 data class CustomerUpdateRequest(
@@ -18,7 +19,7 @@ data class CustomerUpdateRequest(
     ) : CustomerRequest()
 
 fun CustomerUpdateRequest.toCustomer() = Customer(
-    id = id?: throw RuntimeException("id can't be null"),
+    id = UUID.fromString(id) ?: throw RuntimeException("id can't be null"),
     name = name?.trim() ?: throw RuntimeException("name can't be null"),
     document = document?.trim() ?: throw RuntimeException("document can't be null"),
     personType = PersonType.valueOf(personType ?: throw RuntimeException("person type can't be null")),

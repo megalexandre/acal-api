@@ -7,7 +7,7 @@ import java.util.UUID
 class GroupSaveRequest: GroupRequest()
 
 fun GroupSaveRequest.toGroup() = Group(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     name = name?.trim() ?: throw RuntimeException("name can't be null"),
     value =  value ?: throw RuntimeException("name can't be null"),
     category = Category.byValue(category) ?: throw RuntimeException("category can't be null"),

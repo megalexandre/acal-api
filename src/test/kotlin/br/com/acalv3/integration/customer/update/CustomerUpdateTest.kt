@@ -41,7 +41,6 @@ class CustomerUpdateTest: DefaultGatewayTest() {
 
 		val savedCustomer = customerRepository.save(customerStub())
 		val customer = copyToString(customerUpdate.inputStream, defaultCharset())
-				.replace("\$id",savedCustomer.id)
 
 		Given {
 			header(header)

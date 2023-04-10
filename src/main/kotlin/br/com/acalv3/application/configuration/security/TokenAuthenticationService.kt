@@ -1,5 +1,6 @@
 package br.com.acalv3.application.configuration.security
 
+import br.com.acalv3.domain.exception.UnauthorizedException
 import br.com.acalv3.domain.model.security.UserDomain
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.jsonwebtoken.ExpiredJwtException
@@ -67,10 +68,10 @@ class TokenAuthenticationService(
 				}
 				return null
 			}
-		} catch (e: IllegalArgumentException ) {
-			throw RuntimeException(ERROR_MESSAGE)
+		} catch (e: IllegalArgumentException  ) {
+			throw UnauthorizedException(ERROR_MESSAGE)
 		} catch (e: ExpiredJwtException) {
-			throw RuntimeException(ERROR_MESSAGE)
+			throw UnauthorizedException(ERROR_MESSAGE)
 		}
 
 		return null

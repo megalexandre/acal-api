@@ -19,3 +19,5 @@ spring:
         format_sql: false
         check_nullability: false
 
+server:
+  port: 8080

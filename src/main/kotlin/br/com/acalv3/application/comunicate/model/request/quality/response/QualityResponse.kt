@@ -1,4 +1,4 @@
-package br.com.acalv3.application.comunicate.model.quality.response
+package br.com.acalv3.application.comunicate.model.request.quality.response
 
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality

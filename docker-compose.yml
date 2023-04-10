@@ -6,9 +6,8 @@ services:
     container_name: database
     image: mysql:8.0-debian
     restart: unless-stopped
-    env_file: ./.env
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=acaldb
+      - MYSQL_ROOT_PASSWORD=TrObccrzH11dURytVjTGwOCiK8mba
     ports:
       - "3306:3306"

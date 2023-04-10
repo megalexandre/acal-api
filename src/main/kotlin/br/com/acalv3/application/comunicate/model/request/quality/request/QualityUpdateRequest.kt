@@ -1,4 +1,4 @@
-package br.com.acalv3.application.comunicate.model.quality.request
+package br.com.acalv3.application.comunicate.model.request.quality.request
 
 import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
@@ -14,7 +14,7 @@ class QualityUpdateRequest(
     val id: String?,
 
     @field:NotNull(message = "os parametros da coleta são obrigatório")
-    val gathering: List<GatheringUpdateRequest>? ,
+    val gathering: List<GatheringUpdateRequest>?,
 
     @field:NotNull(message = "Data de inicio é obrigatório")
     val startedAt: String?,

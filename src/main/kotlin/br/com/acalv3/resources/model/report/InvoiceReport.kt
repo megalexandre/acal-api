@@ -2,8 +2,11 @@ package br.com.acalv3.resources.model.report
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.commons.reference
-import br.com.acalv3.domain.enumeration.Param
-import br.com.acalv3.domain.enumeration.Param.*
+import br.com.acalv3.domain.enumeration.Param.CHLORINE
+import br.com.acalv3.domain.enumeration.Param.COLOR
+import br.com.acalv3.domain.enumeration.Param.ESCHERICHIA
+import br.com.acalv3.domain.enumeration.Param.TOTAL_COLIFORMS
+import br.com.acalv3.domain.enumeration.Param.TURBIDITY
 import br.com.acalv3.resources.model.business.InvoiceEntity
 import java.time.LocalDate.now
 import java.time.format.DateTimeFormatter.ofPattern
@@ -24,6 +27,7 @@ class InvoiceReport(
     var chlorine: GatheringReport = GatheringReport(CHLORINE.name)
     var escherichia: GatheringReport = GatheringReport(ESCHERICHIA.name)
     var totalColiforms: GatheringReport = GatheringReport(TOTAL_COLIFORMS.name)
+    val params: List<GatheringReport> = listOf()
 }
 
 fun InvoiceEntity.toReport() = InvoiceReport(

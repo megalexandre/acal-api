@@ -5,10 +5,10 @@ import br.com.acalv3.application.comunicate.model.request.group.GroupUpdateReque
 import br.com.acalv3.application.comunicate.model.request.group.toGroup
 import br.com.acalv3.application.comunicate.model.request.place.PlaceUpdateRequest
 import br.com.acalv3.application.comunicate.model.request.place.toPlace
-import br.com.acalv3.domain.enumeration.Active
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Link
 import java.time.LocalDateTime
+import java.util.UUID
 import javax.validation.constraints.NotBlank
 
 data class LinkUpdateRequest(
@@ -37,7 +37,7 @@ data class LinkUpdateRequest(
 ): LinkRequest()
 
 fun LinkUpdateRequest.toLink(customer: Customer) = Link(
-    id = id?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
+    id = UUID.fromString(id)?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
     customer = customer,
     place = place?.toPlace() ?: throw RuntimeException("place id can't be null"),
     mailPlace = placeAddress?.toPlace() ?: throw RuntimeException("place id can't be null"),

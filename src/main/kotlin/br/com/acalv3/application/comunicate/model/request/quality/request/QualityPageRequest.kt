@@ -1,4 +1,4 @@
-package br.com.acalv3.application.comunicate.model.quality.request
+package br.com.acalv3.application.comunicate.model.request.quality.request
 
 import br.com.acalv3.application.comunicate.model.request.pagination.BasePageRequest
 import br.com.acalv3.domain.model.page.QualityPage

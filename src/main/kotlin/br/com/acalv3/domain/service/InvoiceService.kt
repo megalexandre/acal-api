@@ -13,6 +13,5 @@ interface InvoiceService {
     fun update(invoice: Invoice): Invoice
     fun paginate(pageRequest: InvoicePage): Page<Invoice>
     fun getAll(): List<Invoice>
-    fun report(): ByteArray?
     fun report(id: UUID): ByteArray?
 }

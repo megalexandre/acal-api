@@ -7,6 +7,5 @@ import java.util.UUID
 interface InvoiceRepository: AbstractRepository<Invoice, InvoicePage> {
     fun update(invoice: Invoice): Invoice
     fun save(invoice: List<Invoice>): List<Invoice>
-    fun report(): ByteArray?
     fun report(id: UUID): ByteArray?
 }

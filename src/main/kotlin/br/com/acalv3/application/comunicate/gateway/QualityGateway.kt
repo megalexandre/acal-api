@@ -1,16 +1,15 @@
 package br.com.acalv3.application.comunicate.gateway
 
 import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
-import br.com.acalv3.application.comunicate.Gateway.Companion.QUALITY
-import br.com.acalv3.application.comunicate.model.quality.request.QualityPageRequest
-import br.com.acalv3.application.comunicate.model.quality.request.QualityRequest
-import br.com.acalv3.application.comunicate.model.quality.request.QualityUpdateRequest
-import br.com.acalv3.application.comunicate.model.quality.request.toPage
-import br.com.acalv3.application.comunicate.model.quality.request.toQuality
-import br.com.acalv3.application.comunicate.model.quality.response.QualityPageResponse
-import br.com.acalv3.application.comunicate.model.quality.response.QualityResponse
-import br.com.acalv3.application.comunicate.model.quality.response.toPageResponse
-import br.com.acalv3.application.comunicate.model.quality.response.toQualityResponse
+import br.com.acalv3.application.comunicate.model.request.quality.request.QualityPageRequest
+import br.com.acalv3.application.comunicate.model.request.quality.request.QualityRequest
+import br.com.acalv3.application.comunicate.model.request.quality.request.QualityUpdateRequest
+import br.com.acalv3.application.comunicate.model.request.quality.request.toPage
+import br.com.acalv3.application.comunicate.model.request.quality.request.toQuality
+import br.com.acalv3.application.comunicate.model.request.quality.response.QualityPageResponse
+import br.com.acalv3.application.comunicate.model.request.quality.response.QualityResponse
+import br.com.acalv3.application.comunicate.model.request.quality.response.toPageResponse
+import br.com.acalv3.application.comunicate.model.request.quality.response.toQualityResponse
 import br.com.acalv3.domain.service.QualityService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(QUALITY, produces=[ APPLICATION_PRODUCES ])
+@RequestMapping("quality", produces=[ APPLICATION_PRODUCES ])
 class QualityGateway(
     val service: QualityService
 ) {

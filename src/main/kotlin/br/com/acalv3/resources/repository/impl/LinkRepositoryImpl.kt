@@ -50,17 +50,17 @@ class LinkRepositoryImpl(
 
     override fun findByName(name: String): Link? = repository.findByName(name)?.toLink()
 
-    override fun findByCustomerId(id: String): Link? =
-        repository.findByCustomerId(UUID.fromString(id))?.firstOrNull()?.toLink()
+    override fun findByCustomerId(id: UUID): Link? =
+        repository.findByCustomerId(id)?.firstOrNull()?.toLink()
 
-    override fun findByGroupId(id: String): Link? =
-        repository.findByGroupId(UUID.fromString(id))?.firstOrNull()?.toLink()
+    override fun findByGroupId(id: UUID): Link? =
+        repository.findByGroupId(id)?.firstOrNull()?.toLink()
 
-    override fun findByPlaceId(id: String): Link? =
-        repository.findByPlaceId(UUID.fromString(id))?.firstOrNull()?.toLink()
+    override fun findByPlaceId(id: UUID): Link? =
+        repository.findByPlaceId(id)?.firstOrNull()?.toLink()
 
-    override fun findActiveByPlaceId(id: String): Link? =
-        repository.findByPlaceIdAndActive(UUID.fromString(id), true)?.firstOrNull()?.toLink()
+    override fun findActiveByPlaceId(id: UUID): Link? =
+        repository.findByPlaceIdAndActive(id, true)?.firstOrNull()?.toLink()
 
     override fun paginate(page: LinkPage): Page<Link> =
         repository.findAll(

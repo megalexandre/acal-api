@@ -2,6 +2,7 @@ package br.com.acalv3.domain.service
 
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
+import java.util.UUID
 import org.springframework.data.domain.Page
 
 interface LinkService {
@@ -14,9 +15,9 @@ interface LinkService {
     fun findAll(reference: String): List<Link>
     fun findAll(): List<Link>
     fun findByName(name: String): Link?
-    fun findByCustomerId(customerId: String): Link?
-    fun findByPlaceId(placeId: String): Link?
-    fun findByGroupId(groupId: String): Link?
+    fun findByCustomerId(customerId: UUID): Link?
+    fun findByPlaceId(placeId: UUID): Link?
+    fun findByGroupId(groupId: UUID): Link?
     fun count(): Long
     fun countActive(): Long
     fun invoicing(): Long

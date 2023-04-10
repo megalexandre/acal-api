@@ -5,9 +5,10 @@ import br.com.acalv3.domain.model.Group
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.Place
 import java.time.LocalDateTime
+import java.util.UUID
 
 data class LinkGetResponse(
-    val id: String,
+    val id: UUID,
     val place: Place,
     val mailPlace: Place,
     val customer: Customer,

@@ -6,11 +6,7 @@ import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
 import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.strategies.link.LinkStrategy
-import net.sf.jasperreports.engine.JasperCompileManager
-import net.sf.jasperreports.engine.JasperExportManager
-import net.sf.jasperreports.engine.JasperFillManager
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
-import org.springframework.core.io.ClassPathResource
+import java.util.UUID
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
@@ -33,11 +29,11 @@ class LinkServiceImpl(
 
 	override fun findByName(name: String) = repository.findByName(name)
 
-	override fun findByCustomerId(customerId: String): Link? = repository.findByCustomerId(customerId)
+	override fun findByCustomerId(customerId: UUID): Link? = repository.findByCustomerId(customerId)
 
-	override fun findByPlaceId(placeId: String): Link? = repository.findByPlaceId(placeId)
+	override fun findByPlaceId(placeId: UUID): Link? = repository.findByPlaceId(placeId)
 
-	override fun findByGroupId(groupId: String): Link? = repository.findByGroupId(groupId)
+	override fun findByGroupId(groupId: UUID): Link? = repository.findByGroupId(groupId)
 
 	override fun count(): Long = repository.count()
 

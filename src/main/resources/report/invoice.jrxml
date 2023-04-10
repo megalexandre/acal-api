@@ -31,7 +31,7 @@
 				</graphicElement>
 			</line>
 		</band>
-		<band height="137">
+		<band height="224">
 			<staticText>
 				<reportElement x="0" y="0" width="555" height="30" uuid="c084e6c0-2907-4597-bcaa-3c3f58154037">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -70,7 +70,7 @@
 				</graphicElement>
 			</line>
 		</band>
-		<band height="61">
+		<band height="191">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<rectangle radius="15">
 				<reportElement x="5" y="10" width="175" height="40" uuid="63e1b19d-dd94-4e28-a335-4701ff30a7bc">

@@ -1,9 +1,10 @@
 package br.com.acalv3.application.comunicate.model.response.address
 
 import br.com.acalv3.domain.model.Address
+import java.util.UUID
 
 class AddressGetResponse(
-    val id: String,
+    val id: UUID,
     val name: String,
 )
 

@@ -34,7 +34,7 @@ class PlaceEntity (
 ) : DefaultEntity()
 
 fun Place.toPlaceEntity() = PlaceEntity(
-    id = UUID.fromString(id),
+    id = id,
     address = address.toAddressEntity(),
     letter = letter,
     number = number,
@@ -43,7 +43,7 @@ fun Place.toPlaceEntity() = PlaceEntity(
 )
 
 fun PlaceEntity.toPlace() = Place(
-    id = id.toString(),
+    id = id,
     address = address.toAddress(),
     letter = letter,
     number = number,

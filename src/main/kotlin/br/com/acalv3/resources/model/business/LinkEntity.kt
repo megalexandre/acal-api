@@ -4,9 +4,14 @@ import br.com.acalv3.application.comunicate.Fixture
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.resources.model.DefaultEntity
 import java.time.LocalDateTime
-import java.util.*
-import javax.persistence.*
+import java.util.UUID
 import javax.persistence.CascadeType.DETACH
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Id
+import javax.persistence.JoinColumn
+import javax.persistence.ManyToOne
+import javax.persistence.OneToMany
 import org.hibernate.annotations.CreationTimestamp
 import org.hibernate.annotations.UpdateTimestamp
 import org.springframework.data.domain.Page
@@ -58,7 +63,7 @@ class LinkEntity (
     ) : DefaultEntity()
 
 fun Link.toLinkEntity() = LinkEntity(
-    id = UUID.fromString(id),
+    id = id,
     place = place.toPlaceEntity(),
     mailPlace = mailPlace.toPlaceEntity(),
     group = group.toGroupEntity(),
@@ -70,7 +75,7 @@ fun Link.toLinkEntity() = LinkEntity(
 )
 
 fun LinkEntity.toLink() = Link(
-    id = id.toString(),
+    id = id,
     place = place.toPlace(),
     mailPlace = mailPlace.toPlace(),
     group = group.toGroup(),

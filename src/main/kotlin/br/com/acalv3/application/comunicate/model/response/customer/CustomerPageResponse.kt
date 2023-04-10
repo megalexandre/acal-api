@@ -2,10 +2,11 @@ package br.com.acalv3.application.comunicate.model.response.customer
 
 import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
+import java.util.UUID
 import org.springframework.data.domain.Page
 
 data class CustomerPageResponse(
-    val id: String?,
+    val id: UUID?,
     val name: String?,
     val document: String?,
     val personType: PersonType,

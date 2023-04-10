@@ -7,7 +7,6 @@ import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
 import javax.persistence.Id
@@ -33,14 +32,14 @@ class GroupEntity (
 ) : DefaultEntity()
 
 fun Group.toGroupEntity() = GroupEntity(
-    id = UUID.fromString(id),
+    id = id,
     value = value,
     category = category,
     name = name,
 )
 
 fun GroupEntity.toGroup() = Group(
-    id = id.toString(),
+    id = id,
     value = value,
     category = category,
     name = name,

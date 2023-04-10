@@ -1,9 +1,9 @@
 package br.com.acalv3.application.configuration.advice
 
-import br.com.acalv3.application.configuration.interceptor.CustomAccessDeniedHandler
 import br.com.acalv3.commons.clearMessage
 import br.com.acalv3.domain.exception.DuplicatedFieldException
 import br.com.acalv3.domain.exception.RequiredFieldException
+import br.com.acalv3.domain.exception.UnauthorizedException
 import java.sql.SQLException
 import java.time.LocalDateTime
 import org.hibernate.exception.ConstraintViolationException
@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR
 import org.springframework.http.HttpStatus.NO_CONTENT
+import org.springframework.http.HttpStatus.UNAUTHORIZED
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ControllerAdvice
@@ -57,6 +58,15 @@ class AppAdvice {
 			ex, BAD_REQUEST, error
 		)
 	}
+
+	@ExceptionHandler(value = [
+		UnauthorizedException::class])
+	fun e3 (ex: UnauthorizedException)  {
+		getResponse(
+			ex, UNAUTHORIZED, "Voce não Possui Permissão, faça o login"
+		)
+	}
+
 
 	fun getResponse(ex: Exception, status: HttpStatus, error: String? = null ) = run {
 		logger.info(status.name)

@@ -1,8 +1,7 @@
 package br.com.acalv3.resources.model.dto
 
 import br.com.acalv3.domain.model.Address
-import br.com.acalv3.domain.model.Customer
-import java.util.*
+import java.util.UUID
 
 
 class LegacyAddress (
@@ -10,6 +9,6 @@ class LegacyAddress (
 )
 
 fun LegacyAddress.toAddress() = Address(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     name = name,
 )

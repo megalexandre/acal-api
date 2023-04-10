@@ -17,8 +17,7 @@ import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
-import org.springframework.http.MediaType
-import org.springframework.http.MediaType.*
+import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -43,22 +42,20 @@ class LinkGateway(
     fun linkWithHydrometerByMonth(@PathVariable reference: String) = service.linkWithHydrometerByMonth(reference)
 
     @PostMapping
-    fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse = run {
+    fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse =
         service.save(request.toLink(
             customer = customerService.getById(request.customerId()),
             place = placeService.getById(request.placeId()),
             mailPlace = placeService.getById(request.mailPlaceId()),
             group = groupService.getById(request.groupId()),
         )).toLinkResponse()
-    }
 
     @PutMapping("/update")
-    fun update(@Valid @RequestBody request: LinkUpdateRequest): SaveUpdateLinkResponse = run {
+    fun update(@Valid @RequestBody request: LinkUpdateRequest): SaveUpdateLinkResponse =
         service.update(
             request.toLink(
                 customerService.getById(request.customer?.id ?: throw RuntimeException(""))
             )).toLinkResponse()
-    }
 
     @PostMapping("/paginate")
     fun paginate(@Valid @RequestBody request: LinkPageRequest): Page<LinkPageResponse> =
@@ -79,8 +76,7 @@ class LinkGateway(
     fun inactivate(@PathVariable id: String) = service.inactivate(id)
 
     @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
-    fun link(@RequestBody request: LinkPageRequest): ByteArray? = service.report(
-        request.toPageRequest()
-    )
+    fun link(@RequestBody request: LinkPageRequest): ByteArray? =
+        service.report(request.toPageRequest())
 
 }

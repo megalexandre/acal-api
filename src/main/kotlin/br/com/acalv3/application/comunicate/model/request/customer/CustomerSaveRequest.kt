@@ -16,7 +16,7 @@ class CustomerSaveRequest(
 ): CustomerRequest()
 
 fun CustomerSaveRequest.toCustomer() = Customer(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     name = name?.trim() ?: throw RuntimeException("name can't be null"),
     document = document?.trim()  ?: throw RuntimeException("document can't be null"),
     phoneNumber = phoneNumber?.trim(),

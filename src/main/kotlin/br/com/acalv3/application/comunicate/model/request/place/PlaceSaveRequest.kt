@@ -12,7 +12,7 @@ class PlaceSaveRequest(
 ): PlaceRequest()
 
 fun PlaceSaveRequest.toPlace() = Place(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     letter = letter?: "A",
     number = number?: throw RuntimeException("number can't be null"),
     address = address?.toAddress() ?: throw RuntimeException("address can't be null"),

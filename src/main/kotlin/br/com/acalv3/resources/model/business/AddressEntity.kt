@@ -2,11 +2,11 @@ package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Address
 import br.com.acalv3.resources.model.DefaultEntity
-import org.springframework.data.domain.Page
-import java.util.*
+import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
+import org.springframework.data.domain.Page
 
 @Entity(name = "address")
 class AddressEntity (
@@ -21,12 +21,12 @@ class AddressEntity (
 ) : DefaultEntity()
 
 fun Address.toAddressEntity() = AddressEntity(
-    id = UUID.fromString(id),
+    id = id,
     name = name,
 )
 
 fun AddressEntity.toAddress() = Address(
-    id = id.toString(),
+    id = id,
     name = name,
 )
 

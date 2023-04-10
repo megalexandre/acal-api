@@ -1,12 +1,13 @@
 package br.com.acalv3.application.comunicate.model.request.address
 
 import br.com.acalv3.domain.model.Address
+import java.util.UUID
 import javax.validation.constraints.NotBlank
 
 data class AddressUpdateRequest(
 
     @field:NotBlank(message = "id é um campo obrigatório")
-    val id: String? = null,
+    val id: UUID? = null,
 
 ) : AddressRequest()
 

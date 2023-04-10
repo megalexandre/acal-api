@@ -1,5 +1,9 @@
 package br.com.acalv3.application.comunicate.gateway
 
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.BY_ID
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.GROUP
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.PAGINATE
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.UPDATE
 import br.com.acalv3.application.comunicate.model.request.group.GroupPageRequest
 import br.com.acalv3.application.comunicate.model.request.group.GroupSaveRequest
 import br.com.acalv3.application.comunicate.model.request.group.GroupUpdateRequest
@@ -14,7 +18,6 @@ import br.com.acalv3.application.comunicate.model.response.group.toGroupResponse
 import br.com.acalv3.domain.service.GroupService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
-import org.springframework.http.MediaType
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -26,14 +29,14 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("group",
+@RequestMapping(GROUP,
     produces=[APPLICATION_JSON_VALUE],
 )
 class GroupGateway(
     val service: GroupService,
 ) {
 
-    @GetMapping("/{id}")
+    @GetMapping(BY_ID)
     fun find(@PathVariable id: String): GroupGetResponse =
         service.getById(id).toGetGroupResponse()
 
@@ -41,15 +44,15 @@ class GroupGateway(
     fun save(@Valid @RequestBody request: GroupSaveRequest): SaveUpdateGroupResponse =
         service.save(request.toGroup()).toGroupResponse()
 
-    @PutMapping("/update")
+    @PutMapping(UPDATE)
     fun update(@Valid @RequestBody request: GroupUpdateRequest): SaveUpdateGroupResponse =
         service.update(request.toGroup()).toGroupResponse()
 
-    @PostMapping("/paginate")
+    @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: GroupPageRequest): Page<GroupPageResponse> =
         service.paginate(request.toGroupPage()).toGroupPageResponse()
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(BY_ID)
     fun delete(@PathVariable id: String) = service.delete(id)
 
 }

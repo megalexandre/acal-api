@@ -43,7 +43,7 @@ class CustomerEntity (
     ) : DefaultEntity()
 
 fun Customer.toCustomerEntity() = CustomerEntity(
-    id = UUID.fromString(id),
+    id = id,
     name = name,
     phoneNumber = phoneNumber,
     document = document,
@@ -53,7 +53,7 @@ fun Customer.toCustomerEntity() = CustomerEntity(
 )
 
 fun CustomerEntity.toCustomer() = Customer(
-    id = id.toString(),
+    id = id,
     name = name,
     phoneNumber = phoneNumber,
     document = document,

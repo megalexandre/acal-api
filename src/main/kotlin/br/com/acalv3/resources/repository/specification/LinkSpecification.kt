@@ -8,10 +8,10 @@ import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.resources.model.business.LinkEntity
 import java.math.BigDecimal
 import java.util.UUID
-import org.springframework.data.jpa.domain.Specification
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
+import org.springframework.data.jpa.domain.Specification
 
 class LinkSpecification(private val link: LinkPage) {
 
@@ -44,7 +44,7 @@ class LinkSpecification(private val link: LinkPage) {
             predicate.expressions.add(eqGroupValue(root, builder))
         }
 
-        if(!link.place?.address?.id.isNullOrEmpty()){
+        if(link.place?.address?.id != null){
             predicate.expressions.add(eqAddressId(root, builder))
         }
 
@@ -63,7 +63,7 @@ class LinkSpecification(private val link: LinkPage) {
     private fun eqAddressId(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(
             root.get<Place>("place").get<Address>("address").get<UUID>("id"),
-            UUID.fromString(link.place?.address?.id)
+            link.place?.address?.id
         )
 
     private fun eqAddressNumber(root: Root<LinkEntity>, builder: CriteriaBuilder): Predicate =

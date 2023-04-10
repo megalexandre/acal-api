@@ -5,9 +5,10 @@ import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
+import java.util.UUID
 
 data class CustomerGetResponse(
-    val id: String?,
+    val id: UUID?,
     val name: String?,
     val document: String?,
     val phoneNumber: String?,
