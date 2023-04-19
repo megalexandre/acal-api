@@ -1,6 +1,8 @@
 package br.com.acalv3.application.comunicate.gateway
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.INVOICE
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.LIST
+import br.com.acalv3.application.comunicate.GatewaysRoutes.Companion.PAGINATE
 import br.com.acalv3.application.comunicate.model.request.invoice.InvoicePageRequest
 import br.com.acalv3.application.comunicate.model.request.invoice.InvoiceRequest
 import br.com.acalv3.application.comunicate.model.request.invoice.toInvoice
@@ -25,29 +27,27 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("invoice",
-    produces=[APPLICATION_PRODUCES],
+@RequestMapping(INVOICE,
+    produces=[APPLICATION_JSON_VALUE],
 )
-class InvoiceGateway(
+private class InvoiceGateway(
     val service: InvoiceService,
     val linkService: LinkService
 ) {
     private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
-    @PostMapping("/paginate")
+    @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: InvoicePageRequest): Page<InvoicePageResponse> =
         service.paginate(request.toPageRequest()).toInvoiceResponse()
 
-    @PostMapping(consumes = [APPLICATION_JSON_VALUE])
+    @PostMapping
     fun save(@Valid @RequestBody request: List<InvoiceRequest>): List<InvoiceResponse>  = run {
-        logger.info("saving invoice: $request")
-
         service.saveAll(request.map {
             it.toInvoice(linkService.getById(it.id!!))
         }).toInvoiceResponse()
     }
 
-    @GetMapping("/list")
+    @GetMapping(LIST)
     fun list(): List<InvoiceResponse> =
         service.getAll().toInvoiceResponse().also{
             logger.info("listing all address")

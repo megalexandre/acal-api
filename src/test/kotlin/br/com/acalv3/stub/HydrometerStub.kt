@@ -14,6 +14,6 @@ fun hydrometerStub(
     id = id,
     reference = reference,
     value = value,
-    totalCounterValue = totalCounterValue,
+    delivered = totalCounterValue,
     link = link,
 )

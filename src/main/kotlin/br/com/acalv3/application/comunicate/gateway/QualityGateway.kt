@@ -1,6 +1,5 @@
 package br.com.acalv3.application.comunicate.gateway
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
 import br.com.acalv3.application.comunicate.model.request.quality.request.QualityPageRequest
 import br.com.acalv3.application.comunicate.model.request.quality.request.QualityRequest
 import br.com.acalv3.application.comunicate.model.request.quality.request.QualityUpdateRequest
@@ -13,6 +12,7 @@ import br.com.acalv3.application.comunicate.model.request.quality.response.toQua
 import br.com.acalv3.domain.service.QualityService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("quality", produces=[ APPLICATION_PRODUCES ])
+@RequestMapping("quality", produces=[APPLICATION_JSON_VALUE])
 class QualityGateway(
     val service: QualityService
 ) {

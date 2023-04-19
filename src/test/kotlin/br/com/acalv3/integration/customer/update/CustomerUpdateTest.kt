@@ -47,7 +47,7 @@ class CustomerUpdateTest: DefaultGatewayTest() {
 			contentType(JSON)
 			body(customer)
 		} When {
-			put("$basePath/customer/update")
+			put("$host/customer/update")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))

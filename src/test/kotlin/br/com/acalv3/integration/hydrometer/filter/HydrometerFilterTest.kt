@@ -1,5 +1,6 @@
 package br.com.acalv3.integration.hydrometer.filter
 
+import br.com.acalv3.domain.model.Hydrometer
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.service.AddressService
 import br.com.acalv3.domain.service.CustomerService
@@ -48,7 +49,9 @@ class HydrometerFilterTest: DefaultGatewayTest() {
 	@Autowired
 	lateinit var addressService: AddressService
 
-	fun initializer(): Link {
+	lateinit var hydrometer: Hydrometer
+
+	fun initLink(): Link {
 		linkRepository.deleteAll()
 
 		val address = addressService.save(addressStub())
@@ -68,28 +71,39 @@ class HydrometerFilterTest: DefaultGatewayTest() {
 
 	@BeforeEach
 	fun beforeEach(){
-
+		hydrometer = service.save(hydrometerStub(
+			link = initLink()
+		))
 	}
 
 	@Test
 	fun `should filter by id`(){
-		val link = initializer()
-		val hydrometer = service.save(hydrometerStub(
-			link = link
-		))
-
 		Given {
 			contentType(JSON)
 			header(header)
 		} When {
-			get("$basePath/hydrometer/${hydrometer.id}")
+			get("$host/hydrometer/${hydrometer.id}")
 		} Then {
 			statusCode(200)
-			body("id", equalTo(hydrometer.id))
+			body("id", equalTo(hydrometer.id.toString()))
 		}
 
 	}
 
+	@Test
+	fun `should paginate`(){
+		Given {
+			contentType(JSON)
+			header(header)
+			body("{}")
+		} When {
+			post("$host/hydrometer/paginate")
+		} Then {
+			statusCode(200)
+			body("totalElements", equalTo(1))
+		}
+
+	}
 
 	fun save(): Link {
 		val place = placeService.save(placeStub())

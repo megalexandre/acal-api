@@ -10,6 +10,7 @@ import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
+import br.com.acalv3.resources.model.business.toLinkSafeHydrometer
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
@@ -26,7 +27,6 @@ class LinkRepositoryImpl(
 ) : LinkRepository {
 
     override fun linkWithHydrometerByMonth(reference: String): List<Link>? =
-
         repository.findAll { root, _, builder ->
             builder.and(
                 builder.equal(root.get<Boolean>("active"), true),
@@ -107,7 +107,11 @@ class LinkRepositoryImpl(
         )
     }
 
+    override fun findHydrometerByReference(reference: String): List<Link> =
+        repository.findHydrometerByReference(reference).toLinkSafeHydrometer()
+
     private fun valid(text: String?) = when(text) { null,EMPTY -> SEPARATOR else -> text}
+
     private fun valid(status: Boolean?) = when(status) {
         null -> ALL
         true -> ACTIVE

@@ -6,7 +6,7 @@ class HydrometerSaveResponse(
     val id: String,
 )
 
-fun Hydrometer.toResponse(): HydrometerSaveResponse = HydrometerSaveResponse(
+fun Hydrometer.toSaveResponse(): HydrometerSaveResponse = HydrometerSaveResponse(
     id = id.toString(),
 )
 

@@ -2,6 +2,7 @@ package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Hydrometer
 import br.com.acalv3.resources.model.DefaultEntity
+import java.math.BigDecimal
 import java.util.UUID
 import javax.persistence.CascadeType.DETACH
 import javax.persistence.Column
@@ -20,11 +21,13 @@ class HydrometerEntity (
 
     val reference: String,
 
-    val value: Long,
+    val costValue: BigDecimal,
 
-    val totalCounterValue: Long,
+    val actualQuantity: Long,
 
-) : DefaultEntity() {
+    val lastMonthQuantity: Long,
+
+    ) : DefaultEntity() {
 
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="link_id",nullable = false)
@@ -34,8 +37,9 @@ class HydrometerEntity (
 fun Hydrometer.toEntity() = HydrometerEntity(
     id = id,
     reference = reference,
-    value = value,
-    totalCounterValue = totalCounterValue,
+    costValue = costValue,
+    actualQuantity = actualQuantity,
+    lastMonthQuantity = lastMonthQuantity,
 ).also {
     it.link = link?.toLinkEntity()
 }
@@ -43,10 +47,22 @@ fun Hydrometer.toEntity() = HydrometerEntity(
 fun HydrometerEntity.toDomain() = Hydrometer(
     id = id,
     reference = reference,
-    value = value,
-    totalCounterValue = totalCounterValue,
+    costValue = costValue,
+    actualQuantity = actualQuantity,
+    lastMonthQuantity = lastMonthQuantity,
     link = link?.toLink()
 )
 
-fun Page<HydrometerEntity>.toPage() = map{ it.toDomain() }
-fun List<HydrometerEntity>.toDomain() = map{ it.toDomain() }
+fun HydrometerEntity.toDomainWithoutLink() = Hydrometer(
+    id = id,
+    reference = reference,
+    costValue = costValue,
+    actualQuantity = actualQuantity,
+    lastMonthQuantity = lastMonthQuantity,
+    link = link?.toLinkWithSafeHydrometer(),
+)
+
+fun Page<HydrometerEntity>.toPage() = map{ it.toDomainWithoutLink() }
+fun List<HydrometerEntity>.toDomain(): List<Hydrometer> = map{ it.toDomainWithoutLink() }
+fun List<HydrometerEntity>.toDomainWithoutLink(): List<Hydrometer> = map{ it.toDomainWithoutLink() }
+fun List<Hydrometer>.toEntity(): List<HydrometerEntity> = map{ it.toEntity() }

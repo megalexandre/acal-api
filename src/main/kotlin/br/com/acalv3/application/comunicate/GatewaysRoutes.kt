@@ -15,6 +15,7 @@ class GatewaysRoutes {
         const val GROUP = "group"
         const val HEALTH =  "/health"
         const val HYDROMETER = "hydrometer"
+        const val INVOICE = "invoice"
     }
 
 }

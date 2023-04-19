@@ -26,3 +26,5 @@ fun Link.toLinkGetResponse() = LinkGetResponse(
     finishedAt = finishedAt,
     mailPlace = mailPlace,
 )
+
+fun List<Link>.toLinkGetResponse() = map{ it.toLinkGetResponse() }

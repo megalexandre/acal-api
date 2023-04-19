@@ -1,6 +1,5 @@
 package br.com.acalv3.application.comunicate.gateway
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.APPLICATION_PRODUCES
 import br.com.acalv3.application.comunicate.model.request.link.LinkPageRequest
 import br.com.acalv3.application.comunicate.model.request.link.LinkSaveRequest
 import br.com.acalv3.application.comunicate.model.request.link.LinkUpdateRequest
@@ -17,6 +16,7 @@ import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
 import org.springframework.data.domain.Page
+import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("link",
-    produces=[ APPLICATION_PRODUCES ],
+    produces=[APPLICATION_JSON_VALUE],
 )
 class LinkGateway(
     val service: LinkService,

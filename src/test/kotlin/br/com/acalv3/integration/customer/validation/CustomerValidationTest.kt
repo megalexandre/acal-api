@@ -46,7 +46,7 @@ class CustomerValidationTest: DefaultGatewayTest() {
 			header(header)
 			body(customer)
 		} When {
-			post("$basePath/customer")
+			post("$host/customer")
 		} Then {
 			statusCode(BAD_REQUEST.value())
 			body("$", hasKey("error"))
@@ -62,7 +62,7 @@ class CustomerValidationTest: DefaultGatewayTest() {
 			header(header)
 			body(postUser)
 		} When {
-			post("$basePath/customer")
+			post("$host/customer")
 		} Then {
 			statusCode(BAD_REQUEST.value())
 			body("$", hasKey("error"))
@@ -78,7 +78,7 @@ class CustomerValidationTest: DefaultGatewayTest() {
 			header(header)
 			body(postUser)
 		} When {
-			post("$basePath/customer")
+			post("$host/customer")
 		} Then {
 			statusCode(BAD_REQUEST.value())
 			body("$", hasKey("error"))

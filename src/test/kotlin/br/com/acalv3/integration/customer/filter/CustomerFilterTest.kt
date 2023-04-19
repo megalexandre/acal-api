@@ -49,7 +49,7 @@ class CustomerFilterTest: DefaultGatewayTest() {
 			contentType(JSON)
 			header(header)
 		} When {
-			get("$basePath/customer/${customer.id}")
+			get("$host/customer/${customer.id}")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))
@@ -66,7 +66,7 @@ class CustomerFilterTest: DefaultGatewayTest() {
 			header(header)
 			body(customerQuery)
 		} When {
-			post("$basePath/customer/paginate")
+			post("$host/customer/paginate")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("content"))
@@ -84,7 +84,7 @@ class CustomerFilterTest: DefaultGatewayTest() {
 			header(header)
 		} When {
 			body(customerQuery)
-			post("$basePath/customer/paginate")
+			post("$host/customer/paginate")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("content"))
@@ -102,7 +102,7 @@ class CustomerFilterTest: DefaultGatewayTest() {
 			header(header)
 		} When {
 			body(customerQuery)
-			post("$basePath/customer/paginate")
+			post("$host/customer/paginate")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("content"))

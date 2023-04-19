@@ -19,10 +19,14 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
     @Query(SELECT_INVOICE)
     fun invoicing(reference: String): List<UUID>
 
+    @Query(SELECT_HYDROMETER_BY_REFERENCE)
+    fun findHydrometerByReference(reference: String): List<LinkEntity>
+
     companion object{
         private const val SELECT_INVOICE = """
-            SELECT l.id 
-                FROM link l
+            SELECT 
+                l.id 
+            FROM link l
             WHERE l.active = true
             AND l.id NOT IN 
             (
@@ -31,5 +35,24 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
                 WHERE i.reference = :reference
             )
         """
+        private const val SELECT_HYDROMETER_BY_REFERENCE_SUB_QUERY = """
+            SELECT 
+                l.id 
+            FROM link l 
+            INNER JOIN l.hydrometers h 
+            WHERE h.reference = :reference
+        """
+
+        private const val SELECT_HYDROMETER_BY_REFERENCE = """
+            SELECT 
+                l, h 
+            FROM link l  
+            INNER JOIN l.place p 
+            LEFT JOIN FETCH l.hydrometers h 
+            WHERE p.hasHydrometer = true 
+            AND l.active = true 
+            AND l.id NOT IN ( $SELECT_HYDROMETER_BY_REFERENCE_SUB_QUERY )
+        """
     }
+
 }

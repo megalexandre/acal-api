@@ -9,14 +9,12 @@ import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.http.HttpStatus
 import org.springframework.http.HttpStatus.BAD_REQUEST
 import org.springframework.util.StreamUtils.copyToString
 
@@ -42,7 +40,7 @@ class QualityValidationTest: DefaultGatewayTest() {
 			header(header)
 			body(request)
 		} When {
-			post("$basePath/quality")
+			post("$host/quality")
 		} Then {
 			statusCode(BAD_REQUEST.value())
 			body("$", hasKey("id"))

@@ -43,7 +43,7 @@ class CustomerSaveTest: DefaultGatewayTest() {
 			header(header)
 			body(customer)
 		} When {
-			post("$basePath/customer")
+			post("$host/customer")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))
@@ -59,7 +59,7 @@ class CustomerSaveTest: DefaultGatewayTest() {
 			header(header)
 			body(customer).log().all()
 		} When {
-			post("$basePath/customer")
+			post("$host/customer")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))

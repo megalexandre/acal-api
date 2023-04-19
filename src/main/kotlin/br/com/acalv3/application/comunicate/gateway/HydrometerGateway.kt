@@ -8,9 +8,13 @@ import br.com.acalv3.application.comunicate.model.request.hydrometer.HydrometerS
 import br.com.acalv3.application.comunicate.model.request.hydrometer.toDomain
 import br.com.acalv3.application.comunicate.model.request.hydrometer.toPage
 import br.com.acalv3.application.comunicate.model.response.hydrometer.response.HydrometerPageResponse
+import br.com.acalv3.application.comunicate.model.response.hydrometer.response.HydrometerResponse
 import br.com.acalv3.application.comunicate.model.response.hydrometer.response.HydrometerSaveResponse
 import br.com.acalv3.application.comunicate.model.response.hydrometer.response.toPageResponse
 import br.com.acalv3.application.comunicate.model.response.hydrometer.response.toResponse
+import br.com.acalv3.application.comunicate.model.response.hydrometer.response.toSaveResponse
+import br.com.acalv3.application.comunicate.model.response.link.LinkGetResponse
+import br.com.acalv3.application.comunicate.model.response.link.toLinkGetResponse
 import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
 import javax.validation.Valid
@@ -35,11 +39,16 @@ class HydrometerGateway(
        service.paginate(request.toPage()).toPageResponse()
 
    @GetMapping(BY_ID)
-   fun find(@PathVariable id: String): HydrometerSaveResponse = service.getById(id).toResponse()
+   fun find(@PathVariable id: String): HydrometerResponse =
+       service.getById(id).toResponse()
 
    @PostMapping
    fun save(@Valid @RequestBody request: HydrometerSaveRequest): HydrometerSaveResponse =
         service.save(request.toDomain(
             linkService.getById(request.linkId.toString())
-        )).toResponse()
+        )).toSaveResponse()
+
+    @GetMapping( "/findByReference/{reference}")
+    fun validHydrometerByReference(@PathVariable reference: String): List<LinkGetResponse>? =
+        linkService.findHydrometerByReference(reference)?.toLinkGetResponse()
 }

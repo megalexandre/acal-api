@@ -52,4 +52,7 @@ class LinkServiceImpl(
 	override fun inactivate(id: String) = repository.inactivate(id)
 
 	override fun linkWithHydrometerByMonth(reference: String) = repository.linkWithHydrometerByMonth(reference)
+
+	override fun findHydrometerByReference(reference: String): List<Link>? =
+		repository.findHydrometerByReference(reference)
 }

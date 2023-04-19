@@ -53,7 +53,7 @@ class DefaultGatewayTest{
 
 	var token: String? = null
 	var header: Header? = null
-	var basePath: String? = null
+	var host: String? = null
 
 	@PostConstruct
 	fun sendLoginAndGetToken(){
@@ -81,7 +81,7 @@ class DefaultGatewayTest{
 
 		this.token = userLogin.token
 		this.header = Header(AUTHORIZATION, token)
-		this.basePath = "$LOCAL_HOST$port"
+		this.host = "$LOCAL_HOST$port"
 	}
 
 	companion object{

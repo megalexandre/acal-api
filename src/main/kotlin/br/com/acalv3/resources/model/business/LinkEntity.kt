@@ -60,7 +60,11 @@ class LinkEntity (
 
     val finishedAt: LocalDateTime? = null
 
-    ) : DefaultEntity()
+    ) : DefaultEntity(){
+
+    @OneToMany(mappedBy="link")
+    var hydrometers: List<HydrometerEntity>? = null
+}
 
 fun Link.toLinkEntity() = LinkEntity(
     id = id,
@@ -85,5 +89,17 @@ fun LinkEntity.toLink() = Link(
     finishedAt = finishedAt,
 )
 
+fun LinkEntity.toLinkWithSafeHydrometer() = Link(
+    id = id,
+    place = place.toPlace(),
+    mailPlace = mailPlace.toPlace(),
+    group = group.toGroup(),
+    customer = customer.toCustomer(),
+    active = active,
+    startedAt = startedAt,
+    finishedAt = finishedAt,
+)
+
 fun Page<LinkEntity>.toLinkPage() = map{ it.toLink() }
 fun List<LinkEntity>.toLink() = map{ it.toLink() }
+fun List<LinkEntity>.toLinkSafeHydrometer() = map{ it.toLinkWithSafeHydrometer() }

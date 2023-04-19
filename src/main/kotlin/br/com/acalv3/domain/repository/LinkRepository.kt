@@ -17,4 +17,5 @@ interface LinkRepository:  AbstractRepository<Link, LinkPage>  {
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
     fun findAll(reference: String): List<Link>
     fun report(link: LinkPage): ByteArray
+    fun findHydrometerByReference(reference: String): List<Link>
 }

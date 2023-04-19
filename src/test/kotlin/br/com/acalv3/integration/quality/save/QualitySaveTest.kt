@@ -9,7 +9,6 @@ import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -40,7 +39,7 @@ class QualitySaveTest: DefaultGatewayTest() {
 			header(header)
 			body(request)
 		} When {
-			post("$basePath/quality")
+			post("$host/quality")
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))
