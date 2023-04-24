@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.model.report
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
+import br.com.acalv3.application.comunication.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.commons.reference
 import br.com.acalv3.domain.enumeration.Param.CHLORINE
 import br.com.acalv3.domain.enumeration.Param.COLOR

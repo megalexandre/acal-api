@@ -11,6 +11,8 @@ import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
+import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -41,6 +43,8 @@ class CustomerUpdateTest: DefaultGatewayTest() {
 
 		val savedCustomer = customerRepository.save(customerStub())
 		val customer = copyToString(customerUpdate.inputStream, defaultCharset())
+			.replace("#id",savedCustomer.id.toString())
+			.replace("#updated_name", "new_customer_name")
 
 		Given {
 			header(header)
@@ -51,8 +55,10 @@ class CustomerUpdateTest: DefaultGatewayTest() {
 		} Then {
 			statusCode(200)
 			body("$", hasKey("id"))
-			hasKey("name").matches("update")
+			hasKey("name").matches("new_customer_name")
 		}
+
+		assertEquals(customerRepository.findAll().size, 1,"Do not must duplicate data")
 	}
 
 }

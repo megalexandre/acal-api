@@ -51,37 +51,38 @@ class DefaultGatewayTest{
 	@Autowired
 	lateinit var userRepositoryJpa: UserRepositoryJpa
 
-	var token: String? = null
-	var header: Header? = null
-	var host: String? = null
+	final var token: String? = null
+	final var header: Header? = null
+	final var host: String? = null
 
-	@PostConstruct
-	fun sendLoginAndGetToken(){
 
-		if(userRepositoryJpa.findByUsername("alexandre")  == null){
-			userRepositoryJpa.save(
-				UserEntity(
-					id = UUID.randomUUID(),
-					username = "alexandre",
-					password = BCryptPasswordEncoder().encode("senha")
+	init {
+		if (token == null){
+			if (userRepositoryJpa.findByUsername("alexandre") == null) {
+				userRepositoryJpa.save(
+					UserEntity(
+						id = UUID.randomUUID(),
+						username = "alexandre",
+						password = BCryptPasswordEncoder().encode("senha")
+					)
 				)
-			)
+			}
+
+			val response = RestAssured.given()
+				.contentType(JSON)
+				.`when`()
+				.body(copyToString(resource.inputStream, defaultCharset()))
+				.post("$LOCAL_HOST$port$LOGIN_ROUTER")
+				.then()
+				.statusCode(OK.value()).extract().asString()
+
+			val userLogin: UserDomain = objectMapper.readValue(response, UserDomain::class.java)
+			assertNotNull(userLogin.token, "Must return a valid token")
+
+			this.token = userLogin.token
+			this.header = Header(AUTHORIZATION, token)
+			this.host = "$LOCAL_HOST$port"
 		}
-
-		val response = RestAssured.given()
-			.contentType(JSON)
-			.`when`() 
-			.body(copyToString(resource.inputStream, defaultCharset()))
-			.post("$LOCAL_HOST$port$LOGIN_ROUTER")
-			.then()
-			.statusCode(OK.value()).extract().asString()
-
-		val userLogin: UserDomain = objectMapper.readValue(response, UserDomain::class.java)
-		assertNotNull(userLogin.token, "Must return a valid token")
-
-		this.token = userLogin.token
-		this.header = Header(AUTHORIZATION, token)
-		this.host = "$LOCAL_HOST$port"
 	}
 
 	companion object{

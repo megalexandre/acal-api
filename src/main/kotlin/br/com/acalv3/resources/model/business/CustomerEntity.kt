@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.model.business
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.DATE_FORMAT
+import br.com.acalv3.application.comunication.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.domain.enumeration.PersonType
 import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.resources.model.DefaultEntity

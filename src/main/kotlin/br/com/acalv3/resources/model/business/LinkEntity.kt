@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.model.business
 
-import br.com.acalv3.application.comunicate.Fixture
+import br.com.acalv3.application.comunication.Fixture
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.resources.model.DefaultEntity
 import java.time.LocalDateTime

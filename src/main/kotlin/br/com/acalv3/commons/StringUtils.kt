@@ -1,6 +1,6 @@
 package br.com.acalv3.commons
 
-import br.com.acalv3.application.comunicate.Fixture.Companion.MONTH
+import br.com.acalv3.application.comunication.Fixture.Companion.MONTH
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter.ofPattern
 import java.util.Locale

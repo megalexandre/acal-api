@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.application.comunicate.model.request.address.toAddress
+import br.com.acalv3.application.comunication.model.request.address.toAddress
 import br.com.acalv3.domain.model.Address
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.PlacePage
