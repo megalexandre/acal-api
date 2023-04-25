@@ -1,16 +1,12 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.domain.model.Address
 import br.com.acalv3.domain.model.Customer
-import br.com.acalv3.domain.model.page.AddressPage
 import br.com.acalv3.domain.model.page.CustomerPage
 import br.com.acalv3.domain.repository.CustomerRepository
-import br.com.acalv3.resources.model.business.toAddress
 import br.com.acalv3.resources.model.business.toCustomer
 import br.com.acalv3.resources.model.business.toCustomerEntity
 import br.com.acalv3.resources.model.business.toCustomerPage
 import br.com.acalv3.resources.repository.interfaces.CustomerRepositoryJpa
-import br.com.acalv3.resources.repository.specification.AddressSpecification
 import br.com.acalv3.resources.repository.specification.CustomerSpecification
 import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException

@@ -1,10 +1,10 @@
 package br.com.acalv3.application.comunication.gateway
 
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.ADDRESS_ROUTE
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.BY_ID
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.LIST
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.PAGINATE
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.UPDATE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.ADDRESS_ROUTE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.BY_ID
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.LIST
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.PAGINATE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.UPDATE
 import br.com.acalv3.application.comunication.model.request.address.AddressPaginateRequest
 import br.com.acalv3.application.comunication.model.request.address.AddressSaveRequest
 import br.com.acalv3.application.comunication.model.request.address.AddressUpdateRequest

@@ -1,6 +1,6 @@
 package br.com.acalv3.application.comunication.gateway
 
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.HEALTH
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.HEALTH
 import br.com.acalv3.application.comunication.model.response.health.HealthResponse
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.http.MediaType

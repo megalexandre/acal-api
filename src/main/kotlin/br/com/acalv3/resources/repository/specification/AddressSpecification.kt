@@ -2,10 +2,10 @@ package br.com.acalv3.resources.repository.specification
 
 import br.com.acalv3.domain.model.page.AddressPage
 import br.com.acalv3.resources.model.business.AddressEntity
-import org.springframework.data.jpa.domain.Specification
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
+import org.springframework.data.jpa.domain.Specification
 
 class AddressSpecification(private val address: AddressPage) {
 

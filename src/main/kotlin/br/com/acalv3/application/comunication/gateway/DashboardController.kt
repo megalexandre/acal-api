@@ -1,6 +1,6 @@
 package br.com.acalv3.application.comunication.gateway
 
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.DASHBOARD
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.DASHBOARD
 import br.com.acalv3.application.comunication.model.response.dashboard.DashboardResponse
 import br.com.acalv3.application.comunication.model.response.dashboard.toDashboardResponse
 import br.com.acalv3.domain.service.DashboardService

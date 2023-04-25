@@ -1,9 +1,9 @@
 package br.com.acalv3.application.comunication.gateway
 
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.BY_ID
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.CUSTOMER_ROUTE
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.PAGINATE
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.UPDATE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.BY_ID
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.CUSTOMER_ROUTE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.PAGINATE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.UPDATE
 import br.com.acalv3.application.comunication.model.request.customer.CustomerPageRequest
 import br.com.acalv3.application.comunication.model.request.customer.CustomerSaveRequest
 import br.com.acalv3.application.comunication.model.request.customer.CustomerUpdateRequest

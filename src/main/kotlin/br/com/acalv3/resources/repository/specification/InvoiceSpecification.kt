@@ -2,10 +2,10 @@ package br.com.acalv3.resources.repository.specification
 
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.resources.model.business.InvoiceEntity
-import org.springframework.data.jpa.domain.Specification
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
+import org.springframework.data.jpa.domain.Specification
 
 class InvoiceSpecification(private val invoice: InvoicePage) {
 

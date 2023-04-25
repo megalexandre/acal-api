@@ -56,7 +56,8 @@ class DefaultGatewayTest{
 	final var host: String? = null
 
 
-	init {
+	@PostConstruct
+	fun init(){
 		if (token == null){
 			if (userRepositoryJpa.findByUsername("alexandre") == null) {
 				userRepositoryJpa.save(

@@ -1,8 +1,8 @@
 package br.com.acalv3.application.comunication.gateway
 
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.INVOICE
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.LIST
-import br.com.acalv3.application.comunication.GatewaysRoutes.Companion.PAGINATE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.INVOICE
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.LIST
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.PAGINATE
 import br.com.acalv3.application.comunication.model.request.invoice.InvoicePageRequest
 import br.com.acalv3.application.comunication.model.request.invoice.InvoiceRequest
 import br.com.acalv3.application.comunication.model.request.invoice.toInvoice

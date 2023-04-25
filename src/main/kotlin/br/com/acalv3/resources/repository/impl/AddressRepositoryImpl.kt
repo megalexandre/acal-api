@@ -1,9 +1,7 @@
 package br.com.acalv3.resources.repository.impl
 
 import br.com.acalv3.domain.model.Address
-import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.AddressPage
-import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.AddressRepository
 import br.com.acalv3.resources.model.business.toAddress
 import br.com.acalv3.resources.model.business.toAddressEntity

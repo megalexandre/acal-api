@@ -7,7 +7,6 @@ import br.com.acalv3.resources.model.security.toUserEntity
 import br.com.acalv3.resources.repository.interfaces.UserRepositoryJpa
 import org.springframework.stereotype.Repository
 
-
 @Repository
 class UserRepositoryImpl(
     private val repository: UserRepositoryJpa,

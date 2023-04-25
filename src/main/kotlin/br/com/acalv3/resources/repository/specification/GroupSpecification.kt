@@ -1,11 +1,8 @@
 package br.com.acalv3.resources.repository.specification
 
 import br.com.acalv3.domain.model.page.GroupPage
-import br.com.acalv3.resources.model.business.AddressEntity
 import br.com.acalv3.resources.model.business.GroupEntity
-import br.com.acalv3.resources.model.business.PlaceEntity
 import java.math.BigDecimal
-import java.util.UUID
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
