@@ -21,7 +21,7 @@ class QualityUpdateRequest(
 )
 
 fun QualityUpdateRequest.toQuality() = Quality(
-    id = UUID.fromString(id).toString(),
+    id = UUID.fromString(id),
     startedAt = startedAt ?: throw RuntimeException(),
 ).also {
     it.gathering = gathering?.toGathering(it) ?: throw RuntimeException()
@@ -42,7 +42,7 @@ class GatheringUpdateRequest(
 )
 
 fun GatheringUpdateRequest.toGathering(quality: Quality) = Gathering(
-    id = UUID.fromString(id).toString(),
+    id = UUID.fromString(id),
     required = required ?: throw RuntimeException(),
     analyzed = analyzed ?: throw RuntimeException(),
     conformity = conformity ?: throw RuntimeException(),

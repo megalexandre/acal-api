@@ -1,7 +1,7 @@
 package br.com.acalv3.integration.quality.save
 
 import br.com.acalv3.integration.DefaultGatewayTest
-import br.com.acalv3.resources.model.business.CustomerEntity
+import br.com.acalv3.resources.model.business.QualityEntity
 import io.restassured.http.ContentType.JSON
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
@@ -23,7 +23,7 @@ class QualitySaveTest: DefaultGatewayTest() {
 	private lateinit var request: Resource
 
 	@Autowired
-	private lateinit var repository: JpaRepository<CustomerEntity, UUID>
+	private lateinit var repository: JpaRepository<QualityEntity, UUID>
 
 	@BeforeEach
 	fun beforeEach(){

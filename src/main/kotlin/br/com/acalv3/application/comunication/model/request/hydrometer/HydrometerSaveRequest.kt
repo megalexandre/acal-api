@@ -8,18 +8,14 @@ import java.util.UUID
 class HydrometerSaveRequest(
     val reference: String,
     val costValue: BigDecimal,
-    val actualQuantity: Long,
-    val lastMonthQuantity: Long,
+    val consumption: Long,
     var linkId: UUID?,
-){
-    val quantity = actualQuantity - lastMonthQuantity
-}
+)
 
 fun HydrometerSaveRequest.toDomain(link: Link) = Hydrometer(
     id = UUID.randomUUID(),
     reference =  reference,
     costValue = costValue,
-    actualQuantity = actualQuantity,
-    lastMonthQuantity = lastMonthQuantity,
+    consumption = consumption,
     link = link,
 )

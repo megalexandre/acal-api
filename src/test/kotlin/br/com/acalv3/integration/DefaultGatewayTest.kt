@@ -37,7 +37,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @SpringBootTest(
 	webEnvironment = RANDOM_PORT,
 )
-class DefaultGatewayTest{
+abstract class DefaultGatewayTest{
 
 	@Value("classpath:json/request/user_login.json")
 	private lateinit var resource: Resource
@@ -54,7 +54,6 @@ class DefaultGatewayTest{
 	final var token: String? = null
 	final var header: Header? = null
 	final var host: String? = null
-
 
 	@PostConstruct
 	fun init(){
@@ -105,8 +104,8 @@ class DefaultGatewayTest{
 			registry.add("spring.datasource.url", mysqlContainer::getJdbcUrl)
 			registry.add("spring.datasource.password", mysqlContainer::getPassword)
 			registry.add("spring.datasource.username", mysqlContainer::getUsername)
-
 		}
+
 	}
 
 

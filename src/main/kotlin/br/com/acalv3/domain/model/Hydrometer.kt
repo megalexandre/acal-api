@@ -9,8 +9,7 @@ class Hydrometer(
     val reference: String,
 
     val costValue: BigDecimal,
-    val actualQuantity: Long,
-    val lastMonthQuantity: Long,
+    val consumption: Long,
 
     var link: Link?,
 )

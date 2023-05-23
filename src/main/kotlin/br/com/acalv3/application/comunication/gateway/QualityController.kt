@@ -31,11 +31,11 @@ class QualityController(
     @PostMapping
     fun save(@Valid @RequestBody request: QualityRequest) = service.save(request.toQuality()).toQualityResponse()
 
-    @PutMapping("/update")
-    fun update(@Valid @RequestBody request: QualityUpdateRequest) = service.update(request.toQuality()).toQualityResponse()
-
     @GetMapping("/{id}")
     fun find(@PathVariable id: String) = service.getById(id).toQualityResponse()
+
+    @PutMapping("/update")
+    fun update(@Valid @RequestBody request: QualityUpdateRequest) = service.update(request.toQuality()).toQualityResponse()
 
     @GetMapping("/list")
     fun list(): List<QualityResponse> = service.getAll().toQualityResponse()

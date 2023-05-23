@@ -1,10 +1,10 @@
 package br.com.acalv3.domain.model
 
 import br.com.acalv3.domain.enumeration.Param
-import java.time.LocalDate
+import java.util.UUID
 
 class Gathering(
-    val id: String,
+    val id: UUID,
     val param: Param,
     val required: Long,
     val analyzed: Long,
@@ -13,9 +13,9 @@ class Gathering(
 )
 
 class Quality(
-    val id: String,
+    val id: UUID,
     val startedAt: String,
-): Model() {
+) {
     var gathering: List<Gathering>? = null
     fun gathering(): List<Gathering> = gathering ?: throw RuntimeException("gathering cant be null")
 }

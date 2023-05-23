@@ -1,4 +1,3 @@
 {
-  "startedAt": "01-01-0001",
-  "finishedAt": "01-01-0001"
+  "startedAt": "#startedAt"
 }

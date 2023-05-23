@@ -2,13 +2,10 @@ package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.model.Quality
 import br.com.acalv3.resources.model.DefaultEntity
-import java.time.LocalDate
 import java.util.UUID
-import javax.persistence.CascadeType
 import javax.persistence.CascadeType.ALL
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.FetchType
 import javax.persistence.FetchType.EAGER
 import javax.persistence.Id
 import javax.persistence.OneToMany
@@ -30,19 +27,19 @@ data class QualityEntity (
 
 }
 
-fun Quality.toQualityEntity() = QualityEntity(
-    id = UUID.fromString(id),
+fun Quality.toEntity() = QualityEntity(
+    id = id,
     startedAt = startedAt,
 ).also {
-    it.gathering = gathering?.toGatheringEntity(it.toQuality())
+    it.gathering = gathering?.toGatheringEntity(it.toDomain())
 }
 
-fun QualityEntity.toQuality() = Quality(
-    id = id.toString(),
+fun QualityEntity.toDomain() = Quality(
+    id = id,
     startedAt = startedAt,
 ).also {
     it.gathering = this.gathering?.toGathering(it)
 }
 
-fun List<QualityEntity>.toQuality() = map{ it.toQuality() }
-fun Page<QualityEntity>.toPage() = map{ it.toQuality() }
+fun List<QualityEntity>.toDomain() = map{ it.toDomain() }
+fun Page<QualityEntity>.toPage() = map{ it.toDomain() }

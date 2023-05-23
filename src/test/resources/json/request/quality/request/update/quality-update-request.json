@@ -1,0 +1,40 @@
+{
+  "gathering": [
+    {
+      "id":  "#ID_COLOR",
+      "param": "COLOR",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    },
+    {
+      "id":  "#ID_TURBIDITY",
+      "param": "TURBIDITY",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    },
+    {
+      "id": "#ID_CHLORINE",
+      "param": "CHLORINE",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }, {
+      "id": "#ID_ESCHERICHIA",
+      "param": "ESCHERICHIA",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }, {
+      "id": "#ID_TOTAL_COLIFORMS",
+      "param": "TOTAL_COLIFORMS",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }
+  ],
+
+  "startedAt": "#startedAt",
+  "id": "#id"
+}

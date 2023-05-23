@@ -4,11 +4,9 @@ import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
 import br.com.acalv3.resources.model.DefaultEntity
-import java.lang.RuntimeException
 import java.util.UUID
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.EnumType
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
 import javax.persistence.Id
@@ -39,17 +37,17 @@ class GatheringEntity (
 }
 
 fun Gathering.toGatheringEntity(quality: Quality) = GatheringEntity(
-    id = UUID.fromString(id),
+    id = id,
     param = param,
     required = required,
     analyzed = analyzed,
     conformity = conformity,
 ).also {
-    it.quality = quality.toQualityEntity()
+    it.quality = quality.toEntity()
 }
 
 fun GatheringEntity.toGathering(quality: Quality) = Gathering(
-    id = id.toString(),
+    id = id,
     param = param,
     required = required,
     analyzed = analyzed,

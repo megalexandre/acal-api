@@ -10,7 +10,7 @@ class QualityPageResponse(
 )
 
 fun Quality.toPageResponse() = QualityPageResponse(
-    id = id,
+    id = id.toString(),
     startedAt = startedAt,
     gathering = gathering().toGatheringResponse()
 )

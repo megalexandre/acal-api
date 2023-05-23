@@ -1,0 +1,34 @@
+{
+  "gathering": [
+    {
+      "param": "COLOR",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    },
+    {
+      "param": "TURBIDITY",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    },
+    {
+      "param": "CHLORINE",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }, {
+      "param": "ESCHERICHIA",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }, {
+      "param": "TOTAL_COLIFORMS",
+      "required": 10,
+      "analyzed": 10,
+      "conformity": 10
+    }
+  ],
+
+  "startedAt": "#startedAt"
+}

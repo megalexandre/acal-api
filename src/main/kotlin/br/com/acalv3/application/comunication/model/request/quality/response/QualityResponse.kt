@@ -18,13 +18,13 @@ class GatheringResponse(
 )
 
 fun Quality.toQualityResponse() = QualityResponse(
-    id = id,
+    id = id.toString(),
     startedAt = startedAt,
     gathering = gathering().toGatheringResponse(),
 )
 
 fun Gathering.toGatheringResponse() = GatheringResponse(
-    id = id,
+    id = id.toString(),
     required = required,
     param = param.toString(),
     analyzed = analyzed,

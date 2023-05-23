@@ -1,10 +1,12 @@
 package br.com.acalv3.application.comunication.model.request.quality.request
 
+import br.com.acalv3.application.comunication.Fixture.Companion.REFERENCE_REGEX
 import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.domain.model.Quality
 import java.util.UUID
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Pattern
 import org.springframework.validation.annotation.Validated
 
 @Validated
@@ -13,12 +15,13 @@ class QualityRequest(
     @field:NotNull(message = "os parametros da coleta são obrigatório")
     val gathering: List<GatheringRequest>?,
 
-    @field:NotNull(message = "Data de inicio é obrigatório")
+    @field:Pattern(regexp=REFERENCE_REGEX, message="Referência deve ter o formato MMYYYY")
+    @field:NotNull(message = "Referência é obrigatório")
     val startedAt: String?,
 )
 
 fun QualityRequest.toQuality() = Quality(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     startedAt = startedAt ?: throw RuntimeException(),
 ).also {
     it.gathering = gathering?.toGathering(it) ?: throw RuntimeException()
@@ -37,7 +40,7 @@ class GatheringRequest(
 )
 
 fun GatheringRequest.toGathering(quality: Quality) = Gathering(
-    id = UUID.randomUUID().toString(),
+    id = UUID.randomUUID(),
     required = required ?: throw RuntimeException(),
     analyzed = analyzed ?: throw RuntimeException(),
     conformity = conformity ?: throw RuntimeException(),

@@ -23,9 +23,7 @@ class HydrometerEntity (
 
     val costValue: BigDecimal,
 
-    val actualQuantity: Long,
-
-    val lastMonthQuantity: Long,
+    val consumption: Long,
 
     ) : DefaultEntity() {
 
@@ -38,8 +36,7 @@ fun Hydrometer.toEntity() = HydrometerEntity(
     id = id,
     reference = reference,
     costValue = costValue,
-    actualQuantity = actualQuantity,
-    lastMonthQuantity = lastMonthQuantity,
+    consumption = consumption,
 ).also {
     it.link = link?.toLinkEntity()
 }
@@ -48,8 +45,7 @@ fun HydrometerEntity.toDomain() = Hydrometer(
     id = id,
     reference = reference,
     costValue = costValue,
-    actualQuantity = actualQuantity,
-    lastMonthQuantity = lastMonthQuantity,
+    consumption = consumption,
     link = link?.toLink()
 )
 
@@ -57,8 +53,7 @@ fun HydrometerEntity.toDomainWithoutLink() = Hydrometer(
     id = id,
     reference = reference,
     costValue = costValue,
-    actualQuantity = actualQuantity,
-    lastMonthQuantity = lastMonthQuantity,
+    consumption = consumption,
     link = link?.toLinkWithSafeHydrometer(),
 )
 
