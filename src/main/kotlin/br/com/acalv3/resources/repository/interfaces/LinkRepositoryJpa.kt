@@ -40,7 +40,7 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
             SELECT 
                 l
             FROM link l  
-            INNER JOIN l.place p 
+            INNER JOIN l.place p
             WHERE p.hasHydrometer = true 
             AND l.active = true 
         """

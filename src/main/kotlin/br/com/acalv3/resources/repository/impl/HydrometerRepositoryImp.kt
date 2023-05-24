@@ -4,6 +4,7 @@ import br.com.acalv3.domain.model.Hydrometer
 import br.com.acalv3.domain.model.page.HydrometerPage
 import br.com.acalv3.domain.repository.HydrometerRepository
 import br.com.acalv3.resources.model.business.toDomain
+import br.com.acalv3.resources.model.business.toDomainWithoutLink
 import br.com.acalv3.resources.model.business.toEntity
 import br.com.acalv3.resources.model.business.toPage
 import br.com.acalv3.resources.repository.interfaces.HydrometerRepositoryJpa
@@ -18,6 +19,9 @@ import org.springframework.stereotype.Repository
 class HydrometerRepositoryImp(
     private val repository: HydrometerRepositoryJpa,
 ) : HydrometerRepository {
+
+    override fun getHydrometerByLinkAndReference(linkId: UUID, reference: String): Hydrometer? =
+        repository.findByReferenceAndLinkId(reference = reference, id = linkId)?.toDomainWithoutLink()
 
     override fun getById(id: String): Hydrometer =
         repository.findByIdOrNull(UUID.fromString(id))?.toDomain() ?: throw NotFoundException()

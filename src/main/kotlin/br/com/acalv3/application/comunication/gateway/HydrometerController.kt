@@ -17,6 +17,7 @@ import br.com.acalv3.application.comunication.model.response.link.LinkGetRespons
 import br.com.acalv3.application.comunication.model.response.link.toLinkGetResponse
 import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
+import java.util.UUID
 import javax.validation.Valid
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
@@ -46,13 +47,17 @@ class HydrometerController(
    fun save(@Valid @RequestBody request: HydrometerSaveRequest): HydrometerSaveResponse =
         service.save(request.toDomain(linkService.getById(request.linkId.toString()))).toSaveResponse()
 
-    @PostMapping("lote")
-    fun saveAll(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
-        request.forEach{
-            service.save(it.toDomain(linkService.getById(it.linkId.toString())))
-        }
+   @PostMapping("lote")
+   fun saveAll(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
+       request.forEach{
+           service.save(it.toDomain(linkService.getById(it.linkId.toString())))
+       }
 
-    @GetMapping( "/findByReference/{reference}")
-    fun validHydrometerByReference(@PathVariable reference: String): List<LinkGetResponse>? =
+   @GetMapping( "/findByReference/{reference}")
+   fun validHydrometerByReference(@PathVariable reference: String): List<LinkGetResponse>? =
         linkService.findHydrometerByReference(reference)?.toLinkGetResponse()
+
+   @GetMapping("/link/{link}/reference/{reference}")
+   fun getHydrometerByLinkAndReference(@PathVariable reference: String, @PathVariable link: UUID): HydrometerResponse? =
+       service.getHydrometerByLinkAndReference(linkId = link, reference = reference)?.toResponse()
 }
