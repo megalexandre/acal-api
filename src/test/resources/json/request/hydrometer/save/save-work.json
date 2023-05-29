@@ -1,0 +1,9 @@
+{
+  "reference":"012023",
+  "costValue": 40,
+  "consumption": 1000,
+  "actualQuantity": 0,
+  "link": {
+    "id": "#link-id"
+  }
+}

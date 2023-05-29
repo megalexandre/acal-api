@@ -11,10 +11,12 @@ fun hydrometerStub(
     consumption: Long = 1000,
     costValue: BigDecimal = BigDecimal.TEN,
     link: Link? = linkStub(),
+    linkId: UUID = UUID.randomUUID(),
 ) = Hydrometer(
     id = id,
     reference = reference,
     link = link,
     costValue = costValue,
     consumption = consumption,
+    linkId = linkId,
 )

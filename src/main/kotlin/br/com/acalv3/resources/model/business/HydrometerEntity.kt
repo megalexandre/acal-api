@@ -25,18 +25,21 @@ class HydrometerEntity (
 
     val consumption: Long,
 
-    ) : DefaultEntity() {
+    @Column(name = "link_id", nullable = false)
+    val linkId: UUID,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="link_id",nullable = false)
+    @JoinColumn(name="link_id", insertable = false, updatable = false)
     var link: LinkEntity? = null
-}
+
+) : DefaultEntity()
 
 fun Hydrometer.toEntity() = HydrometerEntity(
     id = id,
     reference = reference,
     costValue = costValue,
     consumption = consumption,
+    linkId = linkId,
 ).also {
     it.link = link?.toLinkEntity()
 }
@@ -46,7 +49,8 @@ fun HydrometerEntity.toDomain() = Hydrometer(
     reference = reference,
     costValue = costValue,
     consumption = consumption,
-    link = link?.toLink()
+    link = link?.toLink(),
+    linkId = linkId,
 )
 
 fun HydrometerEntity.toDomainWithoutLink() = Hydrometer(
@@ -55,6 +59,7 @@ fun HydrometerEntity.toDomainWithoutLink() = Hydrometer(
     costValue = costValue,
     consumption = consumption,
     link = link?.toLinkWithSafeHydrometer(),
+    linkId = linkId,
 )
 
 fun Page<HydrometerEntity>.toPage() = map{ it.toDomainWithoutLink() }

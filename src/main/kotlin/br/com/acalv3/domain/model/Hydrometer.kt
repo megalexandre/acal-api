@@ -10,6 +10,6 @@ class Hydrometer(
 
     val costValue: BigDecimal,
     val consumption: Long,
-
-    var link: Link?,
+    val linkId: UUID,
+    var link: Link? = null,
 )

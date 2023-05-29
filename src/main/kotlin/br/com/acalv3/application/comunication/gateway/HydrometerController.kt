@@ -44,13 +44,13 @@ class HydrometerController(
        service.getById(id).toResponse()
 
    @PostMapping
-   fun save(@Valid @RequestBody request: HydrometerSaveRequest): HydrometerSaveResponse =
-        service.save(request.toDomain(linkService.getById(request.linkId.toString()))).toSaveResponse()
+   fun save(@RequestBody request: HydrometerSaveRequest): HydrometerSaveResponse =
+        service.save(request.toDomain()).toSaveResponse()
 
    @PostMapping("lote")
    fun saveAll(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
        request.forEach{
-           service.save(it.toDomain(linkService.getById(it.linkId.toString())))
+           service.save(it.toDomain())
        }
 
    @GetMapping( "/findByReference/{reference}")
