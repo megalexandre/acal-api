@@ -7,7 +7,7 @@ import org.springframework.data.jpa.domain.Specification
 class QualitySpecification(private val qualityPage: QualityPage) {
 
     fun getSpecification(): Specification<QualityEntity> =
-        Specification<QualityEntity> { root, _, builder ->
+        Specification<QualityEntity> { _, _, builder ->
             val predicate = builder.conjunction()
             predicate
         }

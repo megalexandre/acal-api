@@ -40,7 +40,7 @@ class PlaceRepositoryImpl(
             PlaceSpecification(PlacePage(
                 letter = place.letter,
                 number = place.number,
-                address = place.address.toAddress()
+                address = place.address?.toAddress()
             )).getSpecification()
         ).firstOrNull()?.toPlace()
 

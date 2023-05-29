@@ -15,7 +15,7 @@ class LinkReport(
 fun Link.toLinkReport() = LinkReport(
     customerName = customer.name,
     customerDocument = customer.document.formatDocument(),
-    addressName = place.address.name,
+    addressName = place.address?.name ?: "",
     number = """${place.number} ${place.letter}""",
     groupName = group.name,
     categoryName = group.category.value,

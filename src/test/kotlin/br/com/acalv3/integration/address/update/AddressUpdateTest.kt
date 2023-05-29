@@ -8,7 +8,6 @@ import io.restassured.http.ContentType.JSON
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
-import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
 import org.junit.jupiter.api.BeforeEach
@@ -17,8 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.data.jpa.repository.JpaRepository
-import org.springframework.util.StreamUtils.copyToString
+import org.springframework.test.annotation.DirtiesContext
 
+@DirtiesContext
 class AddressUpdateTest: DefaultGatewayTest() {
 
 	@Value("classpath:json/request/address/save/address.json")

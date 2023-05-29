@@ -17,7 +17,7 @@ fun Place.toPlacePageResponse() = PlacePageResponse(
     id = id,
     number = number,
     letter = letter,
-    address = address.toGetAddressResponse()
+    address = address?.toGetAddressResponse()
 )
 
 fun Page<Place>.toPlacePageResponse() = map{ it.toPlacePageResponse() }

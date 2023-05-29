@@ -1,0 +1,8 @@
+{
+  "number": 4,
+  "letter": "2",
+  "address": {
+    "id": "#address-id"
+  },
+  "hasHydrometer": true
+}

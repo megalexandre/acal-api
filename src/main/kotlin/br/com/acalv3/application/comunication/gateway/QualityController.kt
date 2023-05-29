@@ -29,7 +29,8 @@ class QualityController(
 ) {
 
     @PostMapping
-    fun save(@Valid @RequestBody request: QualityRequest) = service.save(request.toQuality()).toQualityResponse()
+    fun save(@Valid @RequestBody request: QualityRequest) =
+        service.save(request.toQuality()).toQualityResponse()
 
     @GetMapping("/{id}")
     fun find(@PathVariable id: String) = service.getById(id).toQualityResponse()

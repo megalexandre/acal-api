@@ -19,9 +19,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.core.io.Resource
 import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.util.StreamUtils.copyToString
 
-
+@DirtiesContext
 class CustomerFilterTest: DefaultGatewayTest() {
 
 	@Autowired

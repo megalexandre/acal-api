@@ -22,6 +22,7 @@ fun PlaceUpdateRequest.toPlace() = Place(
     number = number?: throw RuntimeException("number can't be null"),
     letter = letter?: throw RuntimeException("letter can't be null"),
     address = address?.toAddress() ?: throw RuntimeException("Address can't be null"),
+    addressId = address.id ?: throw RuntimeException("Address can't be null"),
     hasHydrometer = hasHydrometer,
     other = other,
 )

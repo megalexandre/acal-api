@@ -33,6 +33,8 @@ class QualitySaveTest: DefaultGatewayTest() {
 	@Test
 	fun `should save a minimal quality ok 200`(){
 		val request = copyToString(request.inputStream, defaultCharset())
+			.replace("\n","")
+			.replace("\r","")
 
 		Given {
 			contentType(JSON)

@@ -20,9 +20,12 @@ class PlaceEntity (
     @Column(nullable = false)
     val letter: String,
 
+    @Column(name = "order_id", nullable = false)
+    val addressId: UUID,
+
     @ManyToOne
-    @JoinColumn(name="address_id")
-    val address: AddressEntity,
+    @JoinColumn(name="address_id", insertable = false, updatable = false)
+    val address: AddressEntity? = null,
 
     @Column(nullable = false)
     val number: Long,
@@ -35,7 +38,8 @@ class PlaceEntity (
 
 fun Place.toPlaceEntity() = PlaceEntity(
     id = id,
-    address = address.toAddressEntity(),
+    address = address?.toAddressEntity(),
+    addressId = addressId,
     letter = letter,
     number = number,
     hasHydrometer = hasHydrometer,
@@ -44,7 +48,8 @@ fun Place.toPlaceEntity() = PlaceEntity(
 
 fun PlaceEntity.toPlace() = Place(
     id = id,
-    address = address.toAddress(),
+    addressId = addressId,
+    address = address?.toAddress(),
     letter = letter,
     number = number,
     hasHydrometer = hasHydrometer,

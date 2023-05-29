@@ -22,6 +22,7 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.core.io.Resource
 import org.springframework.http.HttpStatus.OK
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
+import org.springframework.test.annotation.DirtiesContext
 import org.springframework.test.context.DynamicPropertyRegistry
 import org.springframework.test.context.DynamicPropertySource
 import org.springframework.test.context.TestPropertySource
@@ -37,6 +38,7 @@ import org.testcontainers.junit.jupiter.Testcontainers
 @SpringBootTest(
 	webEnvironment = RANDOM_PORT,
 )
+@DirtiesContext
 abstract class DefaultGatewayTest{
 
 	@Value("classpath:json/request/user_login.json")

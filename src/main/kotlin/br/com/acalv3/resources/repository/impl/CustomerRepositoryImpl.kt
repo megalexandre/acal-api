@@ -45,8 +45,6 @@ class CustomerRepositoryImpl(
     override fun findAll(page: CustomerPage): List<Customer> =
         repository.findAll(CustomerSpecification(page).getSpecification()).toCustomer()
 
-    override fun findAll(): List<Customer> {
-        TODO("Not yet implemented")
-    }
+    override fun findAll(): List<Customer> = repository.findAll().toCustomer()
 
 }

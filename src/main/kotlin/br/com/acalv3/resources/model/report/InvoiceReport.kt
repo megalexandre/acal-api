@@ -32,7 +32,7 @@ class InvoiceReport(
 
 fun InvoiceEntity.toReport() = InvoiceReport(
     id = id.toString(),
-    address = link.place.address.name,
+    address = link.place.address?.name ?: "",
     number = """${link.place.number} ${link.place.letter}""",
     category = link.group.category.value,
     customer = link.customer.name,

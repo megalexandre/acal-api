@@ -4,9 +4,10 @@ import java.util.UUID
 
 class Place(
     val id: UUID,
+    val addressId: UUID,
+    val address: Address? = null,
     val number: Long,
     val letter: String,
-    val address: Address,
     val hasHydrometer: Boolean,
     val other: String?,
 )

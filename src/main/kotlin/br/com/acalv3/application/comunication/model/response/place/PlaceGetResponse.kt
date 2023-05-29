@@ -18,7 +18,7 @@ fun Place.toGetPlaceResponse() = PlaceGetResponse(
     id = id,
     number = number,
     letter = letter,
-    address = address.toGetAddressResponse(),
+    address = address?.toGetAddressResponse(),
     hasHydrometer = hasHydrometer,
     other = other,
 )

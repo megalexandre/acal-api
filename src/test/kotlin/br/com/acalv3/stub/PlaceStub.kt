@@ -9,6 +9,7 @@ fun placeStub(
     number: Long = 1,
     letter: String = "A",
     address: Address = addressStub(),
+    addressId: UUID = address.id,
     hasHydrometer: Boolean = true,
     other: String? = "outher",
 ) = Place(
@@ -16,6 +17,7 @@ fun placeStub(
     number = number,
     letter = letter,
     address = address,
+    addressId = addressId,
     hasHydrometer = hasHydrometer,
     other = other,
 )

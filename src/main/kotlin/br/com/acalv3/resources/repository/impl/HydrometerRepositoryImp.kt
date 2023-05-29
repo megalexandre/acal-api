@@ -45,6 +45,4 @@ class HydrometerRepositoryImp(
 
     override fun getAll(): List<Hydrometer> = repository.findAll().toDomain()
 
-
-
 }

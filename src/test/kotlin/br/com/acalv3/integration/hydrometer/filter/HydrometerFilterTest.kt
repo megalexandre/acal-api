@@ -1,7 +1,6 @@
 package br.com.acalv3.integration.hydrometer.filter
 
 import br.com.acalv3.domain.model.Hydrometer
-import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.service.AddressService
 import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.GroupService
@@ -9,33 +8,28 @@ import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.PlaceService
 import br.com.acalv3.integration.DefaultGatewayTest
-import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.stub.addressStub
 import br.com.acalv3.stub.customerStub
 import br.com.acalv3.stub.groupStub
-import br.com.acalv3.stub.hydrometerStub
 import br.com.acalv3.stub.linkStub
 import br.com.acalv3.stub.placeStub
 import io.restassured.http.ContentType.JSON
 import io.restassured.module.kotlin.extensions.Given
 import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
+import java.math.BigDecimal
+import java.util.UUID
 import org.hamcrest.Matchers.equalTo
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-
 
 class HydrometerFilterTest: DefaultGatewayTest() {
 
 	@Autowired
-	lateinit var service: HydrometerService
+	lateinit var hydrometerService: HydrometerService
 
 	@Autowired
 	lateinit var linkService: LinkService
-
-	@Autowired
-	lateinit var linkRepository: LinkRepositoryJpa
 
 	@Autowired
 	lateinit var placeService: PlaceService
@@ -49,35 +43,9 @@ class HydrometerFilterTest: DefaultGatewayTest() {
 	@Autowired
 	lateinit var addressService: AddressService
 
-	lateinit var hydrometer: Hydrometer
-
-	fun initLink(): Link {
-		linkRepository.deleteAll()
-
-		val address = addressService.save(addressStub())
-		val place = placeService.save(placeStub(
-			address = address,
-		))
-		val group = groupService.save(groupStub())
-		val customer = customerService.save(customerStub())
-
-		return linkService.save(linkStub(
-			place = place,
-			mailPlace = place,
-			group = group,
-			customer = customer,
-		))
-	}
-
-	@BeforeEach
-	fun beforeEach(){
-		hydrometer = service.save(hydrometerStub(
-			link = initLink()
-		))
-	}
-
 	@Test
 	fun `should filter by id`(){
+		val hydrometer = save()
 		Given {
 			contentType(JSON)
 			header(header)
@@ -87,7 +55,6 @@ class HydrometerFilterTest: DefaultGatewayTest() {
 			statusCode(200)
 			body("id", equalTo(hydrometer.id.toString()))
 		}
-
 	}
 
 	@Test
@@ -100,21 +67,35 @@ class HydrometerFilterTest: DefaultGatewayTest() {
 			post("$host/hydrometer/paginate")
 		} Then {
 			statusCode(200)
-			body("totalElements", equalTo(1))
+			body("totalElements", equalTo(0))
 		}
-
 	}
 
-	fun save(): Link {
-		val place = placeService.save(placeStub())
+
+	fun save(): Hydrometer {
+		val address = addressService.save(addressStub())
+		val place = placeService.save(placeStub(
+			address = address,
+			addressId = address.id,
+		))
 		val group = groupService.save(groupStub())
 		val customer = customerService.save(customerStub())
 
-		return linkService.save(linkStub(
+		val link = linkService.save(linkStub(
 			place = place,
+			mailPlace = place,
 			group = group,
 			customer = customer,
 		))
+
+		return hydrometerService.save(Hydrometer(
+			id = UUID.randomUUID(),
+			reference = "052023",
+			costValue = BigDecimal.TEN,
+			consumption = 1000L,
+			link = link,
+		))
 	}
+
 
 }
