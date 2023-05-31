@@ -72,7 +72,7 @@ class IntegrationTestUtil {
             consumption = 1000L,
             link = link,
             linkId = link.id,
-        )
+            )
         )
     }
 }

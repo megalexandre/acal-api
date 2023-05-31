@@ -10,11 +10,10 @@ import br.com.acalv3.application.comunication.model.response.link.LinkPageRespon
 import br.com.acalv3.application.comunication.model.response.link.SaveUpdateLinkResponse
 import br.com.acalv3.application.comunication.model.response.link.toLinkGetResponse
 import br.com.acalv3.application.comunication.model.response.link.toLinkResponse
-import br.com.acalv3.domain.service.CustomerService
-import br.com.acalv3.domain.service.GroupService
 import br.com.acalv3.domain.service.LinkService
-import br.com.acalv3.domain.service.PlaceService
 import javax.validation.Valid
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
@@ -33,50 +32,61 @@ import org.springframework.web.bind.annotation.RestController
 )
 class LinkController(
     val service: LinkService,
-    val customerService: CustomerService,
-    val placeService: PlaceService,
-    val groupService: GroupService,
 ) {
+    private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @GetMapping("/hydrometer/{reference}")
-    fun linkWithHydrometerByMonth(@PathVariable reference: String) = service.linkWithHydrometerByMonth(reference)
+    fun linkWithHydrometerByMonth(@PathVariable reference: String) =
+        service.linkWithHydrometerByMonth(reference).also {
+            logger.info("linkWithHydrometerByMonth: $reference")
+        }
 
     @PostMapping
     fun save(@RequestBody request: LinkSaveRequest): SaveUpdateLinkResponse =
-        service.save(request.toLink(
-            customer = customerService.getById(request.customerId()),
-            place = placeService.getById(request.placeId()),
-            mailPlace = placeService.getById(request.mailPlaceId()),
-            group = groupService.getById(request.groupId()),
-        )).toLinkResponse()
+        service.save(request.toLink()).toLinkResponse().also {
+            logger.info("save: $request")
+        }
 
     @PutMapping("/update")
     fun update(@Valid @RequestBody request: LinkUpdateRequest): SaveUpdateLinkResponse =
-        service.update(
-            request.toLink(
-                customerService.getById(request.customer?.id ?: throw RuntimeException(""))
-            )).toLinkResponse()
+        service.update(request.toLink()).toLinkResponse().also {
+            logger.info("update: $request")
+        }
 
     @PostMapping("/paginate")
     fun paginate(@Valid @RequestBody request: LinkPageRequest): Page<LinkPageResponse> =
-        service.paginate(request.toPageRequest()).toLinkResponse()
+        service.paginate(request.toPageRequest()).toLinkResponse().also {
+            logger.info("paginate: $request")
+        }
 
     @GetMapping("/list")
     fun findAll(): List<LinkPageResponse> =
-        service.findAll().toLinkResponse()
+        service.findAll().toLinkResponse().also {
+            logger.info("findAll")
+        }
 
     @GetMapping("/list/{reference}")
     fun findAllByReference(@PathVariable reference: String): List<LinkPageResponse> =
-        service.findAll(reference).toLinkResponse()
+        service.findAll(reference).toLinkResponse().also {
+            logger.info("findAll: $reference")
+        }
 
     @GetMapping("/{id}")
-    fun find(@PathVariable id: String): LinkGetResponse = service.getById(id).toLinkGetResponse()
+    fun find(@PathVariable id: String): LinkGetResponse =
+        service.getById(id).toLinkGetResponse().also {
+            logger.info("getById: $id")
+        }
 
     @DeleteMapping("inactive/{id}")
-    fun inactivate(@PathVariable id: String) = service.inactivate(id)
+    fun inactivate(@PathVariable id: String) =
+        service.inactivate(id).also {
+            logger.info("inactivate: $id")
+        }
 
     @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
     fun link(@RequestBody request: LinkPageRequest): ByteArray? =
-        service.report(request.toPageRequest())
+        service.report(request.toPageRequest()).also {
+            logger.info("report: $request")
+        }
 
 }

@@ -5,13 +5,20 @@ import java.util.UUID
 
 data class Link(
     val id: UUID,
-    val customer: Customer,
-    val place: Place,
-    val mailPlace: Place,
-    val group: Group,
+
+    val group: Group? = null,
+    val place: Place? = null,
+    val customer: Customer? = null,
+    val mailPlace: Place? = null,
+
+    val groupId: UUID,
+    val placeId: UUID,
+    val customerId: UUID,
+    val mailPlaceId: UUID,
+
     val active: Boolean,
     val startedAt: LocalDateTime,
     val finishedAt: LocalDateTime? = null
 ) {
-    val addressName = place.address?.name +" "+ place.number+" "+place.letter
+    val addressName = place?.address?.name +" "+ place?.number+" "+place?.letter
 }

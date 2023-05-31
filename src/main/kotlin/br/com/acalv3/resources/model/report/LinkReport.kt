@@ -13,12 +13,12 @@ class LinkReport(
 )
 
 fun Link.toLinkReport() = LinkReport(
-    customerName = customer.name,
-    customerDocument = customer.document.formatDocument(),
-    addressName = place.address?.name ?: "",
-    number = """${place.number} ${place.letter}""",
-    groupName = group.name,
-    categoryName = group.category.value,
+    customerName = "${customer?.name }",
+    customerDocument = "${customer?.document?.formatDocument()}",
+    addressName = "${place?.address?.name}",
+    number = "${place?.number} ${place?.letter}",
+    groupName = "${group?.name}",
+    categoryName = "${group?.category?.value}",
 )
 
 fun List<Link>.toLinkReport() = map { it.toLinkReport() }

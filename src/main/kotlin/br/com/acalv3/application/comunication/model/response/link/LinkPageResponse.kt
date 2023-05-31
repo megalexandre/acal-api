@@ -10,9 +10,9 @@ import org.springframework.data.domain.Page
 
 data class LinkPageResponse(
     val id: UUID,
-    val place: Place,
-    val customer: Customer,
-    val group: Group,
+    val place: Place?,
+    val customer: Customer?,
+    val group: Group?,
     val active: Boolean,
     val startedAt: LocalDateTime,
     val finishedAt: LocalDateTime?,

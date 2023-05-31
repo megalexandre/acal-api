@@ -28,20 +28,33 @@ class LinkEntity (
     val name: String,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="place_id")
-    val place: PlaceEntity,
+    @JoinColumn(name="place_id",insertable = false, updatable = false)
+    val place: PlaceEntity? = null,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="place_address_id")
-    val mailPlace: PlaceEntity,
+    @JoinColumn(name="mail_place_id",insertable = false, updatable = false)
+    val mailPlace: PlaceEntity? = null,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="group_id")
-    val group: GroupEntity,
+    @JoinColumn(name="customer_id",insertable = false, updatable = false)
+    val customer: CustomerEntity? = null,
 
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="customer_id")
-    val customer: CustomerEntity,
+    @JoinColumn(name="group_id",insertable = false, updatable = false)
+    val group: GroupEntity? = null,
+
+    @Column(name = "place_id", nullable = false, columnDefinition = "BINARY(16)")
+    val placeId: UUID,
+
+    @Column(name = "mail_place_id", nullable = false, columnDefinition = "BINARY(16)")
+    val mailPlaceId: UUID,
+
+    @Column(name = "customer_id", nullable = false, columnDefinition = "BINARY(16)")
+    val customerId: UUID,
+
+    @Column(name = "group_id", nullable = false, columnDefinition = "BINARY(16)")
+    val groupId: UUID,
+
 
     @OneToMany(mappedBy="link")
     val invoice: List<InvoiceEntity>? = null,
@@ -68,10 +81,15 @@ class LinkEntity (
 
 fun Link.toLinkEntity() = LinkEntity(
     id = id,
-    place = place.toPlaceEntity(),
-    mailPlace = mailPlace.toPlaceEntity(),
-    group = group.toGroupEntity(),
-    customer = customer.toCustomerEntity(),
+    place = place?.toPlaceEntity(),
+    mailPlace = mailPlace?.toPlaceEntity(),
+    group = group?.toGroupEntity(),
+    customer = customer?.toCustomerEntity(),
+
+    placeId = placeId,
+    mailPlaceId = mailPlaceId,
+    groupId = groupId,
+    customerId = customerId,
     active = active,
     name = "",
     startedAt = startedAt,
@@ -80,10 +98,16 @@ fun Link.toLinkEntity() = LinkEntity(
 
 fun LinkEntity.toLink() = Link(
     id = id,
-    place = place.toPlace(),
-    mailPlace = mailPlace.toPlace(),
-    group = group.toGroup(),
-    customer = customer.toCustomer(),
+    place = place?.toPlace(),
+    mailPlace = mailPlace?.toPlace(),
+    group = group?.toGroup(),
+    customerId = customerId,
+    customer = customer?.toCustomer(),
+
+    placeId = placeId,
+    mailPlaceId = mailPlaceId,
+    groupId = groupId,
+
     active = active,
     startedAt = startedAt,
     finishedAt = finishedAt,
@@ -91,10 +115,16 @@ fun LinkEntity.toLink() = Link(
 
 fun LinkEntity.toLinkWithSafeHydrometer() = Link(
     id = id,
-    place = place.toPlace(),
-    mailPlace = mailPlace.toPlace(),
-    group = group.toGroup(),
-    customer = customer.toCustomer(),
+    place = place?.toPlace(),
+    mailPlace = mailPlace?.toPlace(),
+    group = group?.toGroup(),
+    customerId = customerId,
+    customer = customer?.toCustomer(),
+
+    placeId = placeId,
+    mailPlaceId = mailPlaceId,
+    groupId = groupId,
+
     active = active,
     startedAt = startedAt,
     finishedAt = finishedAt,

@@ -9,10 +9,10 @@ import java.util.UUID
 
 data class LinkGetResponse(
     val id: UUID,
-    val place: Place,
-    val mailPlace: Place,
-    val customer: Customer,
-    val group: Group,
+    val place: Place?,
+    val mailPlace: Place?,
+    val customer: Customer?,
+    val group: Group?,
     val startedAt: LocalDateTime,
     val finishedAt: LocalDateTime?,
 )

@@ -13,8 +13,8 @@ class SaveLinkStrategy(
     override fun action() = SAVE
 
     override fun can(link: Link) {
-        repository.findActiveByPlaceId(link.place.id)?.let {
-            throw RuntimeException("$MESSAGE${it.customer.name}")
+        repository.findActiveByPlaceId(link.placeId)?.let {
+            throw RuntimeException("$MESSAGE${it.customer?.name}")
         }
     }
 

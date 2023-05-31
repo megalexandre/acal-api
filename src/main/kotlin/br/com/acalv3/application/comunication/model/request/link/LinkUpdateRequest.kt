@@ -1,14 +1,8 @@
 package br.com.acalv3.application.comunication.model.request.link
 
-import br.com.acalv3.application.comunication.model.request.customer.CustomerUpdateRequest
-import br.com.acalv3.application.comunication.model.request.group.GroupUpdateRequest
-import br.com.acalv3.application.comunication.model.request.group.toGroup
-import br.com.acalv3.application.comunication.model.request.place.PlaceUpdateRequest
-import br.com.acalv3.application.comunication.model.request.place.toPlace
-import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Link
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.UUID.fromString
 import javax.validation.constraints.NotBlank
 
 data class LinkUpdateRequest(
@@ -17,16 +11,16 @@ data class LinkUpdateRequest(
     val id: String? = null,
 
     @field:NotBlank(message = "Cliente é um campo obrigatório")
-    val customer: CustomerUpdateRequest? = null,
+    val customerId: String? = null,
 
     @field:NotBlank(message = "Grupo é um campo obrigatório")
-    val group: GroupUpdateRequest? = null,
+    val groupId: String? = null,
 
     @field:NotBlank(message = "Endereco é um campo obrigatório")
-    val place: PlaceUpdateRequest? = null,
+    val placeId: String? = null,
 
     @field:NotBlank(message = "Endereco é um campo obrigatório")
-    val placeAddress: PlaceUpdateRequest? = null,
+    val mailPlaceId: String? = null,
 
     val active: Boolean,
 
@@ -36,12 +30,12 @@ data class LinkUpdateRequest(
 
 ): LinkRequest()
 
-fun LinkUpdateRequest.toLink(customer: Customer) = Link(
-    id = UUID.fromString(id)?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
-    customer = customer,
-    place = place?.toPlace() ?: throw RuntimeException("place id can't be null"),
-    mailPlace = placeAddress?.toPlace() ?: throw RuntimeException("place id can't be null"),
-    group = group?.toGroup() ?: throw RuntimeException("group id can't be null"),
+fun LinkUpdateRequest.toLink() = Link(
+    id = fromString(id) ?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
+    customerId = fromString(customerId) ?: throw RuntimeException("CustomerUpdateRequest id can't be null"),
+    placeId = fromString(placeId) ?: throw RuntimeException("place id can't be null"),
+    mailPlaceId = fromString(mailPlaceId) ?: throw RuntimeException("place id can't be null"),
+    groupId = fromString(groupId) ?: throw RuntimeException("group id can't be null"),
     active = active,
     startedAt = startedAt,
     finishedAt = finishedAt,

@@ -12,8 +12,8 @@ class HydrometerPageResponse(
     val consumption: Long,
     val link: Link?,
 ){
-    val linkName = link?.let {"${link.place.address?.name}: ${link.place.number} ${link.place.letter}"} ?:""
-    val personName = link?.let { link.customer.name }
+    val linkName = link?.let {"${link.place?.address?.name}: ${link.place?.number} ${link.place?.letter}"} ?:""
+    val personName = link?.let { link.customer?.name }
 }
 
 fun Hydrometer.toPageResponse() = HydrometerPageResponse(
