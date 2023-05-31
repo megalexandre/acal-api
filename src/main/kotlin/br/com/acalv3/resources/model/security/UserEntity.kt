@@ -8,7 +8,6 @@ import javax.persistence.Entity
 import javax.persistence.FetchType.EAGER
 import javax.persistence.Id
 import javax.persistence.OneToMany
-import javax.persistence.UniqueConstraint
 
 @Entity(name = "user_model")
 class UserEntity (

@@ -9,6 +9,8 @@ class DeleteHydrometerStrategy: HydrometerStrategy<Hydrometer> {
 
     override fun action() = DELETE
 
-    override fun can(model: Hydrometer) {}
+    override fun can(model: Hydrometer) {
+
+    }
 
 }

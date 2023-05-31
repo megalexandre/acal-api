@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
 interface HydrometerRepositoryJpa : JpaRepository<HydrometerEntity, UUID>, JpaSpecificationExecutor<HydrometerEntity>{
     fun findByReferenceAndLinkId(reference: String, id: UUID):  HydrometerEntity?
-
+    fun findByReference(reference: String): HydrometerEntity?
 }
