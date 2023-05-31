@@ -12,6 +12,8 @@ import br.com.acalv3.resources.model.business.toInvoicePage
 import br.com.acalv3.resources.model.report.toReport
 import br.com.acalv3.resources.repository.interfaces.InvoiceRepositoryJpa
 import br.com.acalv3.resources.repository.specification.InvoiceSpecification
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.UUID
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
@@ -55,6 +57,9 @@ class InvoiceRepositoryImpl(
         )
     }
 
+    override fun findByActualReference(): List<Invoice>? = repository.findByReference(
+        LocalDateTime.now().format(DateTimeFormatter.ofPattern("MMYYYY"))
+    )?.toInvoice()
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
@@ -66,10 +71,10 @@ class InvoiceRepositoryImpl(
     override fun save(invoice: List<Invoice>): List<Invoice> =
         repository.saveAll(invoice.toInvoiceEntity()).toInvoice()
 
-    override fun paginate(request: InvoicePage): Page<Invoice> =
+    override fun paginate(page: InvoicePage): Page<Invoice> =
         repository.findAll(
-            InvoiceSpecification(request).getSpecification(),
-            super.pageable(request)
+            InvoiceSpecification(page).getSpecification(),
+            super.pageable(page)
         ).toInvoicePage()
 
     override fun getAll(): List<Invoice> = repository.findAll().toInvoice()

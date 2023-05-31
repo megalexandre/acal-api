@@ -32,4 +32,6 @@ class InvoiceServiceImpl(
 		repository.getAll()
 
 	override fun report(id: UUID): ByteArray? = repository.report(id)
+
+	override fun findByActualReference(): List<Invoice>? = repository.findByActualReference()
 }

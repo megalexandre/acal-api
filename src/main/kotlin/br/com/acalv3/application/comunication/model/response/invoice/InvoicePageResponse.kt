@@ -7,7 +7,7 @@ import org.springframework.data.domain.Page
 data class InvoicePageResponse(
     val id: String,
     val reference: String,
-    val link: Link,
+    val link: Link?,
 )
 
 fun Invoice.toInvoicePageResponse() = InvoicePageResponse(

@@ -8,15 +8,17 @@ import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers.equalTo
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
 
-class HydrometerFilterTest(
-	val integrationTestUtil: IntegrationTestUtil
-): DefaultGatewayTest() {
+class HydrometerFilterTest: DefaultGatewayTest() {
 
+	@Autowired
+	lateinit var integrationTestUtil: IntegrationTestUtil
 
 	@Test
 	fun `should filter by id`(){
 		val hydrometer = integrationTestUtil.saveHydrometer()
+
 		Given {
 			contentType(JSON)
 			header(header)
@@ -41,9 +43,5 @@ class HydrometerFilterTest(
 			body("totalElements", equalTo(0))
 		}
 	}
-
-
-
-
 
 }

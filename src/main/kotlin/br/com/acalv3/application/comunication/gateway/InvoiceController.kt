@@ -4,14 +4,13 @@ import br.com.acalv3.application.comunication.ControllersRoutes.Companion.INVOIC
 import br.com.acalv3.application.comunication.ControllersRoutes.Companion.LIST
 import br.com.acalv3.application.comunication.ControllersRoutes.Companion.PAGINATE
 import br.com.acalv3.application.comunication.model.request.invoice.InvoicePageRequest
-import br.com.acalv3.application.comunication.model.request.invoice.InvoiceRequest
+import br.com.acalv3.application.comunication.model.request.invoice.InvoiceSaveRequest
 import br.com.acalv3.application.comunication.model.request.invoice.toInvoice
 import br.com.acalv3.application.comunication.model.request.invoice.toPageRequest
 import br.com.acalv3.application.comunication.model.response.invoice.InvoicePageResponse
 import br.com.acalv3.application.comunication.model.response.invoice.InvoiceResponse
 import br.com.acalv3.application.comunication.model.response.invoice.toInvoiceResponse
 import br.com.acalv3.domain.service.InvoiceService
-import br.com.acalv3.domain.service.LinkService
 import java.util.UUID
 import javax.validation.Valid
 import org.slf4j.Logger
@@ -32,20 +31,20 @@ import org.springframework.web.bind.annotation.RestController
 )
 private class InvoiceGateway(
     val service: InvoiceService,
-    val linkService: LinkService
 ) {
     private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: InvoicePageRequest): Page<InvoicePageResponse> =
-        service.paginate(request.toPageRequest()).toInvoiceResponse()
+        service.paginate(request.toPageRequest()).toInvoiceResponse().also{
+            logger.info("paginate address: $request")
+        }
 
     @PostMapping
-    fun save(@Valid @RequestBody request: List<InvoiceRequest>): List<InvoiceResponse>  = run {
-        service.saveAll(request.map {
-            it.toInvoice(linkService.getById(it.id!!))
-        }).toInvoiceResponse()
-    }
+    fun save(@Valid @RequestBody request: List<InvoiceSaveRequest>): List<InvoiceResponse> =
+        service.saveAll(request.toInvoice()).toInvoiceResponse().also{
+            logger.info("save address: $request")
+        }
 
     @GetMapping(LIST)
     fun list(): List<InvoiceResponse> =

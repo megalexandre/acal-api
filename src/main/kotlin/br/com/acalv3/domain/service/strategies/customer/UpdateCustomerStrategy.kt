@@ -12,11 +12,10 @@ class UpdateCustomerStrategy(
 
     override fun action() = UPDATE
 
-    override fun can(customer: Customer) {
-        repository.findByDocument(customer.document)?.let {
-            if(it.id != customer.id){
-                throw RuntimeException(
-                    "o documento ${it.document} já está cadastrado para o usuário: ${it.name}")
+    override fun can(model: Customer) {
+        repository.findByDocument(model.document)?.let {
+            if(it.id != model.id){
+                throw RuntimeException("o documento ${it.document} já está cadastrado para o usuário: ${it.name}")
             }
         }
     }

@@ -12,9 +12,9 @@ class SaveGroupStrategy(
 
     override fun action() = SAVE
 
-    override fun can(group: Group) {
-        repository.findGroup(group)?.let {
-            throw RuntimeException("O grupo [${it.name}] já está cadastrado para a categoria [${group.category.value}]")
+    override fun can(model: Group) {
+        repository.findGroup(model)?.let {
+            throw RuntimeException("O grupo [${it.name}] já está cadastrado para a categoria [${model.category.value}]")
         }
     }
 }

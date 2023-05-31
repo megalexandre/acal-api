@@ -5,8 +5,9 @@ import java.util.UUID
 class Invoice(
     val id: UUID,
     val reference: String,
-    val link: Link,
-
+    val linkId: UUID,
+    val link: Link? = null,
+    val payout: Boolean = true,
 ) {
     var invoiceDetails: List<InvoiceDetail>? = null
 }

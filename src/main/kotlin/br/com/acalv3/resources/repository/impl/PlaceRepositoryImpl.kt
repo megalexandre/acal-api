@@ -25,13 +25,8 @@ class PlaceRepositoryImpl(
         repository.findByIdOrNull(UUID.fromString(id))?.toPlace() ?: throw NotFoundException()
 
     override fun getAll(): List<Place> = repository.findAll().toPlace()
-
-    override fun save(place: Place): Place =
-        repository.save(place.toPlaceEntity()).toPlace()
-
-    override fun update(place: Place): Place =
-        repository.save(place.toPlaceEntity()).toPlace()
-
+    override fun save(type: Place): Place = repository.save(type.toPlaceEntity()).toPlace()
+    override fun update(place: Place): Place =  repository.save(place.toPlaceEntity()).toPlace()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
     override fun count(): Long = repository.count()
 

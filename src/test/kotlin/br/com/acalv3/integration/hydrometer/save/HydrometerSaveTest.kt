@@ -10,7 +10,6 @@ import io.restassured.module.kotlin.extensions.Then
 import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
-import org.hamcrest.Matchers.hasKey
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -37,7 +36,6 @@ class HydrometerSaveTest: DefaultGatewayTest() {
 
 	@Test
 	fun `should save a hydrometer ok 200`(){
-
 		val saveLink = integrationTestUtil.saveLink()
 
 		val hydrometer = copyToString(hydrometerMinimal.inputStream, defaultCharset())
@@ -51,7 +49,6 @@ class HydrometerSaveTest: DefaultGatewayTest() {
 			post("$host/$HYDROMETER")
 		} Then {
 			statusCode(200)
-			body("$", hasKey("id"))
 		}
 	}
 

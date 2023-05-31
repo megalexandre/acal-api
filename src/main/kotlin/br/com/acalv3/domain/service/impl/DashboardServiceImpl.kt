@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service
 class DashboardServiceImpl(
 	val customerServiceImpl: CustomerServiceImpl,
 	val linkServiceImpl: LinkServiceImpl,
+	val invoiceServiceImpl: InvoiceServiceImpl
 ): DashboardService {
 
-	override fun get(): Dashboard =
-		Dashboard(
+	override fun get(): Dashboard {
+
+		val invoices = invoiceServiceImpl.findByActualReference()
+
+		return Dashboard(
 			totalCustomer = customerServiceImpl.count(),
 			totalLink = linkServiceImpl.countActive(),
-			invoicing = linkServiceImpl.invoicing(),
+			awaitingPaymentInvoice = invoices?.count { it.payout }?.toLong() ?: 0,
+			generatedInvoice = invoices?.size?.toLong() ?: 0,
 		)
+	}
 }

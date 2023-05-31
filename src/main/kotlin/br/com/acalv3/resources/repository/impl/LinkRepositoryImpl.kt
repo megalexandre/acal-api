@@ -42,7 +42,7 @@ class LinkRepositoryImpl(
 
     override fun getAll(): List<Link> = repository.findAll().toLink()
 
-    override fun save(link: Link): Link = repository.save(link.toLinkEntity()).toLink()
+    override fun save(type: Link): Link = repository.save(type.toLinkEntity()).toLink()
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
@@ -77,8 +77,6 @@ class LinkRepositoryImpl(
     override fun count(): Long = repository.count()
 
     override fun countActive(): Long = repository.countActive()
-
-    override fun invoicing(): Long = 0
 
     override fun inactivate(id: String) = this.update(
         this.getById(id).copy(

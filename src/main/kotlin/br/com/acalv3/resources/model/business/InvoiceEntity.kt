@@ -23,9 +23,13 @@ class InvoiceEntity (
 
     val reference: String,
 
+    @Column(name = "link_id", nullable = false, columnDefinition = "BINARY(16)")
+    val linkId: UUID,
+
+
     @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="link_id",nullable=false)
-    val link: LinkEntity,
+    @JoinColumn(name="link_id", insertable = false, updatable = false)
+    val link: LinkEntity? = null,
 
 ) : DefaultEntity() {
 
@@ -36,7 +40,8 @@ class InvoiceEntity (
 fun Invoice.toInvoiceEntity() = InvoiceEntity(
     id = id,
     reference = reference,
-    link = link.toLinkEntity(),
+    linkId = linkId,
+    link = link?.toLinkEntity(),
 
 ).also {
     it.invoiceDetails = invoiceDetails?.toInvoiceDetailEntity(it)
@@ -45,7 +50,8 @@ fun Invoice.toInvoiceEntity() = InvoiceEntity(
 fun InvoiceEntity.toInvoice() = Invoice(
     id = id,
     reference = reference,
-    link = link.toLink(),
+    link = link?.toLink(),
+    linkId = linkId,
 ).also {
     it.invoiceDetails = invoiceDetails?.toInvoiceDetail()
 }

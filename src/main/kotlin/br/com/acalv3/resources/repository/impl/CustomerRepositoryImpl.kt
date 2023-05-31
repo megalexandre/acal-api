@@ -26,8 +26,8 @@ class CustomerRepositoryImpl(
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
-    override fun save(customer: Customer): Customer =
-        repository.save(customer.toCustomerEntity()).toCustomer()
+    override fun save(type: Customer): Customer =
+        repository.save(type.toCustomerEntity()).toCustomer()
 
     override fun findByName(name: String): Customer =
         repository.findByName(name).toCustomer()

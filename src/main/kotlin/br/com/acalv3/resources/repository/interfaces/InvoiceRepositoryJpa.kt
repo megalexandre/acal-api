@@ -5,5 +5,7 @@ import java.util.UUID
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
-interface InvoiceRepositoryJpa : JpaRepository<InvoiceEntity, UUID>, JpaSpecificationExecutor<InvoiceEntity>
+interface InvoiceRepositoryJpa : JpaRepository<InvoiceEntity, UUID>, JpaSpecificationExecutor<InvoiceEntity>{
+    fun findByReference(reference: String): List<InvoiceEntity>?
+}
 

@@ -22,7 +22,7 @@ class AddressRepositoryImpl(
     override fun getById(id: String): Address =
         repository.findByIdOrNull(UUID.fromString(id))?.toAddress() ?: throw NotFoundException()
 
-    override fun save(address: Address): Address = repository.save(address.toAddressEntity()).toAddress()
+    override fun save(type: Address): Address = repository.save(type.toAddressEntity()).toAddress()
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

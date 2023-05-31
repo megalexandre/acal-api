@@ -25,7 +25,7 @@ class HydrometerEntity (
 
     val consumption: Long,
 
-    @Column(name = "link_id", nullable = false)
+    @Column(name = "link_id", nullable = false, columnDefinition = "BINARY(16)")
     val linkId: UUID,
 
     @ManyToOne(cascade = [DETACH])

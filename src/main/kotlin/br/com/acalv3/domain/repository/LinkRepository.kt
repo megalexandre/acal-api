@@ -12,7 +12,6 @@ interface LinkRepository:  AbstractRepository<Link, LinkPage>  {
     fun findByPlaceId(id: UUID): Link?
     fun findActiveByPlaceId(id: UUID): Link?
     fun countActive(): Long
-    fun invoicing(): Long
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
     fun findAll(reference: String): List<Link>

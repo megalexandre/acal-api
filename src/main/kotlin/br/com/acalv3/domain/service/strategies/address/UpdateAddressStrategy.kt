@@ -12,10 +12,10 @@ class UpdateAddressStrategy(
 
     override fun action() = UPDATE
 
-    override fun can(address: Address) {
-        repository.findByName(address.name)?.let {
-            if(it.id != address.id){
-                throw RuntimeException("O Endereço ${address.name} já está cadastrado")
+    override fun can(model: Address) {
+        repository.findByName(model.name)?.let {
+            if(it.id != model.id){
+                throw RuntimeException("O Endereço ${model.name} já está cadastrado")
             }
         }
     }

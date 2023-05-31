@@ -3,13 +3,15 @@ package br.com.acalv3.application.comunication.model.response.dashboard
 import br.com.acalv3.domain.model.Dashboard
 
 class DashboardResponse (
-    val totalCustomer: Long,
     val totalLink: Long,
-    val invoicing: Long
+    val totalCustomer: Long,
+    val awaitingPaymentInvoice: Long,
+    val generatedInvoice: Long,
 )
 
 fun Dashboard.toDashboardResponse() = DashboardResponse(
     totalCustomer = totalCustomer,
     totalLink = totalLink,
-    invoicing = invoicing,
+    awaitingPaymentInvoice = awaitingPaymentInvoice,
+    generatedInvoice = generatedInvoice,
 )

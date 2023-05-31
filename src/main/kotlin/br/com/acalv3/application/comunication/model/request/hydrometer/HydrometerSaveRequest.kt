@@ -8,10 +8,10 @@ class HydrometerSaveRequest(
     val reference: String,
     val costValue: BigDecimal,
     val consumption: Long,
-    val link: Link,
+    val link: LinkRequest,
 )
 
-class Link(
+class LinkRequest(
     val id: UUID
 )
 

@@ -14,9 +14,9 @@ class SaveQualityStrategy(
 
     override fun action() = SAVE
 
-    override fun can(quality: Quality) {
-        repository.findByStartedAt(quality.startedAt)?.let {
-            throw DuplicatedFieldException("$ERROR_MESSAGE ${quality.startedAt.reference()}")
+    override fun can(model: Quality) {
+        repository.findByStartedAt(model.startedAt)?.let {
+            throw DuplicatedFieldException("$ERROR_MESSAGE ${model.startedAt.reference()}")
         }
     }
 

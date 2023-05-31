@@ -12,9 +12,9 @@ class SaveAddressStrategy(
 
     override fun action() = SAVE
 
-    override fun can(address: Address) {
-        repository.findByName(address.name)?.let {
-            throw RuntimeException("O Endereço ${address.name} já está cadastrado")
+    override fun can(model: Address) {
+        repository.findByName(model.name)?.let {
+            throw RuntimeException("O Endereço ${model.name} já está cadastrado")
         }
     }
 }

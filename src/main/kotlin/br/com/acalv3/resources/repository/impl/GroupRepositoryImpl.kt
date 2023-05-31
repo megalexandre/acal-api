@@ -30,19 +30,16 @@ class GroupRepositoryImpl(
                     category = group.category
         )).getSpecification()).firstOrNull()?.toGroup()
 
-    override fun findByName(name: String): Group =
-       repository.findByName(name).toGroup()
-
-    override fun save(group: Group): Group =
-        repository.save(group.toGroupEntity()).toGroup()
+    override fun findByName(name: String): Group = repository.findByName(name).toGroup()
+    override fun save(type: Group): Group =  repository.save(type.toGroupEntity()).toGroup()
 
     override fun update(group: Group): Group =
         repository.save(group.toGroupEntity()).toGroup()
 
-    override fun paginate(request: GroupPage): Page<Group> =
+    override fun paginate(page: GroupPage): Page<Group> =
         repository.findAll(
-            GroupSpecification(request).getSpecification(),
-            super.pageable(request)
+            GroupSpecification(page).getSpecification(),
+            super.pageable(page)
         ).toGroupPage()
 
     override fun getAll(): List<Group> = repository.findAll().toGroup()

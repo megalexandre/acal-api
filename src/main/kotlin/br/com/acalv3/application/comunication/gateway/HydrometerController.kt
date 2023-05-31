@@ -9,7 +9,6 @@ import br.com.acalv3.application.comunication.model.request.hydrometer.toDomain
 import br.com.acalv3.application.comunication.model.request.hydrometer.toPage
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.HydrometerPageResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.HydrometerResponse
-import br.com.acalv3.application.comunication.model.response.hydrometer.response.HydrometerSaveResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.toPageResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.toResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.toSaveResponse
@@ -44,13 +43,9 @@ class HydrometerController(
        service.getById(id).toResponse()
 
    @PostMapping
-   fun save(@RequestBody request: HydrometerSaveRequest): HydrometerSaveResponse =
-        service.save(request.toDomain()).toSaveResponse()
-
-   @PostMapping("lote")
-   fun saveAll(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
+   fun save(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
        request.forEach{
-           service.save(it.toDomain())
+           service.save(it.toDomain()).toSaveResponse()
        }
 
    @GetMapping( "/findByReference/{reference}")

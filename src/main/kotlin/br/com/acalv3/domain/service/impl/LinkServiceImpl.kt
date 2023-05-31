@@ -47,8 +47,6 @@ class LinkServiceImpl(
 
 	override fun findAll(reference: String): List<Link> = repository.findAll(reference)
 
-	override fun invoicing(): Long = repository.invoicing()
-
 	override fun inactivate(id: String) = repository.inactivate(id)
 
 	override fun linkWithHydrometerByMonth(reference: String) = repository.linkWithHydrometerByMonth(reference)

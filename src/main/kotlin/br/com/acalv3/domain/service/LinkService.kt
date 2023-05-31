@@ -20,7 +20,6 @@ interface LinkService {
     fun findByGroupId(groupId: UUID): Link?
     fun count(): Long
     fun countActive(): Long
-    fun invoicing(): Long
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
     fun findHydrometerByReference(reference: String): List<Link>?

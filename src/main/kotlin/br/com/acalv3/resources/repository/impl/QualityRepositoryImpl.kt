@@ -21,7 +21,7 @@ class QualityRepositoryImpl(
         repository.findByStartedAt(startedAt)?.toDomain()
 
     override fun getById(id: String): Quality = repository.getById(UUID.fromString(id)).toDomain()
-    override fun save(quality: Quality): Quality = repository.save(quality.toEntity()).toDomain()
+    override fun save(type: Quality): Quality = repository.save(type.toEntity()).toDomain()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
     override fun count(): Long = repository.count()
     override fun getAll(): List<Quality> = repository.findAll().toDomain()

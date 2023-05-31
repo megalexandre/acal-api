@@ -12,8 +12,8 @@ class SaveCustomerStrategy(
 
     override fun action() = SAVE
 
-    override fun can(customer: Customer) {
-        repository.findByDocument(customer.document)?.let {
+    override fun can(model: Customer) {
+        repository.findByDocument(model.document)?.let {
             throw RuntimeException(
                 "o documento ${it.document} já está cadastrado para o usuário: ${it.name}")
         }

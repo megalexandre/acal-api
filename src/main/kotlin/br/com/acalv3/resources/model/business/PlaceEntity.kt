@@ -3,8 +3,10 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.resources.model.DefaultEntity
 import java.util.UUID
+import javax.persistence.CascadeType.DETACH
 import javax.persistence.Column
 import javax.persistence.Entity
+import javax.persistence.ForeignKey
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -20,11 +22,14 @@ class PlaceEntity (
     @Column(nullable = false)
     val letter: String,
 
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "address_id", nullable = false, columnDefinition = "BINARY(16)")
     val addressId: UUID,
 
-    @ManyToOne
-    @JoinColumn(name="address_id", insertable = false, updatable = false)
+    @ManyToOne(cascade = [DETACH])
+    @JoinColumn(
+        nullable = true,
+        foreignKey= ForeignKey(name="place_address_fk"),
+        name="address_id", insertable = false, updatable = false)
     val address: AddressEntity? = null,
 
     @Column(nullable = false)
