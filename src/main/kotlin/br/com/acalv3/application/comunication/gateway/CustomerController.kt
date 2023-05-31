@@ -17,6 +17,8 @@ import br.com.acalv3.application.comunication.model.response.customer.toCustomer
 import br.com.acalv3.application.comunication.model.response.customer.toGetCustomerResponse
 import br.com.acalv3.domain.service.CustomerService
 import javax.validation.Valid
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -35,24 +37,35 @@ import org.springframework.web.bind.annotation.RestController
 class CustomerController(
     val customerService: CustomerService
     ) {
+    private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
     @PostMapping
     fun save(@Valid @RequestBody request: CustomerSaveRequest): SaveUpdateCustomerResponse =
-        customerService.save(request.toCustomer()).toCustomerResponse()
+        customerService.save(request.toCustomer()).toCustomerResponse().also {
+            logger.info("save customer: $request")
+        }
 
     @PutMapping(UPDATE)
     fun update(@Valid @RequestBody request: CustomerUpdateRequest) =
-        customerService.update(request.toCustomer()).toCustomerResponse()
+        customerService.update(request.toCustomer()).toCustomerResponse().also {
+            logger.info("update customer: $request")
+        }
 
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: CustomerPageRequest): Page<CustomerPageResponse> =
-        customerService.paginate(request.toCustomerPage()).toCustomerPageResponse()
+        customerService.paginate(request.toCustomerPage()).toCustomerPageResponse().also {
+            logger.info("paginate customer: $request")
+        }
 
     @GetMapping(BY_ID)
     fun find(@PathVariable id: String): CustomerGetResponse =
-        customerService.getById(id).toGetCustomerResponse()
+        customerService.getById(id).toGetCustomerResponse().also {
+            logger.info("getById customer: $id")
+        }
 
     @DeleteMapping(BY_ID)
-    fun delete(@PathVariable id: String) = customerService.delete(id)
+    fun delete(@PathVariable id: String) = customerService.delete(id).also {
+        logger.info("delete customer: $id")
+    }
 
 }

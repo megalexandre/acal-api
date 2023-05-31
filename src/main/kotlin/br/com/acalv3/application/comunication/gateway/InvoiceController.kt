@@ -37,19 +37,19 @@ private class InvoiceGateway(
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: InvoicePageRequest): Page<InvoicePageResponse> =
         service.paginate(request.toPageRequest()).toInvoiceResponse().also{
-            logger.info("paginate address: $request")
+            logger.info("paginate invoice: $request")
         }
 
     @PostMapping
     fun save(@Valid @RequestBody request: List<InvoiceSaveRequest>): List<InvoiceResponse> =
         service.saveAll(request.toInvoice()).toInvoiceResponse().also{
-            logger.info("save address: $request")
+            logger.info("save invoice: $request")
         }
 
     @GetMapping(LIST)
     fun list(): List<InvoiceResponse> =
         service.getAll().toInvoiceResponse().also{
-            logger.info("listing all address")
+            logger.info("listing all invoice")
         }
 
     @PostMapping(path = ["/report/{id}"], produces = [APPLICATION_PDF_VALUE])

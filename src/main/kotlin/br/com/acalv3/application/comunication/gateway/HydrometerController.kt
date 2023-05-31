@@ -18,6 +18,8 @@ import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
 import java.util.UUID
 import javax.validation.Valid
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.web.bind.annotation.GetMapping
@@ -33,26 +35,37 @@ class HydrometerController(
     val service: HydrometerService,
     val linkService: LinkService
 ) {
+    private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
    @PostMapping(PAGINATE)
    fun paginate(@Valid @RequestBody request: HydrometerPageRequest): Page<HydrometerPageResponse> =
-       service.paginate(request.toPage()).toPageResponse()
+       service.paginate(request.toPage()).toPageResponse().also {
+           logger.info("hydrometer paginate: $request")
+       }
 
    @GetMapping(BY_ID)
    fun find(@PathVariable id: String): HydrometerResponse =
-       service.getById(id).toResponse()
+       service.getById(id).toResponse().also {
+           logger.info("hydrometer getById: $id")
+       }
 
    @PostMapping
    fun save(@Valid @RequestBody request: List<HydrometerSaveRequest>) =
        request.forEach{
            service.save(it.toDomain()).toSaveResponse()
+       }.also {
+           logger.info("hydrometer save: $request")
        }
 
    @GetMapping( "/findByReference/{reference}")
    fun validHydrometerByReference(@PathVariable reference: String): List<LinkGetResponse>? =
-        linkService.findHydrometerByReference(reference)?.toLinkGetResponse()
+        linkService.findHydrometerByReference(reference)?.toLinkGetResponse().also {
+            logger.info("hydrometer findHydrometerByReference: $reference")
+        }
 
    @GetMapping("/link/{link}/reference/{reference}")
    fun getHydrometerByLinkAndReference(@PathVariable reference: String, @PathVariable link: UUID): HydrometerResponse? =
-       service.getHydrometerByLinkAndReference(linkId = link, reference = reference)?.toResponse()
+       service.getHydrometerByLinkAndReference(linkId = link, reference = reference)?.toResponse().also {
+           logger.info("hydrometer getHydrometerByLinkAndReference: $reference, $link")
+       }
 }
