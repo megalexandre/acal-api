@@ -1,7 +1,6 @@
 package br.com.acalv3.resources.model.business
 
 import br.com.acalv3.domain.enumeration.Reason
-import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.InvoiceDetail
 import br.com.acalv3.resources.model.DefaultEntity
 import java.math.BigDecimal
@@ -11,12 +10,10 @@ import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
-import javax.persistence.FetchType
 import javax.persistence.FetchType.EAGER
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
-import org.springframework.data.domain.Page
 
 @Entity(name = "invoice_detail")
 class InvoiceDetailEntity (

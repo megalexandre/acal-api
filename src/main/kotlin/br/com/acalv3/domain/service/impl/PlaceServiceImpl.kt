@@ -1,16 +1,13 @@
 package br.com.acalv3.domain.service.impl
 
-import br.com.acalv3.domain.enumeration.Action
 import br.com.acalv3.domain.enumeration.Action.DELETE
 import br.com.acalv3.domain.enumeration.Action.SAVE
 import br.com.acalv3.domain.enumeration.Action.UPDATE
 import br.com.acalv3.domain.model.Address
-import br.com.acalv3.domain.model.Customer
 import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.PlacePage
 import br.com.acalv3.domain.repository.PlaceRepository
 import br.com.acalv3.domain.service.PlaceService
-import br.com.acalv3.domain.service.strategies.address.AddressStrategy
 import br.com.acalv3.domain.service.strategies.place.PlaceStrategy
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service

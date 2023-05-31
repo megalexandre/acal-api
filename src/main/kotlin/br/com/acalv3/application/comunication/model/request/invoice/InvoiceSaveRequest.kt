@@ -1,7 +1,6 @@
 package br.com.acalv3.application.comunication.model.request.invoice
 
 import br.com.acalv3.domain.model.Invoice
-import br.com.acalv3.domain.model.Link
 import java.util.UUID
 
 class InvoiceSaveRequest (

@@ -5,8 +5,7 @@ import br.com.acalv3.domain.model.Hydrometer
 import org.springframework.stereotype.Service
 
 @Service
-class SaveHydrometerStrategy(
-): HydrometerStrategy<Hydrometer> {
+class SaveHydrometerStrategy : HydrometerStrategy<Hydrometer> {
 
     override fun action() = SAVE
 
