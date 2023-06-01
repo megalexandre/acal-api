@@ -51,9 +51,9 @@ dependencies {
 	testImplementation("org.junit.jupiter:junit-jupiter-engine")
 	testImplementation("org.junit.platform:junit-platform-launcher")
 
-	testImplementation("io.mockk:mockk:1.8.8")
+	testImplementation("io.mockk:mockk:1.13.4")
 	testImplementation("com.ninja-squad:springmockk:2.0.1")
-	testImplementation("com.h2database:h2:2.0.202")
+	testImplementation("com.h2database:h2:2.1.214")
 
 	testCompileOnly("org.springframework.boot:spring-boot-starter-test"){
 		exclude(module = "junit")

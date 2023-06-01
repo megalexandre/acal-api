@@ -1,4 +1,4 @@
-package br.com.acalv3.integration.quality.update
+package br.com.acalv3.integration.quality.validation.update
 
 import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.integration.DefaultGatewayTest

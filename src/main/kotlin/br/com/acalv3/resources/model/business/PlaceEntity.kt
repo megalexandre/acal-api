@@ -6,7 +6,6 @@ import java.util.UUID
 import javax.persistence.CascadeType.DETACH
 import javax.persistence.Column
 import javax.persistence.Entity
-import javax.persistence.ForeignKey
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -28,7 +27,6 @@ class PlaceEntity (
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(
         nullable = true,
-        foreignKey= ForeignKey(name="place_address_fk"),
         name="address_id", insertable = false, updatable = false)
     val address: AddressEntity? = null,
 

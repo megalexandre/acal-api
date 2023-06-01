@@ -13,7 +13,7 @@ fun customerStub(
     name: String = "customer-stub-test",
     personType: PersonType = PERSON,
     phoneNumber: String = "71988872749",
-    document: String = "03386558662",
+    document: String = "95680718065",
     birthDay: LocalDate = now(),
     active: Boolean = true
 ) = Customer(

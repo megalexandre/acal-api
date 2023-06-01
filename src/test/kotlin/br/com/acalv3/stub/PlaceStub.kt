@@ -8,8 +8,8 @@ fun placeStub(
     id: UUID = UUID.randomUUID(),
     number: Long = 1,
     letter: String = "A",
-    address: Address = addressStub(),
-    addressId: UUID = address.id,
+    address: Address? = addressStub(),
+    addressId: UUID = address?.id!!,
     hasHydrometer: Boolean = true,
     other: String? = "outher",
 ) = Place(

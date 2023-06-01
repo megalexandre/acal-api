@@ -20,5 +20,5 @@ data class Link(
     val startedAt: LocalDateTime,
     val finishedAt: LocalDateTime? = null
 ) {
-    val addressName = place?.address?.name +" "+ place?.number+" "+place?.letter
+    val addressName = place?.address?.name +", Núm: "+ place?.number+" | "+place?.letter
 }

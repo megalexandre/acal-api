@@ -11,7 +11,6 @@ import io.restassured.module.kotlin.extensions.When
 import java.nio.charset.Charset.defaultCharset
 import java.util.UUID
 import org.hamcrest.Matchers.hasKey
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -40,10 +39,10 @@ class CustomerUpdateTest: DefaultGatewayTest() {
 
 	@Test
 	fun `should update a customer`(){
-
 		val savedCustomer = customerRepository.save(customerStub())
 		val customer = copyToString(customerUpdate.inputStream, defaultCharset())
 			.replace("#id",savedCustomer.id.toString())
+			.replace("#document", savedCustomer.document)
 			.replace("#updated_name", "new_customer_name")
 
 		Given {
