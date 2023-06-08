@@ -17,4 +17,5 @@ fun GroupUpdateRequest.toGroup() = Group(
     name = name?.trim() ?: throw RuntimeException("name can't be null"),
     value =  value ?: throw RuntimeException("name can't be null"),
     category = Category.byValue(category) ?: throw RuntimeException("category can't be null"),
+    categoryValue = categoryValue ?: throw RuntimeException("categoryValue can't be null"),
 )

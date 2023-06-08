@@ -10,6 +10,7 @@ class Customer(
     val document: String,
     val personType: PersonType,
     var birthDay: LocalDate? = null,
+    val membershipNumber: Int,
     val phoneNumber: String?,
     val active: Boolean
 )

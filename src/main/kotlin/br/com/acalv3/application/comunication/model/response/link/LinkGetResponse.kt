@@ -15,6 +15,7 @@ data class LinkGetResponse(
     val group: Group?,
     val startedAt: LocalDateTime,
     val finishedAt: LocalDateTime?,
+    val linkName: String,
 )
 
 fun Link.toLinkGetResponse() = LinkGetResponse(
@@ -25,6 +26,7 @@ fun Link.toLinkGetResponse() = LinkGetResponse(
     startedAt = startedAt,
     finishedAt = finishedAt,
     mailPlace = mailPlace,
+    linkName = addressName
 )
 
 fun List<Link>.toLinkGetResponse() = map{ it.toLinkGetResponse() }

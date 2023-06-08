@@ -41,37 +41,37 @@ class AddressController(
     @PostMapping
     fun save(@Valid @RequestBody request: AddressSaveRequest): SaveUpdateAddressResponse =
         service.save(request.toAddress()).toAddressResponse().also {
-            logger.info("save address: $request")
+            logger.info("address save: $request")
         }
 
     @PutMapping(UPDATE)
     fun update(@Valid @RequestBody request: AddressUpdateRequest) =
         service.update(request.toAddress()).toAddressResponse().also {
-            logger.info("save update: $request")
+            logger.info("address update: $request")
         }
 
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: AddressPaginateRequest): Page<AddressPageResponse> =
         service.paginate(request.toAddressPage()).toAddressPageResponse().also {
-            logger.info("save paginate: $request")
+            logger.info("address paginate: $request")
         }
 
     @GetMapping(BY_ID)
     fun find(@PathVariable id: String): AddressGetResponse =
         service.getById(id).toGetAddressResponse().also {
-            logger.info("find: $id")
+            logger.info("address find: $id")
         }
 
     @GetMapping(LIST)
     fun list(): List<AddressGetResponse> =
         service.getAll().toGetAddressResponse().also {
-            logger.info("list all")
+            logger.info("address list all")
         }
 
     @DeleteMapping(BY_ID)
     fun delete(@PathVariable id: String) =
         service.delete(id).also {
-            logger.info("delete by id: $id")
+            logger.info("address delete by id: $id")
         }
 
 }

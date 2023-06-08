@@ -10,4 +10,6 @@ class Place(
     val letter: String,
     val hasHydrometer: Boolean,
     val other: String?,
-)
+){
+    val addressName: String = "${address?.name}, $number$letter"
+}

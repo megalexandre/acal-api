@@ -15,11 +15,11 @@ spring:
     hibernate:
       ddl-auto: update
       hbm2ddl:  auto
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-        format_sql: true
+        format_sql: false
         check_nullability: true
   output:
     ansi:

@@ -1,5 +1,6 @@
 package br.com.acalv3.application.comunication.gateway
 
+import br.com.acalv3.application.comunication.ControllersRoutes.Companion.BY_ID
 import br.com.acalv3.application.comunication.ControllersRoutes.Companion.INVOICE
 import br.com.acalv3.application.comunication.ControllersRoutes.Companion.LIST
 import br.com.acalv3.application.comunication.ControllersRoutes.Companion.PAGINATE
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -26,13 +28,17 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping(INVOICE,
-    produces=[APPLICATION_JSON_VALUE],
-)
+@RequestMapping(INVOICE, produces = [APPLICATION_JSON_VALUE])
 private class InvoiceGateway(
     val service: InvoiceService,
 ) {
     private var logger: Logger = LoggerFactory.getLogger(this::class.java)
+
+    @GetMapping(BY_ID)
+    fun find(@PathVariable id: String): InvoiceResponse =
+        service.getById(id).toInvoiceResponse().also {
+            logger.info("find invoice: $id")
+        }
 
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: InvoicePageRequest): Page<InvoicePageResponse> =
@@ -50,6 +56,12 @@ private class InvoiceGateway(
     fun list(): List<InvoiceResponse> =
         service.getAll().toInvoiceResponse().also{
             logger.info("listing all invoice")
+        }
+
+    @PatchMapping("pay/{id}")
+    fun pay(@PathVariable id: String) =
+        service.payById(id).also {
+            logger.info("Pay by id: $id")
         }
 
     @PostMapping(path = ["/report/{id}"], produces = [APPLICATION_PDF_VALUE])

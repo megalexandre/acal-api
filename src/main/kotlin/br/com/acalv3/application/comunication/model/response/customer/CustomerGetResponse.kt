@@ -15,7 +15,8 @@ data class CustomerGetResponse(
     val personType: PersonType?,
     @JsonFormat(pattern = DATE_FORMAT)
     val birthDay: LocalDate? = null,
-    val active: Boolean
+    val active: Boolean,
+    val membershipNumber: Int,
 )
 
 fun Customer.toGetCustomerResponse() = CustomerGetResponse(
@@ -26,4 +27,5 @@ fun Customer.toGetCustomerResponse() = CustomerGetResponse(
     birthDay = birthDay,
     phoneNumber = phoneNumber,
     active = active,
+    membershipNumber = membershipNumber,
 )

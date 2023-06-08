@@ -14,8 +14,12 @@ class DeleteAddressStrategy(
 
     override fun can(model: Address) {
         placeService.findByAddress(model)?.let {
-            throw RuntimeException("Esse Logradouro está vinculo a endereço(s) e não pode ser deletado")
+            throw RuntimeException(String.format(ERROR_DUPLICATED, it.addressName))
         }
+    }
+
+    companion object{
+        private const val ERROR_DUPLICATED = "Esse logradouro está vinculado ao Endereco: %s"
     }
 
 }

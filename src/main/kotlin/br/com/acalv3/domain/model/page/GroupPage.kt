@@ -12,10 +12,12 @@ data class GroupPage (
     override val page: Int = 0,
     override val pageSize: Int = 10,
     override val direction: String = "ASC",
+    val categoryValue: BigDecimal? = null,
 ) : BasePage(
     page = page,
     pageSize = pageSize,
     sortedField = sortedField,
     direction = direction,
+
 )
 

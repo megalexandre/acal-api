@@ -3,7 +3,10 @@ package br.com.acalv3.domain.enumeration
 enum class Reason {
 
 	HYDROMETER,
-	CATEGORY;
+	DUE,
+	CATEGORY,
+	WATER,
+	;
 
 	companion object {
 		fun byName(input: String?): Reason?  =

@@ -61,7 +61,7 @@ dependencies {
 		exclude(module = "mockito-core")
 	}
 	testImplementation("org.springframework.security:spring-security-test")
-
+	implementation("org.springframework.boot:spring-boot-starter-validation")
 
 	implementation("junit:junit:4.13.1")
 	implementation("mysql:mysql-connector-java")

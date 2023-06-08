@@ -14,6 +14,8 @@ fun InvoiceDetailRequest.toInvoiceDetail() = InvoiceDetail(
     id = UUID.randomUUID(),
     reason = Reason.byName(reason)?: throw RuntimeException("this reason cant be accepted: $reason"),
     value = value?: throw RuntimeException("value cant be null"),
+    isPayed = false,
+    dataPayed = null,
 )
 
 fun List<InvoiceDetailRequest>.toInvoiceDetail() = map{ it.toInvoiceDetail()}

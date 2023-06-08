@@ -12,6 +12,7 @@ class LegacyUser (
     @JsonProperty("person_type")
     val personType: PersonType,
     val number: String?,
+    val membershipNumber: Int = 0,
 )
 
 fun LegacyUser.toCustomer() = Customer(
@@ -21,4 +22,5 @@ fun LegacyUser.toCustomer() = Customer(
     personType = personType,
     phoneNumber = number,
     active = true,
+    membershipNumber = membershipNumber,
 )

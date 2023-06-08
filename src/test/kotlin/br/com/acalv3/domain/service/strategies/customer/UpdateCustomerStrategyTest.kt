@@ -66,6 +66,4 @@ internal class UpdateCustomerStrategyTest{
             exception.message, "O documento 216.663.210-60 já está cadastrado para o usuário: customer-stub-test")
     }
 
-
-
 }

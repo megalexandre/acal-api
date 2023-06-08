@@ -3,6 +3,7 @@ package br.com.acalv3.resources.repository.impl
 import br.com.acalv3.commons.ReportUtils
 import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.enumeration.Report.BILL
+import br.com.acalv3.domain.exception.InvoiceNotFoundException
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.domain.repository.InvoiceRepository
@@ -29,9 +30,22 @@ class InvoiceRepositoryImpl(
     override fun getById(id: String): Invoice =
         repository.findByIdOrNull(UUID.fromString(id))?.toInvoice() ?: throw NotFoundException()
 
+    override fun payById(id: String) {
+        runCatching {
+            val invoice = getById(id)
+
+            invoice.invoiceDetails?.forEach {
+                it.isPayed = true
+                it.dataPayed = LocalDateTime.now()
+            }
+            save(invoice.copy(isPayed = true))
+        }.onFailure {
+            throw InvoiceNotFoundException("invoice not found: $it")
+        }
+    }
+
     override fun save(type: Invoice): Invoice =
         repository.save(type.toInvoiceEntity()).toInvoice()
-
 
     override fun report(id: UUID): ByteArray? = run {
         val data = repository.findByIdOrNull(id)!!

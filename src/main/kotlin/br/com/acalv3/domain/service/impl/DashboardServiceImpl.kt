@@ -18,7 +18,7 @@ class DashboardServiceImpl(
 		return Dashboard(
 			totalCustomer = customerServiceImpl.count(),
 			totalLink = linkServiceImpl.countActive(),
-			awaitingPaymentInvoice = invoices?.count { it.payout }?.toLong() ?: 0,
+			awaitingPaymentInvoice = invoices?.count { it.isPayed }?.toLong() ?: 0,
 			generatedInvoice = invoices?.size?.toLong() ?: 0,
 		)
 	}

@@ -9,6 +9,7 @@ class GroupPageResponse(
     val id: UUID,
     val name: String,
     val value: BigDecimal,
+    val categoryValue: BigDecimal,
     val category: String,
 )
 
@@ -16,7 +17,8 @@ fun Group.toGroupPageResponse() = GroupPageResponse(
     id = id,
     name = name,
     value = value,
-    category = category.name
+    category = category.name,
+    categoryValue = categoryValue,
 )
 
 fun Page<Group>.toGroupPageResponse() = map{ it.toGroupPageResponse() }

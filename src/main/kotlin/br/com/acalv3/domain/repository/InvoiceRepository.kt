@@ -9,4 +9,6 @@ interface InvoiceRepository: AbstractRepository<Invoice, InvoicePage> {
     fun save(invoice: List<Invoice>): List<Invoice>
     fun report(id: UUID): ByteArray?
     fun findByActualReference(): List<Invoice>?
+    fun payById(id: String)
+
 }

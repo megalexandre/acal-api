@@ -2,6 +2,7 @@ package br.com.acalv3.application.configuration.advice
 
 import br.com.acalv3.commons.clearMessage
 import br.com.acalv3.domain.exception.DuplicatedFieldException
+import br.com.acalv3.domain.exception.InvoiceNotFoundException
 import br.com.acalv3.domain.exception.RequiredFieldException
 import br.com.acalv3.domain.exception.UnauthorizedException
 import java.sql.SQLException
@@ -31,16 +32,18 @@ class AppAdvice {
 
 	@ExceptionHandler(value = [
 		ConstraintViolationException::class,
-		DuplicatedFieldException::class, ])
+		DuplicatedFieldException::class,
+		MethodArgumentNotValidException::class,
+		InvoiceNotFoundException::class
+	])
 	fun e2 (ex: RuntimeException) = getResponse(ex, BAD_REQUEST)
 
-	@ExceptionHandler(value = [
-		MethodArgumentNotValidException::class])
-	fun e3 (ex: MethodArgumentNotValidException) = getResponse(ex, BAD_REQUEST)
 
 	@ExceptionHandler(value = [
 		RuntimeException::class])
-	fun e4 (ex: RuntimeException) = getResponse(ex,INTERNAL_SERVER_ERROR)
+	fun e4 (ex: RuntimeException) = getResponse(ex,INTERNAL_SERVER_ERROR).also {
+		logger.error("",ex)
+	}
 
 	@ExceptionHandler(value = [
 		RequiredFieldException::class])

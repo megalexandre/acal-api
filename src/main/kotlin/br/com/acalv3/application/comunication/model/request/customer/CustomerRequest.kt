@@ -25,4 +25,6 @@ open class CustomerRequest (
     open val phoneNumber: String? = null,
 
     open val active: Boolean? = true,
+
+    open val membershipNumber: Int = 0,
 )

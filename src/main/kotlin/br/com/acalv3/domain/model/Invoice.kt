@@ -1,13 +1,16 @@
 package br.com.acalv3.domain.model
 
+import java.time.LocalDateTime
 import java.util.UUID
 
-class Invoice(
+data class Invoice(
     val id: UUID,
     val reference: String,
     val linkId: UUID,
     val link: Link? = null,
-    val payout: Boolean = true,
+    val isPayed: Boolean = true,
+    val emission: LocalDateTime,
+    val dueDate: LocalDateTime,
 ) {
     var invoiceDetails: List<InvoiceDetail>? = null
 }

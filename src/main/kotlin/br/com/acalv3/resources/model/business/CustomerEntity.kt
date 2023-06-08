@@ -34,6 +34,9 @@ class CustomerEntity (
     @Column(nullable = false, unique = true, length = 32)
     val document: String,
 
+    @Column(nullable = false)
+    val membershipNumber: Int,
+
     @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
     @JsonFormat(pattern = DATE_FORMAT)
     val birthDay: LocalDate? = null,
@@ -49,7 +52,9 @@ fun Customer.toCustomerEntity() = CustomerEntity(
     document = document,
     personType = personType,
     birthDay = birthDay,
+    membershipNumber = membershipNumber,
     active = active,
+
 )
 
 fun CustomerEntity.toCustomer() = Customer(
@@ -59,6 +64,7 @@ fun CustomerEntity.toCustomer() = Customer(
     document = document,
     personType = personType,
     birthDay = birthDay,
+    membershipNumber = membershipNumber,
     active = active,
 )
 

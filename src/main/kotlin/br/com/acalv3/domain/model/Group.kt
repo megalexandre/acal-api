@@ -7,6 +7,7 @@ import java.util.UUID
 class Group(
     val id: UUID,
     val value: BigDecimal,
+    val categoryValue: BigDecimal,
     val category: Category,
     val name: String,
 )

@@ -15,9 +15,13 @@ class UpdateAddressStrategy(
     override fun can(model: Address) {
         repository.findByName(model.name)?.let {
             if(it.id != model.id){
-                throw RuntimeException("O Endereço ${model.name} já está cadastrado")
+                throw RuntimeException(String.format(ERROR_DUPLICATED, model.name))
             }
         }
+    }
+
+    companion object{
+        private const val ERROR_DUPLICATED = "O Endereço %s já está cadastrado"
     }
 
 }

@@ -22,5 +22,6 @@ fun CustomerSaveRequest.toCustomer() = Customer(
     phoneNumber = phoneNumber?.trim(),
     personType = PersonType.valueOf(personType ?: throw RuntimeException("personType can't be null")),
     birthDay = birthDay,
-    active = true
+    active = true,
+    membershipNumber = membershipNumber,
 )

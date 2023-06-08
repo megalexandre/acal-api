@@ -14,6 +14,7 @@ fun customerStub(
     personType: PersonType = PERSON,
     phoneNumber: String = "71988872749",
     document: String = "95680718065",
+    membershipNumber: Int = 1,
     birthDay: LocalDate = now(),
     active: Boolean = true
 ) = Customer(
@@ -23,5 +24,6 @@ fun customerStub(
      phoneNumber = phoneNumber,
      document = document,
      birthDay = birthDay,
-     active = active
+     active = active,
+    membershipNumber = membershipNumber,
 )

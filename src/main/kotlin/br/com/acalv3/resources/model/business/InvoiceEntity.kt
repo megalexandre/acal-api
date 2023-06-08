@@ -1,7 +1,10 @@
 package br.com.acalv3.resources.model.business
 
+import br.com.acalv3.application.comunication.Fixture.Companion.DATE_TIME_FORMAT
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.resources.model.DefaultEntity
+import com.fasterxml.jackson.annotation.JsonFormat
+import java.time.LocalDateTime
 import java.util.UUID
 import javax.persistence.CascadeType.ALL
 import javax.persistence.CascadeType.DETACH
@@ -13,6 +16,8 @@ import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
 import javax.persistence.OneToMany
 import org.springframework.data.domain.Page
+import org.springframework.format.annotation.DateTimeFormat
+import org.springframework.format.annotation.DateTimeFormat.ISO.DATE_TIME
 
 @Entity(name = "invoice")
 class InvoiceEntity (
@@ -26,12 +31,21 @@ class InvoiceEntity (
     @Column(name = "link_id", nullable = false, columnDefinition = "BINARY(16)")
     val linkId: UUID,
 
+    val isPayed: Boolean,
 
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="link_id", insertable = false, updatable = false)
     val link: LinkEntity? = null,
 
-) : DefaultEntity() {
+    @DateTimeFormat(pattern = DATE_TIME_FORMAT, iso = DATE_TIME)
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    val emission: LocalDateTime,
+
+    @DateTimeFormat(pattern = DATE_TIME_FORMAT, iso = DATE_TIME)
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
+    val dueDate: LocalDateTime,
+
+    ) : DefaultEntity() {
 
     @OneToMany(fetch = EAGER, mappedBy="invoice", cascade = [ALL])
     var invoiceDetails: List<InvoiceDetailEntity>? = null
@@ -41,8 +55,10 @@ fun Invoice.toInvoiceEntity() = InvoiceEntity(
     id = id,
     reference = reference,
     linkId = linkId,
+    isPayed = isPayed,
     link = link?.toLinkEntity(),
-
+    emission = emission,
+    dueDate = dueDate,
 ).also {
     it.invoiceDetails = invoiceDetails?.toInvoiceDetailEntity(it)
 }
@@ -50,8 +66,11 @@ fun Invoice.toInvoiceEntity() = InvoiceEntity(
 fun InvoiceEntity.toInvoice() = Invoice(
     id = id,
     reference = reference,
+    isPayed = isPayed,
     link = link?.toLink(),
     linkId = linkId,
+    emission = emission,
+    dueDate = dueDate,
 ).also {
     it.invoiceDetails = invoiceDetails?.toInvoiceDetail()
 }

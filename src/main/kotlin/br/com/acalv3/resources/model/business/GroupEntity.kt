@@ -23,6 +23,9 @@ class GroupEntity (
     val value: BigDecimal,
 
     @Column(nullable = false)
+    val categoryValue: BigDecimal,
+
+    @Column(nullable = false)
     @Enumerated(STRING)
     val category: Category,
 
@@ -36,6 +39,7 @@ fun Group.toGroupEntity() = GroupEntity(
     value = value,
     category = category,
     name = name,
+    categoryValue = categoryValue,
 )
 
 fun GroupEntity.toGroup() = Group(
@@ -43,6 +47,7 @@ fun GroupEntity.toGroup() = Group(
     value = value,
     category = category,
     name = name,
+    categoryValue = categoryValue,
 )
 
 fun Page<GroupEntity>.toGroupPage() = map{ it.toGroup() }
