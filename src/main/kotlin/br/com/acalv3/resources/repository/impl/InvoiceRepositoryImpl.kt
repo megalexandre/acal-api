@@ -33,12 +33,15 @@ class InvoiceRepositoryImpl(
     override fun payById(id: String) {
         runCatching {
             val invoice = getById(id)
-
-            invoice.invoiceDetails?.forEach {
-                it.isPayed = true
-                it.dataPayed = LocalDateTime.now()
+            val newInvoice = invoice.copy(isPayed = true)
+            newInvoice.invoiceDetails = invoice.invoiceDetails?.map {
+                it.copy(
+                    isPayed = true,
+                    dataPayed = LocalDateTime.now()
+                )
             }
-            save(invoice.copy(isPayed = true))
+
+            save(newInvoice)
         }.onFailure {
             throw InvoiceNotFoundException("invoice not found: $it")
         }

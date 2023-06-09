@@ -5,7 +5,7 @@ import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.UUID
 
-class InvoiceDetail(
+data class InvoiceDetail(
     val id: UUID,
     val reason: Reason,
     val value: BigDecimal,

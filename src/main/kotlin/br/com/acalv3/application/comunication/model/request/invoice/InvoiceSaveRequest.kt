@@ -10,6 +10,7 @@ import java.util.UUID
 class InvoiceSaveRequest (
     val reference: String? = null,
     val link: LinkRequest,
+    val isPayed: Boolean = false,
 
     @JsonFormat(shape = STRING, pattern = DATE_TIME_FORMAT)
     val emission: LocalDateTime? = null,
@@ -28,6 +29,7 @@ fun InvoiceSaveRequest.toInvoice() = Invoice(
     linkId = UUID.fromString(link.id),
     emission = emission!!,
     dueDate = dueDate!!,
+    isPayed = isPayed,
 )
 
 fun List<InvoiceSaveRequest>.toInvoice() = map{ it.toInvoice()}

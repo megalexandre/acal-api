@@ -8,7 +8,7 @@ data class Invoice(
     val reference: String,
     val linkId: UUID,
     val link: Link? = null,
-    val isPayed: Boolean = true,
+    val isPayed: Boolean,
     val emission: LocalDateTime,
     val dueDate: LocalDateTime,
 ) {
