@@ -1,6 +1,5 @@
 package br.com.acalv3.application.comunication.model.response.invoice
 
-import br.com.acalv3.application.comunication.Fixture
 import br.com.acalv3.application.comunication.Fixture.Companion.DATE_TIME_FORMAT
 import br.com.acalv3.application.comunication.model.response.link.LinkGetResponse
 import br.com.acalv3.application.comunication.model.response.link.toLinkGetResponse
@@ -20,8 +19,8 @@ class InvoiceResponse(
     var invoiceDetails: List<InvoiceDetailResponse>? = null,
     @JsonFormat(shape = STRING, pattern = DATE_TIME_FORMAT)
     val emission: LocalDateTime,
-    @JsonFormat(shape = STRING, pattern = Fixture.DATE_TIME_FORMAT)
-    val duoDate: LocalDateTime,
+    @JsonFormat(shape = STRING, pattern = DATE_TIME_FORMAT)
+    val dueDate: LocalDateTime,
     val link: LinkGetResponse?,
 )
 
@@ -30,6 +29,7 @@ class InvoiceDetailResponse(
     val reason: Reason,
     val value: BigDecimal,
     var isPayed: Boolean,
+    @JsonFormat(pattern = DATE_TIME_FORMAT)
     var dataPayed: LocalDateTime?,
 )
 
@@ -40,7 +40,7 @@ fun Invoice.toInvoiceResponse() = InvoiceResponse(
     isPayed = isPayed,
     invoiceDetails = invoiceDetails?.toInvoiceDetailResponse(),
     emission = emission,
-    duoDate = dueDate,
+    dueDate = dueDate,
 )
 
 fun InvoiceDetail.toInvoiceDetailResponse() = InvoiceDetailResponse(

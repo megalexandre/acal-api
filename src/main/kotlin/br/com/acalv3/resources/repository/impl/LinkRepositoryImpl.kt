@@ -10,7 +10,6 @@ import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
-import br.com.acalv3.resources.model.business.toLinkSafeHydrometer
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
@@ -39,8 +38,6 @@ class LinkRepositoryImpl(
 
     override fun getById(id: String): Link =
         repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
-
-    override fun getAll(): List<Link> = repository.findAll().toLink()
 
     override fun save(type: Link): Link = repository.save(type.toLinkEntity()).toLink()
 
@@ -106,7 +103,7 @@ class LinkRepositoryImpl(
     }
 
     override fun findHydrometerByReference(reference: String): List<Link> =
-        repository.findHydrometerByReference(reference).toLinkSafeHydrometer()
+        repository.findHydrometerByReference(reference).toLink()
 
     private fun valid(text: String?) = when(text) { null,EMPTY -> SEPARATOR else -> text}
 

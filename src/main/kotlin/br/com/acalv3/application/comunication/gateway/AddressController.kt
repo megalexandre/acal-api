@@ -64,7 +64,7 @@ class AddressController(
 
     @GetMapping(LIST)
     fun list(): List<AddressGetResponse> =
-        service.getAll().toGetAddressResponse().also {
+        service.findAll().toGetAddressResponse().also {
             logger.info("address list all")
         }
 

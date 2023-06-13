@@ -42,8 +42,6 @@ class GroupRepositoryImpl(
             super.pageable(page)
         ).toGroupPage()
 
-    override fun getAll(): List<Group> = repository.findAll().toGroup()
-
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 
     override fun count(): Long = repository.count()

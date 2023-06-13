@@ -19,6 +19,8 @@ class LinkSaveRequest (
     @field:NotBlank(message = "Endereço de correpondencia é obrigatorio")
     val mailPlaceId: String? = null,
 
+    val createdBy: String
+
     ) : LinkRequest(){
 
     fun groupId(): String = groupId?: throw RuntimeException("groupId cant be null")
@@ -35,4 +37,5 @@ fun LinkSaveRequest.toLink() = Link (
     groupId = UUID.fromString(groupId),
     active = true,
     startedAt = LocalDateTime.now(),
+    createdBy = createdBy,
 )

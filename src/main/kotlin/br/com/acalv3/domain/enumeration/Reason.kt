@@ -6,6 +6,7 @@ enum class Reason {
 	DUE,
 	CATEGORY,
 	WATER,
+	ACCOUNT_PAYMENT
 	;
 
 	companion object {

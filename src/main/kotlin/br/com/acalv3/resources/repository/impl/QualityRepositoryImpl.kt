@@ -24,8 +24,6 @@ class QualityRepositoryImpl(
     override fun save(type: Quality): Quality = repository.save(type.toEntity()).toDomain()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
     override fun count(): Long = repository.count()
-    override fun getAll(): List<Quality> = repository.findAll().toDomain()
-
     override fun paginate(page: QualityPage): Page<Quality> =
         repository.findAll(
             QualitySpecification(page).getSpecification(),
@@ -37,8 +35,6 @@ class QualityRepositoryImpl(
             QualitySpecification(page).getSpecification(),
         ).toDomain()
 
-    override fun findAll(): List<Quality> {
-        TODO("Not yet implemented")
-    }
+    override fun findAll(): List<Quality> = repository.findAll().toDomain()
 
 }

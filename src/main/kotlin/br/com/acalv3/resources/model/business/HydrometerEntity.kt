@@ -58,7 +58,7 @@ fun HydrometerEntity.toDomainWithoutLink() = Hydrometer(
     reference = reference,
     costValue = costValue,
     consumption = consumption,
-    link = link?.toLinkWithSafeHydrometer(),
+    link = link?.toLink(),
     linkId = linkId,
 )
 

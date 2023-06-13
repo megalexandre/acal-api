@@ -42,7 +42,6 @@ class InvoiceDetailEntity (
 
     @ManyToOne(cascade = [ALL], fetch = EAGER)
     @JoinColumn(name="invoice_id")
-
     var invoice: InvoiceEntity? = null
 }
 

@@ -24,9 +24,9 @@ data class CustomerPageRequest(
 fun CustomerPageRequest.toCustomerPage() = CustomerPage(
     name = name,
     document = document,
+    direction = direction,
     birthDay = birthDay,
     sortedField = sortedField,
     page = page,
     pageSize = pageSize,
-    direction = direction,
 )

@@ -55,6 +55,7 @@ class LinkEntity (
     @Column(name = "group_id", nullable = false, columnDefinition = "BINARY(16)")
     val groupId: UUID,
 
+    val createdBy: String,
 
     @OneToMany(mappedBy="link")
     val invoice: List<InvoiceEntity>? = null,
@@ -85,7 +86,7 @@ fun Link.toLinkEntity() = LinkEntity(
     mailPlace = mailPlace?.toPlaceEntity(),
     group = group?.toGroupEntity(),
     customer = customer?.toCustomerEntity(),
-
+    createdBy = createdBy,
     placeId = placeId,
     mailPlaceId = mailPlaceId,
     groupId = groupId,
@@ -103,28 +104,10 @@ fun LinkEntity.toLink() = Link(
     group = group?.toGroup(),
     customerId = customerId,
     customer = customer?.toCustomer(),
-
+    createdBy = createdBy,
     placeId = placeId,
     mailPlaceId = mailPlaceId,
     groupId = groupId,
-
-    active = active,
-    startedAt = startedAt,
-    finishedAt = finishedAt,
-)
-
-fun LinkEntity.toLinkWithSafeHydrometer() = Link(
-    id = id,
-    place = place?.toPlace(),
-    mailPlace = mailPlace?.toPlace(),
-    group = group?.toGroup(),
-    customerId = customerId,
-    customer = customer?.toCustomer(),
-
-    placeId = placeId,
-    mailPlaceId = mailPlaceId,
-    groupId = groupId,
-
     active = active,
     startedAt = startedAt,
     finishedAt = finishedAt,
@@ -132,4 +115,3 @@ fun LinkEntity.toLinkWithSafeHydrometer() = Link(
 
 fun Page<LinkEntity>.toLinkPage() = map{ it.toLink() }
 fun List<LinkEntity>.toLink() = map{ it.toLink() }
-fun List<LinkEntity>.toLinkSafeHydrometer() = map{ it.toLinkWithSafeHydrometer() }

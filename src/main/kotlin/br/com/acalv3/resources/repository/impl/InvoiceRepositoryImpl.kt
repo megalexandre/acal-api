@@ -94,8 +94,6 @@ class InvoiceRepositoryImpl(
             super.pageable(page)
         ).toInvoicePage()
 
-    override fun getAll(): List<Invoice> = repository.findAll().toInvoice()
-
     override fun findAll(page: InvoicePage): List<Invoice> =
         repository.findAll().toInvoice()
 

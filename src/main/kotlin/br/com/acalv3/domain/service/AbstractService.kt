@@ -12,7 +12,7 @@ abstract class AbstractService <Type, Pagination>{
     abstract fun repository(): AbstractRepository<Type, Pagination>
 
     fun getById(id: String): Type = repository().getById(id)
-    fun getAll(): List<Type> = repository().getAll()
+    fun findAll(): List<Type> = repository().findAll()
     fun save(q: Type): Type = strategies().first{ it.action() == SAVE }.can(q).let { repository().save(q) }
     fun update(q: Type): Type = strategies().first{ it.action() == UPDATE }.can(q).let { repository().save(q) }
     fun delete(id: String) = strategies().first{ it.action() == DELETE }.can(getById(id)).let { repository().delete(id)}

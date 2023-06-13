@@ -24,7 +24,7 @@ class PlaceRepositoryImpl(
     override fun getById(id: String): Place =
         repository.findByIdOrNull(UUID.fromString(id))?.toPlace() ?: throw NotFoundException()
 
-    override fun getAll(): List<Place> = repository.findAll().toPlace()
+    override fun findAll(): List<Place> = repository.findAll().toPlace()
     override fun save(type: Place): Place = repository.save(type.toPlaceEntity()).toPlace()
     override fun update(place: Place): Place =  repository.save(place.toPlaceEntity()).toPlace()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
@@ -50,9 +50,6 @@ class PlaceRepositoryImpl(
             PlaceSpecification(page).getSpecification(),
         ).toPlace()
 
-    override fun findAll(): List<Place> {
-        TODO("Not yet implemented")
-    }
 
     override fun findByAddress(address: Address): Place? =
         repository.findAll(

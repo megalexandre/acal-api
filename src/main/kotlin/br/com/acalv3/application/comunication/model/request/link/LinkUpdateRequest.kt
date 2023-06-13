@@ -28,6 +28,8 @@ data class LinkUpdateRequest(
 
     val finishedAt: LocalDateTime,
 
+    val createdBy: String
+
 ): LinkRequest()
 
 fun LinkUpdateRequest.toLink() = Link(
@@ -36,6 +38,7 @@ fun LinkUpdateRequest.toLink() = Link(
     placeId = fromString(placeId) ?: throw RuntimeException("place id can't be null"),
     mailPlaceId = fromString(mailPlaceId) ?: throw RuntimeException("place id can't be null"),
     groupId = fromString(groupId) ?: throw RuntimeException("group id can't be null"),
+    createdBy = createdBy,
     active = active,
     startedAt = startedAt,
     finishedAt = finishedAt,

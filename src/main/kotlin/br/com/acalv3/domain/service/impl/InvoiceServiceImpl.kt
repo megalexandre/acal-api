@@ -1,8 +1,12 @@
 package br.com.acalv3.domain.service.impl
 
+import br.com.acalv3.domain.enumeration.Reason.ACCOUNT_PAYMENT
 import br.com.acalv3.domain.enumeration.Reason.CATEGORY
 import br.com.acalv3.domain.enumeration.Reason.DUE
 import br.com.acalv3.domain.enumeration.Reason.WATER
+import br.com.acalv3.domain.enumeration.Type
+import br.com.acalv3.domain.exception.InvoiceNotFoundException
+import br.com.acalv3.domain.model.Book
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.domain.model.InvoiceDetail
 import br.com.acalv3.domain.model.page.InvoicePage
@@ -10,23 +14,53 @@ import br.com.acalv3.domain.repository.InvoiceRepository
 import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.InvoiceService
 import br.com.acalv3.domain.service.LinkService
+import br.com.acalv3.domain.service.event.BookEvent
+import java.math.BigDecimal
+import java.time.LocalDateTime
 import java.util.UUID
 import java.util.UUID.randomUUID
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.data.domain.Page
 import org.springframework.stereotype.Service
 
 @Service
 class InvoiceServiceImpl(
-	val repository: InvoiceRepository,
-	val linkService: LinkService,
-	val hydrometerService: HydrometerService,
+	private val repository: InvoiceRepository,
+	private val linkService: LinkService,
+	private val hydrometerService: HydrometerService,
+	private val applicationEventPublisher: ApplicationEventPublisher
 ): InvoiceService {
 
 	override fun getById(id: String): Invoice =
 		repository.getById(id)
 
-	override fun payById(id: String) =
-		repository.payById(id)
+	override fun payById(id: String) {
+		runCatching {
+			val invoice = getById(id)
+			val newInvoice = invoice.copy(isPayed = true)
+			newInvoice.invoiceDetails = invoice.invoiceDetails?.map {
+				it.copy(
+					isPayed = true,
+					dataPayed = LocalDateTime.now()
+				)
+			}
+
+			repository.save(newInvoice)
+			applicationEventPublisher.publishEvent(
+				BookEvent(this, Book(
+					id = randomUUID(),
+					value = newInvoice.invoiceDetails?.sumOf { it.value } ?: BigDecimal.ZERO,
+					createdBy = "",
+					createdAt = LocalDateTime.now(),
+					type = Type.IN,
+					reason = ACCOUNT_PAYMENT,
+				))
+			)
+
+		}.onFailure {
+			throw InvoiceNotFoundException("invoice not found: $it")
+		}
+	}
 
 	override fun save(invoice: Invoice): Invoice =
 		repository.save(invoice)
@@ -81,8 +115,7 @@ class InvoiceServiceImpl(
 	override fun paginate(pageRequest: InvoicePage): Page<Invoice> =
 		repository.paginate(pageRequest)
 
-	override fun getAll(): List<Invoice> =
-		repository.getAll()
+	override fun getAll(): List<Invoice> = repository.findAll()
 
 	override fun report(id: UUID): ByteArray? = repository.report(id)
 

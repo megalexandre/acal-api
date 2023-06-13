@@ -37,14 +37,7 @@ class AddressRepositoryImpl(
     override fun findAll(page: AddressPage): List<Address> =
         repository.findAll(AddressSpecification(page).getSpecification()).toAddress()
 
-    override fun findAll(): List<Address> {
-        TODO("Not yet implemented")
-    }
+    override fun findAll(): List<Address> = repository.findAll().toAddress()
 
     override fun count(): Long = repository.count()
-
-    override fun getAll(): List<Address> = repository.findAll().toAddress()
-
-
-
 }

@@ -49,7 +49,7 @@ class QualityController(
         }
 
     @GetMapping("/list")
-    fun list(): List<QualityResponse> = service.getAll().toQualityResponse().also{
+    fun list(): List<QualityResponse> = service.findAll().toQualityResponse().also{
         logger.info("list quality")
     }
 
