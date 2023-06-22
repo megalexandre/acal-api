@@ -69,4 +69,9 @@ private class InvoiceGateway(
         service.report(UUID.fromString(id)).also {
             logger.info("getting report by id: $id")
         }
+
+    @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
+    fun report(@Valid @RequestBody request: InvoicePageRequest): ByteArray? =
+        service.report(request.toPageRequest())
+
 }

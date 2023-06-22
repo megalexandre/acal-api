@@ -2,6 +2,7 @@ package br.com.acalv3.application.comunication.model.request.book
 
 import br.com.acalv3.application.comunication.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.application.comunication.model.request.pagination.DefaultPageRequest
+import br.com.acalv3.domain.enumeration.Direction
 import br.com.acalv3.domain.enumeration.Reason
 import br.com.acalv3.domain.enumeration.Type
 import br.com.acalv3.domain.model.page.BookPage
@@ -21,9 +22,12 @@ data class BookPageRequest(
     val type: Type? = null,
     val reason: Reason? = null,
 
+    val createdAtFinish: LocalDate? = null,
+    val createdAtStarted: LocalDate? = null,
+
     override val page: Int = 0,
     override val pageSize: Int = 10,
-    override val direction: String = "ASC",
+    override val direction: Direction = Direction.ASC,
     override val sortedField: String = "id",
 
     ): DefaultPageRequest()
@@ -39,4 +43,6 @@ fun BookPageRequest.toPage() = BookPage(
     page = page,
     pageSize = pageSize,
     direction = direction,
+    createdAtFinish = createdAtFinish,
+    createdAtStarted = createdAtStarted,
 )

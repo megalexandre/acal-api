@@ -1,12 +1,12 @@
 package br.com.acalv3.domain.enumeration
 
-enum class Reason {
+enum class Reason(val translate: String) {
 
-	HYDROMETER,
-	DUE,
-	CATEGORY,
-	WATER,
-	ACCOUNT_PAYMENT
+	HYDROMETER("Hidrômetro"),
+	DUE("Taxa"),
+	CATEGORY("Categoria"),
+	WATER("Água (Hidrômetro)"),
+	ACCOUNT_PAYMENT("Pagamento de fatura")
 	;
 
 	companion object {

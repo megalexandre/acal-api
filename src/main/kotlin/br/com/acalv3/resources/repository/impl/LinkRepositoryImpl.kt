@@ -1,15 +1,16 @@
 package br.com.acalv3.resources.repository.impl
 
-import br.com.acalv3.commons.ReportUtils
 import br.com.acalv3.commons.formatDocument
 import br.com.acalv3.domain.enumeration.Report.LINK
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
 import br.com.acalv3.domain.repository.LinkRepository
+import br.com.acalv3.domain.service.ReportService
 import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
+import br.com.acalv3.resources.model.report.DefaultReport
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Repository
 @Repository
 class LinkRepositoryImpl(
     private val repository: LinkRepositoryJpa,
+    private val reportService: ReportService,
 ) : LinkRepository {
 
     override fun linkWithHydrometerByMonth(reference: String): List<Link>? =
@@ -87,19 +89,20 @@ class LinkRepositoryImpl(
             super.sort(link)
         ).toLink().toLinkReport()
 
-        return ReportUtils().print(
-            data = data,
+        return reportService.print( DefaultReport(
+            dataList = data,
             report = LINK,
-            param = hashMapOf(
-                CUSTOMER to valid(link.customer?.name),
-                DOCUMENT to valid(link.customer?.document).formatDocument(),
-                ADDRESS to valid(link.place?.address?.name),
-                STATUS to valid(link.active),
-                GROUP to valid(link.group?.name),
-                CATEGORY to valid(link.group?.category?.value),
+            param = hashMapOf(with(link){
+                CUSTOMER to valid(customer?.name)
+                DOCUMENT to valid(customer?.document).formatDocument()
+                ADDRESS to valid(place?.address?.name)
+                STATUS to valid(active)
+                GROUP to valid(group?.name)
+                CATEGORY to valid(group?.category?.value)
                 TOTAL to data.size.toString()
+                }
             )
-        )
+        ))
     }
 
     override fun findHydrometerByReference(reference: String): List<Link> =
@@ -126,6 +129,7 @@ class LinkRepositoryImpl(
         private const val GROUP = "group"
         private const val CATEGORY = "category"
         private const val TOTAL = "total_row"
+        private const val SUBREPORT_DIR = "SUBREPORT_DIR"
     }
 }
 

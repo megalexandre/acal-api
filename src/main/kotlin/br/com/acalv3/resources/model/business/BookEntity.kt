@@ -25,7 +25,7 @@ class BookEntity (
     @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    @Column(nullable = false)
+    @Column(precision = 10, scale = 2, nullable = false)
     val value: BigDecimal,
 
     @Column(nullable = false, length = 256)

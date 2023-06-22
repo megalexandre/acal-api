@@ -32,6 +32,8 @@ class CustomerSpecification(private val customer: CustomerPage) {
         }
     }
 
+
+
     private fun likeName(root: Root<CustomerEntity>, builder: CriteriaBuilder): Predicate =
         builder.like(builder.upper(root.get(NAME)),"%${customer.name}%")
 
@@ -46,6 +48,7 @@ class CustomerSpecification(private val customer: CustomerPage) {
         private const val DOCUMENT = "document"
         private const val BIRTH_DAY = "birthDay"
         private const val ACTIVE = "active"
+        private const val REFERENCE ="reference"
     }
 }
 

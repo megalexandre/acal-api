@@ -16,4 +16,4 @@ fun Gathering.toReport() = GatheringReport(
     conformity =  conformity.toString(),
 )
 
-fun List<Gathering>.toReport() = map { it.toReport() }
+fun List<Gathering>.toReport() = map{ it.toReport() }

@@ -1,6 +1,6 @@
 package br.com.acalv3.resources.model.business
 
-import br.com.acalv3.application.comunication.Fixture
+import br.com.acalv3.application.comunication.Fixture.Companion.DATE_FORMAT
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.resources.model.DefaultEntity
 import java.time.LocalDateTime
@@ -61,11 +61,11 @@ class LinkEntity (
     val invoice: List<InvoiceEntity>? = null,
 
     @CreationTimestamp
-    @DateTimeFormat(pattern = Fixture.DATE_FORMAT, iso = DATE_TIME)
+    @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
     val createdAt: LocalDateTime? = null,
 
     @UpdateTimestamp
-    @DateTimeFormat(pattern = Fixture.DATE_FORMAT, iso = DATE_TIME)
+    @DateTimeFormat(pattern = DATE_FORMAT, iso = DATE_TIME)
     val updatedAt: LocalDateTime? = null,
 
     val active: Boolean,

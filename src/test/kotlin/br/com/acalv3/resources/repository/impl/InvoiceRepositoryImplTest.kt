@@ -18,6 +18,7 @@ internal class InvoiceRepositoryImplTest {
 
     private val repository = mockk<InvoiceRepositoryJpa>()
     private val qualityRepository = mockk<QualityRepositoryImpl>()
+
     private val invoiceRepositoryImpl = InvoiceRepositoryImpl(repository,qualityRepository )
 
     @Test

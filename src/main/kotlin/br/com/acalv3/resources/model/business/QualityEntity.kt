@@ -18,28 +18,24 @@ data class QualityEntity (
     @Column(name = "id", columnDefinition = "BINARY(16)")
     val id: UUID,
 
-    val startedAt: String,
-
-) : DefaultEntity() {
+    val reference: String,
 
     @OneToMany(mappedBy="quality", cascade = [ALL], fetch = EAGER)
-    var gathering: List<GatheringEntity>? = null
+    val gathering: List<GatheringEntity>? = null
 
-}
+) : DefaultEntity()
 
 fun Quality.toEntity() = QualityEntity(
     id = id,
-    startedAt = startedAt,
-).also {
-    it.gathering = gathering?.toGatheringEntity(it.toDomain())
-}
+    reference = reference,
+    gathering = gathering?.toGatheringEntity()
+)
 
 fun QualityEntity.toDomain() = Quality(
     id = id,
-    startedAt = startedAt,
-).also {
-    it.gathering = this.gathering?.toGathering(it)
-}
+    reference = reference,
+    gathering = gathering?.toGathering()
+)
 
 fun List<QualityEntity>.toDomain() = map{ it.toDomain() }
 fun Page<QualityEntity>.toPage() = map{ it.toDomain() }

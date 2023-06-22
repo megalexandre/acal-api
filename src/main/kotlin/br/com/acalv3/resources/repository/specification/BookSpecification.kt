@@ -38,17 +38,30 @@ class BookSpecification(private val book: BookPage) {
         book.createdAt?.let {
             predicate.expressions.add(eqCreatedAt(root, builder))
         }
+
+        if(book.createdAtFinish != null && book.createdAtStarted != null){
+            predicate.expressions.add(eqCreateBetween(root, builder))
+        }
+
     }
+
+    private fun eqCreateBetween(root: Root<BookEntity>, builder: CriteriaBuilder): Predicate =
+        builder.between(
+            root["createdAt"],
+            book.createdAtStarted?.atStartOfDay(),
+            book.createdAtFinish?.atTime(MAX)
+        )
+
 
     private fun eqCreatedAt(root: Root<BookEntity>, builder: CriteriaBuilder): Predicate =
         builder.between(
-            root.get("createdAt"),
+            root["createdAt"],
             book.createdAt?.toLocalDate()?.atStartOfDay(),
             book.createdAt?.toLocalDate()?.atTime(MAX)
         )
 
     private fun likeName(root: Root<BookEntity>, builder: CriteriaBuilder): Predicate =
-        builder.like(builder.upper(root.get("createdBy")),"%${book.createdBy?.trim()}%")
+        builder.like(builder.upper(root["createdBy"]),"%${book.createdBy?.trim()}%")
 
     private fun eqType(root: Root<BookEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<Type>("type"), book.type)

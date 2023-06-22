@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service
 @Service
 class LinkServiceImpl(
 	val repository: LinkRepository,
-	val strategies: List<LinkStrategy>
+	val strategies: List<LinkStrategy>,
+	val reportServiceImpl: ReportServiceImpl
 ): LinkService {
 
 	override fun report(link: LinkPage): ByteArray  = repository.report(link)

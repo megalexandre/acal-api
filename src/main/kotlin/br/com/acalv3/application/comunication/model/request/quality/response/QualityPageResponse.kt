@@ -5,14 +5,14 @@ import org.springframework.data.domain.Page
 
 class QualityPageResponse(
     val id: String,
-    val startedAt: String,
+    val reference: String,
     var gathering: List<GatheringResponse>? = null
 )
 
 fun Quality.toPageResponse() = QualityPageResponse(
     id = id.toString(),
-    startedAt = startedAt,
-    gathering = gathering().toGatheringResponse()
+    reference = reference,
+    gathering = gathering?.toGatheringResponse()
 )
 
 fun Page<Quality>.toPageResponse() = map{ it.toPageResponse() }

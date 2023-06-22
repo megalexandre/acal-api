@@ -20,7 +20,8 @@ fun linkStub(
     groupId: UUID = group.id,
     active: Boolean = true,
     startedAt: LocalDateTime = now(),
-    finishedAt: LocalDateTime? = now()
+    finishedAt: LocalDateTime? = now(),
+    createdBy: String = "alexandre",
 ) = Link(
     id = id,
     customer = customer,
@@ -32,6 +33,7 @@ fun linkStub(
     group = group,
     groupId = groupId,
     active = active,
+    createdBy = createdBy,
     startedAt = startedAt,
     finishedAt = finishedAt,
 )

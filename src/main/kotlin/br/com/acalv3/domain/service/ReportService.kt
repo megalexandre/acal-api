@@ -1,9 +1,9 @@
 package br.com.acalv3.domain.service
 
-import br.com.acalv3.domain.model.page.LinkPage
+import br.com.acalv3.resources.model.report.DefaultReport
 
-fun interface ReportService {
+interface ReportService {
 
-     fun link(link: LinkPage): ByteArray?
+     fun print(defaultReport: DefaultReport): ByteArray
 
 }

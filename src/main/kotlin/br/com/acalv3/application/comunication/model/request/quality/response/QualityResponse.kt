@@ -5,8 +5,8 @@ import br.com.acalv3.domain.model.Quality
 
 class QualityResponse(
     val id:  String,
-    val startedAt: String,
-    val gathering: List<GatheringResponse>,
+    val reference: String,
+    val gathering: List<GatheringResponse>?,
 )
 
 class GatheringResponse(
@@ -19,8 +19,8 @@ class GatheringResponse(
 
 fun Quality.toQualityResponse() = QualityResponse(
     id = id.toString(),
-    startedAt = startedAt,
-    gathering = gathering().toGatheringResponse(),
+    reference = reference,
+    gathering = gathering?.toGatheringResponse(),
 )
 
 fun Gathering.toGatheringResponse() = GatheringResponse(

@@ -22,18 +22,17 @@ class GroupSpecification(private val place: GroupPage) {
             predicate.expressions.add(eqName(root, builder))
         }
 
-        if (place.value != null) {
+        place.value?.let {
             predicate.expressions.add(eqValue(root, builder))
         }
 
-        if (place.categoryValue != null) {
+        place.categoryValue?.let {
             predicate.expressions.add(eqCategoryValue(root, builder))
         }
 
-        if(place.category != null){
+        place.category?.let {
             predicate.expressions.add(eqCategory(root, builder))
         }
-
 
     }
 
@@ -44,7 +43,7 @@ class GroupSpecification(private val place: GroupPage) {
         builder.equal(root.get<BigDecimal>("value"), place.value)
 
     private fun eqCategoryValue(root: Root<GroupEntity>, builder: CriteriaBuilder): Predicate =
-        builder.equal(root.get<BigDecimal>("categoryValue"), place.value)
+        builder.equal(root.get<BigDecimal>("categoryValue"), place.categoryValue)
 
     private fun eqCategory(root: Root<GroupEntity>, builder: CriteriaBuilder): Predicate = run{
         builder.equal(root.get<String>("category"), place.category)

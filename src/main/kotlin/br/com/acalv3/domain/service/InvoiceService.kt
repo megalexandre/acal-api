@@ -14,5 +14,6 @@ interface InvoiceService {
     fun paginate(pageRequest: InvoicePage): Page<Invoice>
     fun getAll(): List<Invoice>
     fun report(id: UUID): ByteArray?
+    fun report(pageRequest: InvoicePage): ByteArray?
     fun findByActualReference(): List<Invoice>?
 }

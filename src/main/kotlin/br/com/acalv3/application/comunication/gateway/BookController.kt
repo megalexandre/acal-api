@@ -12,6 +12,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.data.domain.Page
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
+import org.springframework.http.MediaType.APPLICATION_PDF_VALUE
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -28,6 +29,12 @@ class BookController(
     fun paginate(@Valid @RequestBody request: BookPageRequest): Page<BookPageResponse> =
         service.paginate(request.toPage()).toPageResponse().also {
             logger.info("book paginate: $request")
+        }
+
+    @PostMapping(path = ["/report"], produces = [APPLICATION_PDF_VALUE])
+    fun report(@Valid @RequestBody request: BookPageRequest): ByteArray? =
+        service.report(request.toPage()).also {
+            logger.info("book report: $request")
         }
 
 }

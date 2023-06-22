@@ -15,9 +15,9 @@ class UpdateQualityStrategy(
     override fun action() = UPDATE
 
     override fun can(model: Quality) {
-        repository.findByStartedAt(model.startedAt)?.let {
+        repository.findByStartedAt(model.reference)?.let {
             if(it.id != model.id){
-                throw DuplicatedFieldException("$ERROR_MESSAGE ${model.startedAt.reference()}")
+                throw DuplicatedFieldException("$ERROR_MESSAGE ${model.reference.reference()}")
             }
         }
     }

@@ -4,6 +4,7 @@ import br.com.acalv3.application.comunication.Fixture.Companion.DATE_TIME_FORMAT
 import br.com.acalv3.domain.model.Invoice
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING
+import java.math.BigDecimal.ZERO
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -30,6 +31,7 @@ fun InvoiceSaveRequest.toInvoice() = Invoice(
     emission = emission!!,
     dueDate = dueDate!!,
     isPayed = isPayed,
+    value = ZERO,
 )
 
 fun List<InvoiceSaveRequest>.toInvoice() = map{ it.toInvoice()}

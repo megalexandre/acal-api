@@ -1,14 +1,23 @@
 package br.com.acalv3.domain.service.impl
 
-import br.com.acalv3.domain.model.page.LinkPage
-import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.ReportService
+import br.com.acalv3.resources.model.report.DefaultReport
+import net.sf.jasperreports.engine.JasperCompileManager
+import net.sf.jasperreports.engine.JasperExportManager
+import net.sf.jasperreports.engine.JasperFillManager
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource
+import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 
 @Service
-class ReportServiceImpl(
-    val linkService: LinkService
-    ): ReportService {
+class ReportServiceImpl: ReportService {
 
-    override fun link(link: LinkPage): ByteArray = linkService.report(link)
+    override fun print (
+        default: DefaultReport
+    ): ByteArray = JasperExportManager.exportReportToPdf(
+        JasperFillManager.fillReport(
+        JasperCompileManager.compileReport(ClassPathResource(default.report.location).inputStream),
+        default.param,
+        JRBeanCollectionDataSource(default.dataList)
+    ))
 }

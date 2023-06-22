@@ -4,6 +4,7 @@ import br.com.acalv3.application.comunication.Fixture.Companion.DATE_TIME_FORMAT
 import br.com.acalv3.domain.model.Invoice
 import br.com.acalv3.resources.model.DefaultEntity
 import com.fasterxml.jackson.annotation.JsonFormat
+import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.util.UUID
 import javax.persistence.CascadeType.ALL
@@ -33,6 +34,9 @@ class InvoiceEntity (
 
     val isPayed: Boolean,
 
+    @Column(precision = 10, scale = 2, nullable = false)
+    val value: BigDecimal,
+
     @ManyToOne(cascade = [DETACH])
     @JoinColumn(name="link_id", insertable = false, updatable = false)
     val link: LinkEntity? = null,
@@ -45,7 +49,7 @@ class InvoiceEntity (
     @JsonFormat(pattern = DATE_TIME_FORMAT)
     val dueDate: LocalDateTime,
 
-    ) : DefaultEntity() {
+) : DefaultEntity() {
 
     @OneToMany(fetch = EAGER, mappedBy="invoice", cascade = [ALL])
     var invoiceDetails: List<InvoiceDetailEntity>? = null
@@ -55,6 +59,7 @@ fun Invoice.toInvoiceEntity() = InvoiceEntity(
     id = id,
     reference = reference,
     linkId = linkId,
+    value = value,
     isPayed = isPayed,
     link = link?.toLinkEntity(),
     emission = emission,
@@ -68,6 +73,7 @@ fun InvoiceEntity.toInvoice() = Invoice(
     reference = reference,
     isPayed = isPayed,
     link = link?.toLink(),
+    value = value,
     linkId = linkId,
     emission = emission,
     dueDate = dueDate,

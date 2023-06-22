@@ -1,5 +1,6 @@
 package br.com.acalv3.domain.repository
 
+import br.com.acalv3.domain.enumeration.Direction.DESC
 import br.com.acalv3.domain.model.page.abstract.BasePage
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageRequest
@@ -22,9 +23,7 @@ interface AbstractRepository<Type, Pagination> {
     fun sort(request: BasePage) =
         Sort.by(
             when (request.direction) {
-                Sort.Direction.DESC.name -> {
-                    Sort.Direction.DESC
-                }
+                DESC -> Sort.Direction.DESC
                 else -> Sort.Direction.ASC
             }, request.sortedField
         )

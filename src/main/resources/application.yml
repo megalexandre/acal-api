@@ -3,6 +3,7 @@ app:
 
 spring:
 
+  profile: local
   datasource:
     platform: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -15,7 +16,7 @@ spring:
     hibernate:
       ddl-auto: update
       hbm2ddl:  auto
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
@@ -27,11 +28,3 @@ spring:
 
 server:
   port: 8080
-  ssl:
-    enable: true
-    key-store-type: PKCS12
-    key-store: classpath:keystore/acal.p12
-    key-store-password: CoXy9QLoJ$M04$3%
-
-security.require-ssl: true
-

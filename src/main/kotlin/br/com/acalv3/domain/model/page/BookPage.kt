@@ -1,9 +1,11 @@
 package br.com.acalv3.domain.model.page
 
+import br.com.acalv3.domain.enumeration.Direction
 import br.com.acalv3.domain.enumeration.Reason
 import br.com.acalv3.domain.enumeration.Type
 import br.com.acalv3.domain.model.page.abstract.BasePage
 import java.math.BigDecimal
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.UUID
 
@@ -18,9 +20,12 @@ data class BookPage (
     override val sortedField: String = "id",
     override val page: Int = 0,
     override val pageSize: Int = 10,
-    override val direction: String = "ASC",
+    override val direction: Direction = Direction.ASC,
 
-): BasePage(
+    val createdAtFinish: LocalDate? = null,
+    val createdAtStarted: LocalDate? = null,
+
+    ): BasePage(
     page = page,
     pageSize = pageSize,
     sortedField = sortedField,

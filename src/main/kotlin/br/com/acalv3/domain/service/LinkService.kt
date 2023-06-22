@@ -23,4 +23,5 @@ interface LinkService {
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
     fun findHydrometerByReference(reference: String): List<Link>?
+
 }

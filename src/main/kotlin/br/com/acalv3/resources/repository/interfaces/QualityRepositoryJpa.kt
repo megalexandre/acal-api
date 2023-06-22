@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 
 
 interface QualityRepositoryJpa : JpaRepository<QualityEntity, UUID>, JpaSpecificationExecutor<QualityEntity>{
-    fun findByStartedAt(startedAt: String): QualityEntity?
+    fun findByReference(reference: String): QualityEntity?
+    fun findByReferenceIn(references: List<String>): List<QualityEntity>?
 }

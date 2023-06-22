@@ -17,15 +17,14 @@ class QualityRequest(
 
     @field:Pattern(regexp=REFERENCE_REGEX, message="Referência deve ter o formato MMYYYY")
     @field:NotNull(message = "Referência é obrigatório")
-    val startedAt: String?,
+    val reference: String?,
 )
 
 fun QualityRequest.toQuality() = Quality(
     id = UUID.randomUUID(),
-    startedAt = startedAt ?: throw RuntimeException(),
-).also {
-    it.gathering = gathering?.toGathering(it) ?: throw RuntimeException()
-}
+    reference = reference ?: throw RuntimeException(),
+    gathering = gathering?.toGathering() ?: throw RuntimeException()
+)
 
 @Validated
 class GatheringRequest(
@@ -39,13 +38,13 @@ class GatheringRequest(
     val conformity: Long?,
 )
 
-fun GatheringRequest.toGathering(quality: Quality) = Gathering(
+fun GatheringRequest.toGathering() = Gathering(
     id = UUID.randomUUID(),
     required = required ?: throw RuntimeException(),
     analyzed = analyzed ?: throw RuntimeException(),
     conformity = conformity ?: throw RuntimeException(),
     param = Param.byValue(param) ?: throw RuntimeException("Param $param is not found"),
-    quality = quality
+    qualityId = UUID.randomUUID(),
 )
 
-fun List<GatheringRequest>.toGathering(quality: Quality) = map { it.toGathering(quality) }
+fun List<GatheringRequest>.toGathering() = map { it.toGathering() }

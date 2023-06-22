@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.1.final using JasperReports Library version 6.20.1-7584acb244139816654f64e2fd57a00d3e31921e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="invoice" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d79ffd48-ffaf-40a4-8624-3efefbd3afb4">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (5)"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="id" class="java.lang.String"/>
+	<field name="address" class="java.lang.String"/>
+	<field name="number" class="java.lang.String"/>
+	<field name="category" class="java.lang.String"/>
+	<field name="group" class="java.lang.String"/>
+	<field name="reference" class="java.lang.String"/>
+	<field name="dueDate" class="java.lang.String"/>
+	<field name="customer" class="java.lang.String"/>
+	<field name="emission" class="java.lang.String"/>
+	<field name="totalValue" class="java.lang.String"/>
+	<field name="categoryValue" class="java.lang.String"/>
+	<field name="hydrometerValue" class="java.lang.String"/>
+	<field name="otherValue" class="java.lang.String"/>
+	<field name="groupValue" class="java.lang.String"/>
+	<field name="param" class="java.util.ArrayList"/>
+	<detail>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="30" uuid="27398b9f-cd16-45d8-b350-c62978606246">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACAL - Associção Comunitária e Assistência de Lages]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="555" height="20" uuid="84d91045-756f-4a0a-95bd-940c7bd7fa91">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ECONOMIZAR ÁGUA É UM DEVER DE TODO SER HUMANO.]]></text>
+			</staticText>
+		</band>
+		<band height="51">
+			<rectangle radius="15">
+				<reportElement x="375" y="5" width="175" height="40" uuid="3326ad57-f151-43c7-9257-cf786a5524da">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#BDBDBD"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="15">
+				<reportElement x="190" y="5" width="175" height="40" uuid="5548e8f9-628d-414f-847e-e941ceaaa330">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#BDBDBD"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="15">
+				<reportElement x="5" y="5" width="175" height="40" uuid="0a33c048-0c32-4ce8-be39-56dbdd331654">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#BDBDBD"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="17" y="5" width="150" height="16" uuid="a3f366bf-19cb-4c68-bd66-b42a6d755c87">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Número de Associado]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="5" width="150" height="16" uuid="31d18d87-c417-493c-889c-a7ffb7381423">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Referência:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="71acdc09-ada1-4d84-b4ef-55ba53645afc"/>
+			</line>
+			<line>
+				<reportElement x="0" y="50" width="555" height="1" uuid="c41ef598-34dc-4d38-8e31-3d3b5a3e7c15"/>
+			</line>
+			<textField>
+				<reportElement x="387" y="21" width="150" height="24" uuid="7d644c5b-8c56-49e2-a213-195885c382f4"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{reference}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="5" y="21" width="175" height="24" uuid="722f2cf6-6a77-47df-9732-0b9779827a3a"/>
+				<textElement textAlignment="Center">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="30" width="175" height="14" uuid="869efb74-70cc-4337-96ed-64b71c318ffd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="55">
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="0" width="555" height="50" uuid="4c6ec249-54f1-4612-8786-db48c15014b2"/>
+				<subreportParameter name="customer">
+					<subreportParameterExpression><![CDATA[$F{customer}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="group">
+					<subreportParameterExpression><![CDATA[$F{group}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="address">
+					<subreportParameterExpression><![CDATA[$F{address}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="number">
+					<subreportParameterExpression><![CDATA[$F{number}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dueDate">
+					<subreportParameterExpression><![CDATA[$F{dueDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emission">
+					<subreportParameterExpression><![CDATA[$F{emission}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="category">
+					<subreportParameterExpression><![CDATA[$F{category}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="groupValue">
+					<subreportParameterExpression><![CDATA[$F{groupValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="categoryValue">
+					<subreportParameterExpression><![CDATA[$F{categoryValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hydrometerValue">
+					<subreportParameterExpression><![CDATA[$F{hydrometerValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="otherValue">
+					<subreportParameterExpression><![CDATA[$F{otherValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalValue">
+					<subreportParameterExpression><![CDATA[$F{totalValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+ "\\"+"invoice-body.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="60">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="60" uuid="e5a237e6-a4ca-4432-b97c-4a0867a86286"/>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{param})]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+ "\\"+"param.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="10">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<line>
+				<reportElement x="0" y="5" width="555" height="1" uuid="c253923a-aa55-4db2-a577-fadf5c777ed3">
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Dashed"/>
+				</graphicElement>
+			</line>
+		</band>
+		<band height="50">
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="0" width="555" height="50" uuid="8aa56539-6599-4a7e-a563-8516a839b135"/>
+				<subreportParameter name="customer">
+					<subreportParameterExpression><![CDATA[$F{customer}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="group">
+					<subreportParameterExpression><![CDATA[$F{group}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="address">
+					<subreportParameterExpression><![CDATA[$F{address}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="number">
+					<subreportParameterExpression><![CDATA[$F{number}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="dueDate">
+					<subreportParameterExpression><![CDATA[$F{dueDate}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="emission">
+					<subreportParameterExpression><![CDATA[$F{emission}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="category">
+					<subreportParameterExpression><![CDATA[$F{category}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="groupValue">
+					<subreportParameterExpression><![CDATA[$F{groupValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="categoryValue">
+					<subreportParameterExpression><![CDATA[$F{categoryValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="hydrometerValue">
+					<subreportParameterExpression><![CDATA[$F{hydrometerValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="otherValue">
+					<subreportParameterExpression><![CDATA[$F{otherValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="totalValue">
+					<subreportParameterExpression><![CDATA[$F{totalValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+ "\\"+"invoice-body.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="1">
+			<break>
+				<reportElement x="0" y="0" width="555" height="1" uuid="8106aa59-0f8c-46c0-9665-7c286ebc8053"/>
+			</break>
+		</band>
+	</detail>
+</jasperReport>

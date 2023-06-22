@@ -14,6 +14,7 @@ fun invoiceStub(
     reference: String = "022023",
     linkId: UUID = randomUUID(),
     link: Link? = null,
+    value: BigDecimal = BigDecimal.ZERO,
     isPayed: Boolean = false,
     emission: LocalDateTime = LocalDateTime.now(),
     dueDate: LocalDateTime = LocalDateTime.now(),
@@ -25,6 +26,7 @@ fun invoiceStub(
     isPayed = isPayed,
     emission = emission,
     dueDate = dueDate,
+    value = value,
 )
 
 fun invoiceDetailStub(

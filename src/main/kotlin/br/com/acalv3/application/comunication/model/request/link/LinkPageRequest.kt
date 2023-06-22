@@ -7,6 +7,7 @@ import br.com.acalv3.application.comunication.model.request.group.toGroupPage
 import br.com.acalv3.application.comunication.model.request.pagination.DefaultPageRequest
 import br.com.acalv3.application.comunication.model.request.place.PlacePageRequest
 import br.com.acalv3.application.comunication.model.request.place.toPlacePage
+import br.com.acalv3.domain.enumeration.Direction
 import br.com.acalv3.domain.model.page.LinkPage
 
 data class LinkPageRequest(
@@ -20,7 +21,7 @@ data class LinkPageRequest(
     override val sortedField: String = "id",
     override val page: Int = 0,
     override val pageSize: Int = 10,
-    override val direction: String = "ASC",
+    override val direction: Direction = Direction.ASC,
 
     ) : DefaultPageRequest()
 

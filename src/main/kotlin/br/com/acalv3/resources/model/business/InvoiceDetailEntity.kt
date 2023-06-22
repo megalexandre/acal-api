@@ -30,6 +30,7 @@ class InvoiceDetailEntity (
     @Enumerated(STRING)
     val reason: Reason,
 
+    @Column(precision = 10, scale = 2, nullable = false)
     val value: BigDecimal,
 
     val isPayed: Boolean,

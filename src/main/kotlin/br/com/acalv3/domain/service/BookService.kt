@@ -11,4 +11,6 @@ interface BookService {
 
     fun paginate(bookPageRequest: BookPage): Page<Book>
 
+    fun report(pageRequest: BookPage): ByteArray?
+
 }
