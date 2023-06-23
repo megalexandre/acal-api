@@ -10,6 +10,7 @@ class ControllersRoutes {
 
         const val BOOK_ROUTER = "book"
         const val ADDRESS_ROUTE = "address"
+        const val DATABASE_ROUTE = "database"
         const val CUSTOMER_ROUTE ="customer"
         const val DASHBOARD = "dashboard"
         const val GROUP = "group"

@@ -1,5 +1,6 @@
 app:
   version: 0.0.1
+  output: "C:\\Users\\alexa\\workspace\\acal-local\\backup\\hoje.sql"
 
 spring:
 
