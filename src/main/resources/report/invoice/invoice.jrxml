@@ -29,7 +29,7 @@
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
+					<font size="16" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ACAL - Associção Comunitária e Assistência de Lages]]></text>
 			</staticText>
@@ -38,7 +38,7 @@
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="12" isBold="true" isUnderline="true"/>
 				</textElement>
 				<text><![CDATA[ECONOMIZAR ÁGUA É UM DEVER DE TODO SER HUMANO.]]></text>
 			</staticText>
@@ -117,15 +117,8 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="190" y="30" width="175" height="14" uuid="869efb74-70cc-4337-96ed-64b71c318ffd"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
-			</textField>
 		</band>
-		<band height="55">
+		<band height="50">
 			<subreport isUsingCache="false">
 				<reportElement x="0" y="0" width="555" height="50" uuid="4c6ec249-54f1-4612-8786-db48c15014b2"/>
 				<subreportParameter name="customer">
@@ -164,6 +157,9 @@
 				<subreportParameter name="totalValue">
 					<subreportParameterExpression><![CDATA[$F{totalValue}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
+				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+ "\\"+"invoice-body.jasper"]]></subreportExpression>
 			</subreport>
@@ -188,7 +184,7 @@
 		</band>
 		<band height="50">
 			<subreport isUsingCache="false">
-				<reportElement x="0" y="0" width="555" height="50" uuid="8aa56539-6599-4a7e-a563-8516a839b135"/>
+				<reportElement x="0" y="0" width="555" height="50" uuid="6b8c8d7d-f6a5-47b1-8827-c7d954b37800"/>
 				<subreportParameter name="customer">
 					<subreportParameterExpression><![CDATA[$F{customer}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -224,6 +220,9 @@
 				</subreportParameter>
 				<subreportParameter name="totalValue">
 					<subreportParameterExpression><![CDATA[$F{totalValue}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="id">
+					<subreportParameterExpression><![CDATA[$F{id}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR}+ "\\"+"invoice-body.jasper"]]></subreportExpression>

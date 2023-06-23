@@ -1,5 +1,6 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.commons.referenceFormat
 import br.com.acalv3.domain.enumeration.Report.INVOICE
 import br.com.acalv3.domain.exception.InvoiceNotFoundException
@@ -9,7 +10,6 @@ import br.com.acalv3.domain.repository.InvoiceRepository
 import br.com.acalv3.resources.model.business.toInvoice
 import br.com.acalv3.resources.model.business.toInvoiceEntity
 import br.com.acalv3.resources.model.business.toInvoicePage
-import br.com.acalv3.resources.model.report.DefaultReport
 import br.com.acalv3.resources.model.report.InvoiceReport
 import br.com.acalv3.resources.repository.interfaces.InvoiceRepositoryJpa
 import br.com.acalv3.resources.repository.specification.InvoiceSpecification

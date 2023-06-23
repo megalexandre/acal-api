@@ -23,6 +23,7 @@
 	<parameter name="hydrometerValue" class="java.lang.String"/>
 	<parameter name="otherValue" class="java.lang.String"/>
 	<parameter name="groupValue" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -342,37 +343,12 @@
 			<rectangle>
 				<reportElement x="195" y="0" width="164" height="140" uuid="9f315558-0580-4350-8e00-fae4be12e799"/>
 			</rectangle>
-			<textField>
-				<reportElement x="195" y="0" width="164" height="140" backcolor="#E3E3E3" uuid="e436e7cd-57f1-4f26-8af7-e0e4c4e46a13"/>
-				<box>
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.25"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.25"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="20" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{dueDate}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="194" y="0" width="164" height="20" backcolor="#E3E3E3" uuid="37dda24a-a1ef-4f8c-b615-8818b7592a6a">
-					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
-				</reportElement>
-				<box>
-					<pen lineWidth="0.0"/>
-					<topPen lineWidth="0.0"/>
-					<leftPen lineWidth="0.0"/>
-					<bottomPen lineWidth="0.0"/>
-					<rightPen lineWidth="0.0"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font isBold="true"/>
-					<paragraph leftIndent="5"/>
-				</textElement>
-				<text><![CDATA[Vencimento:]]></text>
-			</staticText>
+			<componentElement>
+				<reportElement x="195" y="0" width="164" height="139" uuid="20459641-1634-400a-9a3c-40f002d5e3c6"/>
+				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<jr:codeExpression><![CDATA[$P{id}]]></jr:codeExpression>
+				</jr:QRCode>
+			</componentElement>
 		</band>
 	</detail>
 </jasperReport>

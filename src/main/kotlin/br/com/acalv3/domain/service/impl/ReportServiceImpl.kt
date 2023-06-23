@@ -1,7 +1,7 @@
 package br.com.acalv3.domain.service.impl
 
 import br.com.acalv3.domain.service.ReportService
-import br.com.acalv3.resources.model.report.DefaultReport
+import br.com.acalv3.commons.DefaultReport
 import net.sf.jasperreports.engine.JasperCompileManager
 import net.sf.jasperreports.engine.JasperExportManager
 import net.sf.jasperreports.engine.JasperFillManager

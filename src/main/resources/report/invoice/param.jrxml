@@ -106,7 +106,8 @@
 			<textField>
 				<reportElement x="195" y="0" width="120" height="20" uuid="61c753bd-cb1d-4266-be51-2ef11ac57468"/>
 				<box>
-					<bottomPen lineWidth="0.25" lineStyle="Dashed"/>
+					<pen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{required}]]></textFieldExpression>
@@ -114,25 +115,37 @@
 			<textField>
 				<reportElement x="0" y="0" width="195" height="20" uuid="9ddd3fba-7dbf-4800-937e-7247763ebbf0"/>
 				<box>
-					<bottomPen lineWidth="0.25" lineStyle="Dashed"/>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{param}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="315" y="0" width="120" height="20" uuid="dd919cd1-58ab-464c-9508-b849b5b21b49"/>
 				<box>
-					<bottomPen lineWidth="0.25" lineStyle="Dashed"/>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{analyzed}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="435" y="0" width="120" height="20" uuid="faf17189-07eb-4817-a258-b88ccc83cffd"/>
 				<box>
-					<bottomPen lineWidth="0.25" lineStyle="Dashed"/>
+					<pen lineWidth="0.0"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{conformity}]]></textFieldExpression>
 			</textField>
 		</band>

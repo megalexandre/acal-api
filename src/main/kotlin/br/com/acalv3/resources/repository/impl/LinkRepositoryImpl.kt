@@ -10,7 +10,7 @@ import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
-import br.com.acalv3.resources.model.report.DefaultReport
+import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification

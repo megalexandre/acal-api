@@ -1,4 +1,4 @@
-package br.com.acalv3.resources.model.report
+package br.com.acalv3.commons
 
 import br.com.acalv3.domain.enumeration.Param.CHLORINE
 import br.com.acalv3.domain.enumeration.Param.COLOR
@@ -7,6 +7,7 @@ import br.com.acalv3.domain.enumeration.Param.TOTAL_COLIFORMS
 import br.com.acalv3.domain.enumeration.Param.TURBIDITY
 import br.com.acalv3.domain.enumeration.Report
 import br.com.acalv3.domain.model.Quality
+import br.com.acalv3.resources.model.report.GatheringReport
 
 class DefaultReport(
     val dataList: List<*>,

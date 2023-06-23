@@ -10,7 +10,7 @@ import br.com.acalv3.domain.repository.BookRepository
 import br.com.acalv3.resources.model.business.toBook
 import br.com.acalv3.resources.model.business.toBookEntity
 import br.com.acalv3.resources.model.business.toBookPage
-import br.com.acalv3.resources.model.report.DefaultReport
+import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.resources.model.report.toBookReport
 import br.com.acalv3.resources.repository.interfaces.BookRepositoryJpa
 import br.com.acalv3.resources.repository.specification.BookSpecification
@@ -29,7 +29,7 @@ class BookRepositoryImp(
     override fun findByCreatedAtDateBetween(day: LocalDate): List<Book>? =
        repository.findByCreatedAtBetween(day.atStartOfDay(), day.atTime(MAX))
 
-    override fun report(page: BookPage): DefaultReport  {
+    override fun report(page: BookPage): DefaultReport {
         val books = repository.findAll(BookSpecification(page).getSpecification()).toBook()
 
         return DefaultReport(
@@ -55,7 +55,7 @@ class BookRepositoryImp(
         val finish = page.createdAtFinish?.toLocalDateTimeStartedDefaultFormat()
 
         if(started == null || finish == null){
-            return "todo o periodo"
+            return "Todo o periodo"
         }
 
         return """de: $started até: $finish"""
