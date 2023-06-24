@@ -1,6 +1,5 @@
 app:
   version: 0.0.1
-  output: "C:\\Users\\alexa\\workspace\\acal-local\\backup\\hoje.sql"
 
 spring:
 
@@ -28,4 +27,12 @@ spring:
       enabled: always
 
 server:
-  port: 8080
+  port: 8443
+  ssl:
+    enable: true
+    keyStoreType: PKCS12
+    key-store: classpath:keystore.p12
+    key-store-password: CoXy9QLoJ$M04$3%
+    keyAlias: tomcat
+
+security.require-ssl: true

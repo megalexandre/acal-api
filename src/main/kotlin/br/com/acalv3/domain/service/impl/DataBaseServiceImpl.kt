@@ -15,7 +15,7 @@ class DataBaseServiceImpl(
     @Value("\${spring.datasource.password}")
     private val password: String,
 
-    @Value("\${app.output}")
+    @Value("\\")
     private val output: String,
 
     ) : DataBaseService {
