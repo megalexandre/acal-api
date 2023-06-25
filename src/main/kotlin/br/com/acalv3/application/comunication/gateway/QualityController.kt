@@ -9,6 +9,7 @@ import br.com.acalv3.application.comunication.model.request.quality.response.Qua
 import br.com.acalv3.application.comunication.model.request.quality.response.toPageResponse
 import br.com.acalv3.application.comunication.model.request.quality.response.toQualityResponse
 import br.com.acalv3.domain.service.QualityService
+import java.util.UUID
 import javax.validation.Valid
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -31,7 +32,7 @@ class QualityController(
 
     @PostMapping
     fun save(@Valid @RequestBody request: QualityRequest) =
-        service.save(request.toQuality()).toQualityResponse().also{
+        service.save(request.toQuality(UUID.randomUUID())).toQualityResponse().also{
             logger.info("paginate quality: $request")
         }
 

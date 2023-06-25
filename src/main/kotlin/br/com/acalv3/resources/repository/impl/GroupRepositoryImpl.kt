@@ -32,6 +32,9 @@ class GroupRepositoryImpl(
 
     override fun findByName(name: String): Group = repository.findByName(name).toGroup()
     override fun save(type: Group): Group =  repository.save(type.toGroupEntity()).toGroup()
+    override fun saveAll(type: List<Group>) {
+        TODO("Not yet implemented")
+    }
 
     override fun update(group: Group): Group =
         repository.save(group.toGroupEntity()).toGroup()

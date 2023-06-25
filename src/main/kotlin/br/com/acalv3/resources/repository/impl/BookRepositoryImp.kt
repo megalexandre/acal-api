@@ -1,5 +1,6 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.commons.defaultFormat
 import br.com.acalv3.commons.toCurrency
 import br.com.acalv3.commons.toLocalDateTimeStartedDefaultFormat
@@ -10,7 +11,6 @@ import br.com.acalv3.domain.repository.BookRepository
 import br.com.acalv3.resources.model.business.toBook
 import br.com.acalv3.resources.model.business.toBookEntity
 import br.com.acalv3.resources.model.business.toBookPage
-import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.resources.model.report.toBookReport
 import br.com.acalv3.resources.repository.interfaces.BookRepositoryJpa
 import br.com.acalv3.resources.repository.specification.BookSpecification
@@ -25,6 +25,7 @@ import org.springframework.stereotype.Repository
 class BookRepositoryImp(
     private val repository: BookRepositoryJpa,
 ) : BookRepository {
+
 
     override fun findByCreatedAtDateBetween(day: LocalDate): List<Book>? =
        repository.findByCreatedAtBetween(day.atStartOfDay(), day.atTime(MAX))
@@ -66,6 +67,9 @@ class BookRepositoryImp(
     override fun findAll(): List<Book> = repository.findAll().toBook()
 
     override fun save(type: Book): Book =repository.save(type.toBookEntity()).toBook()
+
+    override fun saveAll(type: List<Book>) {
+    }
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

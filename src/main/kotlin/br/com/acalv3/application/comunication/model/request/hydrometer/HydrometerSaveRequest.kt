@@ -23,3 +23,5 @@ fun HydrometerSaveRequest.toDomain() = Hydrometer(
     linkId = link.id,
     link = null,
 )
+
+fun List<HydrometerSaveRequest>.toDomain() = map { it.toDomain() }

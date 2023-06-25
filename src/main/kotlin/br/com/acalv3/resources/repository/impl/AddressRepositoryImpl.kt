@@ -23,6 +23,9 @@ class AddressRepositoryImpl(
         repository.findByIdOrNull(UUID.fromString(id))?.toAddress() ?: throw NotFoundException()
 
     override fun save(type: Address): Address = repository.save(type.toAddressEntity()).toAddress()
+    override fun saveAll(type: List<Address>) {
+        TODO("Not yet implemented")
+    }
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

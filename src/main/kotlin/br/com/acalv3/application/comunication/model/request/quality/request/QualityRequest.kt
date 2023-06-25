@@ -20,10 +20,10 @@ class QualityRequest(
     val reference: String?,
 )
 
-fun QualityRequest.toQuality() = Quality(
-    id = UUID.randomUUID(),
+fun QualityRequest.toQuality(qualityId: UUID) = Quality(
+    id = qualityId,
     reference = reference ?: throw RuntimeException(),
-    gathering = gathering?.toGathering() ?: throw RuntimeException()
+    gathering = gathering?.toGathering(qualityId) ?: throw RuntimeException()
 )
 
 @Validated
@@ -38,13 +38,13 @@ class GatheringRequest(
     val conformity: Long?,
 )
 
-fun GatheringRequest.toGathering() = Gathering(
-    id = UUID.randomUUID(),
+fun GatheringRequest.toGathering(qualityId: UUID) = Gathering(
+    id = qualityId,
+    qualityId = qualityId,
     required = required ?: throw RuntimeException(),
     analyzed = analyzed ?: throw RuntimeException(),
     conformity = conformity ?: throw RuntimeException(),
     param = Param.byValue(param) ?: throw RuntimeException("Param $param is not found"),
-    qualityId = UUID.randomUUID(),
 )
 
-fun List<GatheringRequest>.toGathering() = map { it.toGathering() }
+fun List<GatheringRequest>.toGathering(qualityId: UUID) = map { it.toGathering(qualityId) }

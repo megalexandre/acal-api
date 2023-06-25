@@ -102,6 +102,10 @@ class InvoiceRepositoryImpl(
     override fun findAll(page: InvoicePage): List<Invoice> =
         repository.findAll().toInvoice()
 
+    override fun saveAll(type: List<Invoice>) {
+        TODO("Not yet implemented")
+    }
+
     override fun findAll(): List<Invoice> =
         repository.findAll().toInvoice()
 

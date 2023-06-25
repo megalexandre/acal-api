@@ -27,6 +27,10 @@ class CustomerRepositoryImpl(
     override fun save(type: Customer): Customer =
         repository.save(type.toCustomerEntity()).toCustomer()
 
+    override fun saveAll(type: List<Customer>) {
+        TODO("Not yet implemented")
+    }
+
     override fun findByName(name: String): Customer =
         repository.findByName(name).toCustomer()
 

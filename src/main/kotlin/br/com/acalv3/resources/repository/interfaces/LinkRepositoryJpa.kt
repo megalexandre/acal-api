@@ -43,6 +43,9 @@ interface LinkRepositoryJpa : JpaRepository<LinkEntity, UUID>, JpaSpecificationE
             INNER JOIN l.place p
             WHERE p.hasHydrometer = true 
             AND l.active = true 
+            AND l.id NOT IN(
+            	SELECT h.linkId FROM hydrometer h WHERE h.reference = :reference 
+            )
         """
     }
 

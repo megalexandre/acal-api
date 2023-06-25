@@ -10,6 +10,7 @@ interface AbstractRepository<Type, Pagination> {
     fun getById(id: String): Type
     fun findAll(): List<Type>
     fun save(type: Type): Type
+    fun saveAll(type: List<Type>)
     fun delete(id: String)
     fun count(): Long
     fun paginate(page: Pagination): Page<Type>

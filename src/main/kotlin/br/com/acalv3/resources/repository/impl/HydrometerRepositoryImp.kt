@@ -29,7 +29,10 @@ class HydrometerRepositoryImp(
     override fun getById(id: String): Hydrometer =
         repository.findByIdOrNull(UUID.fromString(id))?.toDomain() ?: throw NotFoundException()
 
-    override fun save(type: Hydrometer): Hydrometer = repository.save(type.toEntity()).toDomain()
+    override fun save(type: Hydrometer): Hydrometer =
+        repository.save(type.toEntity()).toDomain()
+
+    override fun saveAll(type: List<Hydrometer>) {repository.saveAll(type.toEntity())}
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

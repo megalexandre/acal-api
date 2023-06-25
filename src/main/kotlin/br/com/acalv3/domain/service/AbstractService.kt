@@ -14,8 +14,18 @@ abstract class AbstractService <Type, Pagination>{
     fun getById(id: String): Type = repository().getById(id)
     fun findAll(): List<Type> = repository().findAll()
     fun save(q: Type): Type = strategies().first{ it.action() == SAVE }.can(q).let { repository().save(q) }
+
     fun update(q: Type): Type = strategies().first{ it.action() == UPDATE }.can(q).let { repository().save(q) }
     fun delete(id: String) = strategies().first{ it.action() == DELETE }.can(getById(id)).let { repository().delete(id)}
     fun paginate(page: Pagination): Page<Type> = repository().paginate(page)
     fun count(): Long = repository().count()
+
+    fun saveAll(q: List<Type>){
+        val strategy = strategies().first{ it.action() == SAVE }
+
+        q.forEach{ strategy.can(it) }
+        repository().saveAll(q)
+
+    }
+
 }

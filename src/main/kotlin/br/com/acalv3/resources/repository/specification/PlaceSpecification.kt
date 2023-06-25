@@ -27,7 +27,7 @@ class PlaceSpecification(private val place: PlacePage) {
             predicate.expressions.add(eqLetter(root, builder))
         }
 
-        if(place.address != null){
+        if(place.addressId != null){
             predicate.expressions.add(eqAddress(root, builder))
         }
     }
@@ -39,7 +39,7 @@ class PlaceSpecification(private val place: PlacePage) {
         builder.equal(root.get<Long>("letter"), place.letter?.trim())
 
     private fun eqAddress(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =
-        builder.equal(root.get<AddressEntity>("address").get<UUID>("id"), place.address?.id)
+        builder.equal(root.get<AddressEntity>("address").get<UUID>("id"), place.addressId)
 }
 
 

@@ -3,13 +3,13 @@ package br.com.acalv3.domain.model
 import br.com.acalv3.domain.enumeration.Param
 import java.util.UUID
 
-class Quality(
+data class Quality(
     val id: UUID,
     val reference: String,
     var gathering: List<Gathering>?
 )
 
-class Gathering(
+data class Gathering(
     val id: UUID,
     val qualityId: UUID,
     val param: Param,

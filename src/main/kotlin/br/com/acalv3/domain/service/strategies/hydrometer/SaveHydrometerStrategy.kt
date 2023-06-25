@@ -13,12 +13,12 @@ class SaveHydrometerStrategy(
     override fun action() = SAVE
 
     override fun can(model: Hydrometer) {
-        repository.findByReference(model.reference)?.let{
+        repository.getHydrometerByLinkAndReference(linkId = model.linkId,reference = model.reference)?.let{
             throw RuntimeException(String.format(ERROR_MESSAGE, model.reference))
         }
     }
 
     companion object{
-        private const val ERROR_MESSAGE = "Já existe um registro cadastrados para essa referência: %f"
+        private const val ERROR_MESSAGE = "Já existe um registro cadastrados para essa referência"
     }
 }

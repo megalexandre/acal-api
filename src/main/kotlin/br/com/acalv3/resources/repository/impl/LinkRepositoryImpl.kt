@@ -1,5 +1,6 @@
 package br.com.acalv3.resources.repository.impl
 
+import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.commons.formatDocument
 import br.com.acalv3.domain.enumeration.Report.LINK
 import br.com.acalv3.domain.model.Link
@@ -10,7 +11,6 @@ import br.com.acalv3.resources.model.business.PlaceEntity
 import br.com.acalv3.resources.model.business.toLink
 import br.com.acalv3.resources.model.business.toLinkEntity
 import br.com.acalv3.resources.model.business.toLinkPage
-import br.com.acalv3.commons.DefaultReport
 import br.com.acalv3.resources.model.report.toLinkReport
 import br.com.acalv3.resources.repository.interfaces.LinkRepositoryJpa
 import br.com.acalv3.resources.repository.specification.LinkSpecification
@@ -42,6 +42,9 @@ class LinkRepositoryImpl(
         repository.findByIdOrNull(UUID.fromString(id))?.toLink() ?: throw NotFoundException()
 
     override fun save(type: Link): Link = repository.save(type.toLinkEntity()).toLink()
+    override fun saveAll(type: List<Link>) {
+        TODO("Not yet implemented")
+    }
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
 

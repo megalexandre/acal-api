@@ -3,7 +3,7 @@ package br.com.acalv3.resources.model.business
 import br.com.acalv3.domain.model.Quality
 import br.com.acalv3.resources.model.DefaultEntity
 import java.util.UUID
-import javax.persistence.CascadeType.ALL
+import javax.persistence.CascadeType
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.FetchType.EAGER
@@ -20,7 +20,7 @@ data class QualityEntity (
 
     val reference: String,
 
-    @OneToMany(mappedBy="quality", cascade = [ALL], fetch = EAGER)
+    @OneToMany(mappedBy="quality", cascade = [CascadeType.PERSIST], fetch = EAGER)
     val gathering: List<GatheringEntity>? = null
 
 ) : DefaultEntity()
@@ -39,3 +39,4 @@ fun QualityEntity.toDomain() = Quality(
 
 fun List<QualityEntity>.toDomain() = map{ it.toDomain() }
 fun Page<QualityEntity>.toPage() = map{ it.toDomain() }
+

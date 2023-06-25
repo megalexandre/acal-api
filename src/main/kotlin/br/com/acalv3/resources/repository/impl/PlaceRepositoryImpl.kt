@@ -26,6 +26,10 @@ class PlaceRepositoryImpl(
 
     override fun findAll(): List<Place> = repository.findAll().toPlace()
     override fun save(type: Place): Place = repository.save(type.toPlaceEntity()).toPlace()
+    override fun saveAll(type: List<Place>) {
+        TODO("Not yet implemented")
+    }
+
     override fun update(place: Place): Place =  repository.save(place.toPlaceEntity()).toPlace()
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
     override fun count(): Long = repository.count()
@@ -35,7 +39,7 @@ class PlaceRepositoryImpl(
             PlaceSpecification(PlacePage(
                 letter = place.letter,
                 number = place.number,
-                address = place.address?.toAddress()
+                addressId = place.addressId,
             )).getSpecification()
         ).firstOrNull()?.toPlace()
 

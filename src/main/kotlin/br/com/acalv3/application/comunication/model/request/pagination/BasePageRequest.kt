@@ -9,4 +9,4 @@ abstract class BasePageRequest(
      val direction: Direction = Direction.ASC,
      val sortedField: String = "id",
 
-     )
+)

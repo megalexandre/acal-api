@@ -4,11 +4,12 @@ import br.com.acalv3.domain.enumeration.Param
 import br.com.acalv3.domain.model.Gathering
 import br.com.acalv3.resources.model.DefaultEntity
 import java.util.UUID
-import javax.persistence.CascadeType.DETACH
+import javax.persistence.CascadeType.MERGE
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.EnumType.STRING
 import javax.persistence.Enumerated
+import javax.persistence.FetchType.LAZY
 import javax.persistence.Id
 import javax.persistence.JoinColumn
 import javax.persistence.ManyToOne
@@ -23,8 +24,8 @@ class GatheringEntity (
     @Column(name = "quality_id", nullable = false, columnDefinition = "BINARY(16)")
     val qualityId: UUID,
 
-    @ManyToOne(cascade = [DETACH])
-    @JoinColumn(name="quality_id", insertable = false, updatable = false)
+    @ManyToOne(cascade = [MERGE], fetch = LAZY)
+    @JoinColumn(name="quality_id", nullable = true, insertable = false, updatable = false)
     val quality: QualityEntity? = null,
 
     @Enumerated(STRING)
@@ -59,3 +60,4 @@ fun GatheringEntity.toGathering() = Gathering(
 
 fun List<GatheringEntity>.toGathering(): List<Gathering>  = map{ it.toGathering() }
 fun List<Gathering>.toGatheringEntity(): List<GatheringEntity> = map{ it.toGatheringEntity() }
+

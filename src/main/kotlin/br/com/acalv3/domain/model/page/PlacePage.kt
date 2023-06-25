@@ -4,11 +4,13 @@ import br.com.acalv3.domain.enumeration.Direction
 import br.com.acalv3.domain.enumeration.Direction.ASC
 import br.com.acalv3.domain.filter.AddressFilter
 import br.com.acalv3.domain.model.page.abstract.BasePage
+import java.util.UUID
 
 data class PlacePage (
     val letter: String? = null,
     val number: Long? = null,
     val address: AddressFilter? = null,
+    val addressId: UUID? = null,
 
     override val sortedField: String = "id",
     override val page: Int = 0,
