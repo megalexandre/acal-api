@@ -2,7 +2,6 @@ app:
   version: 0.0.1
 
 spring:
-
   profile: local
   datasource:
     platform: mysql
@@ -27,12 +26,4 @@ spring:
       enabled: always
 
 server:
-  port: 8443
-  ssl:
-    enable: true
-    keyStoreType: PKCS12
-    key-store: classpath:keystore.p12
-    key-store-password: CoXy9QLoJ$M04$3%
-    keyAlias: tomcat
-
-security.require-ssl: true
+  port: 8080
