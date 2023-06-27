@@ -11,7 +11,7 @@ data class PlacePage (
     val number: Long? = null,
     val address: AddressFilter? = null,
     val addressId: UUID? = null,
-
+    val hasHydrometer: Boolean? = null,
     override val sortedField: String = "id",
     override val page: Int = 0,
     override val pageSize: Int = 10,

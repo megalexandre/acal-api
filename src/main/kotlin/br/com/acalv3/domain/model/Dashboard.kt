@@ -9,4 +9,6 @@ class Dashboard(
     val generatedInvoice: Long,
     val qtdTransactionsToday: Int,
     val valueTransactionsToday: BigDecimal,
+    val awaitingPaymentInvoiceCurrency: BigDecimal,
+    val totalPaymentInvoiceCurrency: BigDecimal,
 )

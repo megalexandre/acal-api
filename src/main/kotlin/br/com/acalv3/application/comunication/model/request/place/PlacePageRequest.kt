@@ -11,6 +11,7 @@ class PlacePageRequest(
     val letter: String?,
     val number: Long?,
     val address: AddressFilterRequest?,
+    val hasHydrometer: Boolean? ,
 
     override val sortedField: String = "id",
     override val page: Int = 0,
@@ -27,4 +28,5 @@ fun PlacePageRequest.toPlacePage() = PlacePage(
     page = page,
     pageSize = pageSize,
     direction = direction,
+    hasHydrometer = hasHydrometer,
 )

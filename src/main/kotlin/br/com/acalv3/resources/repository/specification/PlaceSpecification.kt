@@ -30,7 +30,14 @@ class PlaceSpecification(private val place: PlacePage) {
         if(place.addressId != null){
             predicate.expressions.add(eqAddress(root, builder))
         }
+
+        place.hasHydrometer?.let {
+            predicate.expressions.add(hasHydrometer(root, builder))
+        }
     }
+
+    private fun hasHydrometer(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =
+        builder.equal(root.get<Boolean>("hasHydrometer"), place.hasHydrometer)
 
     private fun eqNumber(root: Root<PlaceEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<Long>("number"), place.number)

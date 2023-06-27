@@ -1,5 +1,8 @@
 package br.com.acalv3.resources.repository.specification
 
+import br.com.acalv3.domain.model.Address
+import br.com.acalv3.domain.model.Link
+import br.com.acalv3.domain.model.Place
 import br.com.acalv3.domain.model.page.InvoicePage
 import br.com.acalv3.resources.model.business.CustomerEntity
 import br.com.acalv3.resources.model.business.InvoiceEntity
@@ -7,6 +10,7 @@ import br.com.acalv3.resources.model.business.LinkEntity
 import java.math.BigDecimal
 import java.time.LocalDateTime
 import java.time.LocalTime
+import java.util.UUID
 import javax.persistence.criteria.CriteriaBuilder
 import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
@@ -44,9 +48,19 @@ class InvoiceSpecification(private val invoice: InvoicePage) {
             predicate.expressions.add(eqDueDate(root,builder))
         }
 
-
-
+        invoice.addressId?.let {
+            predicate.expressions.add(eqAddress(root,builder))
+        }
     }
+
+    private fun eqAddress(root: Root<InvoiceEntity>, builder: CriteriaBuilder): Predicate =
+        builder.equal(
+            root
+            .get<Link>("link")
+            .get<Place>("place")
+            .get<Address>("address")
+            .get<UUID>("id"), UUID.fromString(invoice.addressId))
+
     private fun eqDueDate(root: Root<InvoiceEntity>, builder: CriteriaBuilder): Predicate =
         builder.between(
             root.get<LocalDateTime>("dueDate"),
@@ -56,7 +70,7 @@ class InvoiceSpecification(private val invoice: InvoicePage) {
 
 
     private fun eqValue(root: Root<InvoiceEntity>, builder: CriteriaBuilder): Predicate =
-        builder.equal(root.get<BigDecimal>("value"), invoice.value)
+        builder.equal(root.get<BigDecimal>("value"), invoice.addressId)
 
     private fun eqReference(root: Root<InvoiceEntity>, builder: CriteriaBuilder): Predicate =
         builder.equal(root.get<String>("reference"), invoice.reference)

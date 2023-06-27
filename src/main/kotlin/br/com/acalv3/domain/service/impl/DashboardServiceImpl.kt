@@ -7,6 +7,7 @@ import br.com.acalv3.domain.service.CustomerService
 import br.com.acalv3.domain.service.DashboardService
 import br.com.acalv3.domain.service.InvoiceService
 import br.com.acalv3.domain.service.LinkService
+import java.math.BigDecimal
 import java.math.BigDecimal.ZERO
 import java.time.LocalDate
 import org.springframework.stereotype.Service
@@ -24,13 +25,26 @@ class DashboardServiceImpl(
 		val invoices = invoiceService.findByActualReference()
 		val transactions: List<Book>? = bookService.transactionsByDay(LocalDate.now())
 
+		val awaitingPaymentInvoiceCurrency: BigDecimal = invoices?.
+			map { it.invoiceDetails }?.
+			map { it?.sumOf {d -> d.value } }?.
+			sumOf { it ?: ZERO } ?: ZERO
+
+		val totalPaymentInvoiceCurrency: BigDecimal =  invoices?.
+			filter { it.isPayed }?.
+			map { it.invoiceDetails }?.
+			map { it?.sumOf {d -> d.value } }?.
+			sumOf { it ?: ZERO } ?: ZERO
+
 		return Dashboard(
 			totalCustomer = customerService.count(),
 			totalLink = linkService.countActive(),
 			awaitingPaymentInvoice = invoices?.count { it.isPayed }?.toLong() ?: 0,
 			generatedInvoice = invoices?.size?.toLong() ?: 0,
 			qtdTransactionsToday = transactions?.size ?: 0,
-			valueTransactionsToday = transactions?.map { it.value }?.sumOf { it } ?: ZERO
+			valueTransactionsToday = transactions?.map { it.value }?.sumOf { it } ?: ZERO,
+			awaitingPaymentInvoiceCurrency = awaitingPaymentInvoiceCurrency,
+			totalPaymentInvoiceCurrency = totalPaymentInvoiceCurrency,
 		)
 	}
 }

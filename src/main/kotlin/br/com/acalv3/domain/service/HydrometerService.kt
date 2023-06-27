@@ -11,4 +11,5 @@ abstract class HydrometerService: AbstractService<Hydrometer, HydrometerPage>() 
     abstract override fun repository(): HydrometerRepository
 
     abstract fun getHydrometerByLinkAndReference(linkId: UUID, reference: String): Hydrometer?
+    abstract fun getHydrometerByReference(reference: String): List<Hydrometer>?
 }

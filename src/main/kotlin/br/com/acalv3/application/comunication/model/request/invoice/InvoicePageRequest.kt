@@ -16,11 +16,16 @@ data class InvoicePageRequest(
     val dueDate: LocalDate? = null,
     val customerName: String? = null,
 
+    val address: AddressInvoice? = null,
     override val sortedField: String = "id",
     override val direction: Direction = Direction.ASC,
     override val page: Int = 0,
     override val pageSize: Int = 10,
     ) : DefaultPageRequest()
+
+class AddressInvoice(
+    val id: String? = null,
+)
 
 fun InvoicePageRequest.toPageRequest() = InvoicePage(
     id = id,
@@ -31,6 +36,7 @@ fun InvoicePageRequest.toPageRequest() = InvoicePage(
     sortedField = sortedField,
     page = page,
     pageSize = pageSize,
-    direction = direction
+    direction = direction,
+    addressId = address?.id,
 )
 

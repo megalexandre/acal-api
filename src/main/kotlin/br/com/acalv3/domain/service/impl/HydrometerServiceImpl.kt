@@ -17,4 +17,8 @@ class HydrometerServiceImpl(
 
 	override fun getHydrometerByLinkAndReference(linkId: UUID, reference: String): Hydrometer? =
 	 	repository.getHydrometerByLinkAndReference(linkId, reference)
+
+	override fun getHydrometerByReference(reference: String): List<Hydrometer>? =
+		repository.findByReference(reference)
+
 }

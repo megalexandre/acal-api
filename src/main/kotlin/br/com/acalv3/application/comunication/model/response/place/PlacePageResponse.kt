@@ -11,13 +11,15 @@ class PlacePageResponse(
     val number: Long?,
     val letter: String?,
     val address: AddressGetResponse?,
+    val hasHydrometer: Boolean,
 )
 
 fun Place.toPlacePageResponse() = PlacePageResponse(
     id = id,
     number = number,
     letter = letter,
-    address = address?.toGetAddressResponse()
+    address = address?.toGetAddressResponse(),
+    hasHydrometer = hasHydrometer,
 )
 
 fun Page<Place>.toPlacePageResponse() = map{ it.toPlacePageResponse() }

@@ -1,5 +1,6 @@
 package br.com.acalv3.domain.service
 
+import br.com.acalv3.domain.dto.GenerateHydrometer
 import br.com.acalv3.domain.model.Link
 import br.com.acalv3.domain.model.page.LinkPage
 import java.util.UUID
@@ -22,6 +23,6 @@ interface LinkService {
     fun countActive(): Long
     fun inactivate(id: String): Link
     fun linkWithHydrometerByMonth(reference: String): List<Link>?
-    fun findHydrometerByReference(reference: String): List<Link>?
+    fun findHydrometerByReference(reference: String): List<GenerateHydrometer>?
 
 }

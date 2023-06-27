@@ -40,6 +40,7 @@ class PlaceRepositoryImpl(
                 letter = place.letter,
                 number = place.number,
                 addressId = place.addressId,
+                hasHydrometer = place.hasHydrometer
             )).getSpecification()
         ).firstOrNull()?.toPlace()
 
@@ -58,7 +59,8 @@ class PlaceRepositoryImpl(
     override fun findByAddress(address: Address): Place? =
         repository.findAll(
             PlaceSpecification(PlacePage(
-                address = address.toAddress()
-            )).getSpecification()
+                address = address.toAddress(),
+            )
+            ).getSpecification()
         ).firstOrNull()?.toPlace()
 }

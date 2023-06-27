@@ -11,6 +11,7 @@ data class InvoicePage (
     val value: Number?= null,
     val dueDate: LocalDate? = null,
     val customerName: String? = null,
+    val addressId: String? = null,
     override val sortedField: String = "id",
     override val page: Int = 0,
     override val pageSize: Int = 10,

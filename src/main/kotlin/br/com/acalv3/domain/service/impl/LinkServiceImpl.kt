@@ -1,9 +1,15 @@
 package br.com.acalv3.domain.service.impl
 
+import br.com.acalv3.domain.dto.GenerateHydrometer
+import br.com.acalv3.domain.dto.LinkHydrometerPair
 import br.com.acalv3.domain.enumeration.Action
+import br.com.acalv3.domain.model.Hydrometer
 import br.com.acalv3.domain.model.Link
+import br.com.acalv3.domain.model.Reference
 import br.com.acalv3.domain.model.page.LinkPage
+import br.com.acalv3.domain.model.previous
 import br.com.acalv3.domain.repository.LinkRepository
+import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
 import br.com.acalv3.domain.service.strategies.link.LinkStrategy
 import java.util.UUID
@@ -12,9 +18,9 @@ import org.springframework.stereotype.Service
 
 @Service
 class LinkServiceImpl(
-	val repository: LinkRepository,
-	val strategies: List<LinkStrategy>,
-	val reportServiceImpl: ReportServiceImpl
+	private val repository: LinkRepository,
+	private val strategies: List<LinkStrategy>,
+	private val hydrometerService: HydrometerService,
 ): LinkService {
 
 	override fun report(link: LinkPage): ByteArray  = repository.report(link)
@@ -52,6 +58,30 @@ class LinkServiceImpl(
 
 	override fun linkWithHydrometerByMonth(reference: String) = repository.linkWithHydrometerByMonth(reference)
 
-	override fun findHydrometerByReference(reference: String): List<Link>? =
-		repository.findHydrometerByReference(reference)
+	override fun findHydrometerByReference(reference: String): List<GenerateHydrometer>? {
+		val actual: List<Link> = repository.findHydrometerByReference(reference)
+		val previous = hydrometerService.getHydrometerByReference(Reference(reference).previous().toString())
+
+		val allAddress = actual.map { it.place?.address?.name ?: "" }.distinct()
+
+		val list: List<GenerateHydrometer> = allAddress.map {
+			GenerateHydrometer(
+				addressName = it,
+				linkHydrometerPair = getAllLinkByAddress(it, actual, previous),
+			)
+		}
+
+		return list
+	}
+
+	private fun getAllLinkByAddress(address: String, links: List<Link>, previous: List<Hydrometer>?): List<LinkHydrometerPair>{
+		return links.filter { l -> l.place?.address?.name == address }.map {
+			LinkHydrometerPair(
+				link = it,
+				lastConsumption = previous?.firstOrNull{ p-> p.linkId == it.id }?.consumption ?: 0,
+			)
+		}
+	}
+
+
 }

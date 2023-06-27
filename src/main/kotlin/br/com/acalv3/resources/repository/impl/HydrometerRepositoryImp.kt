@@ -23,7 +23,7 @@ class HydrometerRepositoryImp(
     override fun getHydrometerByLinkAndReference(linkId: UUID, reference: String): Hydrometer? =
         repository.findByReferenceAndLinkId(reference = reference, id = linkId)?.toDomainWithoutLink()
 
-    override fun findByReference(reference: String): Hydrometer? =
+    override fun findByReference(reference: String): List<Hydrometer>? =
         repository.findByReference(reference)?.toDomain()
 
     override fun getById(id: String): Hydrometer =

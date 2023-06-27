@@ -6,5 +6,5 @@ import java.util.UUID
 
 interface HydrometerRepository:  AbstractRepository<Hydrometer, HydrometerPage>{
     fun getHydrometerByLinkAndReference(linkId: UUID, reference: String): Hydrometer?
-    fun findByReference(reference: String): Hydrometer?
+    fun findByReference(reference: String): List<Hydrometer>?
 }

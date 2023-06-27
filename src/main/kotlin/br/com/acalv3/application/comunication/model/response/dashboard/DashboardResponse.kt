@@ -10,6 +10,8 @@ class DashboardResponse (
     val generatedInvoice: Long,
     val qtdTransactionsToday: Int,
     val valueTransactionsToday: BigDecimal,
+    val awaitingPaymentInvoiceCurrency: BigDecimal,
+    val totalPaymentInvoiceCurrency: BigDecimal,
 )
 
 fun Dashboard.toDashboardResponse() = DashboardResponse(
@@ -19,4 +21,6 @@ fun Dashboard.toDashboardResponse() = DashboardResponse(
     generatedInvoice = generatedInvoice,
     qtdTransactionsToday = qtdTransactionsToday,
     valueTransactionsToday = valueTransactionsToday,
+    awaitingPaymentInvoiceCurrency = awaitingPaymentInvoiceCurrency,
+    totalPaymentInvoiceCurrency = totalPaymentInvoiceCurrency,
 )

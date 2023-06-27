@@ -7,12 +7,12 @@ import br.com.acalv3.application.comunication.model.request.hydrometer.Hydromete
 import br.com.acalv3.application.comunication.model.request.hydrometer.HydrometerSaveRequest
 import br.com.acalv3.application.comunication.model.request.hydrometer.toDomain
 import br.com.acalv3.application.comunication.model.request.hydrometer.toPage
+import br.com.acalv3.application.comunication.model.response.hydrometer.response.GenerateHydrometerResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.HydrometerPageResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.HydrometerResponse
+import br.com.acalv3.application.comunication.model.response.hydrometer.response.toGenerateHydrometerResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.toPageResponse
 import br.com.acalv3.application.comunication.model.response.hydrometer.response.toResponse
-import br.com.acalv3.application.comunication.model.response.link.LinkGetResponse
-import br.com.acalv3.application.comunication.model.response.link.toLinkGetResponse
 import br.com.acalv3.domain.service.HydrometerService
 import br.com.acalv3.domain.service.LinkService
 import java.util.UUID
@@ -57,8 +57,8 @@ class HydrometerController(
 
 
    @GetMapping( "/findByReference/{reference}")
-   fun validHydrometerByReference(@PathVariable reference: String): List<LinkGetResponse>? =
-        linkService.findHydrometerByReference(reference)?.toLinkGetResponse().also {
+   fun validHydrometerByReference(@PathVariable reference: String): List<GenerateHydrometerResponse>? =
+        linkService.findHydrometerByReference(reference)?.toGenerateHydrometerResponse().also {
             logger.info("hydrometer findHydrometerByReference: $reference")
         }
 
