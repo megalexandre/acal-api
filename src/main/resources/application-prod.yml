@@ -4,7 +4,7 @@ server:
     enable: true
     keyStoreType: PKCS12
     key-store: classpath:keystore.p12
-    key-store-password: CoXy9QLoJ$M04$3%
+    key-store-password: CoXy9QLoJ1M0443a
     keyAlias: tomcat
 
 security.require-ssl: true
