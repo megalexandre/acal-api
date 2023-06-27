@@ -1,8 +1,7 @@
 app:
   version: 0.0.1
-
 spring:
-  profile: local
+  profiles.active: local
   datasource:
     platform: mysql
     driver-class-name: com.mysql.cj.jdbc.Driver
