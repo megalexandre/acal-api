@@ -51,6 +51,7 @@ class QualityRepositoryImpl(
 
     override fun delete(id: String) = repository.deleteById(UUID.fromString(id))
     override fun count(): Long = repository.count()
+
     override fun paginate(page: QualityPage): Page<Quality> =
         repository.findAll(
             QualitySpecification(page).getSpecification(),
