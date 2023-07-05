@@ -21,7 +21,7 @@ interface AbstractRepository<Type, Pagination> {
                sort(request)
             )
 
-    fun sort(request: BasePage) =
+    fun sort(request: BasePage): Sort =
         Sort.by(
             when (request.direction) {
                 DESC -> Sort.Direction.DESC

@@ -34,16 +34,16 @@ private class InvoiceGateway(
 ) {
     private var logger: Logger = LoggerFactory.getLogger(this::class.java)
 
-    @GetMapping(BY_ID)
-    fun find(@PathVariable id: String): InvoiceResponse =
-        service.getById(id).toInvoiceResponse().also {
-            logger.info("find invoice: $id")
-        }
-
     @PostMapping(PAGINATE)
     fun paginate(@Valid @RequestBody request: InvoicePageRequest): Page<InvoicePageResponse> =
         service.paginate(request.toPageRequest()).toInvoiceResponse().also{
             logger.info("paginate invoice: $request")
+        }
+
+    @GetMapping(BY_ID)
+    fun find(@PathVariable id: String): InvoiceResponse =
+        service.getById(id).toInvoiceResponse().also {
+            logger.info("find invoice: $id")
         }
 
     @PostMapping

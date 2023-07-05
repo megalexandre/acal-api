@@ -35,4 +35,6 @@ class InvoiceReport (
     val otherValue: String = ZERO.toCurrency()
     val totalValue: String = (invoice.invoiceDetails?.map { it.value }?.sumOf { it }).toCurrency()
     val param: List<GatheringReport>? = quality?.gathering?.toReport()
+    val status: String = invoice.status
+    val payedAt: String = invoice.invoiceDetails?.first()?.dataPayed?.defaultFormat(DATE_TIME_REPORT) ?: ""
 }

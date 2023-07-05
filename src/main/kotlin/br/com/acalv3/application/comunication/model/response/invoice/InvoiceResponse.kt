@@ -22,6 +22,7 @@ class InvoiceResponse(
     @JsonFormat(shape = STRING, pattern = DATE_TIME_FORMAT)
     val dueDate: LocalDateTime,
     val link: LinkGetResponse?,
+    val status: String,
 )
 
 class InvoiceDetailResponse(
@@ -41,6 +42,7 @@ fun Invoice.toInvoiceResponse() = InvoiceResponse(
     invoiceDetails = invoiceDetails?.toInvoiceDetailResponse(),
     emission = emission,
     dueDate = dueDate,
+    status = status,
 )
 
 fun InvoiceDetail.toInvoiceDetailResponse() = InvoiceDetailResponse(

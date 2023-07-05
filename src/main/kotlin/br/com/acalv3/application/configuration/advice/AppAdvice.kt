@@ -5,6 +5,7 @@ import br.com.acalv3.domain.exception.DuplicatedFieldException
 import br.com.acalv3.domain.exception.InvoiceNotFoundException
 import br.com.acalv3.domain.exception.RequiredFieldException
 import br.com.acalv3.domain.exception.UnauthorizedException
+import io.jsonwebtoken.ExpiredJwtException
 import java.sql.SQLException
 import java.time.LocalDateTime
 import org.hibernate.exception.ConstraintViolationException
@@ -63,6 +64,7 @@ class AppAdvice {
 	}
 
 	@ExceptionHandler(value = [
+		ExpiredJwtException::class,
 		UnauthorizedException::class])
 	fun e3 (ex: UnauthorizedException)  {
 		getResponse(

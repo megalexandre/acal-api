@@ -3,6 +3,7 @@ package br.com.acalv3.application.configuration.filter
 import br.com.acalv3.application.configuration.security.TokenAuthenticationService
 import br.com.acalv3.domain.model.security.UserDomain
 import com.fasterxml.jackson.databind.ObjectMapper
+import java.time.LocalDateTime.now
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
@@ -42,7 +43,7 @@ class JWTLoginFilter(
 		chain: FilterChain?,
 		authResult: Authentication
 	) = run {
-		logger.info("successful Authentication for user: ${authResult.principal}")
+		logger.info("successful Authentication for user: ${authResult.principal} at: ${now()}")
 		tokenAuthenticationService.addAuthentication(response, authResult)
 	}
 

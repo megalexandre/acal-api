@@ -19,20 +19,21 @@
 	<field name="analyzed" class="java.lang.String"/>
 	<field name="conformity" class="java.lang.String"/>
 	<title>
-		<band height="60">
+		<band height="62">
 			<printWhenExpression><![CDATA[true]]></printWhenExpression>
 			<staticText>
-				<reportElement x="0" y="0" width="555" height="20" uuid="7e6fb647-c878-416d-8b35-20ec394ccd84">
+				<reportElement x="0" y="0" width="555" height="30" uuid="7e6fb647-c878-416d-8b35-20ec394ccd84">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[PADRÃO DA PORTARIA MS 2914/2011]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="0" y="20" width="555" height="20" uuid="b02938d5-728a-4280-a81e-1cd72479bd40">
+				<reportElement x="0" y="30" width="555" height="16" uuid="b02938d5-728a-4280-a81e-1cd72479bd40">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10" isBold="false"/>
@@ -40,9 +41,10 @@
 				<text><![CDATA[Decreto Federal Número 5.440/2005]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="40" width="195" height="20" backcolor="#F9F9F9" uuid="4f59ac09-2164-4271-ab84-c3d35bd4ca22">
+				<reportElement mode="Opaque" x="0" y="46" width="195" height="16" backcolor="#E3E3E3" uuid="4f59ac09-2164-4271-ab84-c3d35bd4ca22">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -55,9 +57,10 @@
 				<text><![CDATA[Parâmetro:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="195" y="40" width="120" height="20" backcolor="#F9F9F9" uuid="b5b511c6-c09a-4206-b9c7-f0cf72f27e8f">
+				<reportElement mode="Opaque" x="195" y="46" width="120" height="16" backcolor="#E3E3E3" uuid="b5b511c6-c09a-4206-b9c7-f0cf72f27e8f">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -70,9 +73,10 @@
 				<text><![CDATA[Exigido:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="315" y="40" width="120" height="20" backcolor="#F9F9F9" uuid="e649b8b4-b2b0-40b8-99ff-3cfb9a5ef952">
+				<reportElement mode="Opaque" x="315" y="46" width="120" height="16" backcolor="#E3E3E3" uuid="e649b8b4-b2b0-40b8-99ff-3cfb9a5ef952">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -85,9 +89,10 @@
 				<text><![CDATA[Analisado:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="435" y="40" width="120" height="20" backcolor="#F9F9F9" uuid="4d86a822-db83-4a2d-aa0b-2e1753e3b46d">
+				<reportElement mode="Opaque" x="435" y="46" width="120" height="16" backcolor="#E3E3E3" uuid="4d86a822-db83-4a2d-aa0b-2e1753e3b46d">
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="0.5"/>
@@ -102,18 +107,24 @@
 		</band>
 	</title>
 	<detail>
-		<band height="20" splitType="Stretch">
+		<band height="16" splitType="Stretch">
 			<textField>
-				<reportElement x="195" y="0" width="120" height="20" uuid="61c753bd-cb1d-4266-be51-2ef11ac57468"/>
+				<reportElement x="195" y="0" width="120" height="16" uuid="61c753bd-cb1d-4266-be51-2ef11ac57468">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.0"/>
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{required}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="0" width="195" height="20" uuid="9ddd3fba-7dbf-4800-937e-7247763ebbf0"/>
+				<reportElement x="0" y="0" width="195" height="16" uuid="9ddd3fba-7dbf-4800-937e-7247763ebbf0">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -121,11 +132,15 @@
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{param}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="315" y="0" width="120" height="20" uuid="dd919cd1-58ab-464c-9508-b849b5b21b49"/>
+				<reportElement x="315" y="0" width="120" height="16" uuid="dd919cd1-58ab-464c-9508-b849b5b21b49">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -133,11 +148,15 @@
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{analyzed}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="435" y="0" width="120" height="20" uuid="faf17189-07eb-4817-a258-b88ccc83cffd"/>
+				<reportElement x="435" y="0" width="120" height="16" uuid="faf17189-07eb-4817-a258-b88ccc83cffd">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
 				<box>
 					<pen lineWidth="0.0"/>
 					<topPen lineWidth="0.0"/>
@@ -145,9 +164,28 @@
 					<bottomPen lineWidth="0.5" lineStyle="Solid"/>
 					<rightPen lineWidth="0.0"/>
 				</box>
-				<textElement textAlignment="Left" verticalAlignment="Middle"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{conformity}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
+	<lastPageFooter>
+		<band height="70">
+			<staticText>
+				<reportElement x="0" y="0" width="554" height="70" isPrintWhenDetailOverflows="true" uuid="00ac9633-a7ad-44a2-bbf6-66f09da571d1">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+				</reportElement>
+				<textElement markup="html">
+					<font size="8"/>
+				</textElement>
+				<text><![CDATA[<b>Cor -</b> Ocorre devido partícula desenvolvidas na água.<br />
+<b>Turbidez -</b> Ocorre devido a partícula em suspensão, que deixam a água com aparência turva.<br />
+<b>Cloro -</b> Produto químico utilizado para eliminar bactérias.<br />
+<b>Coliformes Totais -</b> Indicador utilizado para medir contaminção por bactérias.<br />
+<b>Eschirichia -</b> Indicador utilizado para medir contaminação por fecal.]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
 </jasperReport>

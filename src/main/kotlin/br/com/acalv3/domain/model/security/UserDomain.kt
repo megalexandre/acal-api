@@ -4,6 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails
 
 data class UserDomain(
 
+    private val id: String? = null,
+
     private val username: String,
 
     private var password: String,
@@ -14,9 +16,9 @@ data class UserDomain(
 
 ): UserDetails {
 
-    override fun getAuthorities(): List<RoleDomain>? {
-        return authorities
-    }
+    fun getId(): String? = id
+
+    override fun getAuthorities(): List<RoleDomain>? = authorities
 
     override fun getPassword(): String {
         return password

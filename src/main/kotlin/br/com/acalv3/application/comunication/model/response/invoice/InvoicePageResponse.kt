@@ -17,7 +17,9 @@ data class InvoicePageResponse(
 
     @JsonFormat(shape = STRING, pattern = DATE_TIME_FORMAT)
     val dueDate: LocalDateTime,
+    val status: String,
 ) {
+    @Deprecated("should use status")
     val isOverdue = !isPayed && LocalDateTime.now().isAfter(dueDate)
     val totalValue = invoiceDetails?.sumOf { it.value }
 }
@@ -29,6 +31,7 @@ fun Invoice.toInvoicePageResponse() = InvoicePageResponse(
     isPayed = isPayed,
     dueDate = dueDate,
     invoiceDetails = invoiceDetails?.toInvoiceDetailResponse(),
+    status = status,
 )
 
 fun Page<Invoice>.toInvoiceResponse() = map{ it.toInvoicePageResponse() }

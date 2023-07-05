@@ -180,7 +180,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
+					<font size="16" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{customer}]]></textFieldExpression>
 			</textField>
@@ -319,7 +319,7 @@
 					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="20" isBold="true"/>
+					<font size="24" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{totalValue}]]></textFieldExpression>
 			</textField>
@@ -344,7 +344,7 @@
 				<reportElement x="195" y="0" width="164" height="140" uuid="9f315558-0580-4350-8e00-fae4be12e799"/>
 			</rectangle>
 			<componentElement>
-				<reportElement x="195" y="0" width="164" height="139" uuid="20459641-1634-400a-9a3c-40f002d5e3c6"/>
+				<reportElement stretchType="ElementGroupHeight" x="195" y="0" width="164" height="139" uuid="20459641-1634-400a-9a3c-40f002d5e3c6"/>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
 					<jr:codeExpression><![CDATA[$P{id}]]></jr:codeExpression>
 				</jr:QRCode>

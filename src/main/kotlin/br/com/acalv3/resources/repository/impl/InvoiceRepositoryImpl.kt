@@ -52,7 +52,7 @@ class InvoiceRepositoryImpl(
         repository.save(type.toInvoiceEntity()).toInvoice()
 
     override fun report(page: InvoicePage): DefaultReport =
-        createReport(repository.findAll(InvoiceSpecification(page).getSpecification()).toInvoice())
+        createReport(repository.findAll(InvoiceSpecification(page).getSpecification(), sort(page)).toInvoice())
 
     override fun report(id: UUID): DefaultReport =
         createReport(listOf(repository.findById(id).map {it.toInvoice()}.orElseThrow()))
@@ -74,7 +74,8 @@ class InvoiceRepositoryImpl(
             },
             report = INVOICE,
             param = hashMapOf(
-                "SUBREPORT_DIR" to path
+                "SUBREPORT_DIR" to path,
+                "LOGO" to ClassLoader.getSystemResource("acal-logo.jpg").path
             ),
         )
     }
