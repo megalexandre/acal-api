@@ -93,13 +93,6 @@ Reconhecido como Órgão de utilidade publica Municipal. conf.lei N 7 de 27-10-1
 Reconhecido como Órgão de utilidade publica Estadual. conf.lei N 7049 de 16-04-1997<br />
 Rua Morro do Chapéu, S/N - Tel 0(xx74) 3674-2165 - Lages do Batata - Jacobina BA<br />]]></text>
 			</staticText>
-			<image scaleImage="FillFrame">
-				<reportElement x="0" y="0" width="80" height="80" uuid="1c87d6bc-46a8-498d-855b-6e2f32cbecc9">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
-			</image>
 			<line>
 				<reportElement x="0" y="0" width="555" height="1" forecolor="#030303" uuid="707c152c-10de-4d30-a562-0078a977590c"/>
 			</line>

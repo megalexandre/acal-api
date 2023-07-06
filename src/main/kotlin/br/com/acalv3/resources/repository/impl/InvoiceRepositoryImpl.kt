@@ -16,16 +16,17 @@ import br.com.acalv3.resources.repository.specification.InvoiceSpecification
 import java.io.File
 import java.time.LocalDateTime.now
 import java.util.UUID
+import org.springframework.core.io.ResourceLoader
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
 import org.springframework.data.domain.Page
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
-import org.springframework.util.ResourceUtils
 
 @Repository
 class InvoiceRepositoryImpl(
     private val repository: InvoiceRepositoryJpa,
     private val qualityRepository: QualityRepositoryImpl,
+    private val resourceLoader: ResourceLoader,
 ) : InvoiceRepository {
 
     override fun getById(id: String): Invoice =
@@ -57,15 +58,17 @@ class InvoiceRepositoryImpl(
     override fun report(id: UUID): DefaultReport =
         createReport(listOf(repository.findById(id).map {it.toInvoice()}.orElseThrow()))
 
-    private fun createReport(invoices: List<Invoice>): DefaultReport = run {
+    private fun createReport(invoices: List<Invoice>): DefaultReport {
         val qualities = qualityRepository.findByReferenceIn(invoices.map { q -> q.reference }.distinct())
-
         val separator = File.separator
-        val path = ResourceUtils.getFile(
-            """classpath:report${separator}invoice"""
-        ).absolutePath
 
-        DefaultReport(
+        val path = runCatching {
+            resourceLoader.getResource("""classpath:report${separator}invoice""").file.absolutePath
+        }.getOrElse {
+            throw RuntimeException("error on ResourceUtils")
+        }
+
+        return DefaultReport(
             dataList =  invoices.map {invoice ->
                 InvoiceReport(
                     invoice = invoice,
@@ -75,7 +78,7 @@ class InvoiceRepositoryImpl(
             report = INVOICE,
             param = hashMapOf(
                 "SUBREPORT_DIR" to path,
-                "LOGO" to ClassLoader.getSystemResource("acal-logo.jpg").path
+               // "LOGO" to ClassLoader.getSystemResource("acal-logo.jpg").path
             ),
         )
     }
